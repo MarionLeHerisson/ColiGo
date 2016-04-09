@@ -182,7 +182,7 @@
 				<button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
 			</form>
-			<!-- TODO : calcul en temps réel du total -->
+			<!-- TODO : calcul en temps réel du total + proposer un devis -->
 		</div>
 	</div>
 </div>

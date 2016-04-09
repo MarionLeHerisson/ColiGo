@@ -3,7 +3,7 @@ function redirectHome() {
 }
 
 function submitDepotForm() {
-	// récupération des champs à vérifier
+	// get fields to check
 	// TODO : (On vérifie aussi ceux qui ne sont pas rentrés "manuellement" des fois qu'un codeur s'amuse à modifier l'attribut value
 	var data = {
 			firstname : $('#firstname'),
@@ -30,12 +30,12 @@ function submitDepotForm() {
 		checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,
 		checkZipCode = /^[0-9]{5}$/;
 
-	// Si des erreurs ont déjà été affichées, on les masque
+	// if errors are shown, hide them
 	$.each(data, function() {
 		$(this).parents('.form-group').removeClass('has-error');
 	});
 
-	// vérification des inputs
+	// verif inputs
 	if(data.firstname.val() === '' || data.firstname.val().length < 2) {
 		data.firstname.parents('.form-group').addClass('has-error');
 		error ++;
@@ -67,17 +67,17 @@ function submitDepotForm() {
 	}
 
 
-	// Si aucune erreur : on envoie le formulaire
+	// If no error : submit form
 	if(error === 0) {
 		$('#depot-form').submit();
 	}
 }
 
 function submitInscForm() {
-	// Si des erreurs ont déjà été affichées, on les masques toutes
+	// if errors have alrady been shown, hide them
 	$('.bg-danger').each(function(){$(this).addClass('none');});
 
-	// récupération de la valeur de tous les champs du formulaire via leur id
+	// get inputs values
 	var firstname = $('#formFirstname').val(),
 		lastname = $('#formLastname').val(),
 		email = $('#formEmail').val(),
@@ -87,13 +87,13 @@ function submitInscForm() {
 
 
 
-	// prénom ?
+	// firstname ?
 	if(firstname == '') {
 		$('.ttFistname').removeClass('none');
 		error = 1;
 	}
 
-	// nom ?
+	// lastname ?
 	if(lastname == '') {
 		$('.ttLastname').removeClass('none');
 		error = 1;
@@ -104,20 +104,20 @@ function submitInscForm() {
 		$('.ttEmailObg').removeClass('none');
 		error = 1;
 	}
-	// mail valide ?
+	// mail ok ?
 	else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(email)) {
 		$('.ttEmailInv').removeClass('none');
 		error = 1;
 	}
 
-	// mail existe déjà ?
+	// mail alrady exists ?
 
-	// mot de passe ?
+	// password ?
 	if(pwd == '') {
 		$('.ttPwdObg').removeClass('none');
 		error = 1;
 	}
-	// mot de passe assez long ?
+	// password long enough ?
 	else if(pwd.length < 6) {
 		$('.ttPwdInv').removeClass('none');
 		error = 1;
@@ -128,13 +128,13 @@ function submitInscForm() {
 		$('.ttPwdconfObg').removeClass('none');
 		error = 1;
 	}
-	// mots de passe identiques ?
+	// passwords identical ?
 	else if(pwd != pwdConf) {
 		$('.ttPwdconfInv').removeClass('none');
 		error = 1;
 	}
 	
-	// S'il n'y a pas d'erreurs, envoyer le formulaire
+	// If there is no erreor, send form
 	if(error == 0) {
 		$('#inscription-form').submit();
 	}
@@ -142,7 +142,7 @@ function submitInscForm() {
 
 
 
-
+/****** GOOGLE ADDRESS API ******/
 
 var placeSearch, 
 	autocomplete,

@@ -9,6 +9,14 @@
 
 class ColiGo {
 
+    /**
+     * remove quotes and useless spaces in string
+     *
+     * @param string $string
+     * @return string
+     *
+     * @author Marion
+     */
     public static function sanitizeString($string) {
         $string = str_replace('\'', '', trim(stripslashes($string)));
         $string = str_replace('\"', '', $string);

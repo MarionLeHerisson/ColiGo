@@ -19,11 +19,13 @@ class AddressModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd ->prepare("INSERT INTO " . $this->_name . " (address, zip_code, city)
-						         VALUES ('" . $address . "', " . $zipcode . ", '" . $city . "');
-						         SELECT LAST_INSERT_ID()");
+						         VALUES ('" . $address . "', " . $zipcode . ", '" . $city . "';");
         $query->execute();
 
-        return $query;
+        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $res = $query->execute();
+
+        return $res;
     }
 
     // get address from user id

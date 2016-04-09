@@ -36,10 +36,15 @@ class accueil_extranetController {
 			include_once('../Model/parcelExtraModel.php');
 			$parcelExtraManager = new ParcelExtraModel();
 
+			include_once('../Model/ordersModel.php');
+			$ordersManager = new OrdersModel();
+
+			include_once('../Model/relayPointModel.php');
+			$relayPointManager = new RelayPointModel();
+
+			// if user does not exists, subscribe & get its id
 			$user = $userManager->getUserByMail($userMail);
 
-			// TODO : make it work
-			// if user does not exists, subscribe & get its id
 			if(empty($user)) {
 				$userId = $userManager->insertUser($userFirstname, $userLastname, $userMail, null, 4, null);
 			} else {
@@ -52,26 +57,26 @@ class accueil_extranetController {
 			// put extras in an array
 			$extras = [];
 
-			if($_POST['emballage'] != 'none') {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['emballage']) . ')';
+			if(isset($_POST['emballage']) && $_POST['emballage'] != 'none' && intval($_POST['emballage'] != 0)) {
+				$extras[] = intval($_POST['emballage']);
 			}
 			if(isset($_POST['prioritaire'])) {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['prioritaire']) . ')';
+				$extras[] = 7;
 			}
 			if(isset($_POST['imprevu'])) {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['imprevu']) . ')';
+				$extras[] = 8;
 			}
 			if(isset($_POST['indemnisation'])) {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['indemnisation']) . ')';
+				$extras[] = 9;
 			}
 			if(isset($_POST['ramassage'])) {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['ramassage']) . ')';
+				$extras[] = 5;
 			}
 			if(isset($_POST['samedi'])) {
-				$extras[] = '(' . $parcelId . ',' . ColiGo::sanitizeString($_POST['samedi']) . ')';
+				$extras[] = 6;
 			}
 
-			$values = $this->sortValues($extras);
+			$values = $this->sortValues($extras, $parcelId);
 
 			// link extras and parcel
 			$parcelExtraManager->linkMultipleParcelExtra($values);
@@ -80,17 +85,28 @@ class accueil_extranetController {
 			$totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType);
 
 			// if receiver exists -> get id & address_id
-			// else subscribe & get id & address_id
+			$receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
 
-			// insert Orders(departure_address, arrival_address, total_price, NOW(), is_deleted = 0, id user order, id user dest, rp_id)
+			if(empty($user)) {
+				$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, null);
+			} else {
+				$reciverId = $receiver[0]['id'];
+			}
+
+			// Insert receiver address
+			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
+
+			// Get relay point id
+			$rpId = $_SESSION['address'];
+
+			// Get relay point address id TODO : or other departure address
+			$depAddressId = $relayPointManager->getRPAddress($rpId);
+
+			// insert Order
+			$ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
 
 			// at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 		}
-
-
-		//echo '<pre>';
-		//print_r($_POST);
-
 
 		require_once('../View/accueil_extranet.php');
 		require_once('../View/footer.php');
@@ -100,11 +116,12 @@ class accueil_extranetController {
 	 * add comas to have a correct INSERT INTO table VALUES (a,b),(a,b),(a,b) ...
 	 *
 	 * @param array $values
+	 * @param int $parcelId
 	 * @return string
 	 *
 	 * @author Marion
 	 */
-	public function sortValues($values) {
+	public function sortValues($values, $parcelId) {
 
 		$string = '';
 
@@ -112,18 +129,38 @@ class accueil_extranetController {
 			if($string != '') {
 				$string .= ',';
 			}
-			$string .= $val;
+			$string .= '(' . $parcelId . ',' . $val . ')';
 		}
 
 		return $string;
 	}
 
 	/**
+	 * calculate total price
+	 *
 	 * @param array $extras
 	 * @param float $parcelWeight
 	 * @param int $deliveryType
+	 * @return float
+	 *
+	 * @author Marion
 	 */
 	public function calculatePrice($extras, $parcelWeight, $deliveryType) {
-		
+
+		// Managers
+		include_once('../Model/extraModel.php');
+		$extraManager = new ExtraModel();
+
+		include_once('../Model/weightPriceModel.php');
+		$weightPriceManager = new WeightPriceModel();
+		$price = 0;
+
+		foreach($extras as $extra) {
+			$price += $extraManager->getExtraPrice($extra);
+		}
+
+		$weightPrice = $weightPriceManager->getPrice($parcelWeight, $deliveryType);
+
+		return $weightPrice + $price;
 	}
 }

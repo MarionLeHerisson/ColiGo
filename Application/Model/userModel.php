@@ -20,12 +20,13 @@ class UserModel extends defaultModel {
 
         // insert user
         $query = $bdd->prepare("INSERT INTO " . $this->_name . " (first_name, last_name, mail, password, type_id, address_id, is_deleted)
-                                VALUES ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $pwd ."', " . $type . ", " . $address_id .", 0);
-                                SELECT LAST_INSERT_ID();");
+                                VALUES ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $pwd ."', " . $type . ", " . $address_id .", 0);");
         $query->execute();
 
-        return $query;
+        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $res = $query->execute();
 
+        return $res;
     }
 
     // get user from mail
@@ -34,7 +35,8 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id, address_id FROM " . $this->_name . "
-                                WHERE mail = '" . $userMail . "';");
+                                WHERE mail = '" . $userMail . "'
+                                AND is_deleted = 0;");
         $query->execute();
 
         $result = $query->fetchAll();
@@ -42,6 +44,30 @@ class UserModel extends defaultModel {
         return $result;
 
     }
+
+    /**
+     * @param string $firstname
+     * @param string $lastname
+     * @return array
+     *
+     * @author Marion
+     */
+    public function getUserByName($firstname, $lastname) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id, address_id FROM " . $this->_name . "
+                                WHERE first_name = '" . $firstname . "'
+                                AND last_name = '" . $lastname . "'
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        return $result;
+
+    }
+
 
     /**
      * Connect user and return its role
