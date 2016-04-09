@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule	^accueil$	    Application/View/index.php	        [L]
+RewriteRule	^deconnexion$	Application/View/deconnexion.php	[L]
+RewriteRule	^inscription$	Application/View/inscription.php	[L]
+RewriteRule	^validation$	Application/View/valid-inscription.php	[L]
+
+RewriteRule	^accueil_extranet$	Application/View/index_extranet.php	[L]

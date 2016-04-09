@@ -1,0 +1,74 @@
+/* Google Fonts
+
+font-family: 'Roboto Slab', serif;
+font-family: 'Roboto', sans-serif;
+*/
+
+/* G E N E R A L */
+body {
+	text-align: center;
+}
+h2, h3 {
+	font-family: roboto-slab, serif;
+}
+h1, p {
+	font-family: roboto, sans-serif;
+}
+
+.none {
+	display: none;
+}
+
+/* NAV */
+.navbar-default {
+	background-color: #fff;
+	background-image: none;
+}
+.btn-connect {
+	margin-left: 20px;
+}
+
+/* COVER */
+.cover-container {
+	background-image: url(../../Medias/colis-cover.jpeg);
+	background-size: cover;
+	margin-bottom: 30px;
+}
+
+.cover-form {
+	background-image: url(../../Medias/inscription-cover.jpg);
+}
+
+/* FEATURETTE */
+.featurette-divider {
+	margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* INSCRIPTION */
+#inscription-form {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* FORM */
+.btn-primary {
+	background-image: -webkit-linear-gradient(top,#FF3273 0,#FF0055 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FF3273),to(#FF0055));
+	background-image: linear-gradient(to bottom, #FF3273 0,#FF0055 100%);
+
+	border-color: #ff0055;
+}
+
+.btn-primary:hover {
+	background-image: -webkit-linear-gradient(top,#FF3273 0,#EC004F 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FF3273),to(#EC004F));
+	background-image: linear-gradient(to bottom, #FF3273 0,#EC004F 100%);
+	background-color: #EC004F;
+	border-color: #ff0055;
+}
+
+@media (min-width: 768px) {
+	.featurette-heading {
+		font-size: 50px;
+	}
+}
