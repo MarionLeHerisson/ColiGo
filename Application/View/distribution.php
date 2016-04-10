@@ -1,12 +1,12 @@
-<div class="panel panel-default">
-	<div class="panel-heading" role="tab" id="headingThree">
+<div class="panel panel-default <?php if ($_SESSION['type'] == 3) {echo 'none';} ?>">
+	<div class="panel-heading" role="tab" id="headingFour">
 		<h4 class="panel-title">
-			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				Distribution de colis
+			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+				<i class="material-icons">local_shipping</i> Distribution de colis
 			</a>
 		</h4>
 	</div>
-	<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+	<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 		<div class="panel-body">
 			Put input here<br>
 			HAHAHA
@@ -33,4 +33,4 @@
 </div>
 
 
-<!-- TODO : Colis distribué dans le mauvais point relais
+<!-- TODO : Colis distribué dans le mauvais point relais -->

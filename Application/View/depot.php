@@ -1,8 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default <?php if ($_SESSION['type'] == 3) {echo 'none';} ?>">
 	<div class="panel-heading" role="tab" id="headingOne">
 		<h4 class="panel-title">
 			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-				Dépôt de colis
+				<i class="material-icons">local_shipping</i> Dépôt de colis
 			</a>
 		</h4>
 	</div>
@@ -45,15 +45,15 @@
 					<label class="control-label col-md-3" for="type">Type de livraison :</label>
 					<div class="col-md-9">
 						<div class="pull-left">
-							<input type="radio" name="type" id="expresse" value="express" checked>
+							<input type="radio" name="type" id="expresse" value="2" checked>
 							Livraison à horaires garantis
 						</div>
 						<div class="pull-left">
-							<input type="radio" name="type" id="8h" value="8h">
+							<input type="radio" name="type" id="8h" value="1">
 							Livraison le lendemain à 8h si la commande est passée avant 15h
 						</div>
 						<div class="pull-left">
-							<input type="radio" name="type" id="urgence" value="urgence">
+							<input type="radio" name="type" id="urgence" value="3">
 							Livraison d'urgence
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3" for="email">Adresse de livraison :</label>
 					<div class="col-md-6">
-						<input name="address" id="autocomplete" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+						<input name="address" id="autocomplete2" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
 					</div>
 				</div>
 
@@ -161,11 +161,11 @@
 						</div>
 					</div>
 				</div>
-
-<!--				<div class="form-group">
+<!-- TODO : gestion de plusieurs adresses sur mm page (js google api)
+				<!--<div class="form-group">
 					<label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
 					<div class="col-md-6">
-						<input name="address" onfocus="initAutocomplete()" id="autocomplete" class="form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+						<input name="address" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
 					</div>
 					<div class="">
 						<table id="address">

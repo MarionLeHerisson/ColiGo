@@ -12,6 +12,21 @@ class RelayPointModel extends DefaultModel {
 
     protected $_name = 'RelayPoint';
 
+
+    public function insertRelayPoint($address, $ownerId) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, owner_id, is_deleted)
+                                VALUES ()");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+
+        return $res;
+    }
+
+
     /**
      * return address id from relay point id
      *

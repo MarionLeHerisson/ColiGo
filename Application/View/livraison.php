@@ -1,8 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default <?php if ($_SESSION['type'] == 3) {echo 'none';} ?>">
 	<div class="panel-heading" role="tab" id="headingThree">
 		<h4 class="panel-title">
 			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				Livraison de colis
+				<i class="material-icons">local_shipping</i> Livraison de colis
 			</a>
 		</h4>
 	</div>
