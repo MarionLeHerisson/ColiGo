@@ -8,6 +8,15 @@
 	</div>
 	<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 		<div class="panel-body">
+
+			<div class="col-md-3"></div>
+			<div class="form-group col-md-6">
+				<label for="idColisLivre">Scannez le code-barre du colis livré en point relais :</label>
+				<input type="text" name="idColisLivre" id="idColisLivre" class="form-control input-lg">
+				<br>
+				<button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(3)">Valider</button>
+			</div>
+
 			<div class="alert alert-danger alert-dismissible fade in" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">×</span>

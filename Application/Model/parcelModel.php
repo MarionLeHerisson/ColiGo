@@ -35,4 +35,21 @@ class ParcelModel extends DefaultModel {
 
         return $res;
     }
+
+    /**
+     * update parcel satus
+     *
+     * @param $parcelId
+     * @param $newStatus
+     *
+     * @author Marion
+     */
+    public function updateStatus($parcelId, $newStatus) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . " SET status_id = " . $newStatus .
+                                " WHERE id = " . $parcelId . ";");
+        $query->execute();
+    }
 }

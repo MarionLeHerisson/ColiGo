@@ -18,10 +18,11 @@ class RelayPointModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, owner_id, is_deleted)
-                                VALUES ()");
+                                VALUES (" . $address . ", " . $ownerId . ", 0)");
         $query->execute();
 
-        $res = $query->fetchColumn();
+        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $res = $query->execute();
 
         return $res;
     }

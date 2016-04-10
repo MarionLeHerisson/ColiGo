@@ -8,8 +8,15 @@
 	</div>
 	<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 		<div class="panel-body">
-			Put input here<br>
-			HAHAHA
+
+			<div class="col-md-3"></div>
+			<div class="form-group col-md-6">
+				<label for="idColisDistribue">Scannez le code-barre du colis distribué au client :</label>
+				<input type="text" name="idColisDistribue" id="idColisDistribue" class="form-control input-lg">
+				<br>
+				<button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(4)">Valider</button>
+			</div>
+
 			<div class="alert alert-danger alert-dismissible fade in none" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">×</span>

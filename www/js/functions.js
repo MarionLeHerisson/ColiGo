@@ -1,3 +1,20 @@
+function updateParcelStatus(idType) {
+
+	var parcelId;
+	// TODO : recup id en fonction de idType
+
+	$.ajax({ url: 'accueil_extranet',
+		data: {
+			action: 'updateParcelStatus',
+			param: [parcelId,idType]
+		},
+		type: 'post',
+		success: function(output) {
+			alert(output);
+		}
+	});
+}
+
 function redirectHome() {
 	document.location.href="accueil";
 }
