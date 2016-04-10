@@ -6,7 +6,7 @@ require_once("../View/header.php");
 
 <div id="valid-inscription">
 	<h1>Bienvenue chez Coligo.</h1>
-	<h3>Vous pouvez dès à présent profiter de toutes nos fonctionnalités.</h2>
+	<h2>Vous pouvez dès à présent profiter de toutes nos fonctionnalités.</h2>
 </div>
 
 <?php

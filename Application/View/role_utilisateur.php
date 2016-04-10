@@ -1,22 +1,13 @@
-<div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingFive">
+<div class="panel panel-default <?php if ($_SESSION['type'] != 1) {echo 'none';} ?>">
+    <div class="panel-heading" role="tab" id="headingSix">
         <h4 class="panel-title">
-            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <i class="material-icons">announcement</i> Déclarer la perte d'un colis
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                <i class="material-icons">person</i> Gestion des rôles utilisateurs
             </a>
         </h4>
     </div>
-    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
         <div class="panel-body">
-
-            <div class="col-md-3"></div>
-            <div class="form-group col-md-6">
-                <label for="idColisPerdu">Scannez le code-barre du colis perdu :</label>
-                <input type="text" name="idColisPerdu" id="idColisPerdu" class="form-control input-lg">
-                <br>
-                <button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(5)">Valider</button>
-            </div>
-
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>

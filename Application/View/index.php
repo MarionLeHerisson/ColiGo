@@ -58,7 +58,7 @@ require_once "header.php";
 			<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="500x500" src="Medias/paris.jpeg" data-holder-rendered="true">
 		</div>
 	</div>
-	
+
 	<hr class="featurette-divider">
 
 	<div class="row featurette">
@@ -70,7 +70,7 @@ require_once "header.php";
 			<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="500x500" src="Medias/solutions.jpeg" data-holder-rendered="true">
 		</div>
 	</div>
-	
+
 	<!-- #container closed in the footer -->
 
 	<?php

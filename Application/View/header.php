@@ -19,6 +19,7 @@ session_start();
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,500,500italic,700,700italic,100,100italic,900,900italic,400,300' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!-- ColiGo's css -->
 	<link href="www/css/style.css" rel="stylesheet" type="text/css">
@@ -66,14 +67,19 @@ session_start();
 							</ul>
 						</li>';
 					} else {
-						echo '
+						if($_SESSION['type'] != 4) {
+							echo '
+							<li>
+								<a href="accueil_extranet">Extranet</a>
+							</li>';
+						}
+						echo'
 						<li>
 							<a href="profile">Profil</a>
 						</li>
 						<li>
 							<a href="deconnexion">Déconnexion</a>
 						</li>';
-						// TODO : gestion déconnexion (ajax ?)
 					}?>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -82,18 +88,25 @@ session_start();
 
 <?php
 
-	// Récupération du nom de la page actuelle
+	// get actual page name
 	$exploded = explode('/', $_SERVER['REDIRECT_URL']);
 	$len = sizeof($exploded) - 1;
 	$thisPage = $exploded[$len];
-// TODO : isset($_POST['comail']){$coManager = new connexionManager; $coManager->indexAction($_POST)} => redirection admin ou user
-	// On inclut le controller correspondant
-	require_once('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
-	// On l'instancie & on lance la première méthode
-	$controllerName = $thisPage . 'Controller';
-	$controller = new $controllerName;
+
+	// track connection
+	include_once '/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/accueilController.php';
+	$controller = new accueilController();
+	$controller->connectAction();
+
+	// include actual page controller (if different from 'accueil')
+	if($thisPage != 'accueil') {
+		require_once('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
+		// On l'instancie & on lance la première méthode
+		$controllerName = $thisPage . 'Controller';
+		$controller = new $controllerName;
+	}
 	$controller->indexAction();
 
-	// TODO : mettre dans un fichier séparé & éviter répétit° code avec Extrarnet/View/index.php
+	// TODO : mettre dans un fichier séparé ?
 
 ?>

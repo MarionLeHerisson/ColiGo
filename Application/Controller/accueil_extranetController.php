@@ -5,8 +5,21 @@ include_once ('../../library/coligo.php');
 class accueil_extranetController {
 	
 	public function indexAction() {
-		
-		//require_once('../View/header.php');
+
+		// ajax
+		if(isset($_POST['action']) && !empty($_POST['action'])) {
+
+			$action = $_POST['action'];
+			$param = $_POST['param'];
+
+			switch($action) {
+				case 'updateParcelStatus' :
+					include_once('../Model/parcelModel.php');
+					$parcelManager = new ParcelModel();
+					$parcelManager->updateStatus($param[0], $param[1]);
+					break;
+			}
+		}
 
 		if (isset($_POST['name']) && $_POST['name'] != '') {
 

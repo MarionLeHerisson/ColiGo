@@ -5,7 +5,7 @@ class validationController {
 
 	public function indexAction() {
 		if(isset($_POST['firstname'])) {
-			// infos d'inscription
+			// inscription informations
 			$firstname = ColiGo::sanitizeString($_POST['firstname']);
 			$lastname = ColiGo::sanitizeString($_POST['lastname']);
 			$mail = ColiGo::sanitizeString($_POST['email']);
@@ -15,11 +15,12 @@ class validationController {
 			require_once('../Model/userModel.php');
 			$userManager = new UserModel;
 
-			require_once('../Model/addressModel.php');
-			$addressManager = new AddressModel;
-
-			// Si il y a une adresse
+			// If there is an adresse
 			if(isset($_POST['streetnumber'])) {
+
+				require_once('../Model/addressModel.php');
+				$addressManager = new AddressModel;
+
 				$address = trim($_POST['streetnumber']) . ' ' . trim($_POST['route']);
 				$zipcode = trim($_POST['zipcode']);
 				$city = trim($_POST['city']);
@@ -31,10 +32,26 @@ class validationController {
 				$address_id = null;
 			}
 
-			// insertion utilisateur
-			$userManager->insertUser($firstname, $lastname, $mail, $pwd, 4, $address_id);
+			// default : new user is client
+			$userType = 4;
+			// if admin subscribe new user
+			if(isset($_SESSION['type']) && $_SESSION['type'] == 1 && isset($_POST['usertype'])) {
+				$userType = intval($_POST['usertype']);
+			}
+
+			// insert new user
+			$userId = $userManager->insertUser($firstname, $lastname, $mail, $pwd, $userType, $address_id);
 			// envoi de mail
 			mail($mail, "Votre inscription chez ColiGo", "Félicitation, vous êtes bien inscrit chez Coligo !");
+
+			// if a relay point is created
+			if($userType == 2) {
+
+				require_once('../Model/relayPointModel.php');
+				$relayPointManager = new RelayPointModel();
+
+				$relayPointManager->insertRelayPoint($address_id, $userId);
+			}
 		}
 		
 		else echo 'pas de données';

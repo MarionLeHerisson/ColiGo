@@ -67,6 +67,12 @@ h1, p {
 	border-color: #ff0055;
 }
 
+.material-icons {
+	display: block;
+	float: left;
+	position: absolute;
+}
+
 @media (min-width: 768px) {
 	.featurette-heading {
 		font-size: 50px;
