@@ -6,6 +6,7 @@ class accueil_extranetController {
 	
 	public function indexAction() {
 
+		//echo '<pre>';die(print_r($_POST));
 		// ajax
 		if(isset($_POST['action']) && !empty($_POST['action'])) {
 
@@ -14,14 +15,14 @@ class accueil_extranetController {
 
 			switch($action) {
 				case 'updateParcelStatus' :
-					include_once('../Model/parcelModel.php');
-					$parcelManager = new ParcelModel();
-					$parcelManager->updateStatus($param[0], $param[1]);
+					$this->updateStatus($param);
 					break;
 			}
 		}
 
+		// TODO : mettre dans une fonction ajax et pas en plein milieu du Controller
 		if (isset($_POST['name']) && $_POST['name'] != '') {
+			require_once('header.php');
 
 			// sort variables
 			$userFirstname = ColiGo::sanitizeString($_POST['firstname']);
@@ -121,6 +122,7 @@ class accueil_extranetController {
 			// at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 		}
 
+		require_once('../View/header.php');
 		require_once('../View/accueil_extranet.php');
 		require_once('../View/footer.php');
 	}
@@ -175,5 +177,43 @@ class accueil_extranetController {
 		$weightPrice = $weightPriceManager->getPrice($parcelWeight, $deliveryType);
 
 		return $weightPrice + $price;
+	}
+
+
+	public function updateStatus($param) {
+
+		// manager
+		include_once('../Model/parcelModel.php');
+		$parcelManager = new ParcelModel();
+
+		$parcelId = $param[0];
+		$actualStatus = $parcelManager->getStaus($parcelId);
+		$newStatus = $param[1];
+
+		// if parcel doesn't jump a step or is lost
+		if($actualStatus + 1 == $newStatus || $newStatus == 5) {
+			$res = $parcelManager->updateStatus($parcelId, $newStatus);
+
+			if($res != 1) {
+				die(json_encode([
+					'stat'	=> 'ko',
+					'msg'		=> 'Le colis n\'existe plus'
+				]));
+			}
+			else {
+				die(json_encode([
+					'stat'	=> 'Ok',
+					'msg'		=> 'Le status du colis a bien été mis à jour'
+				]));
+			}
+		}
+		else {
+			die(json_encode([
+				'stat'	=> 'ko',
+				'msg'		=> 'Le colis ne se trouve pas à l\'étape requise'
+			]));
+		}
+
+
 	}
 }

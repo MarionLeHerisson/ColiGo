@@ -17,8 +17,13 @@
 				<button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(2)">Valider</button>
 			</div>
 
-				<!-- TODO : verif ajax que le colis n'est pas supprimé, qu'une étape n'a pas été sautée (idem pour livraison/distribution/perdu -->
-
+			<div id="ColisPrisEnCharge" class="none alert alert-dismissible fade in" role="alert">
+				<button type="button" class="close" onclick="closePopin()">
+					<span>×</span>
+				</button>
+				<h4>Erreur</h4>
+				<p id="ColisPrisEnChargeMsg"></p>
+			</div>
 		</div>
 	</div>
 </div>
