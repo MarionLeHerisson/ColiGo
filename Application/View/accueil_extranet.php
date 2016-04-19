@@ -1,5 +1,4 @@
 <?php
-//require_once('header.php');
 
 $sessionType = '';
 
@@ -24,22 +23,19 @@ switch($_SESSION['type']) {
 			
 			<?php
 
-			include_once('role_utilisateur.php');
-			include_once('ajout_utilisateur.php');
-			include_once('depot.php');
-			include_once('prise_en_charge.php');
-			include_once('livraison.php');
-			include_once('distribution.php');
-			include_once('perdu.php');
-			include_once('');
+			include_once('menu_extranet/role_utilisateur.php');
+			include_once('menu_extranet/ajout_utilisateur.php');
+			include_once('menu_extranet/depot.php');
+			include_once('menu_extranet/prise_en_charge.php');
+			include_once('menu_extranet/livraison.php');
+			include_once('menu_extranet/distribution.php');
+			include_once('menu_extranet/perdu.php');
+			//include_once('');
 
 			?>
 
 			
 
-			
-			
-			
 
 		</div>
 	</div>

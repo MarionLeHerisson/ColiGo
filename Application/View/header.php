@@ -13,8 +13,8 @@ session_start();
 	<title>ColiGo - Premier service de livraison en France</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="www/css/bootstrap.min.css" rel="stylesheet">
-	<link href="www/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="www/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="www/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,500,500italic,700,700italic,100,100italic,900,900italic,400,300' rel='stylesheet' type='text/css'>
@@ -26,6 +26,7 @@ session_start();
 
 	<script src="www/js/jquery-1.12.2.min.js"></script>
 	<script src="www/js/functions.js"></script>
+	<script src="www/js/json2.js"></script>
 </head>
 
 <body>
@@ -43,8 +44,8 @@ session_start();
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="accueil">Accueil</a></li>
-					<li><a href="#about">À props</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a href="cgu">À props</a></li>
+					<li><a href="contact">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?php if(!isset($_SESSION['type'])) { 
@@ -85,28 +86,3 @@ session_start();
 			</div><!--/.nav-collapse -->
 		</div>
 	</nav>
-
-<?php
-
-	// get actual page name
-	$exploded = explode('/', $_SERVER['REDIRECT_URL']);
-	$len = sizeof($exploded) - 1;
-	$thisPage = $exploded[$len];
-
-	// track connection
-	include_once '/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/accueilController.php';
-	$controller = new accueilController();
-	$controller->connectAction();
-
-	// include actual page controller (if different from 'accueil')
-	if($thisPage != 'accueil') {
-		require_once('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
-		// On l'instancie & on lance la première méthode
-		$controllerName = $thisPage . 'Controller';
-		$controller = new $controllerName;
-	}
-	$controller->indexAction();
-
-	// TODO : mettre dans un fichier séparé ?
-
-?>

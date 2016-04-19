@@ -30,13 +30,24 @@ h1, p {
 
 /* COVER */
 .cover-container {
-	background-image: url(../../Medias/colis-cover.jpeg);
 	background-size: cover;
 	margin-bottom: 30px;
 }
 
+.cover-index {
+	background-image: url(../../Medias/colis-cover.jpeg);
+}
 .cover-form {
 	background-image: url(../../Medias/inscription-cover.jpg);
+}
+.cover-cgu {
+	background-image: url(../../Medias/cgu.jpeg);
+}
+.cover-profile {
+	background-image: url(../../Medias/profile.jpeg);
+}
+.cover-colivoiturage {
+	background-image: url(../../Medias/colivoiturage.jpeg);
 }
 
 /* FEATURETTE */
@@ -78,3 +89,6 @@ h1, p {
 		font-size: 50px;
 	}
 }
+
+/* TODO : remplacer les liens bleus par rouge ColiGo
+*/

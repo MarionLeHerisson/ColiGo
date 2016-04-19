@@ -1,16 +1,57 @@
+// TODO : à la fermeture d'un onglet, faire disparaitre msg erreur ($(this) hasClass 'fermé' children addClass('none') + faire disparaitre contenu inputs
+function closePopin() {
+	$('.alert-danger').each(function() {
+		$(this).addClass('none');
+	});
+}
+
 function updateParcelStatus(idType) {
 
-	var parcelId;
-	// TODO : recup id en fonction de idType
+	var parcelInputId,
+		parcelLabel = '',
+		parcelId;
 
-	$.ajax({ url: 'accueil_extranet',
+	switch (idType) {
+		case 2 : parcelLabel = 'ColisPrisEnCharge';
+			break;
+		case 3 : parcelLabel = 'ColisLivre';
+			break;
+		case 4 : parcelLabel = 'ColisDistribue';
+			break;
+		case 5 : parcelLabel = 'ColisPerdu';
+			break;
+	}
+
+	parcelInputId = 'id' + parcelLabel;
+
+	parcelId = $('#' + parcelInputId).val();
+
+	$.ajax({
+		type: "POST",
+		url: 'accueil_extranet',
 		data: {
 			action: 'updateParcelStatus',
 			param: [parcelId,idType]
 		},
-		type: 'post',
-		success: function(output) {
-			alert(output);
+		success: function(data) {
+			var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+			if(dataObject.stat === 'ko') {
+				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
+				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			}
+			else if(dataObject.stat === 'ok') {
+				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
+				$('#' + parcelLabel).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+			}
+			else {
+				$('#' + parcelLabel + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
+				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			}
+		},
+		error: function() {
+			$('#' + parcelLabel + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Sinon, veuillez contacter l\'équipe technique de ColiGo.');
+			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
 		}
 	});
 }
