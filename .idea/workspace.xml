@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b6ebe93-6acb-439e-b77e-c544e9538541" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/accueil_site.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/cgu.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/colivoiturage.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/contact.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/depot_client.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/json2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/localiser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/View/profile.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/View/index_extranet.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Medias/inscription.jpg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/ajout_utilisateur.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/ajout_utilisateur.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/depot.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/depot.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/distribution.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/distribution.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/livraison.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/livraison.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/perdu.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/perdu.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/prise_en_charge.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/prise_en_charge.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/View/role_utilisateur.php" afterPath="$PROJECT_DIR$/Application/View/menu_extranet/role_utilisateur.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/accueil_extranet.php" afterPath="$PROJECT_DIR$/Application/View/accueil_extranet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Controller/accueil_extranetController.php" afterPath="$PROJECT_DIR$/Application/Controller/accueil_extranetController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/functions.js" afterPath="$PROJECT_DIR$/www/js/functions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/header.php" afterPath="$PROJECT_DIR$/Application/View/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/index.php" afterPath="$PROJECT_DIR$/Application/View/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Model/parcelModel.php" afterPath="$PROJECT_DIR$/Application/Model/parcelModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="3b6ebe93-6acb-439e-b77e-c544e9538541" name="Default" comment="" />
     <ignored path="ProjAnnuel2016.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -49,11 +22,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="functions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="functions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/functions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6413793">
+            <state vertical-scroll-proportion="0.0">
               <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.062068965">
+              <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -135,7 +118,6 @@
         <option value="$PROJECT_DIR$/Application/View/form-inscription.php" />
         <option value="$PROJECT_DIR$/Application/View/inscription.php" />
         <option value="$PROJECT_DIR$/Application/View/ajout_utilisateur.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Application/Model/relayPointModel.php" />
         <option value="$PROJECT_DIR$/Application/View/depot.php" />
         <option value="$PROJECT_DIR$/Application/View/prise_en_charge.php" />
@@ -165,6 +147,7 @@
         <option value="$PROJECT_DIR$/Application/View/menu_extranet/prise_en_charge.php" />
         <option value="$PROJECT_DIR$/Application/View/menu_extranet/livraison.php" />
         <option value="$PROJECT_DIR$/www/js/functions.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -710,14 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.067567565">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Model/parcelModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -887,8 +862,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/functions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6413793">
+        <state vertical-scroll-proportion="0.0">
           <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062068965">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
           <folding />
         </state>
       </provider>
