@@ -6,6 +6,18 @@ class accueil_extranetController {
 	
 	public function indexAction() {
 
+		$sessionType = '';
+
+		switch($_SESSION['type']) {
+			case 1: $sessionType = 'Administrateur';
+				break;
+			case 2: $sessionType = 'Point Relais';
+				break;
+			case 3: $sessionType = 'Livreur';
+				break;
+			//default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
+		}
+
 		//echo '<pre>';die(print_r($_POST));
 		// ajax
 		if(isset($_POST['action']) && !empty($_POST['action'])) {

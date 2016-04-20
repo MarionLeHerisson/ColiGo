@@ -1,17 +1,3 @@
-<?php
-
-$sessionType = '';
-
-switch($_SESSION['type']) {
-	case 1: $sessionType = 'Administrateur';
-		break;
-	case 2: $sessionType = 'Point Relais';
-		break;
-	case 3: $sessionType = 'Livreur';
-		break;
-	default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
-}
-?>
 <div class="container">
 	<div class="col-md-1"></div>
 

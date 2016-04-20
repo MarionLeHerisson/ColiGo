@@ -7,8 +7,8 @@
 //print_r($_SERVER);
 
 /* C O N F   L O C A L */ 
-//define('BASE_URL', 'http://localhost:8888/ProjAnnuel2016/');
-define('BASE_URL', 'http://www.coligo.local.lan/');
+define('BASE_URL', 'http://localhost:8888/ProjAnnuel2016/');
+//define('BASE_URL', 'http://www.coligo.local.lan/');
 
 define('HOSTNAME', 'localhost');
 define('DBNAME', 'ColiGo');
