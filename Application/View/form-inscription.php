@@ -6,8 +6,6 @@
             <input name="firstname" id="formFirstname" type="text" class="form-control" placeholder="Catherine">
         </div>
         <p class="col-md-4 none ttFistname bg-danger">
-            <!-- TODO : http://getbootstrap.com/css/#forms-control-validation
-                ajouter class has-error en cas d'erreur -->
             Votre prénom est obligatoire
         </p>
     </div>

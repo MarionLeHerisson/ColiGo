@@ -61,8 +61,17 @@ function redirectHome() {
 }
 
 function submitSuiviForm() {
-    var form = $('#suivi');
 
+
+    var input = $('#suivi'),
+        number = input.val();
+
+    if (number != parseInt(number, 10)) {
+        //$('#suiviTooltip').tooltip('show');
+        $('input[rel="txtTooltip"]').tooltip('show');
+    } else {
+        document.location.href="suivi?" + number;
+    }
 }
 
 function submitDepotForm() {

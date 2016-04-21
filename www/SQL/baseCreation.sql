@@ -169,6 +169,15 @@ CREATE TABLE Stock(
 	FOREIGN KEY (extra_id) REFERENCES Extra (id)
 );
 
+CREATE TABLE Tracking(
+  id INT NOT NULL AUTO_INCREMENT,
+  parcel_id INT NOT NULL,
+  status_id INT NOT NULL,
+  new_status_date TIMESTAMP NOT NULL,
 
+  PRIMARY KEY (id),
+  FOREIGN KEY(parcel_id) REFERENCES Parcel(id),
+  FOREIGN KEY(status_id) REFERENCES ParcelStatus(id)
+);
 
 

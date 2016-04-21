@@ -24,9 +24,7 @@ require_once "header.php";
                 <img class="img-circle" src="Medias/loupe.jpg" width="140" height="140">
                 <h3>Suivre un colis</h3>
                 <p>Vous avez simplement besoin du numéro de suivi de votre colis et du code postal de l'adresse de livraison.</p>
-                <form id="suivi" action="suivi" enctype="text/plain">
-                    <p><input type="text" class="input-lg" placeholder="Numéro de suivi" onKeyPress="if(event.keyCode == 13) submitSuiviForm();"></p>
-                </form>
+                <p><input data-placement="bottom" rel="txtTooltip" title="Le numéro de suivi est uniquement composé de chiffres !" id="suivi" type="text" class="input-lg" placeholder="Numéro de suivi" onKeyPress="if(event.keyCode == 13) submitSuiviForm();"></p>
             </div>
 
             <div class="col-md-4">
