@@ -9,4 +9,6 @@ require_once("header.php");
         <br><br><br>
     </div>
 </div>
-Cette section n'est pas encore disponible.
+
+<div class="container">
+    Cette section n'est pas encore disponible.

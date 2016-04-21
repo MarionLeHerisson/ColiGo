@@ -4,6 +4,8 @@ RewriteEngine On
 RewriteRule	^accueil$	    Application/View/index.php	    [L]
 RewriteRule	^cgu$   	    Application/View/index.php      [L]
 RewriteRule	^contact$	    Application/View/index.php	    [L]
+RewriteRule	^depot_client$	Application/View/index.php	    [L]
+RewriteRule	^localiser$		Application/View/index.php	    [L]
 RewriteRule	^colivoiturage$	Application/View/index.php	    [L]
 
 RewriteRule	^deconnexion$	Application/View/index.php    	[L]
@@ -12,3 +14,4 @@ RewriteRule	^profile$	    Application/View/index.php	    [L]
 RewriteRule	^validation$	Application/View/index.php	    [L]
 
 RewriteRule	^accueil_extranet$	Application/View/index.php	[L]
+RewriteRule	^suivi$			Application/View/index.php		[L]

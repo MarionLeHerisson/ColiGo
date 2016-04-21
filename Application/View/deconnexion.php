@@ -5,7 +5,7 @@ $len = sizeof($exploded) - 1;
 $thisPage = $exploded[$len];
 
 // On inclut le controller correspondant
-require_once('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
+require_once(BASE_PATH . 'ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
 // On l'instancie & on lance la première méthode
 $controllerName = $thisPage . 'Controller';
 $controller = new $controllerName;

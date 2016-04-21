@@ -2,6 +2,7 @@
 session_start();
 
 require_once('../../library/coligo.php');
+require_once('../../const.php');
 
 // connection
 if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) && $_POST['copwd'] != '') {
@@ -30,7 +31,13 @@ if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) &
 		echo '<script type="text/javascript">
 						document.location.href="accueil";
 					</script>';
-	} // TODO : if $type = null -> msg erreur
+	}
+
+    if($type == null) {
+        echo '<script type="text/javascript">
+						document.location.href="cgu";
+					</script>';
+    }
 }
 
 
@@ -40,9 +47,9 @@ $len = sizeof($exploded) - 1;
 $thisPage = $exploded[$len];
 
 // include actual page controller (if it exists)
-if(file_exists('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php')) {
+if(file_exists(BASE_PATH . 'Application/Controller/' . $thisPage . 'Controller.php')) {
 
-	require_once('/Applications/MAMP/htdocs/ProjAnnuel2016/Application/Controller/' . $thisPage . 'Controller.php');
+	require_once(BASE_PATH . 'Application/Controller/' . $thisPage . 'Controller.php');
 
 	// Create instace and show index for this page
 	$controllerName = $thisPage . 'Controller';

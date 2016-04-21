@@ -1,5 +1,4 @@
 <?php
-require_once("header.php");
 //API KEY : AIzaSyAPuG1oh7adZDZ1E_N5_owPxzz5bhtV4FI
 ?>
 
@@ -24,8 +23,3 @@ require_once("header.php");
 	</div>
 
 </div>
-
-
-<?php
-require_once("footer.php");
-?>

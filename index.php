@@ -2,7 +2,7 @@
 
 require_once("const.php");
 
-header('Location: ' . BASE_URL . 'accueil');
+header('Location: accueil');
 exit();
 
 ?>

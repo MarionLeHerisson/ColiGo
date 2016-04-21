@@ -60,6 +60,11 @@ function redirectHome() {
 	document.location.href="accueil";
 }
 
+function submitSuiviForm() {
+    var form = $('#suivi');
+
+}
+
 function submitDepotForm() {
 	// get fields to check
 	// TODO : (On vérifie aussi ceux qui ne sont pas rentrés "manuellement" des fois qu'un codeur s'amuse à modifier l'attribut value

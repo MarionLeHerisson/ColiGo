@@ -1,7 +1,3 @@
-<?php
-require_once("header.php");
-?>
-
 <div class="cover-container cover-colivoiturage">
     <div class="inner cover">
         <br><br><br>
@@ -9,4 +5,6 @@ require_once("header.php");
         <br><br><br>
     </div>
 </div>
-Cette section n'est pas encore disponible.
+
+<div class="container">
+    Cette section n'est pas encore disponible.
