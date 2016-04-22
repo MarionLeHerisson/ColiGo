@@ -9,7 +9,7 @@
     <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
         <div class="panel-body">
 
-            <?php include_once('form-inscription.php'); ?>
+            <?php include_once('../form-inscription.php'); ?>
 
             <div class="col-md-9">
                 <button type="button" class="btn btn-primary btn-lg" onclick="submitInscForm()">Valider</button>

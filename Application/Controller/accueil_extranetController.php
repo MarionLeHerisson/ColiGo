@@ -15,7 +15,7 @@ class accueil_extranetController {
 				break;
 			case 3: $sessionType = 'Livreur';
 				break;
-			//default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
+			default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
 		}
 
 		//echo '<pre>';die(print_r($_POST));

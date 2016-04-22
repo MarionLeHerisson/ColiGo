@@ -85,10 +85,10 @@ function submitDepotForm() {
 			receiverFirstname : $('#destfirstname'),
 			receiverLastname : $('#destname'),
 			address : $('#autocomplete'),
-			streetnumber : $('#street_number'),
-			route : $('#route'),
-			city : $('#locality'),
-			zipcode : $('#postal_code'),
+			streetnumber : $('#street_number1'),
+			route : $('#route1'),
+			city : $('#locality1'),
+			zipcode : $('#postal_code1'),
 			packaging : $('input:radio[name=emballage]:checked'),
 			type : $('input:radio[name=type]:checked'),
 
@@ -217,45 +217,93 @@ function submitInscForm() {
 /****** GOOGLE ADDRESS API ******/
 
 var placeSearch, 
-	autocomplete,
-	componentForm = {
-		street_number: 'short_name',
-		route: 'long_name',
-		locality: 'long_name',
-		administrative_area_level_1: 'short_name',
-		country: 'long_name',
-		postal_code: 'short_name'
+	autocomplete1,
+	autocomplete2,
+	autocomplete3,
+	componentForm1 = {
+		street_number1: 'short_name',
+		route1: 'long_name',
+		locality1: 'long_name',
+		administrative_area_level1: 'short_name',
+		country1: 'long_name',
+		postal_code1: 'short_name'
+	},
+	componentForm2 = {
+		street_number2: 'short_name',
+		route2: 'long_name',
+		locality2: 'long_name',
+		administrative_area_level2: 'short_name',
+		country2: 'long_name',
+		postal_code2: 'short_name'
+	},
+	componentForm3 = {
+		street_number3: 'short_name',
+		route3: 'long_name',
+		locality3: 'long_name',
+		administrative_area_level3: 'short_name',
+		country3: 'long_name',
+		postal_code3: 'short_name'
 	};
 
 function initAutocomplete() {
 	// Create the autocomplete object, restricting the search to geographical location types.
-	autocomplete = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+	autocomplete1 = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete1')),
+		{types: ['geocode']});
+	autocomplete2 = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
+		{types: ['geocode']});
+	autocomplete3 = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */(document.getElementById('autocomplete3')),
 		{types: ['geocode']});
 
 	// When the user selects an address from the dropdown, populate the address fields in the form.
-	autocomplete.addListener('place_changed', fillInAddress);
+	autocomplete1.addListener('place_changed', fillInAddress);
+	autocomplete2.addListener('place_changed', fillInAddress);
+	autocomplete3.addListener('place_changed', fillInAddress);
 }
 
 function fillInAddress() {
 	// Get the place details from the autocomplete object.
-	var place = autocomplete.getPlace();
+	var place1 = autocomplete1.getPlace(),
+		place2 = autocomplete2.getPlace(),
+		place3 = autocomplete3.getPlace();
 
 	// initialize inputs
-	for (var component in componentForm) {
+	for (var component in componentForm1) {
+		document.getElementById(component).value = '';
+		document.getElementById(component).disabled = false;
+	}
+	for (component in componentForm2) {
+		document.getElementById(component).value = '';
+		document.getElementById(component).disabled = false;
+	}
+	for (component in componentForm3) {
 		document.getElementById(component).value = '';
 		document.getElementById(component).disabled = false;
 	}
 
 	// Get each component of the address from the place details
 	// and fill the corresponding field on the form.
-	for (var i = 0; i < place.address_components.length; i++) {
-		var addressType = place.address_components[i].types[0];
-		if (componentForm[addressType]) {
-			var val = place.address_components[i][componentForm[addressType]];
-			document.getElementById(addressType).value = val;
-		}
-	}
+	// TODO : O-PTI-MI-SA-TION
+	$('#street_number1').val(place1.address_components[0].long_name);
+	$('#route1').val(place1.address_components[1].long_name);
+	$('#locality1').val(place1.address_components[3].long_name);
+	$('#country1').val(place1.address_components[5].long_name);
+	$('#postal_code1').val(place1.address_components[6].long_name);
+
+	$('#street_number2').val(place2.address_components[0].long_name);
+	$('#route2').val(place2.address_components[1].long_name);
+	$('#locality2').val(place2.address_components[3].long_name);
+	$('#country2').val(place2.address_components[5].long_name);
+	$('#postal_code2').val(place2.address_components[6].long_name);
+
+	$('#street_number3').val(place3.address_components[0].long_name);
+	$('#route3').val(place3.address_components[1].long_name);
+	$('#locality3').val(place3.address_components[3].long_name);
+	$('#country3').val(place3.address_components[5].long_name);
+	$('#postal_code3').val(place3.address_components[6].long_name);
+
 }
 
 // Bias the autocomplete object to the user's geographical location,
@@ -271,7 +319,9 @@ function geolocate() {
 				center: geolocation,
 				radius: position.coords.accuracy
 			});
-			autocomplete.setBounds(circle.getBounds());
+			autocomplete1.setBounds(circle.getBounds());
+			autocomplete2.setBounds(circle.getBounds());
+			autocomplete3.setBounds(circle.getBounds());
 		});
 	}
 }

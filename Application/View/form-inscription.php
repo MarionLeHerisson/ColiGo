@@ -65,35 +65,35 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="email">Adresse :</label>
         <div class="col-md-6">
-            <input name="address" id="autocomplete" class="form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()"></input>
+            <input name="address" id="autocomplete1" class="form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()"></input>
         </div>
     </div>
 
     <table id="address" class="none">
         <tr>
             <td>
-                <input name="streetnumber" id="street_number"></input>
+                <input name="streetnumber" id="street_number1"></input>
             </td>
             <td>
-                <input name="route" id="route"></input>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input name="city" id="locality"></input>
+                <input name="route" id="route1"></input>
             </td>
         </tr>
         <tr>
             <td>
-                <input name="state" id="administrative_area_level_1"></input>
-            </td>
-            <td>
-                <input name="zipcode" id="postal_code"></input>
+                <input name="city" id="locality1"></input>
             </td>
         </tr>
         <tr>
             <td>
-                <input name="country" id="country"></input>
+                <input name="state" id="administrative_area_level1"></input>
+            </td>
+            <td>
+                <input name="zipcode" id="postal_code1"></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="country" id="country1"></input>
             </td>
         </tr>
     </table>

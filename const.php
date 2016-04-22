@@ -1,5 +1,6 @@
 <?php
 //print_r($_SERVER);die;
+
 /* C O N F   L O C A L   W I N D O W S   M A R I O N */
 if($_SERVER['HTTP_HOST'] == 'www.coligo.local.lan') {
 
@@ -11,6 +12,7 @@ if($_SERVER['HTTP_HOST'] == 'www.coligo.local.lan') {
     define('DBLOGIN', 'root');
     define('DBPWD', 'root');
 }
+
 /* C O N F   L O C A L   M A C */
 else if($_SERVER['HTTP_HOST'] == 'localhost:8888') {
 
@@ -22,6 +24,7 @@ else if($_SERVER['HTTP_HOST'] == 'localhost:8888') {
     define('DBLOGIN', 'root');
     define('DBPWD', 'root');
 }
+
 /* C O N F   P R O D */
 //else if(PROD) {
 //    define('BASE_URL', 'http://coligo.fr.nf/');

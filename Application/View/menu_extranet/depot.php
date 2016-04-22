@@ -62,11 +62,12 @@
 				<div class="form-group">
 					<label class="control-label col-md-3" for="firstname">Poids du colis :</label>
 					<div class="col-md-4">
-						<input name="weight" id="weight" type="text" class="form-control" placeholder="">
+						<input name="weight" id="weight" type="text" class="form-control" placeholder="00.00"><p>kg</p>
 					</div>
 					<p class="col-md-4 none ttLastname bg-danger">
 						Poids obligatoire 
 					</p>
+					<!-- TODO : Verif point ou virgule, puis js qui transforme virgule en point, retire -->
 				</div>
 
 				<br><h4>Services supplémentaires :</h4>
@@ -121,12 +122,11 @@
 
 				<div class="none">
 					<table id="address">
-						<input name="streetnumber" id="street_number">
-						<input name="route" id="route">
-						<input name="city" id="locality">
-						<input name="state" id="administrative_area_level_1">
-						<input name="zipcode" id="postal_code">
-						<input name="country" id="country">
+						<input name="streetnumber" id="street_number2">
+						<input name="route" id="route2">
+						<input name="city" id="locality2">
+						<input name="zipcode" id="postal_code2">
+						<input name="country" id="country2">
 					</table>
 				</div>
 
@@ -161,23 +161,22 @@
 						</div>
 					</div>
 				</div>
-<!-- TODO : gestion de plusieurs adresses sur mm page (js google api)
-				<!--<div class="form-group">
+
+				<div class="form-group">
 					<label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
 					<div class="col-md-6">
 						<input name="address" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
 					</div>
-					<div class="">
+					<div class="none">
 						<table id="address">
-							<input name="streetnumber" id="street_number">
-							<input name="route" id="route">
-							<input name="city" id="locality">
-							<input name="state" id="administrative_area_level_1">
-							<input name="zipcode" id="postal_code">
-							<input name="country" id="country">
+							<input name="streetnumber" id="street_number3">
+							<input name="route" id="route3">
+							<input name="city" id="locality3">
+							<input name="zipcode" id="postal_code3">
+							<input name="country" id="country3">
 						</table>
 					</div>
-				</div>-->
+				</div>
 
 				<button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
