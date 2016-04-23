@@ -1,8 +1,4 @@
-<?php
-require_once "header.php";
-?>
-
-    <div class="cover-container cover-index">
+ <div class="cover-container cover-index">
         <div class="inner cover">
             <br><br><br>
             <h1 class="cover-heading"><img src="Medias/logo-name.png" width="20%"></h1>
@@ -83,6 +79,7 @@ require_once "header.php";
                 <p class="lead">Vous allez là où va un de nos colis ? Avant votre départ, passez le prendre au point relais, et déposez-le au point relais de votre ville d'arrivée !
                     Nous vous payons pour ce service. Les colis qui vous sont proposés sont uniquement les colis déposés près de chez vous et à livrer là où vous allez !
                 </p>
+                <p><a class="btn btn-default" href="colivoiturage" role="button">En savoir plus</a></p>
             </div>
             <div class="col-md-5 col-md-pull-7">
                 <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="500x500" src="Medias/colivoiturage.jpeg" data-holder-rendered="true">
@@ -90,7 +87,3 @@ require_once "header.php";
         </div>
 
         <!-- #container closed in the footer -->
-
-<?php
-require "footer.php";
-?>

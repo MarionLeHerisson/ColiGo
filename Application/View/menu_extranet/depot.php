@@ -154,6 +154,7 @@
 						<div class="pull-left">
 							<input type="checkbox" name="ramassage" id="ramassage" value="5">
 							Ramassage au domicile ou sur un lieu de travail (8,00€)
+							<!-- TODO : if checked, show adresse ramassage -->
 						</div><br>
 						<div class="pull-left">
 							<input type="checkbox" name="samedi" id="samedi" value="6">
@@ -165,7 +166,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
 					<div class="col-md-6">
-						<input name="address" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+						<input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
 					</div>
 					<div class="none">
 						<table id="address">

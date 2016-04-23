@@ -84,19 +84,29 @@ function submitDepotForm() {
 			weight : $('#weight'),
 			receiverFirstname : $('#destfirstname'),
 			receiverLastname : $('#destname'),
-			address : $('#autocomplete'),
-			streetnumber : $('#street_number1'),
-			route : $('#route1'),
-			city : $('#locality1'),
-			zipcode : $('#postal_code1'),
-			packaging : $('input:radio[name=emballage]:checked'),
-			type : $('input:radio[name=type]:checked'),
 
-			priority : $('#prioritaire'),// .attr('checked') == true ou isChecked ?
-			unexpected : $('#unexpected'),
-			indemnity : $('#indemnity'),
-			taking : $('#taking'),
-			saturday : $('#saturday')
+			address : $('#autocomplete2'),
+			streetnumber : $('#street_number2').val(),
+			route : $('#route2').val(),
+			city : $('#locality2').val(),
+			zipcode : $('#postal_code2').val(),
+			country : $('#country2').val(),
+
+			ramaddress : $('#autocomplete3'),
+			ramstreetnumber : $('#street_number3').val(),
+			ramroute : $('#route3').val(),
+			ramcity : $('#locality3').val(),
+			ramzipcode : $('#postal_code3').val(),
+			ramcountry : $('#country3').val(),
+
+			packaging : $('input:radio[name=emballage]:checked').val(),
+			type : $('input:radio[name=type]:checked').val(),
+
+			priority : $('#prioritaire').val(),// .attr('checked') == true ou isChecked ?
+			unexpected : $('#unexpected').val(),
+			indemnity : $('#indemnity').val(),
+			taking : $('#taking').val(),
+			saturday : $('#saturday').val()
 		},
 		error = 0,
 		checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,
@@ -133,14 +143,15 @@ function submitDepotForm() {
 		error ++;
 	}
 
-	if(data.zipcode.val() === '' || !checkZipCode.test(data.zipcode.val())) {
+/*	if(data.zipcode.val() === '' || !checkZipCode.test(data.zipcode.val())) {
 		data.zipcode.parents('.form-group').addClass('has-error');
 		error ++;
-	}
+	}*/
 
 
 	// If no error : submit form
 	if(error === 0) {
+		alert('submit');
 		$('#depot-form').submit();
 	}
 }

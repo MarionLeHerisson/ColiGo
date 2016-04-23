@@ -5,7 +5,7 @@ include_once ('../../library/coligo.php');
 class accueil_extranetController {
 	
 	public function indexAction() {
-
+print_r($_POST);
 		$sessionType = '';
 
 		switch($_SESSION['type']) {
@@ -34,7 +34,6 @@ class accueil_extranetController {
 
 		// TODO : mettre dans une fonction ajax et pas en plein milieu du Controller
 		if (isset($_POST['name']) && $_POST['name'] != '') {
-			require_once('header.php');
 
 			// sort variables
 			$userFirstname = ColiGo::sanitizeString($_POST['firstname']);
@@ -72,14 +71,14 @@ class accueil_extranetController {
 			$user = $userManager->getUserByMail($userMail);
 
 			if(empty($user)) {
-				$userId = $userManager->insertUser($userFirstname, $userLastname, $userMail, null, 4, null);
+				$userId = $userManager->insertUser($userFirstname, $userLastname, $userMail, null, 4, 0);
 			} else {
 				$userId = $user[0]['id'];
 			}
 
 			// insert Parcel (weight, status = déposé, delivery_type) -> get id
 			$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
-
+// TODO : insert tracking
 			// put extras in an array
 			$extras = [];
 

@@ -26,12 +26,14 @@ class ParcelModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(weight, status_id, is_deleted, delivery_type)
-                                VALUES (" . $weight . ", " . $status . ", 0, " . $delivery . ");");
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(weight, status_id, delivery_type)
+                                VALUES (" . $weight . ", " . $status . ", " . $delivery . ");");
         $query->execute();
 
-        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
-        $res = $query->execute();
+        $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $query2->execute();
+
+        $res = $query2->fetchColumn();
 
         return $res;
     }

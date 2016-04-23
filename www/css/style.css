@@ -47,7 +47,10 @@ h1, p {
 	background-image: url(../../Medias/profile.jpeg);
 }
 .cover-colivoiturage {
-	background-image: url(../../Medias/colivoiturage.jpeg);
+	background-image: url(../../Medias/colivoiturage-cover.jpeg);
+}
+.cover-localiser {
+	background-image: url(../../Medias/map.jpg);
 }
 
 /* FEATURETTE */
