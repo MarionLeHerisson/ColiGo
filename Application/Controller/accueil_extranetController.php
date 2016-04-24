@@ -44,9 +44,9 @@ print_r($_POST);
 
 			$receiverLastname = ColiGo::sanitizeString($_POST['destname']);
 			$receiverFirstname = ColiGo::sanitizeString($_POST['destfirstname']);
-			$receiverAddress = ColiGo::sanitizeString($_POST['streetnumber']) . ColiGo::sanitizeString($_POST['route']);
-			$receiverZipCode = ColiGo::sanitizeString($_POST['zipcode']);
-			$receiverCity = ColiGo::sanitizeString($_POST['Paris']);
+			$receiverAddress = ColiGo::sanitizeString($_POST['streetnumber2']) . ColiGo::sanitizeString($_POST['route2']);
+			$receiverZipCode = ColiGo::sanitizeString($_POST['zipcode2']);
+			$receiverCity = ColiGo::sanitizeString($_POST['city2']);
 
 			// managers
 			include_once('../Model/userModel.php');
@@ -67,6 +67,13 @@ print_r($_POST);
 			include_once('../Model/relayPointModel.php');
 			$relayPointManager = new RelayPointModel();
 
+			include_once('../Model/trackingModel.php');
+			$trackingManager = new TrackingModel();
+
+			include_once('../Model/orderParcelModel.php');
+			$orderParcelManager = new OrderParcelModel();
+
+
 			// if user does not exists, subscribe & get its id
 			$user = $userManager->getUserByMail($userMail);
 
@@ -78,7 +85,10 @@ print_r($_POST);
 
 			// insert Parcel (weight, status = déposé, delivery_type) -> get id
 			$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
-// TODO : insert tracking
+
+			// Track the parcel with its status and date, keeps an history
+			$trackingManager->updateParcelTracking($parcelId, 1);
+
 			// put extras in an array
 			$extras = [];
 
@@ -96,6 +106,9 @@ print_r($_POST);
 			}
 			if(isset($_POST['ramassage'])) {
 				$extras[] = 5;
+				$senderAddress = ColiGo::sanitizeString($_POST['streetnumber3']) . ColiGo::sanitizeString($_POST['route3']);
+				$senderZipCode = ColiGo::sanitizeString($_POST['zipcode3']);
+				$senderCity = ColiGo::sanitizeString($_POST['city3']);
 			}
 			if(isset($_POST['samedi'])) {
 				$extras[] = 6;
@@ -121,16 +134,22 @@ print_r($_POST);
 			// Insert receiver address
 			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
 
-			// Get relay point id
-			$rpId = $_SESSION['address'];
-
-			// Get relay point address id TODO : or other departure address
-			$depAddressId = $relayPointManager->getRPAddress($rpId);
+			if(isset($_POST['ramassage'])) {
+				$depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
+				$rpId = NULL;
+			}
+			else {
+				// Get relay point id
+				$rpId = $_SESSION['address'];
+				$depAddressId = $relayPointManager->getRPAddress($rpId);
+			}
 
 			// insert Order
-			$ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
+			$orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
 
-			// at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
+			// link order to parcel
+			$orderParcelManager->linkParcelToOrder($parcelId, $orderId);
+			// TODO : at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 		}
 
 		require_once('../View/header.php');

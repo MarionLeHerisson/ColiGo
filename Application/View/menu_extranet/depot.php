@@ -112,7 +112,7 @@
 						<input name="destfirstname" id="destfirstname" type="text" class="form-control" placeholder="">
 					</div>
 				</div>
-
+<!-- TODO : choix point relais / adresse particulier (ajax pour remplir le table) -->
 				<div class="form-group">
 					<label class="control-label col-md-3" for="email">Adresse de livraison :</label>
 					<div class="col-md-6">
@@ -122,11 +122,11 @@
 
 				<div class="none">
 					<table id="address">
-						<input name="streetnumber" id="street_number2">
-						<input name="route" id="route2">
-						<input name="city" id="locality2">
-						<input name="zipcode" id="postal_code2">
-						<input name="country" id="country2">
+						<input name="streetnumber2" id="street_number2">
+						<input name="route2" id="route2">
+						<input name="city2" id="locality2">
+						<input name="zipcode2" id="postal_code2">
+						<input name="country2" id="country2">
 					</table>
 				</div>
 
@@ -170,11 +170,11 @@
 					</div>
 					<div class="none">
 						<table id="address">
-							<input name="streetnumber" id="street_number3">
-							<input name="route" id="route3">
-							<input name="city" id="locality3">
-							<input name="zipcode" id="postal_code3">
-							<input name="country" id="country3">
+							<input name="streetnumber3" id="street_number3">
+							<input name="route3" id="route3">
+							<input name="city3" id="locality3">
+							<input name="zipcode3" id="postal_code3">
+							<input name="country3" id="country3">
 						</table>
 					</div>
 				</div>

@@ -71,7 +71,7 @@ CREATE TABLE Orders (
 	arrival_address INT NOT NULL,
 	total_price FLOAT NOT NULL,
 	order_date TIMESTAMP NOT NULL,
-	ordered_from INT NOT NULL,
+	ordered_from INT,
 	ordered_by INT NOT NULL,
 	deliver_to INT NOT NULL,
 	is_deleted INT DEFAULT 0,
@@ -84,16 +84,18 @@ CREATE TABLE Orders (
 	FOREIGN KEY (deliver_to) REFERENCES User (id)
 );
 
-CREATE TABLE UserOrder (
-	id INT NOT NULL AUTO_INCREMENT,
-	user_id INT NOT NULL,
-	order_id INT NOT NULL,
-	is_deleted INT DEFAULT 0,
-	
-	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES User (id),
-	FOREIGN KEY (order_id) REFERENCES Orders (id)
-);
+/*
+--CREATE TABLE UserOrder (
+--	id INT NOT NULL AUTO_INCREMENT,
+--	user_id INT NOT NULL,
+--	order_id INT NOT NULL,
+--	is_deleted INT DEFAULT 0,
+
+--	PRIMARY KEY (id),
+--	FOREIGN KEY (user_id) REFERENCES User (id),
+--	FOREIGN KEY (order_id) REFERENCES Orders (id)
+--);
+*/
 
 CREATE TABLE DeliveryType(
 	id INT NOT NULL AUTO_INCREMENT,
