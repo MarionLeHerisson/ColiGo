@@ -5,7 +5,7 @@ include_once ('../../library/coligo.php');
 class accueil_extranetController {
 	
 	public function indexAction() {
-print_r($_POST);
+
 		$sessionType = '';
 
 		switch($_SESSION['type']) {
@@ -29,6 +29,9 @@ print_r($_POST);
 				case 'updateParcelStatus' :
 					$this->updateStatus($param);
 					break;
+				case 'addRelayPoint' :
+					$this->addRelayPoint($param);
+					break;
 			}
 		}
 
@@ -44,7 +47,7 @@ print_r($_POST);
 
 			$receiverLastname = ColiGo::sanitizeString($_POST['destname']);
 			$receiverFirstname = ColiGo::sanitizeString($_POST['destfirstname']);
-			$receiverAddress = ColiGo::sanitizeString($_POST['streetnumber2']) . ColiGo::sanitizeString($_POST['route2']);
+			$receiverAddress = ColiGo::sanitizeString($_POST['streetnumber2']) . ', ' . ColiGo::sanitizeString($_POST['route2']);
 			$receiverZipCode = ColiGo::sanitizeString($_POST['zipcode2']);
 			$receiverCity = ColiGo::sanitizeString($_POST['city2']);
 
@@ -106,7 +109,7 @@ print_r($_POST);
 			}
 			if(isset($_POST['ramassage'])) {
 				$extras[] = 5;
-				$senderAddress = ColiGo::sanitizeString($_POST['streetnumber3']) . ColiGo::sanitizeString($_POST['route3']);
+				$senderAddress = ColiGo::sanitizeString($_POST['streetnumber3']) . ', ' . ColiGo::sanitizeString($_POST['route3']);
 				$senderZipCode = ColiGo::sanitizeString($_POST['zipcode3']);
 				$senderCity = ColiGo::sanitizeString($_POST['city3']);
 			}
@@ -252,5 +255,70 @@ print_r($_POST);
 		}
 
 
+	}
+
+	/**
+	 * Add a nex Relay Point
+	 *
+	 * @param array $param
+	 * @return array
+	 *
+	 * @author Marion
+	 * TODO : Verif si user a déjà un mot de passe
+	 */
+	public function addRelayPoint($param) {
+		// Managers
+		include_once('../Model/addressModel.php');
+		$addressManager = new AddressModel();
+
+		include_once('../Model/userModel.php');
+		$userManager = new UserModel();
+
+		include_once('../Model/relayPointModel.php');
+		$relayPointManager = new RelayPointModel();
+
+		$mail = ColiGo::sanitizeString($param[0]);
+		$address = ColiGo::sanitizeString($param[1]);
+		$city = ColiGo::sanitizeString($param[3]);
+		$zipCode = intval($param[2]);
+
+		$addressId = $addressManager->insertAddress($address, $zipCode, $city);
+
+		if(is_null($addressId)) {
+			die(json_encode([
+				'stat'	=> 'ko',
+				'msg'	=> 'Une erreur s\'est produite concernant l\'adresse.'
+			]));
+		}
+
+		$user = $userManager->getUserByMail($mail);
+		$userId = $user[0]['id'];
+
+		if(is_null($userId)) {
+			die(json_encode([
+				'stat'	=> 'ko',
+				'msg'	=> 'Cet utilisateur n\'existe pas. Veuillez d\'abord procéder à son inscription.'
+			]));
+		}
+
+		$userType = $userManager->getUserType($userId);
+
+		if($userType != 2) {
+			$userManager->updateRights($userId, 2);
+		}
+
+		$rpId = $relayPointManager->insertRelayPoint($addressId, $userId);
+
+		if(is_null($rpId)) {
+			die(json_encode([
+				'stat'	=> 'ko',
+				'msg'	=> 'Une erreur s\'est produite, veuillez réessayer. Si l\'erraur persiste, veuillez contacter l\'équipe technique de ColiGo.'
+			]));
+		}
+
+		die(json_encode([
+			'stat'	=> 'ok',
+			'msg'	=> 'Le nouveau point relais a correctement été ajouté.'
+		]));
 	}
 }

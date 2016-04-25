@@ -21,7 +21,7 @@ class validationController {
 				require_once('../Model/addressModel.php');
 				$addressManager = new AddressModel;
 
-				$address = trim($_POST['streetnumber']) . ' ' . trim($_POST['route']);
+				$address = trim($_POST['streetnumber']) . ', ' . trim($_POST['route']);
 				$zipcode = trim($_POST['zipcode']);
 				$city = trim($_POST['city']);
 

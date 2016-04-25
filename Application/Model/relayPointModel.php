@@ -17,7 +17,7 @@ class RelayPointModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, owner_id, is_deleted)
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address_id, owner_id, is_deleted)
                                 VALUES (" . $address . ", " . $ownerId . ", 0)");
         $query->execute();
 

@@ -100,4 +100,41 @@ class UserModel extends defaultModel {
 
         return $tab[0]['type_id'];
     }
+
+
+    /**
+     * Return type_id of an user from its user_id
+     *
+     * @param int $id
+     * @return int
+     *
+     * @author Marion
+     */
+    public function getUserType($id) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT type_id FROM " . $this->_name . "
+                                WHERE id=" . intval($id) .";");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
+
+    /**
+     * Update user rights
+     *
+     * @param int $userId
+     * @param int $type
+     *
+     * @author Marion
+     */
+    public function updateRights($userId, $type) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($type) . " WHERE id = " . intval($userId) . ";");
+        $query->execute();
+    }
 }

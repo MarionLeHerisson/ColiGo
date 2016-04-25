@@ -1,4 +1,4 @@
-<form method="POST" action="validation" enctype="multipart/form-data" class="form-horizontal col-md-9" id="inscription-form">
+<form method="POST" action="validation" enctype="multipart/form-data" class="form-horizontal col-md-10" id="inscription-form">
 
     <div class="form-group">
         <label class="control-label col-md-2" for="email">Prénom* :</label>
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <table id="address" class="none">
+    <table id="address" class="<?php if(DEBUG == 0){echo 'none';}?>">
         <tr>
             <td>
                 <input name="streetnumber" id="street_number1"></input>

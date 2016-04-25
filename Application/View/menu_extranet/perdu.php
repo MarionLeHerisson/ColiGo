@@ -17,11 +17,10 @@
                 <button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(5)">Valider</button>
             </div>
 
-            <div id="ColisPerdu" class="none alert alert-dismissible fade in" role="alert">
+            <div id="ColisPerdu" class="none alert alert-dismissible fade in col-md-12" role="alert">
                 <button type="button" class="close" onclick="closePopin()">
                     <span>×</span>
                 </button>
-                <h4>Erreur</h4>
                 <p id="ColisPerduMsg"></p>
             </div>
         </div>

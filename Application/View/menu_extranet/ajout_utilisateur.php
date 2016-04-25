@@ -9,12 +9,15 @@
     <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
         <div class="panel-body">
 
-            <?php include_once('../form-inscription.php'); ?>
+            <div class="col-md-1"></div>
+            <?php include_once('form-inscription.php'); ?>
+            <div class="col-md-1"></div>
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <button type="button" class="btn btn-primary btn-lg" onclick="submitInscForm()">Valider</button>
                 <br><br>
-                <small>* Champs obligatoires<br>
+                <div class="col-md-2"></div>
+                <small class="col-md-8">* Champs obligatoires<br>
                     ** L'addresse entrée ci dessus sera considérée comme addresse du point relais. L'utilisteur propriétaire
                     du point relais aura la possibilité de s'ajouter une adresse personnelle depuis son profile.</small>
             </div>
