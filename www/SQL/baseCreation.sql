@@ -44,7 +44,7 @@ CREATE TABLE User (
 	id INT NOT NULL AUTO_INCREMENT,
 	first_name VARCHAR(100) NOT NULL,
 	last_name VARCHAR(100) NOT NULL,
-	mail VARCHAR(100) NOT NULL,
+	mail VARCHAR(100),
 	password VARCHAR(32), -- peut être null si n'a pas de compte mais a fait livrer / reçu un colis --
 	type_id INT NOT NULL,
 	address_id INT,
@@ -112,7 +112,6 @@ CREATE TABLE Parcel(
 	delivery_type INT NOT NULL,
 	
 	PRIMARY KEY (id),
-	FOREIGN KEY (weight) REFERENCES WeightPrice (id),
 	FOREIGN KEY (status_id) REFERENCES ParcelStatus (id),
 	FOREIGN KEY (delivery_type) REFERENCES DeliveryType (id)
 );

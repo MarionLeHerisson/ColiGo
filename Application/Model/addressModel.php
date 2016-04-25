@@ -18,12 +18,14 @@ class AddressModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd ->prepare("INSERT INTO " . $this->_name . " (address, zip_code, city)
-						         VALUES ('" . $address . "', " . $zipcode . ", '" . $city . "';");
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, zip_code, city)
+                                VALUES ('" . $address . "'," . intval($zipcode) . " ,'" . $city . "');");
         $query->execute();
 
-        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
-        $res = $query->execute();
+        $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $query2->execute();
+
+        $res = $query2->fetchColumn();
 
         return $res;
     }

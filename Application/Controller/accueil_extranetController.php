@@ -125,7 +125,7 @@ print_r($_POST);
 			// if receiver exists -> get id & address_id
 			$receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
 
-			if(empty($user)) {
+			if(empty($receiver)) {
 				$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, null);
 			} else {
 				$reciverId = $receiver[0]['id'];
@@ -134,15 +134,22 @@ print_r($_POST);
 			// Insert receiver address
 			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
 
+			// If a taking address is given
 			if(isset($_POST['ramassage'])) {
 				$depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
-				$rpId = NULL;
+				$rpId = 'NULL';
 			}
 			else {
 				// Get relay point id
 				$rpId = $_SESSION['address'];
 				$depAddressId = $relayPointManager->getRPAddress($rpId);
 			}
+
+			// TODO : Si connecté en admin, definir $_SESSION['address']
+			// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
+			$depAddressId = 1;
+			$rpId = 1;
+			// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 			// insert Order
 			$orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);

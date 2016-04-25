@@ -28,10 +28,13 @@ class OrdersModel extends DefaultModel {
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(departure_address, arrival_address, total_price,
                                 order_date, ordered_from, ordered_by, deliver_to)
                                 VALUES(" . $departureAddress . ", " . $arrivalAddress . ", " . $totalPrice . ",
-                                NOW(), " . $rpId . ", " . $userId . ", " . $reciverId . "); SELECT LAST_INSERT_ID();");
+                                NOW(), " . $rpId . ", " . $userId . ", " . $reciverId . ");");
         $query->execute();
 
-        $res = $query->fetchColumn();
+        $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        $query2->execute();
+
+        $res = $query2->fetchColumn();
 
         return $res;
     }

@@ -16,15 +16,19 @@ class UserModel extends defaultModel {
     // insert a new user
     public function insertUser($firstname, $lastname, $email, $pwd, $type, $address_id) {
 
+        if(is_null($address_id)) {
+            $address_id = 'NULL';
+        }
+
         $bdd = $this->connectBdd();
 
         // insert user
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . " (first_name, last_name, mail, password, type_id, address_id, is_deleted)
-                                VALUES ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $pwd ."', " . $type . ", " . $address_id .", 0);");
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . " (first_name, last_name, mail, password, type_id, address_id)
+                                VALUES ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $pwd ."', " . $type . ",
+                                " . $address_id ."); SELECT LAST_INSERT_ID();");
         $query->execute();
 
-        $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
-        $res = $query->execute();
+        $res = $query->fetchColumn();
 
         return $res;
     }

@@ -120,7 +120,7 @@
 					</div>
 				</div>
 
-				<div class="none">
+				<div class="<?php if(DEBUG == 0){echo 'none';}?>">
 					<table id="address">
 						<input name="streetnumber2" id="street_number2">
 						<input name="route2" id="route2">
@@ -168,7 +168,7 @@
 					<div class="col-md-6">
 						<input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
 					</div>
-					<div class="none">
+					<div class="<?php if(DEBUG == 0){echo 'none';}?>">
 						<table id="address">
 							<input name="streetnumber3" id="street_number3">
 							<input name="route3" id="route3">
