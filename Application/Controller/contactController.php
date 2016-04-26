@@ -3,8 +3,58 @@
 class contactController {
 
     public function indexAction() {
+
+        if(isset($_POST['action']) && !empty($_POST['action'])) {
+
+            $action = $_POST['action'];
+            $param = $_POST['param'];
+
+            switch($action) {
+                case 'sendMessage' :
+                    $this->sendMessage($param);
+                    break;
+            }
+        }
+
         require_once('../View/header.php');
         require_once('../View/contact.php');
         require_once('../View/footer.php');
+    }
+
+    /**
+     * Send a message to ColiGo's crew
+     *
+     * @param array $param
+     * @return array
+     *
+     * @author Marion
+     */
+    public function sendMessage($param) {
+        $name = ColiGo::sanitizeString($param[0]);
+        $mail = ColiGo::sanitizeString($param[1]);
+        $message = ColiGo::sanitizeString($param[2]) . '<br><br>Ce mail a été envoyé par : ' . $name . ' - ' . $mail;
+        $subject = ColiGo::sanitizeString($param[3]);
+
+        $to = 'marion.hurteau1@gmail.com, ouriet.romain@gmail.com';
+        $to = 'marion.hurteau1@gmail.com';
+        $headers = 'Content-type: text/html; charset=UTF-8' . "\r\n";
+
+        $return = mail($to, $subject, $message, $headers);
+        mail($mail,
+            'Confirmation de l\'envoi de votre message : ' . $subject,
+            'Voici une copie du message que vous avez envoyé à l\'équipe de ColiGo : <br><br><br>' . $message,
+            $headers);
+
+        if($return == true) {
+            die(json_encode([
+                'stat'	=> 'ok',
+                'msg'	=> 'Votre message a correctement été envoyé à l\'équipe de ColiGo.'
+            ]));
+        }
+
+        die(json_encode([
+            'stat'	=> 'ko',
+            'msg'	=> 'Une erreur s\'est produite et votre message n\'a pas pu être envoyé. Vous pouvez réessayer ultérieurement.'
+        ]));
     }
 }

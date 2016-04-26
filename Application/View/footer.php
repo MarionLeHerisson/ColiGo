@@ -1,8 +1,11 @@
 
-	<hr>
-	<footer>
-		<p>© 2016 ColiGo</p>
-	</footer>
+	<div class="col-md-12">
+		<hr>
+		<footer>
+			<p>© 2016 ColiGo</p>
+		</footer>
+	</div>
+
 </div> <!-- /container -->
 
 

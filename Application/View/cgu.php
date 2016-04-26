@@ -33,6 +33,23 @@
                 Le colivoiturage, ou covoiturage pour colis, est un concept appartenant à la société ColiGo. Toute personne se proposant
                 d'y participer verra son identité étroitement contrôlée afin de garantir la sécurité des colis.
             </p>
+
+            <h3>Droits</h3>
+            <p>
+                Les images sont gratuites et libres de droits. Elles ont été fournies par <a href="https://unsplash.com/">Unsplash</a>
+                puis retouchées par les graphistes de ColiGo.<br><br>
+
+                Les typographies sont gratuites et libres de droit. Il s'agit de Google Fonts trouvées sur le site de <a href="https://www.google.com/fonts">
+                Google</a>.<br><br>
+
+                Les icônes sont gratuites et libres de droit. Il s'agit pour certaines des Material Icons fournies par
+                <a href="https://design.google.com/icons/">Google</a>, d'autres ont été trouvées sur des sites gratuits et retouchées par
+                les graphistes de ColiGo.<br><br>
+
+                Une partie du css de ce site provient de <a href="http://getbootstrap.com/">Bootstrap</a>.<br><br>
+
+                Tous les autres éléments qui composent ce site sont la propriété de ColiGo.<br><br>
+            </p>
         </div>
 
         <div class="col-md-3"></div>

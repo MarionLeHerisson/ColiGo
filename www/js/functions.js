@@ -206,6 +206,57 @@ function submitDepotForm() {
 	}
 }
 
+function sendMessage() {
+	var name = $('#contactName').val(),
+		mail = $('#contactMail').val(),
+		subject = $('#contactSubject').val(),
+		message = $('#contactMessage').val(),
+		label = 'sendMessage',
+		error = 0;
+
+	if(message == '') {
+		$('#' + label + 'Msg').html('Votre message est vide !');
+		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+
+		error = 1;
+	}
+
+	if(error === 0) {
+		$.ajax({
+			type: "POST",
+			url: 'contact',
+			data: {
+				action: 'sendMessage',
+				param: [name, mail, message, subject]
+			},
+			success: function(data) {
+				var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+				if(dataObject.stat === 'ko') {
+					$('#' + label + 'Msg').html(dataObject.msg);
+					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				}
+				else if(dataObject.stat === 'ok') {
+					$('#' + label + 'Msg').html(dataObject.msg);
+					$('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+
+					setTimeout(function(){
+						window.location.assign('accueil');
+					}, 3000);
+				}
+				else {
+					$('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
+					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				}
+			},
+			error: function() {
+				$('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
+				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			}
+		});
+	}
+}
+
 function submitInscForm() {
 	// if errors have alrady been shown, hide them
 	$('.bg-danger').each(function(){$(this).addClass('none');});

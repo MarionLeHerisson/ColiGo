@@ -52,6 +52,9 @@ h1, p {
 .cover-localiser {
 	background-image: url(../../Medias/map.jpg);
 }
+.cover-contact {
+	background-image: url(../../Medias/contact-cover.jpeg);
+}
 
 /* FEATURETTE */
 .featurette-divider {
