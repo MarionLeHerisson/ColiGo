@@ -1,4 +1,4 @@
-<div class="panel panel-default <?php if ($_SESSION['type'] != 1) {echo 'none';} ?>">
+<div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingSix">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">

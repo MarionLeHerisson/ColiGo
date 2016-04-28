@@ -32,134 +32,10 @@ class accueil_extranetController {
 				case 'addRelayPoint' :
 					$this->addRelayPoint($param);
 					break;
+				case 'parcelPosting' :
+					$this->postParcel($param);
+					break;
 			}
-		}
-
-		// TODO : mettre dans une fonction ajax et pas en plein milieu du Controller
-		if (isset($_POST['name']) && $_POST['name'] != '') {
-
-			// sort variables
-			$userFirstname = ColiGo::sanitizeString($_POST['firstname']);
-			$userLastname = ColiGo::sanitizeString($_POST['name']);
-			$userMail = ColiGo::sanitizeString($_POST['mail']);
-			$deliveryType = ColiGo::sanitizeString($_POST['type']);
-			$parcelWeight = ColiGo::sanitizeString($_POST['weight']);
-
-			$receiverLastname = ColiGo::sanitizeString($_POST['destname']);
-			$receiverFirstname = ColiGo::sanitizeString($_POST['destfirstname']);
-			$receiverAddress = ColiGo::sanitizeString($_POST['streetnumber2']) . ', ' . ColiGo::sanitizeString($_POST['route2']);
-			$receiverZipCode = ColiGo::sanitizeString($_POST['zipcode2']);
-			$receiverCity = ColiGo::sanitizeString($_POST['city2']);
-
-			// managers
-			include_once('../Model/userModel.php');
-			$userManager = new UserModel();
-
-			include_once('../Model/addressModel.php');
-			$addressManager = new AddressModel();
-
-			include_once('../Model/parcelModel.php');
-			$parcelManager = new ParcelModel();
-
-			include_once('../Model/parcelExtraModel.php');
-			$parcelExtraManager = new ParcelExtraModel();
-
-			include_once('../Model/ordersModel.php');
-			$ordersManager = new OrdersModel();
-
-			include_once('../Model/relayPointModel.php');
-			$relayPointManager = new RelayPointModel();
-
-			include_once('../Model/trackingModel.php');
-			$trackingManager = new TrackingModel();
-
-			include_once('../Model/orderParcelModel.php');
-			$orderParcelManager = new OrderParcelModel();
-
-
-			// if user does not exists, subscribe & get its id
-			$user = $userManager->getUserByMail($userMail);
-
-			if(empty($user)) {
-				$userId = $userManager->insertUser($userFirstname, $userLastname, $userMail, null, 4, 0);
-			} else {
-				$userId = $user[0]['id'];
-			}
-
-			// insert Parcel (weight, status = déposé, delivery_type) -> get id
-			$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
-
-			// Track the parcel with its status and date, keeps an history
-			$trackingManager->updateParcelTracking($parcelId, 1);
-
-			// put extras in an array
-			$extras = [];
-
-			if(isset($_POST['emballage']) && $_POST['emballage'] != 'none' && intval($_POST['emballage'] != 0)) {
-				$extras[] = intval($_POST['emballage']);
-			}
-			if(isset($_POST['prioritaire'])) {
-				$extras[] = 7;
-			}
-			if(isset($_POST['imprevu'])) {
-				$extras[] = 8;
-			}
-			if(isset($_POST['indemnisation'])) {
-				$extras[] = 9;
-			}
-			if(isset($_POST['ramassage'])) {
-				$extras[] = 5;
-				$senderAddress = ColiGo::sanitizeString($_POST['streetnumber3']) . ', ' . ColiGo::sanitizeString($_POST['route3']);
-				$senderZipCode = ColiGo::sanitizeString($_POST['zipcode3']);
-				$senderCity = ColiGo::sanitizeString($_POST['city3']);
-			}
-			if(isset($_POST['samedi'])) {
-				$extras[] = 6;
-			}
-
-			$values = $this->sortValues($extras, $parcelId);
-
-			// link extras and parcel
-			$parcelExtraManager->linkMultipleParcelExtra($values);
-
-			// calculate price
-			$totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType);
-
-			// if receiver exists -> get id & address_id
-			$receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
-
-			if(empty($receiver)) {
-				$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, null);
-			} else {
-				$reciverId = $receiver[0]['id'];
-			}
-
-			// Insert receiver address
-			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
-
-			// If a taking address is given
-			if(isset($_POST['ramassage'])) {
-				$depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
-				$rpId = 'NULL';
-			}
-			else {
-				// Get relay point id
-				$rpId = $_SESSION['address'];
-				$depAddressId = $relayPointManager->getRPAddress($rpId);
-			}
-
-			// TODO : Si connecté en admin, definir $_SESSION['address']
-			// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
-			$depAddressId = 1;
-			$rpId = 1;
-			// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-			// insert Order
-			$orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
-
-			// link order to parcel
-			$orderParcelManager->linkParcelToOrder($parcelId, $orderId);
-			// TODO : at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 		}
 
 		require_once('../View/header.php');
@@ -282,7 +158,13 @@ class accueil_extranetController {
 		$city = ColiGo::sanitizeString($param[3]);
 		$zipCode = intval($param[2]);
 
-		$addressId = $addressManager->insertAddress($address, $zipCode, $city);
+		// If address exists, use existing id for this address
+		$addressId = $addressManager->existAddress($address, $zipCode, $city);
+
+		if($addressId == null) {
+			$addressId = $addressManager->insertAddress($address, $zipCode, $city);
+		}
+
 
 		if(is_null($addressId)) {
 			die(json_encode([
@@ -320,5 +202,151 @@ class accueil_extranetController {
 			'stat'	=> 'ok',
 			'msg'	=> 'Le nouveau point relais a correctement été ajouté.'
 		]));
+	}
+
+
+	/**
+	 * @param array $param
+	 */
+	public function postParcel($param) {
+
+		$userFirstname = ColiGo::sanitizeString($param['firstname']);
+		$userLastname = ColiGo::sanitizeString($param['name']);
+		$userMail = ColiGo::sanitizeString($param['mail']);
+		$deliveryType = ColiGo::sanitizeString($param['type']);
+		$parcelWeight = ColiGo::sanitizeString($param['weight']);
+
+		$receiverLastname = ColiGo::sanitizeString($param['destname']);
+		$receiverFirstname = ColiGo::sanitizeString($param['destfirstname']);
+		$receiverAddress = ColiGo::sanitizeString($param['streetnumber2']) . ', ' . ColiGo::sanitizeString($_POST['route2']);
+		$receiverZipCode = ColiGo::sanitizeString($param['zipcode2']);
+		$receiverCity = ColiGo::sanitizeString($param['city2']);
+
+		// managers
+		include_once('../Model/userModel.php');
+		$userManager = new UserModel();
+
+		include_once('../Model/addressModel.php');
+		$addressManager = new AddressModel();
+
+		include_once('../Model/parcelModel.php');
+		$parcelManager = new ParcelModel();
+
+		include_once('../Model/parcelExtraModel.php');
+		$parcelExtraManager = new ParcelExtraModel();
+
+		include_once('../Model/ordersModel.php');
+		$ordersManager = new OrdersModel();
+
+		include_once('../Model/relayPointModel.php');
+		$relayPointManager = new RelayPointModel();
+
+		include_once('../Model/trackingModel.php');
+		$trackingManager = new TrackingModel();
+
+		include_once('../Model/orderParcelModel.php');
+		$orderParcelManager = new OrderParcelModel();
+
+
+		// if user does not exists, subscribe & get its id
+		$user = $userManager->getUserByMail($userMail);
+
+		if(empty($user)) {
+			$userId = $userManager->insertUser($userFirstname, $userLastname, $userMail, null, 4, 0);
+		} else {
+			$userId = $user[0]['id'];
+		}
+
+		// insert Parcel (weight, status = déposé, delivery_type) -> get id
+		$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
+
+		// Track the parcel with its status and date, keeps an history
+		$trackingManager->updateParcelTracking($parcelId, 1);
+
+		// put extras in an array
+		$extras = [];
+
+		if(isset($param['emballage']) && $param['emballage'] != 'none' && intval($param['emballage'] != 0)) {
+			$extras[] = intval($param['emballage']);
+		}
+		if(isset($param['prioritaire'])) {
+			$extras[] = 7;
+		}
+		if(isset($param['imprevu'])) {
+			$extras[] = 8;
+		}
+		if(isset($param['indemnisation'])) {
+			$extras[] = 9;
+		}
+		if(isset($param['ramassage'])) {
+			$extras[] = 5;
+			$senderAddress = ColiGo::sanitizeString($param['streetnumber3']) . ', ' . ColiGo::sanitizeString($param['route3']);
+			$senderZipCode = ColiGo::sanitizeString($param['zipcode3']);
+			$senderCity = ColiGo::sanitizeString($param['city3']);
+		}
+		if(isset($_POST['samedi'])) {
+			$extras[] = 6;
+		}
+
+		$values = $this->sortValues($extras, $parcelId);
+
+		// link extras and parcel
+		$parcelExtraManager->linkMultipleParcelExtra($values);
+
+		// calculate price
+		$totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType);
+
+		// if receiver exists -> get id & address_id
+		$receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
+
+		if(empty($receiver)) {
+			$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, null);
+		} else {
+			$reciverId = $receiver[0]['id'];
+		}
+
+		// If address exists, use existing id for this address
+		$arrivalAddress = $addressManager->existAddress($receiverAddress, $receiverZipCode, $receiverCity);
+
+		die(json_encode([
+			'stat'	=> 'ok',
+			'msg'	=> 'Adresse d\'arrivée : ' . $arrivalAddress . '----'
+		]));
+
+		if($arrivalAddress == null) {
+			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
+		}
+
+
+
+		// If a taking address is given
+		if(isset($_POST['ramassage'])) {
+			// If address exists, use existing id for this address
+			$depAddressId = $addressManager->existAddress($address, $zipCode, $city);
+
+			if($depAddressId == null) {
+				$depAddressId = $addressManager->insertAddress($address, $zipCode, $city);
+			}
+
+			$rpId = 'NULL';
+		}
+		else {
+			// Get relay point id
+			$rpId = $_SESSION['address'];
+			$depAddressId = $relayPointManager->getRPAddress($rpId);
+		}
+
+		// TODO : Si connecté en admin, definir $_SESSION['address']
+		// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
+		$depAddressId = 1;
+		$rpId = 1;
+		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+		// insert Order
+		$orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
+
+		// link order to parcel
+		$orderParcelManager->linkParcelToOrder($parcelId, $orderId);
+		// TODO : at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 	}
 }

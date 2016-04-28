@@ -10,7 +10,7 @@ RewriteRule	^colivoiturage$	Application/View/index.php	    [L]
 
 RewriteRule	^deconnexion$	Application/View/index.php    	[L]
 RewriteRule	^inscription$	Application/View/index.php	    [L]
-RewriteRule	^profile$	    Application/View/index.php	    [L]
+RewriteRule	^profil$	    Application/View/index.php	    [L]
 RewriteRule	^validation$	Application/View/index.php	    [L]
 
 RewriteRule	^accueil_extranet$	Application/View/index.php	[L]

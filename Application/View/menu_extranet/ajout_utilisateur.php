@@ -1,4 +1,4 @@
-<div class="panel panel-default <?php if ($_SESSION['type'] != 1) {echo 'none';} ?>">
+<div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTen">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
@@ -19,7 +19,7 @@
                 <div class="col-md-2"></div>
                 <small class="col-md-8">* Champs obligatoires<br>
                     ** L'addresse entrée ci dessus sera considérée comme addresse du point relais. L'utilisteur propriétaire
-                    du point relais aura la possibilité de s'ajouter une adresse personnelle depuis son profile.</small>
+                    du point relais aura la possibilité de s'ajouter une adresse personnelle depuis son profil.</small>
             </div>
 
         </div>

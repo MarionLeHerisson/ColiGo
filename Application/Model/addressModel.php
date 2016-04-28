@@ -42,4 +42,26 @@ class AddressModel extends DefaultModel {
 
         return $query;
     }
+
+    /**
+     * Return id if address exists
+     *
+     * @param string $address
+     * @param int $zipcode
+     * @param string $city
+     * @return int
+     */
+    public function existAddress($address, $zipcode, $city) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT id FROM " . $this->_name . "
+                                WHERE address ILIKE '" . $address . "'
+                                AND zip_code = " . intval($zipcode) . "
+                                AND city ILIKE '" . $city . "');");
+        $query->execute();
+        $res = $query->fetchColumn();
+
+        return $res;
+    }
 }

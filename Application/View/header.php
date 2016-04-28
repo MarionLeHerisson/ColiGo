@@ -24,6 +24,7 @@
 	<script src="www/js/jquery-1.12.2.min.js"></script>
 	<script src="www/js/bootstrap.min.js"></script>
 	<script src="www/js/functions.js"></script>
+	<script src="www/js/googleMapsAutocomplete.js"></script>
 	<script src="www/js/json2.js"></script>
 </head>
 
@@ -74,7 +75,7 @@
 						}
 						echo'
 						<li>
-							<a href="profile">Profil</a>
+							<a href="profil">Profil</a>
 						</li>
 						<li>
 							<a href="deconnexion">Déconnexion</a>

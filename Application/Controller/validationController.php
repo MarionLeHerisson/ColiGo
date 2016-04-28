@@ -4,6 +4,7 @@ include_once('../../library/coligo.php');
 class validationController {
 
 	public function indexAction() {
+
 		if(isset($_POST['firstname'])) {
 			// inscription informations
 			$firstname = ColiGo::sanitizeString($_POST['firstname']);
@@ -25,8 +26,13 @@ class validationController {
 				$zipcode = trim($_POST['zipcode']);
 				$city = trim($_POST['city']);
 
-				// insertion de l'adresse
-				$address_id = $addressManager->insertAddress($address, $zipcode, $city);
+				// If address exists, use existing id for this address
+				$address_id = $addressManager->existAddress($address, $zipcode, $city);
+
+				if($address_id == null) {
+					$address_id = $addressManager->insertAddress($address, $zipcode, $city);
+				}
+
 			}
 			else {
 				$address_id = null;
@@ -52,8 +58,20 @@ class validationController {
 
 				$relayPointManager->insertRelayPoint($address_id, $userId);
 			}
+
+			$userManager->connexion($mail, $pwd);
+
+			require_once("../View/header.php");
+			require_once('../View/validInscription.php');
+			require_once('../View/footer.php');
 		}
-		
-		else echo 'pas de données';
+		else {
+			echo '<script type="text/javascript">
+						document.location.href="accueil";
+					</script>';
+		}
+
+
+
 	}
 }

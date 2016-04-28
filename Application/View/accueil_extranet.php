@@ -9,14 +9,18 @@
 			
 			<?php
 
-			include_once('menu_extranet/role_utilisateur.php');
-			include_once('menu_extranet/ajout_utilisateur.php');
-			include_once('menu_extranet/ajout_point_relais.php');
-			include_once('menu_extranet/depot.php');
-			include_once('menu_extranet/prise_en_charge.php');
-			include_once('menu_extranet/livraison.php');
-			include_once('menu_extranet/distribution.php');
-			include_once('menu_extranet/perdu.php');
+			if ($_SESSION['type'] == 1) {	// Admin
+				include_once('menu_extranet/role_utilisateur.php');
+				include_once('menu_extranet/ajout_utilisateur.php');
+				include_once('menu_extranet/ajout_point_relais.php');
+			}
+			if ($_SESSION['type'] != 3) {	// Admin or relay point
+				include_once('menu_extranet/depot.php');
+				include_once('menu_extranet/prise_en_charge.php');
+				include_once('menu_extranet/livraison.php');
+				include_once('menu_extranet/distribution.php');
+			}
+			include_once('menu_extranet/perdu.php');	// Everybody
 
 			?>
 

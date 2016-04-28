@@ -1,4 +1,4 @@
-<div class="panel panel-default <?php if ($_SESSION['type'] == 3) {echo 'none';} ?>">
+<div class="panel panel-default">
 	<div class="panel-heading" role="tab" id="headingOne">
 		<h4 class="panel-title">
 			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -182,7 +182,15 @@
 				<button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
 			</form>
-			<!-- TODO : calcul en temps réel du total + proposer un devis -->
+
+			<div id="formDepot" class="none alert alert-dismissible fade in col-md-12" role="alert">
+				<button type="button" class="close" onclick="closePopin()">
+					<span>×</span>
+				</button>
+				<p id="formDepotMsg"></p>
+			</div>
+
+			<script src="www/js/depot.js"></script>
 		</div>
 	</div>
 </div>
