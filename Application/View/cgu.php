@@ -43,8 +43,8 @@
                 Google</a>.<br><br>
 
                 Les icônes sont gratuites et libres de droit. Il s'agit pour certaines des Material Icons fournies par
-                <a href="https://design.google.com/icons/">Google</a>, d'autres ont été trouvées sur des sites gratuits et retouchées par
-                les graphistes de ColiGo.<br><br>
+                <a href="https://design.google.com/icons/">Google</a>, ou d'icônes trouvées sur
+                <a href="http://fr.freepik.com/">Freepik</a> puis retouchées par les graphistes de ColiGo.<br><br>
 
                 Une partie du css de ce site provient de <a href="http://getbootstrap.com/">Bootstrap</a>.<br><br>
 

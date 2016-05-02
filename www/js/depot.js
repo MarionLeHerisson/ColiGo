@@ -1,21 +1,21 @@
 function submitDepotForm() {
     // get fields to check
     var data = {
-        firstname : $('#firstname'),
-        lastname : $('#name'),
-        mail : $('#mail'),
-        weight : $('#weight'),
-        receiverFirstname : $('#destfirstname'),
-        receiverLastname : $('#destname'),
+        firstname : $('#firstname').val(),
+        lastname : $('#name').val(),
+        mail : $('#mail').val(),
+        weight : $('#weight').val(),
+        receiverFirstname : $('#destfirstname').val(),
+        receiverLastname : $('#destname').val(),
 
-        address : $('#autocomplete2'),
+//        address : $('#autocomplete2'),
         streetnumber : $('#street_number2').val(),
         route : $('#route2').val(),
         city : $('#locality2').val(),
         zipcode : $('#postal_code2').val(),
         country : $('#country2').val(),
 
-        ramaddress : $('#autocomplete3'),
+//        ramaddress : $('#autocomplete3'),
         ramstreetnumber : $('#street_number3').val(),
         ramroute : $('#route3').val(),
         ramcity : $('#locality3').val(),
@@ -33,7 +33,10 @@ function submitDepotForm() {
     },
         error = 0,
         checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,
-        checkZipCode = /^[0-9]{5}$/;
+//        checkZipCode = /^[0-9]{5}$/,
+        label = 'formDepot';
+
+
 
     // if errors are shown, hide them
     $.each(data, function() {
@@ -41,90 +44,74 @@ function submitDepotForm() {
     });
 
     // verif inputs
-    if(data.firstname.val() === '' || data.firstname.val().length < 2) {
-        data.firstname.parents('.form-group').addClass('has-error');
+    if(data.firstname === '') {
+        showMessage(label, 'Le prénom de l\'envoyeur est obligatoire.', 1);
+        error ++;
+    } else if (data.firstname.length < 2) {
+        showMessage(label, 'Le prénom de l\'envoyeur doit contenir au moins deux caractères.', 1);
         error ++;
     }
 
-    if(data.lastname.val() === '' || data.lastname.val().length < 2) {
-        data.lastname.parents('.form-group').addClass('has-error');
+    if(data.lastname === '') {
+        showMessage(label, 'Le nom de l\'envoyeur est obligatoire.', 1);
+        error ++;
+    } else if (data.lastname.length < 2) {
+        showMessage(label, 'Le nom de l\'envoyeur doit contenir au moins deux caractères.', 1);
         error ++;
     }
 
-    if(data.mail.val() === '' || !checkMail.test(data.mail.val())) {
-        data.mail.parents('.form-group').addClass('has-error');
+    if(data.mail === '' || !checkMail.test(data.mail)) {
+        showMessage(label, 'Le mail de l\'envoyeur est obligatoire.', 1);
         error ++;
     }
 
-    if(data.receiverFirstname.val() === '' || data.receiverFirstname.val().length < 2) {
-        data.receiverFirstname.parents('.form-group').addClass('has-error');
+    if(data.receiverFirstname === '') {
+        showMessage(label, 'Le prénom du destinataire est obligatoire.', 1);
+        error ++;
+    } else if (data.receiverFirstname.length < 2) {
+        showMessage(label, 'Le prénom du destinataire doit contenir au moins deux caractères.', 1);
         error ++;
     }
 
-    if(data.receiverLastname.val() === '' || data.receiverLastname.val().length < 2) {
-        data.receiverLastname.parents('.form-group').addClass('has-error');
+    if(data.receiverLastname === '') {
+        showMessage(label, 'Le nom du destinataire est obligatoire.', 1);
+        error ++;
+    } else if (data.receiverLastname.length < 2) {
+        showMessage(label, 'Le nom du destinataire doit contenir au moins deux caractères.', 1);
         error ++;
     }
-
-    /*	if(data.zipcode.val() === '' || !checkZipCode.test(data.zipcode.val())) {
-     data.zipcode.parents('.form-group').addClass('has-error');
-     error ++;
-     }*/
 
 
     // If no error : submit form
     if(error === 0) {
-
-        var params = sortData(data),
-            label = 'formDepot';
 
         $.ajax({
             type: "POST",
             url: 'accueil_extranet',
             data: {
                 action: 'parcelPosting',
-                param: params
+                param: data
             },
             success: function(data) {
                 var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
                 if(dataObject.stat === 'ko') {
-                    $('#' + label + 'Msg').html(dataObject.msg);
-                    $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+                    showMessage(label, dataObject.msg, 1);
                 }
                 else if(dataObject.stat === 'ok') {
-                    $('#' + label + 'Msg').html(dataObject.msg);
-                    $('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+                    showMessage(label, dataObject.msg, 0);
 
                 }
                 else {
-                    $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-                    $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+                    showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
                 }
             },
             error: function() {
-                $('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-                $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+                showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+                    'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', 1);
             }
         });
     }
-}
-
-function sortData(data) {
-
-    var params = [];
-
-    $.each(data, function(key, value) {
-        params[key] = value;
-    });
-
-    params['firstname'] = data.firstname.val();
-    params['lastname'] = data.lastname.val();
-    params['mail'] = data.mail.val();
-    params['receiverFirstname'] = data.receiverFirstname.val();
-    params['receiverLastname'] = data.receiverLastname.val();
-
-    return params;
 }
 
 function claculateQuotation() {

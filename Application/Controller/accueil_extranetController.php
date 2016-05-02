@@ -308,24 +308,17 @@ class accueil_extranetController {
 		// If address exists, use existing id for this address
 		$arrivalAddress = $addressManager->existAddress($receiverAddress, $receiverZipCode, $receiverCity);
 
-		die(json_encode([
-			'stat'	=> 'ok',
-			'msg'	=> 'Adresse d\'arrivée : ' . $arrivalAddress . '----'
-		]));
-
 		if($arrivalAddress == null) {
 			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
 		}
 
-
-
 		// If a taking address is given
 		if(isset($_POST['ramassage'])) {
 			// If address exists, use existing id for this address
-			$depAddressId = $addressManager->existAddress($address, $zipCode, $city);
+			$depAddressId = $addressManager->existAddress($senderAddress, $senderZipCode, $senderCity);
 
 			if($depAddressId == null) {
-				$depAddressId = $addressManager->insertAddress($address, $zipCode, $city);
+				$depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
 			}
 
 			$rpId = 'NULL';
@@ -336,7 +329,7 @@ class accueil_extranetController {
 			$depAddressId = $relayPointManager->getRPAddress($rpId);
 		}
 
-		// TODO : Si connecté en admin, definir $_SESSION['address']
+		// TODO : IMPORTANT Si connecté en admin, definir $_SESSION['address']
 		// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
 		$depAddressId = 1;
 		$rpId = 1;

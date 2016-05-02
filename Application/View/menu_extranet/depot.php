@@ -56,6 +56,7 @@
 							<input type="radio" name="type" id="urgence" value="3">
 							Livraison d'urgence
 						</div>
+						<!--TODO : if checked, check 'prioritaire' and disable it-->
 					</div>
 				</div>
 
@@ -179,16 +180,16 @@
 					</div>
 				</div>
 
+				<div id="formDepot" class="none alert alert-dismissible fade in col-md-12" role="alert">
+					<button type="button" class="close" onclick="closePopin()">
+						<span>×</span>
+					</button>
+					<p id="formDepotMsg"></p>
+				</div>
+
 				<button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
 			</form>
-
-			<div id="formDepot" class="none alert alert-dismissible fade in col-md-12" role="alert">
-				<button type="button" class="close" onclick="closePopin()">
-					<span>×</span>
-				</button>
-				<p id="formDepotMsg"></p>
-			</div>
 
 			<script src="www/js/depot.js"></script>
 		</div>

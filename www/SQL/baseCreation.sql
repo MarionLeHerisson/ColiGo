@@ -28,7 +28,7 @@ CREATE TABLE WeightPrice(
 	delivery_type INT NOT NULL,
 	min_weight FLOAT NOT NULL,
 	max_weight FLOAT NOT NULL,
-	price FLOAT NOT NULL,
+	price DECIMAL(10,2) NOT NULL,
 	
 	PRIMARY KEY (id)
 );

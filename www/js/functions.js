@@ -1,9 +1,6 @@
 // TODO : à la fermeture d'un onglet, faire disparaitre msg erreur ($(this) hasClass 'fermé' children addClass('none') + faire disparaitre contenu inputs
 function closePopin() {
-	$('.alert-danger').each(function() {
-		$(this).addClass('none');
-	});
-	$('.alert-succes').each(function() {
+	$('.alert-dismissible').each(function() {
 		$(this).addClass('none');
 	});
 }
@@ -239,4 +236,17 @@ function submitInscForm() {
 	if(error == 0) {
 		$('#inscription-form').submit();
 	}
+}
+
+function showMessage(label, message, isError) {
+
+	var typeAdded ='success',
+		typeRemoved = 'danger';
+	if(isError == 1) {
+		typeAdded = 'danger';
+		typeRemoved = 'success';
+	}
+
+	$('#' + label + 'Msg').html(message);
+	$('#' + label).removeClass('alert-' + typeRemoved).addClass('alert-' + typeAdded).removeClass('none');
 }

@@ -35,4 +35,23 @@ class WeightPriceModel extends DefaultModel {
         return $result;
 
     }
+
+    /**
+     * Return all prices (used in 'envoyer')
+     *
+     * @return array
+     */
+    public function getAllPrices() {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT delivery_type, max_weight, price FROM " . $this->_name . "
+                                ORDER BY max_weight;");
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        return $result;
+
+    }
 }
