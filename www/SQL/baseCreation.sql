@@ -10,6 +10,7 @@ CREATE TABLE Extra(
 	id INT NOT NULL AUTO_INCREMENT,
 	label VARCHAR(50) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
+	explaination TINYTEXT,
 	
 	PRIMARY KEY (id)
 );

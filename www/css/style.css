@@ -96,6 +96,38 @@ h1, p {
     padding-left: 40px;
 }
 
+.cursor-hover {
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.etape {
+	background-size: cover;
+	height: 200px;
+}
+
+.btn-envoi {
+	padding-top: 5em;
+	padding-bottom: 5em;
+}
+
+.etape-1 {
+	background-image: url("../../Medias/etape-1.svg");
+}
+.etape-2 {
+	background-image: url("../../Medias/etape-2.svg");
+}
+.etape-3 {
+	background-image: url("../../Medias/etape-3.svg");
+}
+.etape-4 {
+	background-image: url("../../Medias/etape-4.svg");
+}
+.etape-5 {
+	background-image: url("../../Medias/etape-5.svg");
+}
+
+
 @media (min-width: 768px) {
 	.featurette-heading {
 		font-size: 50px;

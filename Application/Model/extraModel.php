@@ -36,7 +36,7 @@ class ExtraModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT label, price FROM " . $this->_name . ";");
+        $query = $bdd->prepare("SELECT id, label, price, explaination FROM " . $this->_name . ";");
         $query->execute();
 
         $result = $query->fetchAll();

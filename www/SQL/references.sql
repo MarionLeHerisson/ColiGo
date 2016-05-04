@@ -32,16 +32,16 @@ VALUES
 	(20.1, 	30,  	22.70,	3);
 -- TODO : fret --
 
-INSERT INTO Extra(label, price) 
-VALUES ('papier bulles', 0.40),
-	('papier de soie', 0.60),
-	('papier craft', 0.20),
-	('polystirene', 0.30),
-	('ramassage domicile', 8.0),
-	('livraison samedi', 5.0),
-	('prioritaire', 10.0),
-	('par tous les moyens', 37.0),
-	('indemnisation', 19.0);
+INSERT INTO Extra(label, price, explaination)
+VALUES ('papier bulles', 0.40, 'Le colis sera emballé de papier bulles. Protège les objets fragiles des gros impacts.'),
+	('papier de soie', 0.60, 'Le colis sera emballé dans du papier de soie. Protège les objets très fragiles des faibles impacts.'),
+	('papier craft', 0.20, 'Le colis sera emballé de papier craft. Protège les objets peu fragiles des faibles impacts.'),
+	('polystyrene', 0.30, 'Le colis sera entouré de billes de polystyrène. Protège les objets de grande taille des impacts.'),
+	('ramassage domicile', 8.0, 'Ce service vous propose de ramasser votre colis chez vous et vous permet de ne pas le déposer en point relais.'),
+	('livraison samedi', 5.0, 'Ce service permet de livrer votre colis le samedi.'),
+	('prioritaire', 10.0, 'Ce service rend votre colis prioritaire.'),
+	('par tous les moyens', 37.0, 'En cas de problèmes sur le transport de votre colis, ce service permet la mise en place de tous les moyens possibles pour permettre la livraison de votre colis.'),
+	('indemnisation', 19.0, 'Ce service vous rembourse en cas de perte ou d avarie du colis.');
 
 INSERT INTO ParcelStatus(label, description)
 VALUES ('dépot', 'Votre colis a bien été déposé. Il est en attente de livraison.'),

@@ -250,3 +250,11 @@ function showMessage(label, message, isError) {
 	$('#' + label + 'Msg').html(message);
 	$('#' + label).removeClass('alert-' + typeRemoved).addClass('alert-' + typeAdded).removeClass('none');
 }
+
+/**
+ * Show tooltips on page 'deposer'
+ */
+function showTooltip(label) {
+	console.log('label' + label);
+	$('#' + label).tooltip('show');
+}
