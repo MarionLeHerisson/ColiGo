@@ -9,7 +9,7 @@ CREATE TABLE ParcelStatus(
 CREATE TABLE Extra(
 	id INT NOT NULL AUTO_INCREMENT,
 	label VARCHAR(50) NOT NULL,
-	price FLOAT NOT NULL,
+	price DECIMAL(10,2) NOT NULL,
 	
 	PRIMARY KEY (id)
 );
@@ -69,7 +69,7 @@ CREATE TABLE Orders (
 	id INT NOT NULL AUTO_INCREMENT,
 	departure_address INT NOT NULL,
 	arrival_address INT NOT NULL,
-	total_price FLOAT NOT NULL,
+	total_price DECIMAL(10,2) NOT NULL,
 	order_date TIMESTAMP NOT NULL,
 	ordered_from INT,
 	ordered_by INT NOT NULL,

@@ -23,6 +23,10 @@
             <?php
 
             foreach($prices as $key => $price) {
+
+                if(!isset($price[2])) {$price[2] = '';}
+                if(!isset($price[1])) {$price[1] = '';}
+
                 echo '<tr>
                     <td>' . $key . '</td>
                     <td>' . $price[2] . '</td>
@@ -37,9 +41,23 @@
 
     <div class="col-md-4">
         <h3 class="pull-left">Différentes options s'offrent à vous :</h3>
+        <table class="extra-prices-table table-responsive">
+            <tbody>
+            <?php
+
+            foreach($extras as $extra) {
+                echo '<tr>
+                        <td> ' . $extra['label'] . ' </td>
+                        <td class="tr-extra-prices"> ' . $extra['price'] . ' €</td>
+                    </tr>';
+            }
+// TODO : bulles informatives (hover ou clic) pour chaque extra
+            ?>
+            </tbody>
+        </table>
     </div>
 
-    <small>* Si colis déposé en point relais avant 15h ou ramassé le jour même.</small>
+    <small class="col-md-12">* Si colis déposé en point relais avant 15h ou ramassé le jour même.</small>
 
 <?php
 // TODO : Utiliser depot.php en changeant la phrase 'informations clients' par 'vos infos' etc

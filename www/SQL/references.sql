@@ -33,8 +33,8 @@ VALUES
 -- TODO : fret --
 
 INSERT INTO Extra(label, price) 
-VALUES ('papier bulles', 0.60),
-	('papier de soie', 0.40),
+VALUES ('papier bulles', 0.40),
+	('papier de soie', 0.60),
 	('papier craft', 0.20),
 	('polystirene', 0.30),
 	('ramassage domicile', 8.0),

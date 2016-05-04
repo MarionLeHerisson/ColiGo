@@ -31,4 +31,16 @@ class ExtraModel extends DefaultModel {
 
         return $result;
     }
+
+    public function getAllExtras() {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT label, price FROM " . $this->_name . ";");
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        return $result;
+    }
 }

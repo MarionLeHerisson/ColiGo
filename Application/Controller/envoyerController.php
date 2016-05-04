@@ -10,11 +10,15 @@ class envoyerController {
         include_once('../Model/weightPriceModel.php');
         $weightPriceManager = new WeightPriceModel();
 
+        include_once('../Model/extraModel.php');
+        $extraManager = new ExtraModel();
+
         $prices = $weightPriceManager->getAllPrices();
 
         $prices = $this->sortPrices($prices);
- //       echo '<pre>';
-   //     die(print_r($prices));
+        $extras = $extraManager->getAllExtras();
+//        echo '<pre>';
+//        die(print_r($extras));
         require_once('../View/header.php');
         require_once('../View/envoyer.php');
         require_once('../View/footer.php');

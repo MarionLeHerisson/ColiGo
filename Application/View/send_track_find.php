@@ -3,7 +3,7 @@
         <img class="img-circle" src="Medias/avion-papier.jpg" width="140" height="140">
         <h3>Envoyer un colis</h3>
         <p>Accéder à nos tarifs et aux étapes de l'envoi de votre colis.</p>
-        <p><a class="btn btn-default" href="depot_client" role="button">En savoir plus</a></p>
+        <p><a class="btn btn-default" href="envoyer" role="button">En savoir plus</a></p>
     </div>
 
     <div class="col-md-4">

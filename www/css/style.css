@@ -90,6 +90,12 @@ h1, p {
 	position: absolute;
 }
 
+/* ENVOYER */
+.tr-extra-prices {
+    padding-top: 5px;
+    padding-left: 40px;
+}
+
 @media (min-width: 768px) {
 	.featurette-heading {
 		font-size: 50px;
