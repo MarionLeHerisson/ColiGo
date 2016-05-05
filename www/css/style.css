@@ -77,9 +77,10 @@ h1, p {
 	background-image: linear-gradient(to bottom, #FF3273 0,#FF0055 100%);
 
 	border-color: #ff0055;
+	background-repeat: no-repeat;
 }
 
-.btn-primary:hover {
+.btn-primary:hover , .btn-primary:focus {
 	background-image: -webkit-linear-gradient(top,#FF3273 0,#EC004F 100%);
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#FF3273),to(#EC004F));
 	background-image: linear-gradient(to bottom, #FF3273 0,#EC004F 100%);

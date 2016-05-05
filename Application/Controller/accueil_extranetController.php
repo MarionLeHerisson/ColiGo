@@ -95,8 +95,11 @@ class accueil_extranetController {
 		return $weightPrice + $price;
 	}
 
-// TODO URGENT : update à partir du numéro de suivi, et non de l'id
-// TODO : ne pas pouvoir update comme 'perdu' un colis remis au client
+	/**
+	 * update parcel status
+	 *
+	 * @param array $param
+	 */
 	public function updateStatus($param) {
 
 		// manager
@@ -106,12 +109,15 @@ class accueil_extranetController {
 		include_once('../Model/trackingModel.php');
 		$trackingManager = new TrackingModel();
 
-		$parcelId = $param[0];
-		$actualStatus = $parcelManager->getStaus($parcelId);
+
+		$trackingNumber = $param[0];
 		$newStatus = $param[1];
 
+		$parcelId = $parcelManager->getIdFromTrackingNumber($trackingNumber);
+		$actualStatus = $parcelManager->getStaus($parcelId);
+
 		// if parcel doesn't jump a step or is lost
-		if($actualStatus + 1 == $newStatus || $newStatus == 5) {
+		if($actualStatus + 1 == $newStatus || $newStatus == 5 && $actualStatus != 4) {
 			$res = $parcelManager->updateStatus($parcelId, $newStatus);
 			if($res != '') {
 				die(json_encode([

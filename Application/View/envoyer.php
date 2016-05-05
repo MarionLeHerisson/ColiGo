@@ -29,11 +29,8 @@
 <div class="container">
 
     <div class="col-md-12 btn-envoi">
-        <button type="button" class="btn btn-primary btn-lg">Envoyer un colis</button>
+        <a href="depot_client"><button type="button" class="btn btn-primary btn-lg">Envoyer un colis</button></a>
     </div>
-    <?php
-    // TODO : Utiliser depot.php en changeant la phrase 'informations clients' par 'vos infos' etc
-    ?>
 
     <div class="col-md-8">
         <h3 class="pull-left">Nos tarifs :</h3>

@@ -79,6 +79,14 @@ class ParcelModel extends DefaultModel {
         return $status;
     }
 
+    /**
+     * add tracking number to a parcel
+     *
+     * @param $parcelId
+     * @param $trackingNumber
+     *
+     * @author Marion
+     */
     public function addTrackingNuber($parcelId, $trackingNumber) {
 
         $bdd = $this->connectBdd();
@@ -87,5 +95,25 @@ class ParcelModel extends DefaultModel {
                                 WHERE id = " . $parcelId . ";");
 
         $query->execute();
+    }
+
+    /**
+     * return parcel id
+     *
+     * @param int $trackingNumber
+     * @return int
+     *
+     * @author Marion
+     */
+    public function getIdFromTrackingNumber($trackingNumber) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT id FROM " . $this->_name . " WHERE tracking_number = " . $trackingNumber);
+        $query->execute();
+
+        $res = $query->fetchColumn();
+
+        return $res;
     }
 }

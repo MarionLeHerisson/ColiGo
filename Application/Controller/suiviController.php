@@ -9,7 +9,7 @@ class suiviController {
         $trackingManager = new TrackingModel();
 
         $trackingNumber = intval($_SERVER['REDIRECT_QUERY_STRING']);
-        $trackingStates = $trackingManager->getParcelTracking($trackingNumber); // jointure sur parcel
+        $trackingStates = $trackingManager->getParcelTracking($trackingNumber);
 
         require_once('../View/header.php');
         require_once('../View/suivi.php');
