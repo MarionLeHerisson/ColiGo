@@ -1,35 +1,32 @@
-<div class="container">
-    <div class="col-md-10">
-        <table id="tableSuivi" class="table table-striped table-responsive">
-            <thead>
-                <tr>
-                    <td>Date</td>
-                    <td>Statut</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-
-            foreach($trackingStates as $tracking) {
-
-                if($tracking['label'] == 'distribution') {
-                    $class = ' class="success"';
-                }
-                else if($tracking['label'] == 'perdu') {
-                    $class = ' class="danger"';
-                }
-
-                echo '<tr' . $class . '>
-                        <td>' . $tracking['new_status_date'] . '</td>
-                        <td>' . $tracking['label'] . '</td>
-                        <td>' . $tracking['description'] . '</td>
-                    </tr>';
-            }
-            ?>
-            </tbody>
-        </table>
+<div class="cover-container cover-suivi">
+    <div class="inner cover">
+        <br><br><br>
+        <h2>Suivre un colis</h2>
+        <br><br><br>
     </div>
+</div>
+
+<div class="container">
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-10">
+
+    <?php
+
+    if(empty($trackingStates)) {
+        echo 'Aucun résultat pour ce numéro de suivi. Vérifiez que vous avez bien entré le bon numéro,
+        ou réessayez plus tard : votre colis n\'a peut être pas encore été enregistré.';
+    } else {
+
+        include('tableSuivi.php');
+    }
+
+    ?>
+
+    </div>
+
+    <div class="col-md-1"></div>
 
 
 <?php

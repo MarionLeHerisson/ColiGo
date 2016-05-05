@@ -55,6 +55,9 @@ h1, p {
 .cover-contact {
 	background-image: url(../../Medias/contact-cover.jpeg);
 }
+.cover-suivi {
+	background-image: url(../../Medias/suivi-cover.jpg);
+}
 
 /* FEATURETTE */
 .featurette-divider {
@@ -126,6 +129,13 @@ h1, p {
 .etape-5 {
 	background-image: url("../../Medias/etape-5.svg");
 }
+
+
+/* SUIVI */
+#tableSuivi {
+	border: solid #dddddd 1px;
+}
+
 
 
 @media (min-width: 768px) {
