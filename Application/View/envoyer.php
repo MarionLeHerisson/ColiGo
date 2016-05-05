@@ -31,6 +31,9 @@
     <div class="col-md-12 btn-envoi">
         <button type="button" class="btn btn-primary btn-lg">Envoyer un colis</button>
     </div>
+    <?php
+    // TODO : Utiliser depot.php en changeant la phrase 'informations clients' par 'vos infos' etc
+    ?>
 
     <div class="col-md-8">
         <h3 class="pull-left">Nos tarifs :</h3>
@@ -78,14 +81,10 @@
                         <td class="tr-extra-prices"> ' . $extra['price'] . ' €</td>
                     </tr>';
             }
-// TODO : bulles informatives (hover ou clic) pour chaque extra
+
             ?>
             </tbody>
         </table>
     </div>
 
     <small class="col-md-12">* Si colis déposé en point relais avant 15h ou ramassé le jour même.</small>
-
-<?php
-// TODO : Utiliser depot.php en changeant la phrase 'informations clients' par 'vos infos' etc
-?>

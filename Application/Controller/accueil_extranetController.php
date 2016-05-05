@@ -95,12 +95,16 @@ class accueil_extranetController {
 		return $weightPrice + $price;
 	}
 
-
+// TODO URGENT : update à partir du numéro de suivi, et non de l'id
+// TODO : ne pas pouvoir update comme 'perdu' un colis remis au client
 	public function updateStatus($param) {
 
 		// manager
 		include_once('../Model/parcelModel.php');
 		$parcelManager = new ParcelModel();
+
+		include_once('../Model/trackingModel.php');
+		$trackingManager = new TrackingModel();
 
 		$parcelId = $param[0];
 		$actualStatus = $parcelManager->getStaus($parcelId);
@@ -109,24 +113,24 @@ class accueil_extranetController {
 		// if parcel doesn't jump a step or is lost
 		if($actualStatus + 1 == $newStatus || $newStatus == 5) {
 			$res = $parcelManager->updateStatus($parcelId, $newStatus);
-
-			if($res != 1) {
+			if($res != '') {
 				die(json_encode([
 					'stat'	=> 'ko',
-					'msg'		=> 'Le colis n\'existe plus'
+					'msg'	=> 'Le colis n\'existe plus'
 				]));
 			}
 			else {
+				$trackingManager->updateParcelTracking($parcelId, $newStatus);
 				die(json_encode([
-					'stat'	=> 'Ok',
-					'msg'		=> 'Le status du colis a bien été mis à jour'
+					'stat'	=> 'ok',
+					'msg'	=> 'Le status du colis a bien été mis à jour'
 				]));
 			}
 		}
 		else {
 			die(json_encode([
 				'stat'	=> 'ko',
-				'msg'		=> 'Le colis ne se trouve pas à l\'étape requise'
+				'msg'	=> 'Le colis ne se trouve pas à l\'étape requise'
 			]));
 		}
 
@@ -211,16 +215,16 @@ class accueil_extranetController {
 	public function postParcel($param) {
 
 		$userFirstname = ColiGo::sanitizeString($param['firstname']);
-		$userLastname = ColiGo::sanitizeString($param['name']);
+		$userLastname = ColiGo::sanitizeString($param['lastname']);
 		$userMail = ColiGo::sanitizeString($param['mail']);
 		$deliveryType = ColiGo::sanitizeString($param['type']);
 		$parcelWeight = ColiGo::sanitizeString($param['weight']);
 
 		$receiverLastname = ColiGo::sanitizeString($param['destname']);
 		$receiverFirstname = ColiGo::sanitizeString($param['destfirstname']);
-		$receiverAddress = ColiGo::sanitizeString($param['streetnumber2']) . ', ' . ColiGo::sanitizeString($_POST['route2']);
-		$receiverZipCode = ColiGo::sanitizeString($param['zipcode2']);
-		$receiverCity = ColiGo::sanitizeString($param['city2']);
+		$receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($_POST['route']);
+		$receiverZipCode = ColiGo::sanitizeString($param['zipcode']);
+		$receiverCity = ColiGo::sanitizeString($param['city']);
 
 		// managers
 		include_once('../Model/userModel.php');
@@ -260,6 +264,12 @@ class accueil_extranetController {
 		// insert Parcel (weight, status = déposé, delivery_type) -> get id
 		$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
 
+		$md5 = md5($parcelId);
+		$trackingNumber = intval(substr($md5, 0, 8)) . intval(substr($md5, 8, 16)) . intval(substr($md5, 16, 24)) . intval(substr($md5, 24, 32));
+
+		// insert tracking number
+		$parcelManager->addTrackingNuber($parcelId, $trackingNumber);
+
 		// Track the parcel with its status and date, keeps an history
 		$trackingManager->updateParcelTracking($parcelId, 1);
 
@@ -278,11 +288,11 @@ class accueil_extranetController {
 		if(isset($param['indemnisation'])) {
 			$extras[] = 9;
 		}
-		if(isset($param['ramassage'])) {
+		if(isset($param['taking'])) {
 			$extras[] = 5;
-			$senderAddress = ColiGo::sanitizeString($param['streetnumber3']) . ', ' . ColiGo::sanitizeString($param['route3']);
-			$senderZipCode = ColiGo::sanitizeString($param['zipcode3']);
-			$senderCity = ColiGo::sanitizeString($param['city3']);
+			$senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
+			$senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
+			$senderCity = ColiGo::sanitizeString($param['ramcity']);
 		}
 		if(isset($_POST['samedi'])) {
 			$extras[] = 6;
@@ -313,7 +323,7 @@ class accueil_extranetController {
 		}
 
 		// If a taking address is given
-		if(isset($_POST['ramassage'])) {
+		if(isset($param['taking'])) {
 			// If address exists, use existing id for this address
 			$depAddressId = $addressManager->existAddress($senderAddress, $senderZipCode, $senderCity);
 
@@ -329,7 +339,7 @@ class accueil_extranetController {
 			$depAddressId = $relayPointManager->getRPAddress($rpId);
 		}
 
-		// TODO : IMPORTANT Si connecté en admin, definir $_SESSION['address']
+		// TODO : Si connecté en admin, definir $_SESSION['address']
 		// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
 		$depAddressId = 1;
 		$rpId = 1;
@@ -340,6 +350,11 @@ class accueil_extranetController {
 
 		// link order to parcel
 		$orderParcelManager->linkParcelToOrder($parcelId, $orderId);
-		// TODO : at validation, msg OK + open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
+		// TODO : at validation, open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
+
+		die(json_encode([
+			'stat'	=> 'ok',
+			'msg'	=> 'Le dépot du colis a bien été enregistré. Son numéro de suivi est le ' . $trackingNumber . '.'
+		]));
 	}
 }

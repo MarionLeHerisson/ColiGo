@@ -92,15 +92,15 @@ function submitDepotForm() {
                 action: 'parcelPosting',
                 param: data
             },
-            success: function(data) {
-                var dataObject = JSON.parse(data);	// transforms json return from php to js object
+            success: function(ret) {
+                var dataObject = JSON.parse(ret);	// transforms json return from php to js object
 
                 if(dataObject.stat === 'ko') {
                     showMessage(label, dataObject.msg, 1);
                 }
                 else if(dataObject.stat === 'ok') {
                     showMessage(label, dataObject.msg, 0);
-
+                    // TODO : vider les inputs //console.log(data);
                 }
                 else {
                     showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);

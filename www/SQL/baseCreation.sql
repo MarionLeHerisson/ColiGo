@@ -107,6 +107,7 @@ CREATE TABLE DeliveryType(
 
 CREATE TABLE Parcel(
 	id INT NOT NULL AUTO_INCREMENT,
+	tracking_number BIGINT NOT NULL,
 	weight FLOAT NOT NULL,
 	status_id INT NOT NULL,
 	is_deleted INT DEFAULT 0,

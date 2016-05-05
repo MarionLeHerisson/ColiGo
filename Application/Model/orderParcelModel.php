@@ -13,7 +13,7 @@ class OrderParcelModel extends DefaultModel {
     public function linkParcelToOrder($parcelId, $orderId) {
 
         $bdd = $this->connectBdd();
-echo 'parcel=' . $parcelId . '-order=' . $orderId;
+
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(order_id, parcel_id)
                                 VALUES (" . intval($orderId) . ", " . intval($parcelId) . ");");
         $query->execute();

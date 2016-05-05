@@ -78,4 +78,14 @@ class ParcelModel extends DefaultModel {
 
         return $status;
     }
+
+    public function addTrackingNuber($parcelId, $trackingNumber) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . " SET tracking_number = " . $trackingNumber . "
+                                WHERE id = " . $parcelId . ";");
+
+        $query->execute();
+    }
 }
