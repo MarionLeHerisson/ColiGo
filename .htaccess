@@ -16,3 +16,5 @@ RewriteRule	^validation$	Application/View/index.php	    [L]
 
 RewriteRule	^accueil_extranet$	Application/View/index.php	[L]
 RewriteRule	^suivi$			Application/View/index.php		[L]
+
+RewriteRule	^facture$		Application/View/index.php		[L]

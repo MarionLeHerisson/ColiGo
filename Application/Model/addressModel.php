@@ -6,7 +6,7 @@
  * Time: 18:08
  */
 
-
+// TODO : ajout address_type (particulier, centre, point relais)
 require_once('defaultModel.php');
 
 class AddressModel extends DefaultModel {
