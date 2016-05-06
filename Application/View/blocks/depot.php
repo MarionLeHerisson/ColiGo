@@ -3,13 +3,6 @@
 
     <br><h4><?php echo $info; ?></h4>
     <div class="form-group">
-        <label class="control-label col-md-3" for="name">Nom :</label>
-        <div class="col-md-6">
-            <input name="name" id="name" type="text" class="form-control" placeholder="">
-        </div>
-    </div>
-
-    <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Prenom :</label>
         <div class="col-md-6">
             <input name="firstname" id="firstname" type="text" class="form-control" placeholder="">
@@ -17,6 +10,13 @@
         <p class="col-md-4 none ttLastname bg-danger">
             Prénom obligatoire
         </p>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3" for="name">Nom :</label>
+        <div class="col-md-6">
+            <input name="name" id="name" type="text" class="form-control" placeholder="">
+        </div>
     </div>
 
     <div class="form-group">
@@ -89,18 +89,19 @@
 
     <br><h4>Informations destinataire :</h4>
     <div class="form-group">
+        <label class="control-label col-md-3" for="firstname">Prenom :</label>
+        <div class="col-md-6">
+            <input name="destfirstname" id="destfirstname" type="text" class="form-control" placeholder="">
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="control-label col-md-3" for="name">Nom :</label>
         <div class="col-md-6">
             <input name="destname" id="destname" type="text" class="form-control" placeholder="">
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-3" for="firstname">Prenom :</label>
-        <div class="col-md-6">
-            <input name="destfirstname" id="destfirstname" type="text" class="form-control" placeholder="">
-        </div>
-    </div>
     <!-- TODO : choix point relais / adresse particulier (ajax pour remplir le table) -->
     <div class="form-group">
         <label class="control-label col-md-3" for="email">Adresse de livraison :</label>
