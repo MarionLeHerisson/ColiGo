@@ -60,7 +60,7 @@ class UserModel extends defaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id, address_id FROM " . $this->_name . "
+        $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id FROM " . $this->_name . "
                                 WHERE first_name = '" . $firstname . "'
                                 AND last_name = '" . $lastname . "'
                                 AND is_deleted = 0;");

@@ -15,7 +15,7 @@ class accueil_extranetController {
 				break;
 			case 3: $sessionType = 'Livreur';
 				break;
-			default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
+			//default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
 		}
 
 		//echo '<pre>';die(print_r($_POST));
@@ -228,7 +228,7 @@ class accueil_extranetController {
 
 		$receiverLastname = ColiGo::sanitizeString($param['destname']);
 		$receiverFirstname = ColiGo::sanitizeString($param['destfirstname']);
-		$receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($_POST['route']);
+		$receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($param['route']);
 		$receiverZipCode = ColiGo::sanitizeString($param['zipcode']);
 		$receiverCity = ColiGo::sanitizeString($param['city']);
 
@@ -316,14 +316,14 @@ class accueil_extranetController {
 		$receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
 
 		if(empty($receiver)) {
-			$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, null);
+			$reciverId = $userManager->insertUser($receiverFirstname, $receiverLastname, null, null, 4, 0);
 		} else {
 			$reciverId = $receiver[0]['id'];
 		}
 
 		// If address exists, use existing id for this address
 		$arrivalAddress = $addressManager->existAddress($receiverAddress, $receiverZipCode, $receiverCity);
-
+		
 		if($arrivalAddress == null) {
 			$arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
 		}

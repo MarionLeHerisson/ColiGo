@@ -56,9 +56,9 @@ class AddressModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id FROM " . $this->_name . "
-                                WHERE address ILIKE '" . $address . "'
+                                WHERE address = '" . $address . "'
                                 AND zip_code = " . intval($zipcode) . "
-                                AND city ILIKE '" . $city . "');");
+                                AND city = '" . $city . "';");
         $query->execute();
         $res = $query->fetchColumn();
 
