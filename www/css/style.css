@@ -137,6 +137,13 @@ h1, p {
 	border: solid #dddddd 1px;
 }
 
+/* DEPOT */
+#billPanel {
+    display: block;
+    position: fixed;
+    right: 10px;
+}
+
 
 
 @media (min-width: 768px) {

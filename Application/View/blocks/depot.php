@@ -34,15 +34,15 @@
         <label class="control-label col-md-3" for="type">Type de livraison :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="radio" name="type" id="expresse" value="2" checked>
+                <input type="radio" name="type" id="expresse" value="2" checked onclick="claculateQuotation(event)">
                 Livraison à horaires garantis
             </div>
             <div class="pull-left">
-                <input type="radio" name="type" id="8h" value="1">
+                <input type="radio" name="type" id="8h" value="1" onclick="claculateQuotation(event)">
                 Livraison le lendemain à 8h si la commande est passée avant 15h
             </div>
             <div class="pull-left">
-                <input type="radio" name="type" id="urgence" value="3">
+                <input type="radio" name="type" id="urgence" value="3" onclick="claculateQuotation(event)">
                 Livraison d'urgence
             </div>
         </div>
@@ -51,7 +51,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onchange="claculateQuotation(event)"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire
@@ -63,25 +63,24 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="emballage">Type d'emballage :</label>
         <div class="col-md-9">
-            <div class="pull-left">
-                <input type="radio" name="emballage" id="craft" value="3" data-price="0.2">
+            <div class="col-md-12">
+                <input class="pull-left" type="radio" name="emballage" id="craft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="claculateQuotation(event)">
                 Papier craft (0,20€)
             </div><br>
-            <div class="pull-left">
-                <input type="radio" name="emballage" id="soie" value="2" data-price="0.4">
+            <div class="col-md-12"
+                <input class="pull-left" type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="claculateQuotation(event)">
                 Papier de soie (0,40€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="bulles" value="1"  data-price="0.6">
+                <input type="radio" name="emballage" id="bulles" value="1"  data-price="<?php echo $extraPrices[0]['price'];?>" onclick="claculateQuotation(event)">
                 Papier bulles (0,60€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="poly" value="4" data-price="0.3">
+                <input type="radio" name="emballage" id="poly" value="4" data-price="<?php echo $extraPrices[3]['price'];?>" onclick="claculateQuotation(event)">
                 Particules de calage en polystirène (0,30€)
-                <!-- TODO : Faire les prix via getAllExtraPrices -->
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="none" value="none" checked>
+                <input type="radio" name="emballage" id="none" value="none" checked data-price="noPack" onclick="claculateQuotation(event)">
                 Aucun
             </div>
         </div>
@@ -91,15 +90,15 @@
         <label class="control-label col-md-3" for="type">Assurances :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="10">
+                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="claculateQuotation(event)">
                 Colis prioritaire (10,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="37">
+                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="claculateQuotation(event)">
                 Colis livré par tous les moyens en cas d'imprévu (37,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="19">
+                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="claculateQuotation(event)">
                 Indemnisation en cas de perte ou d'avarie (19,00€/kg)
             </div>
         </div>
@@ -109,11 +108,11 @@
         <label class="control-label col-md-3" for="type">Autres services :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="8" onclick="blockRamAddress()">
+                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php $extraPrices[4]['price'];?>" onclick="blockRamAddress();claculateQuotation(event)">
                 Ramassage au domicile ou sur un lieu de travail (8,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="5">
+                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php $extraPrices[5]['price'];?>" onclick="claculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div>
         </div>
@@ -179,5 +178,7 @@
     <button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
 </form>
+
+<?php include_once('blocks/billPanel.php'); ?>
 
 <script src="www/js/depot.js"></script>

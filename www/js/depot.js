@@ -114,9 +114,14 @@ function submitDepotForm() {
     }
 }
 
-function claculateQuotation() {
-    // TODO : calcul en temps réel du total + proposer un devis
-    // bind sur data-price
+function claculateQuotation(event) {
+    var weight = 0,
+        actualPrice = $('#actualPrice'),
+        newPrice = 0,
+        input = $(event.target),
+        price = input.attr('data-price');
+
+    console.log(price);
 }
 
 function blockRamAddress() {

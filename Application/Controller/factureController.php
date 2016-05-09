@@ -4,7 +4,6 @@ class factureController {
 
     public function indexAction() {
 
-        // TODO : postman ?
         if(!isset($_POST['tracking_number']) || $_POST['tracking_number'] == '') {
             //die('error');
             $trackingNumber = 1234567;
@@ -35,7 +34,7 @@ class factureController {
         imagedestroy($im);
 
 
-        include_once('../View/facture.php');
+        include_once('../View/blocks/facture.php');
     }
 
     /**

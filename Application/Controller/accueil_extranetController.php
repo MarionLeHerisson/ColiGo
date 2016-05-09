@@ -25,6 +25,11 @@ class accueil_extranetController {
             }
         }
 
+        // manager
+        include_once('../Model/extraModel.php');
+        $extraManager = new ExtraModel();
+
+        // view
 		$sessionType = '';
 
 		switch($_SESSION['type']) {
@@ -38,6 +43,7 @@ class accueil_extranetController {
 		}
 
         $info = 'Informations client';
+        $extraPrices = $extraManager->getAllExtras();
 
 		require_once('../View/header.php');
 		require_once('../View/accueil_extranet.php');
