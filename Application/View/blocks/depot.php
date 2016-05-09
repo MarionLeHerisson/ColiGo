@@ -64,26 +64,75 @@
         <label class="control-label col-md-3" for="emballage">Type d'emballage :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="radio" name="emballage" id="craft" value="3">
+                <input type="radio" name="emballage" id="craft" value="3" data-price="0.2">
                 Papier craft (0,20€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="soie" value="2">
+                <input type="radio" name="emballage" id="soie" value="2" data-price="0.4">
                 Papier de soie (0,40€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="bulles" value="1">
+                <input type="radio" name="emballage" id="bulles" value="1"  data-price="0.6">
                 Papier bulles (0,60€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="poly" value="4">
+                <input type="radio" name="emballage" id="poly" value="4" data-price="0.3">
                 Particules de calage en polystirène (0,30€)
-                <!-- TODO : Faire les prix en get -->
+                <!-- TODO : Faire les prix via getAllExtraPrices -->
             </div><br>
             <div class="pull-left">
                 <input type="radio" name="emballage" id="none" value="none" checked>
                 Aucun
             </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3" for="type">Assurances :</label>
+        <div class="col-md-9">
+            <div class="pull-left">
+                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="10">
+                Colis prioritaire (10,00€)
+            </div><br>
+            <div class="pull-left">
+                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="37">
+                Colis livré par tous les moyens en cas d'imprévu (37,00€)
+            </div><br>
+            <div class="pull-left">
+                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="19">
+                Indemnisation en cas de perte ou d'avarie (19,00€/kg)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3" for="type">Autres services :</label>
+        <div class="col-md-9">
+            <div class="pull-left">
+                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="8" onclick="blockRamAddress()">
+                Ramassage au domicile ou sur un lieu de travail (8,00€)
+            </div><br>
+            <div class="pull-left">
+                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="5">
+                Livraison le samedi (5,00€)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <!-- TODO : GoogleMaps api pour points relais -->
+        <label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
+        <div class="col-md-6">
+            <input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" disabled>
+        </div>
+        <div class="<?php if(DEBUG == 0){echo 'none';}?>">
+            <table id="address">
+                <input name="streetnumber3" id="street_number3">
+                <input name="route3" id="route3">
+                <input name="city3" id="locality3">
+                <input name="zipcode3" id="postal_code3">
+                <input name="country3" id="country3">
+            </table>
         </div>
     </div>
 
@@ -118,55 +167,6 @@
             <input name="zipcode2" id="postal_code2">
             <input name="country2" id="country2">
         </table>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-3" for="type">Assurances :</label>
-        <div class="col-md-9">
-            <div class="pull-left">
-                <input type="checkbox" name="prioritaire" id="prioritaire" value="7">
-                Colis prioritaire (10,00€)
-            </div><br>
-            <div class="pull-left">
-                <input type="checkbox" name="imprevu" id="imprevu" value="8">
-                Colis livré par tous les moyens en cas d'imprévu (37,00€)
-            </div><br>
-            <div class="pull-left">
-                <input type="checkbox" name="indemnisation" id="indemnisation" value="9">
-                Indemnisation en cas de perte ou d'avarie (19,00€/kg)
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-3" for="type">Autres services :</label>
-        <div class="col-md-9">
-            <div class="pull-left">
-                <input type="checkbox" name="ramassage" id="ramassage" value="5">
-                Ramassage au domicile ou sur un lieu de travail (8,00€)
-                <!-- TODO : if checked, show adresse ramassage -->
-            </div><br>
-            <div class="pull-left">
-                <input type="checkbox" name="samedi" id="samedi" value="6">
-                Livraison le samedi (5,00€)
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
-        <div class="col-md-6">
-            <input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
-        </div>
-        <div class="<?php if(DEBUG == 0){echo 'none';}?>">
-            <table id="address">
-                <input name="streetnumber3" id="street_number3">
-                <input name="route3" id="route3">
-                <input name="city3" id="locality3">
-                <input name="zipcode3" id="postal_code3">
-                <input name="country3" id="country3">
-            </table>
-        </div>
     </div>
 
     <div id="formDepot" class="none alert alert-dismissible fade in col-md-12" role="alert">

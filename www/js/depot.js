@@ -116,4 +116,22 @@ function submitDepotForm() {
 
 function claculateQuotation() {
     // TODO : calcul en temps réel du total + proposer un devis
+    // bind sur data-price
+}
+
+function blockRamAddress() {
+
+    var autocomplete = $('#autocomplete3');
+
+    if($('input[name=ramassage]').is(':checked')) {
+        autocomplete.removeAttr('disabled');
+    } else {
+        autocomplete.attr('disabled', 'disabled');
+        autocomplete.val('');
+        $('#street_number3').val('');
+        $('#route3').val('');
+        $('#locality3').val('');
+        $('#postal_code3').val('');
+        $('#country3').val('');
+    }
 }

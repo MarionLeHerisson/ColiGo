@@ -17,11 +17,15 @@ if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) &
 	// connect user
 	$type = $userManager->connexion($mail, $pwd);
 
-	// if the user works for ColiGo -> redirect him to extranet
+    // if user does not exist
+    if(is_null($type)) {
+        echo '<script type="text/javascript">
+						document.location.href="accueil";
+					</script>';
+    }
+
+    // if the user works for ColiGo -> redirect him to extranet
 	if($type != 4) {
-
-		// TODO : "clean" redirection ?
-
 		echo '<script type="text/javascript">
 						document.location.href="accueil_extranet";
 					</script>';

@@ -6,6 +6,25 @@ class accueil_extranetController {
 	
 	public function indexAction() {
 
+        // ajax
+        if(isset($_POST['action']) && !empty($_POST['action'])) {
+
+            $action = $_POST['action'];
+            $param = $_POST['param'];
+
+            switch($action) {
+                case 'updateParcelStatus' :
+                    $this->updateStatus($param);
+                    break;
+                case 'addRelayPoint' :
+                    $this->addRelayPoint($param);
+                    break;
+                case 'parcelPosting' :
+                    $this->postParcel($param);
+                    break;
+            }
+        }
+
 		$sessionType = '';
 
 		switch($_SESSION['type']) {
@@ -15,28 +34,10 @@ class accueil_extranetController {
 				break;
 			case 3: $sessionType = 'Livreur';
 				break;
-			//default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
+			default : echo '<script type="text/javascript">document.location.href="accueil";</script>';
 		}
 
-		//echo '<pre>';die(print_r($_POST));
-		// ajax
-		if(isset($_POST['action']) && !empty($_POST['action'])) {
-
-			$action = $_POST['action'];
-			$param = $_POST['param'];
-
-			switch($action) {
-				case 'updateParcelStatus' :
-					$this->updateStatus($param);
-					break;
-				case 'addRelayPoint' :
-					$this->addRelayPoint($param);
-					break;
-				case 'parcelPosting' :
-					$this->postParcel($param);
-					break;
-			}
-		}
+        $info = 'Informations client';
 
 		require_once('../View/header.php');
 		require_once('../View/accueil_extranet.php');

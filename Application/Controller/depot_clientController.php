@@ -4,16 +4,7 @@ class depot_clientController {
 
     public function indexAction() {
 
-        $exploded = explode('/', $_SERVER['REDIRECT_URL']);
-        $len = sizeof($exploded) - 1;
-        $thisPage = $exploded[$len];
-
-        if($thisPage == 'depot_client') {
-            $info = 'Vos informations :';
-        }
-        else {
-            $info = 'Informations client';
-        }
+        $info = 'Vos informations :';
 
         require_once('../View/header.php');
         require_once('../View/depot-client.php');
