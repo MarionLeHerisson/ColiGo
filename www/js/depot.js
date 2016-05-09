@@ -115,12 +115,26 @@ function submitDepotForm() {
 }
 
 function claculateQuotation(event) {
-    var weight = 0,
-        actualPrice = $('#actualPrice'),
-        newPrice = 0,
+    var weight = $('#weight').val(),
+        divNewPrice = $('#billTotalPrice'),
+        actualPrice = parseInt(divNewPrice.text()),
         input = $(event.target),
-        price = input.attr('data-price');
+        price = parseInt(input.attr('data-price')),
+        label = input.attr('name'),
+        tbody = $('#tbody'),
+        newExtra = '<tr>' +
+            '<td class="billLabel" data-label="'+ label + '">' + label + '</td>' +
+            '<td class="billPrice">' + price + '</td>' +
+        '</tr>';
 
+    if((input).is(':checked')) {
+        divNewPrice.text(actualPrice + price);
+        tbody.append(newExtra);
+    } else {
+        divNewPrice.text(actualPrice - price);
+        $('[data-label="' + label + '"]').parent().addClass('none');
+    }
+    console.log(actualPrice);
     console.log(price);
 }
 

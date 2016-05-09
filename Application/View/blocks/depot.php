@@ -108,11 +108,11 @@
         <label class="control-label col-md-3" for="type">Autres services :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php $extraPrices[4]['price'];?>" onclick="blockRamAddress();claculateQuotation(event)">
+                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();claculateQuotation(event)">
                 Ramassage au domicile ou sur un lieu de travail (8,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php $extraPrices[5]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="claculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div>
         </div>

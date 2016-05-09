@@ -4,13 +4,12 @@
     </div>
     <div class="panel-body">
         <table id="billPanelTable">
-            <tr>
-                <td class="billLabel">Coucou</td>
-                <td class="billPrice">3.00 €</td>
-            </tr>
+            <tbody id="tbody">
+
+            </tbody>
             <tr>
                 <th>Prix total :</th>
-                <th class="billTotalPrice">50</th>
+                <th id="billTotalPrice">0</th>
             </tr>
         </table>
     </div>
