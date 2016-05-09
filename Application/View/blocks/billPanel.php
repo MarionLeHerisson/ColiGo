@@ -5,7 +5,14 @@
     <div class="panel-body">
         <table id="billPanelTable">
             <tbody id="tbody">
-
+                <tr>
+                    <td>Poids</td>
+                    <td id="trWeight">0</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td id="trWeight">express</td>
+                </tr>
             </tbody>
             <tr>
                 <th>Prix total :</th>

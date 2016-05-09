@@ -127,7 +127,26 @@ function claculateQuotation(event) {
             '<td class="billPrice">' + price + '</td>' +
         '</tr>';
 
-    if((input).is(':checked')) {
+    if(input.attr('name') == 'type') {
+        // calculate weight price
+        $.ajax({
+            type: "POST",
+            url: 'accueil_extranet',
+            data: {
+                action: 'getWeightPrice',
+                param: weight
+            },
+            success: function(ret) {
+                var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+
+            },
+            error: function() {
+                showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+                    'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', 1);
+            }
+        });
+    }
+    else if((input).is(':checked')) {
         divNewPrice.text(actualPrice + price);
         tbody.append(newExtra);
     } else {

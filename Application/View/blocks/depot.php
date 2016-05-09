@@ -34,7 +34,7 @@
         <label class="control-label col-md-3" for="type">Type de livraison :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="radio" name="type" id="expresse" value="2" checked onclick="claculateQuotation(event)">
+                <input type="radio" name="type" id="express" value="2" checked onclick="claculateQuotation(event)">
                 Livraison à horaires garantis
             </div>
             <div class="pull-left">
@@ -51,7 +51,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onchange="claculateQuotation(event)"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire
