@@ -86,7 +86,7 @@ class UserModel extends defaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT id, first_name, last_name, type_id, address_id FROM " . $this->_name . "
+        $query = $bdd->prepare("SELECT id, first_name, last_name, mail, type_id, address_id FROM " . $this->_name . "
                                 WHERE mail='" . $mail ."' AND password='". $pwd ."' AND is_deleted = 0;");
         $query->execute();
 
@@ -95,6 +95,7 @@ class UserModel extends defaultModel {
         $_SESSION['id'] = $tab[0]['id'];
         $_SESSION['first_name'] = $tab[0]['first_name'];
         $_SESSION['last_name'] = $tab[0]['last_name'];
+        $_SESSION['mail'] = $tab[0]['mail'];
         $_SESSION['type'] = $tab[0]['type_id'];
         $_SESSION['address'] = $tab[0]['address_id'];
 

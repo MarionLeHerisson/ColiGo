@@ -8,9 +8,20 @@ class depot_clientController {
         $extraManager = new ExtraModel();
 
         // view
+        $blockedFirstname = '';
+        $blockedLastname = '';
+        $blockedMail = '';
+        $disabled = '';
+
         $info = 'Vos informations :';
         $extraPrices = $extraManager->getAllExtras();
-        //echo'<pre>';print_r($extraPrices);die;
+
+        if(isset($_SESSION['type'])) {
+            $blockedFirstname = $_SESSION['first_name'];
+            $blockedLastname = $_SESSION['last_name'];
+            $blockedMail = $_SESSION['mail'];
+            $disabled = 'disabled';
+        }
 
         require_once('../View/header.php');
         require_once('../View/depot-client.php');

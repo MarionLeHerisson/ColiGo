@@ -30,6 +30,11 @@ class accueil_extranetController {
         $extraManager = new ExtraModel();
 
         // view
+        $blockedFirstname = '';
+        $blockedLastname = '';
+        $blockedMail = '';
+        $disabled = '';
+
 		$sessionType = '';
 
 		switch($_SESSION['type']) {

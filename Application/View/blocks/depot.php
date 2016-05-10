@@ -5,7 +5,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Prenom :</label>
         <div class="col-md-6">
-            <input name="firstname" id="firstname" type="text" class="form-control" placeholder="">
+            <input name="firstname" id="firstname" type="text" class="form-control" placeholder="" value="<?php echo $blockedFirstname; ?>" <?php echo $disabled; ?>>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Prénom obligatoire
@@ -15,14 +15,14 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="name">Nom :</label>
         <div class="col-md-6">
-            <input name="name" id="name" type="text" class="form-control" placeholder="">
+            <input name="name" id="name" type="text" class="form-control" placeholder="" value="<?php echo $blockedLastname; ?>" <?php echo $disabled; ?>>
         </div>
     </div>
 
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Adresse mail :</label>
         <div class="col-md-6">
-            <input name="mail" id="mail" type="email" class="form-control" placeholder="">
+            <input name="mail" id="mail" type="email" class="form-control" placeholder="" value="<?php echo $blockedMail; ?>" <?php echo $disabled; ?>>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Adresse mail obligatoire
