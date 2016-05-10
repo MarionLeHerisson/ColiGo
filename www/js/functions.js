@@ -258,3 +258,23 @@ function showTooltip(label) {
 	console.log('label' + label);
 	$('#' + label).tooltip('show');
 }
+
+function scrollToTop() {
+
+    var body = $("html, body");
+    body.animate({
+            scrollTop:0
+        },
+        'slow'
+    );
+}
+
+function scrollToBottom() {
+
+    var body = $("html, body");
+    body.animate({
+            scrollTop:1000
+        },
+        'slow'
+    );
+}

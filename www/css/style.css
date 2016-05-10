@@ -144,6 +144,35 @@ h1, p {
     right: 10px;
 }
 
+/* Scroll to top/bottom */
+.scroll {
+    display: block;
+    position: fixed;
+    visibility: visible;
+    opacity: .5;
+    z-index: 110;
+    right: 2em;
+    width: 1.7em;
+    height: 1.7em;
+    background: rgba(100,100,100,.9);
+    text-align: center;
+    border-radius: .2143em;
+    cursor: pointer;
+
+    -webkit-transition: border-radius .2s ease, color .2s ease;
+    transition: border-radius .2s ease, color .2s ease;
+}
+.backToTop {
+    bottom: 5em;
+}
+.backToBottom {
+    top: 5em;
+}
+
+.scroll:hover{
+    border-radius: 2em;
+    color: white;
+}
 
 
 @media (min-width: 768px) {

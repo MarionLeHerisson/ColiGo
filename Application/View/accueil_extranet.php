@@ -22,6 +22,8 @@
 			}
 			include_once('menu_extranet/perdu.php');	// Everybody
 
+            include_once('blocks/scrollButton.php');
+
 			?>
 
 		</div>
