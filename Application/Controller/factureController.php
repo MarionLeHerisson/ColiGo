@@ -6,35 +6,28 @@ class factureController {
 
         if(!isset($_POST['tracking_number']) || $_POST['tracking_number'] == '') {
             //die('error');
-            $trackingNumber = 1234567;
+            $trackingNumber = 689472894;
         } else {
             $trackingNumber = $_POST['tracking_number'];
         }
 
         $data = $this->getBillDatas($trackingNumber);
 
-        include_once('../../library/Barcode.php');
-
         $template = imagecreatefromjpeg("../../Medias/facture.jpg");
+        $template = imagerotate ($template, 270, 0);
 
-        $im = $this->createBarcode($trackingNumber);
-
-        $imPoids = $this->createImgText('Poids du colis : ' . $data['weight'], 2);
-        $imDate = $this->createImgText('Edite le : ' . $data['date'], 2);
-        $imBill = $this->createBill($data);
-
-        // dest_img, src_img, dest_x, dest_y, src_x, src_y, src_width, src_height, transp
-        imagecopy($template, $im, 450, 450, 0, 0, imagesx($im), imagesy($im));
+        $pictures = $this->createPictures($data, $trackingNumber);
+        $template = $this->createFullBill($template, $pictures);
 
         // Show picture
         header ("Content-type: image/png");  // tell the navigator that we show an image and not html code
-        imagepng($imBill);
+        imagepng($template);
 
-        imagedestroy($template);  // free memory
-        imagedestroy($im);
-
-
-        include_once('../View/blocks/facture.php');
+        // free memory
+        imagedestroy($template);
+        foreach($pictures as $ressource) {
+            imagedestroy($ressource);
+        }
     }
 
     /**
@@ -43,12 +36,14 @@ class factureController {
      */
     public function createBarcode($trackingNumber) {
 
-        $im     = imagecreatetruecolor(500, 500);
+        require_once('../../library/Barcode.php');
+
+        $im     = imagecreatetruecolor(300, 200);
         $black  = ImageColorAllocate($im,0x00,0x00,0x00);
         $white  = ImageColorAllocate($im,0xff,0xff,0xff);
-        imagefilledrectangle($im, 0, 0, 500, 500, $white);
+        imagefilledrectangle($im, 0, 0, 300, 200, $white);
         // ressource, color, left, top, rotation, type, data, width, height
-        $data = Barcode::gd($im, $black, 50, 175, 90, "code128", $trackingNumber, 3, 100);
+        $data = Barcode::gd($im, $black, 100, 100, 0, "code128", $trackingNumber, 3, 100);
 
         return $im;
     }
@@ -61,9 +56,15 @@ class factureController {
      */
     public function createImgText($text, $size) {
 
-        $im = imagecreatetruecolor(300, 20);
-        $white = imagecolorallocate($im, 255, 255, 255);
-        imagefilledrectangle($im, 0,0, 300, 20, $white);
+        $width = 300;
+
+        if($size == 2) {
+            $width = 180;
+        }
+
+        $im     = imagecreatetruecolor($width, 20);
+        $white  = imagecolorallocate($im, 255, 255, 255);
+        imagefilledrectangle($im, 0,0, $width, 20, $white);
         $text_color = imagecolorallocate($im, 0, 0, 0);
         imagestring($im, $size, 0, 0,  $text, $text_color);
 
@@ -76,6 +77,12 @@ class factureController {
      */
     public function getBillDatas($trackingNumber) {
 
+        require_once('../Model/parcelModel.php');
+        $parcelManager = new ParcelModel();
+
+        $data = $parcelManager->getAllBillDatas($trackingNumber);
+
+        //echo '<pre>';die(print_r($data));
         /*
         SELECT Parcel.delivery_type, Parcel.weight, parcel.id,
             OrderParcel.parcel_id, OrderParcel.order_id,
@@ -93,7 +100,20 @@ class factureController {
         WHERE Parcel.tracking_number = 689472894
 
         + weight price
-         */
+        + sender & receiver, departure address & arrival address
+
+
+        $data['send_firstname'] = 'Marion';
+        $data['send_lastname'] = 'Hurteau';
+        $data['send_addr'] = '14, rue Monte Cristo';
+        $data['send_cp'] = '75020';
+        $data['send_city'] = 'Paris';
+
+        $data['rec_firstname'] = 'Oriane';
+        $data['rec_lastname'] = 'Payen de La Garanderie';
+        $data['rec_addr'] = '10, rue Lisfranc';
+        $data['rec_cp'] = '75020';
+        $data['rec_city'] = 'Paris';
 
         $data['weight'] = 5;
         $data['date'] = '2016-05-05 11:30:26';
@@ -104,8 +124,8 @@ class factureController {
         $data['extra'][1]['label'] = 'extra 2';
         $data['extra'][1]['price'] = 0.20;
         $data['totalPrice'] = 12.45;
-
-        return $data;
+*/
+        return $data[0];
     }
 
     /**
@@ -125,11 +145,13 @@ class factureController {
         $imgDeliveryType['price'] = $this->createImgText($data['weightPrice'] . ' EUR', 2);
 
         $imgExtra = [];
-        foreach($data['extra'] as $extra) {
-            $imgExtra[] = [
-                'label' => $this->createImgText($extra['label'], 2),
-                'price' => $this->createImgText($extra['price'] . ' EUR', 2)
+        if(isset($data['extra'])) {
+            foreach($data['extra'] as $extra) {
+                $imgExtra[] = [
+                    'label' => $this->createImgText($extra['label'], 2),
+                    'price' => $this->createImgText($extra['price'] . ' EUR', 2)
                 ];
+            }
         }
 
         $imgTotal['label'] = $this->createImgText('TOTAL TTC : ', 3);
@@ -153,5 +175,52 @@ class factureController {
         imagecopy($imgBill, $imgTotal['price'], 200, $line, 0, 0, imagesx($imgTotal['price']), imagesy($imgTotal['price']));
 
         return $imgBill;
+    }
+
+    /**
+     * @param resource $template
+     * @param array $pictures
+     * @return resource
+     */
+    public function createFullBill($template, $pictures) {
+
+        // dest_img, src_img, dest_x, dest_y, src_x, src_y, src_width, src_height, transp
+        imagecopy($template, $pictures['weight'], 230, 55, 0, 0, imagesx($pictures['weight']), imagesy($pictures['weight']));
+        imagecopy($template, $pictures['date'], 230, 75, 0, 0, imagesx($pictures['date']), imagesy($pictures['date']));
+        imagecopy($template, $pictures['bill'], 470, 150, 0, 0, imagesx($pictures['bill']), imagesy($pictures['bill']));
+        imagecopy($template, $pictures['barCode'], 75, 400, 0, 0, imagesx($pictures['barCode']), imagesy($pictures['barCode']));
+        imagecopy($template, $pictures['send1'], 50, 125, 0, 0, imagesx($pictures['send1']), imagesy($pictures['send1']));
+        imagecopy($template, $pictures['send2'], 50, 145, 0, 0, imagesx($pictures['send2']), imagesy($pictures['send2']));
+        imagecopy($template, $pictures['send3'], 50, 165, 0, 0, imagesx($pictures['send3']), imagesy($pictures['send3']));
+        imagecopy($template, $pictures['rec1'], 50, 300, 0, 0, imagesx($pictures['rec1']), imagesy($pictures['rec1']));
+        imagecopy($template, $pictures['rec2'], 50, 320, 0, 0, imagesx($pictures['rec2']), imagesy($pictures['rec2']));
+        imagecopy($template, $pictures['rec3'], 50, 340, 0, 0, imagesx($pictures['rec3']), imagesy($pictures['rec3']));
+        imagecopy($template, $pictures['tracking'], 470, 450, 0, 0, imagesx($pictures['tracking']), imagesy($pictures['tracking']));
+
+        return $template;
+    }
+
+    /**
+     * @param array $data
+     * @param int $trackingNumber
+     * @return array
+     */
+    public function createPictures($data, $trackingNumber) {
+
+        $pictures['barCode'] = $this->createBarcode($trackingNumber);
+
+        $pictures['weight'] = $this->createImgText('Poids du colis : ' . $data['weight'], 2);
+        $pictures['date'] = $this->createImgText('Edite le : ' . $data['date'], 2);
+        $pictures['bill'] = $this->createBill($data);
+        $pictures['tracking'] = $this->createImgText('Votre numero de suivi :' . $trackingNumber, 4);
+
+        $pictures['send1'] = $this->createImgText($data['send_firstname'] . ' ' . $data['send_lastname'], 4);
+        $pictures['send2'] = $this->createImgText($data['send_addr'], 4);
+        $pictures['send3'] = $this->createImgText($data['send_cp'] . ' ' . $data['send_city'], 4);
+        $pictures['rec1'] = $this->createImgText($data['rec_firstname'] . ' ' . $data['rec_lastname'], 4);
+        $pictures['rec2'] = $this->createImgText($data['rec_addr'], 4);
+        $pictures['rec3'] = $this->createImgText($data['rec_cp'] . ' ' . $data['rec_city'], 4);
+
+        return $pictures;
     }
 }
