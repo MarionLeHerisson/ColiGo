@@ -238,8 +238,8 @@ class accueil_extranetController {
 		$deliveryType = ColiGo::sanitizeString($param['type']);
 		$parcelWeight = ColiGo::sanitizeString($param['weight']);
 
-		$receiverLastname = ColiGo::sanitizeString($param['destname']);
-		$receiverFirstname = ColiGo::sanitizeString($param['destfirstname']);
+		$receiverLastname = ColiGo::sanitizeString($param['receiverLastname']);
+		$receiverFirstname = ColiGo::sanitizeString($param['receiverFirstname']);
 		$receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($param['route']);
 		$receiverZipCode = ColiGo::sanitizeString($param['zipcode']);
 		$receiverCity = ColiGo::sanitizeString($param['city']);
@@ -282,8 +282,8 @@ class accueil_extranetController {
 		// insert Parcel (weight, status = déposé, delivery_type) -> get id
 		$parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
 
-		$md5 = md5($parcelId);
-		$trackingNumber = intval(substr($md5, 0, 8)) . intval(substr($md5, 8, 16)) . intval(substr($md5, 16, 24)) . intval(substr($md5, 24, 32));
+		// create unique tracking number
+		$trackingNumber = $this->createUniqueId();
 
 		// insert tracking number
 		$parcelManager->addTrackingNuber($parcelId, $trackingNumber);
@@ -368,11 +368,29 @@ class accueil_extranetController {
 
 		// link order to parcel
 		$orderParcelManager->linkParcelToOrder($parcelId, $orderId);
-		// TODO : at validation, open new tab with A4 picture in two parts (or 2 x A4) : bar code + detailed bill
 
 		die(json_encode([
 			'stat'	=> 'ok',
-			'msg'	=> 'Le dépot du colis a bien été enregistré. Son numéro de suivi est le ' . $trackingNumber . '.'
+			'msg'	=> 'Le dépot du colis a bien été enregistré. Son numéro de suivi est le ' . $trackingNumber . '.',
+			'num'	=> $trackingNumber
 		]));
+	}
+
+	/**
+	 * Create a unique tracking number
+	 */
+	protected function createUniqueId() {
+		$uniqueId = null;
+
+		require_once('../Model/parcelModel.php');
+		$parcelManager = new ParcelModel();
+
+		do {
+			for($i = 0; $i < 10; $i++) {
+				$uniqueId .= rand(0,9);
+			}
+		} while($parcelManager->getIdFromTrackingNumber($uniqueId) != 0);
+
+		return $uniqueId;
 	}
 }

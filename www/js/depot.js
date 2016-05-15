@@ -100,6 +100,7 @@ function submitDepotForm() {
                 }
                 else if(dataObject.stat === 'ok') {
                     showMessage(label, dataObject.msg, 0);
+                    window.open("facture?tracking_number=" + dataObject.num);
                     // TODO : vider les inputs //console.log(data);
                 }
                 else {

@@ -4,11 +4,11 @@ class factureController {
 
     public function indexAction() {
 
-        if(!isset($_POST['tracking_number']) || $_POST['tracking_number'] == '') {
-            //die('error');
-            $trackingNumber = 689472894;
+        if(!isset($_GET['tracking_number']) || $_GET['tracking_number'] == '') {
+            die('error');
+            //$trackingNumber = 689472894;
         } else {
-            $trackingNumber = $_POST['tracking_number'];
+            $trackingNumber = $_GET['tracking_number'];
         }
 
         $data = $this->getBillDatas($trackingNumber);
