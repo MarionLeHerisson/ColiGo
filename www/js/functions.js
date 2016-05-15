@@ -1,9 +1,23 @@
-// TODO : à la fermeture d'un onglet, faire disparaitre msg erreur ($(this) hasClass 'fermé' children addClass('none') + faire disparaitre contenu inputs
 function closePopin() {
 	$('.alert-dismissible').each(function() {
 		$(this).addClass('none');
 	});
 }
+
+function clearEverything() {
+	closePopin();
+
+	$('#depot-form')[0].reset();
+	$('#addRelayPoint-form')[0].reset();
+	$('#inscription-form')[0].reset();
+
+	$('#idColisDistribue').val('');
+	$('#idColisLivre').val('');
+	$('#idColisPerdu').val('');
+	$('#idColisPrisEnCharge').val('');
+}
+
+$('.collapsed').on('click', clearEverything);
 
 function updateParcelStatus(idType) {
 

@@ -10,7 +10,7 @@
         <div class="panel-body">
 
             <div class="col-md-1"></div>
-            <?php include_once('form-inscription.php'); ?>
+            <?php include_once('blocks/form-inscription.php'); ?>
             <div class="col-md-1"></div>
 
             <div class="col-md-12">

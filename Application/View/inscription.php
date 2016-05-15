@@ -13,7 +13,7 @@
 <div class="col-md-12">
 	<div class="col-md-2"></div>
 
-	<?php include_once('form-inscription.php') ?>
+	<?php include_once('blocks/form-inscription.php') ?>
 
 	<div class="col-md-12">
 		<div class="col-md-3"></div>

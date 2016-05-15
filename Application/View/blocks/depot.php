@@ -63,12 +63,12 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="emballage">Type d'emballage :</label>
         <div class="col-md-9">
-            <div class="col-md-12">
-                <input class="pull-left" type="radio" name="emballage" id="craft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="claculateQuotation(event)">
+            <div class="pull-left">
+                <input type="radio" name="emballage" id="craft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="claculateQuotation(event)">
                 Papier craft (0,20€)
             </div><br>
-            <div class="col-md-12"
-                <input class="pull-left" type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="claculateQuotation(event)">
+            <div class="pull-left">
+                <input type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="claculateQuotation(event)">
                 Papier de soie (0,40€)
             </div><br>
             <div class="pull-left">

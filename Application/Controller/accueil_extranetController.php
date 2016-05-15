@@ -357,7 +357,7 @@ class accueil_extranetController {
 			$depAddressId = $relayPointManager->getRPAddress($rpId);
 		}
 
-		// TODO : Si connecté en admin, definir $_SESSION['address']
+		// TODO URGENT : Si connecté en admin, definir $_SESSION['address']
 		// * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
 		$depAddressId = 1;
 		$rpId = 1;

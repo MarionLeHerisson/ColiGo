@@ -8,7 +8,7 @@
     </div>
     <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
         <div class="panel-body">
-
+<!-- TODO : ajouter dans clearEverything() -->
         </div>
     </div>
 </div>

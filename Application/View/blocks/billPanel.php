@@ -11,7 +11,7 @@
                 </tr>
                 <tr>
                     <td>Type</td>
-                    <td id="trWeight">express</td>
+                    <td id="trType">express</td>
                 </tr>
             </tbody>
             <tr>
@@ -21,3 +21,5 @@
         </table>
     </div>
 </div>
+
+<!-- TODO : Div cachée contenant le prix au poid du produit -->

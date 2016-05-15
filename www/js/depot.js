@@ -101,7 +101,7 @@ function submitDepotForm() {
                 else if(dataObject.stat === 'ok') {
                     showMessage(label, dataObject.msg, 0);
                     window.open("facture?tracking_number=" + dataObject.num);
-                    // TODO : vider les inputs //console.log(data);
+                    $('#depot-form')[0].reset();
                 }
                 else {
                     showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
@@ -147,15 +147,37 @@ function claculateQuotation(event) {
             }
         });
     }
+    else if (input.attr('name') == 'emballage') {
+
+        if (price === parseInt(price, 10)) {
+
+            if ($('[data-label="emballage"]')) {
+                $('[data-label="emballage"]').parent().addClass('none');
+            }
+
+            tbody.append(newExtra);
+        }
+        else {
+            $('[data-label="emballage"]').parent().addClass('none');
+        }
+    }
     else if((input).is(':checked')) {
-        divNewPrice.text(actualPrice + price);
+
+        if($('[data-label="' + label + '"]')) {
+            $('[data-label="' + label + '"]').parent().addClass('none');
+        }
+
         tbody.append(newExtra);
-    } else {
-        divNewPrice.text(actualPrice - price);
+
+    }
+    else {
         $('[data-label="' + label + '"]').parent().addClass('none');
     }
-    console.log(actualPrice);
-    console.log(price);
+    console.log('actual price : ' + actualPrice);
+    console.log('price : ' + price);
+    console.log(input);
+    // TODO : calculer prix total à partir du contenu des divs apparentes + prix au poid
+    // TODO : réussir à récupérer le prix des radio buttons
 }
 
 function blockRamAddress() {

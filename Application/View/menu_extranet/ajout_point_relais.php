@@ -12,28 +12,30 @@
             <div class="col-md-1"></div>
 
             <div class="col-md-10">
-                <div class="form-group">
-                    <label class="control-label col-md-4" for="type">Adresse du point relais :</label>
-                    <div class="col-md-8">
-                        <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+                <form id="addRelayPoint-form">
+                    <div class="form-group">
+                        <label class="control-label col-md-4" for="type">Adresse du point relais :</label>
+                        <div class="col-md-8">
+                            <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+                        </div>
+                        <div class="<?php if(DEBUG == 0){echo 'none';}?>">
+                            <table id="address">
+                                <input name="streetnumber4" id="street_number4">
+                                <input name="route4" id="route4">
+                                <input name="city4" id="locality4">
+                                <input name="zipcode4" id="postal_code4">
+                                <input name="country4" id="country4">
+                            </table>
+                        </div>
                     </div>
-                    <div class="<?php if(DEBUG == 0){echo 'none';}?>">
-                        <table id="address">
-                            <input name="streetnumber4" id="street_number4">
-                            <input name="route4" id="route4">
-                            <input name="city4" id="locality4">
-                            <input name="zipcode4" id="postal_code4">
-                            <input name="country4" id="country4">
-                        </table>
-                    </div>
-                </div>
 
-                <div class="form-group" data-example-id="static-tooltips">
-                    <label class="control-label col-md-4">Email du propriétaire du point relais :</label>
-                    <div class="col-md-8">
-                        <input id="rpmail" type="email" class="form-control" placeholder="exemple@domaine.com">
+                    <div class="form-group" data-example-id="static-tooltips">
+                        <label class="control-label col-md-4">Email du propriétaire du point relais :</label>
+                        <div class="col-md-8">
+                            <input id="rpmail" type="email" class="form-control" placeholder="exemple@domaine.com">
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="col-md-1"></div>
