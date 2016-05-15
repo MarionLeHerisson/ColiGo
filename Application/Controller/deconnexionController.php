@@ -4,7 +4,7 @@ class deconnexionController {
 	public function indexAction() {
 		// source : http://php.net/manual/fr/function.session-destroy.php
 		
-		session_start();
+		//session_start();
 
 		// Détruit toutes les variables de session
 		$_SESSION = array();
