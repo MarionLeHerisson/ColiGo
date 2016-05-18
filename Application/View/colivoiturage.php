@@ -7,4 +7,4 @@
 </div>
 
 <div class="container">
-    Cette section n'est pas encore disponible.
+    Ce service n'est pas encore disponible.

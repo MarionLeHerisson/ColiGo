@@ -294,16 +294,16 @@ class accueil_extranetController {
 		// put extras in an array
 		$extras = [];
 
-		if(isset($param['emballage']) && $param['emballage'] != 'none' && intval($param['emballage'] != 0)) {
-			$extras[] = intval($param['emballage']);
+		if(isset($param['packaging']) && $param['packaging'] != 'none' && intval($param['packaging'] != 0)) {
+			$extras[] = intval($param['packaging']);
 		}
-		if(isset($param['prioritaire'])) {
+		if(isset($param['priority'])) {
 			$extras[] = 7;
 		}
-		if(isset($param['imprevu'])) {
+		if(isset($param['unexpected'])) {
 			$extras[] = 8;
 		}
-		if(isset($param['indemnisation'])) {
+		if(isset($param['indemnity'])) {
 			$extras[] = 9;
 		}
 		if(isset($param['taking'])) {
@@ -312,7 +312,7 @@ class accueil_extranetController {
 			$senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
 			$senderCity = ColiGo::sanitizeString($param['ramcity']);
 		}
-		if(isset($_POST['samedi'])) {
+		if(isset($_POST['saturday'])) {
 			$extras[] = 6;
 		}
 
@@ -352,9 +352,13 @@ class accueil_extranetController {
 			$rpId = 'NULL';
 		}
 		else {
-			// Get relay point id
-			$rpId = $_SESSION['address'];
-			$depAddressId = $relayPointManager->getRPAddress($rpId);
+			if(isset($_SESSION['address'])) {
+				// Get relay point id
+				$rpId = $_SESSION['address'];
+				$depAddressId = $relayPointManager->getRPAddress($rpId);
+			}
+
+			// TODO : selection d'un point relais
 		}
 
 		// TODO URGENT : Si connecté en admin, definir $_SESSION['address']

@@ -77,54 +77,20 @@ class factureController {
      */
     public function getBillDatas($trackingNumber) {
 
+        // Managers
         require_once('../Model/parcelModel.php');
         $parcelManager = new ParcelModel();
 
+        require_once('../Model/extraModel.php');
+        $extraManager = new ExtraModel();
+
+
         $data = $parcelManager->getAllBillDatas($trackingNumber);
+        $extras = $extraManager->getAllBillExtras($data[0]['parcel_id']);
 
+        $data[0]['extra'] = $extras;
         //echo '<pre>';die(print_r($data));
-        /*
-        SELECT Parcel.delivery_type, Parcel.weight, parcel.id,
-            OrderParcel.parcel_id, OrderParcel.order_id,
-            Orders.id, Orders.departure_address, Orders.arrival_address, Orders.total_price, Orders.order_date, Orders.ordered_by, Orders.deliver_to
-            ,ParcelExtra.parcel_id, ParcelExtra.extra_id
-        FROM Parcel
-        LEFT JOIN OrderParcel
-        ON OrderParcel.parcel_id = Parcel.id
-        LEFT JOIN Orders
-        ON Orders.id = OrderParcel.order_id
-        LEFT JOIN ParcelExtra
-        ON ParcelExtra.parcel_id = Parcel.id
-        LEFT JOIN Extra
-        ON ParcelExtra.extra_id = Extra.id
-        WHERE Parcel.tracking_number = 689472894
 
-        + weight price
-        + sender & receiver, departure address & arrival address
-
-
-        $data['send_firstname'] = 'Marion';
-        $data['send_lastname'] = 'Hurteau';
-        $data['send_addr'] = '14, rue Monte Cristo';
-        $data['send_cp'] = '75020';
-        $data['send_city'] = 'Paris';
-
-        $data['rec_firstname'] = 'Oriane';
-        $data['rec_lastname'] = 'Payen de La Garanderie';
-        $data['rec_addr'] = '10, rue Lisfranc';
-        $data['rec_cp'] = '75020';
-        $data['rec_city'] = 'Paris';
-
-        $data['weight'] = 5;
-        $data['date'] = '2016-05-05 11:30:26';
-        $data['label'] = 'express';
-        $data['weightPrice'] = 10.25;
-        $data['extra'][0]['label'] = 'extra 1';
-        $data['extra'][0]['price'] = 2;
-        $data['extra'][1]['label'] = 'extra 2';
-        $data['extra'][1]['price'] = 0.20;
-        $data['totalPrice'] = 12.45;
-*/
         return $data[0];
     }
 

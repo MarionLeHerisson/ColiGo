@@ -126,7 +126,7 @@ class ParcelModel extends DefaultModel {
                                     ,Orders.id, Orders.order_date AS date, Orders.departure_address, Orders.arrival_address,
                                     Orders.total_price AS totalPrice, Orders.order_date, Orders.ordered_by
                                     ,Orders.deliver_to
-                                    ,ParcelExtra.parcel_id, ParcelExtra.extra_id
+                                    -- ,ParcelExtra.parcel_id, ParcelExtra.extra_id
                                     ,wp.price AS weightPrice
                                     ,u1.id, u1.first_name AS send_firstname, u1.last_name AS send_lastname
                                     ,u2.id, u2.first_name AS rec_firstname, u2.last_name AS rec_lastname
@@ -140,11 +140,11 @@ class ParcelModel extends DefaultModel {
                                 LEFT JOIN Orders
                                     ON Orders.id = OrderParcel.order_id
 
-                                LEFT JOIN ParcelExtra
-                                    ON ParcelExtra.parcel_id = Parcel.id
+                                -- LEFT JOIN ParcelExtra
+                                   -- ON ParcelExtra.parcel_id = Parcel.id
 
-                                LEFT JOIN Extra
-                                    ON ParcelExtra.extra_id = Extra.id
+                                -- LEFT JOIN Extra
+                                   -- ON ParcelExtra.extra_id = Extra.id
 
                                 LEFT JOIN WeightPrice AS wp
                                     ON Parcel.weight BETWEEN wp.min_weight AND wp.max_weight
@@ -165,7 +165,7 @@ class ParcelModel extends DefaultModel {
                                     ON dt.id = Parcel.delivery_type
 
                                 WHERE Parcel.tracking_number = " . $trackingNumber . "
-                                AND Parcel.delivery_type = wp.delivery_type
+                                AND Parcel.delivery_type = wp.delivery_type;
 ");
         $query->execute();
 

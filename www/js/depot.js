@@ -26,10 +26,10 @@ function submitDepotForm() {
         type : $('input:radio[name=type]:checked').val(),
 
         priority : $('#prioritaire').val(),// .attr('checked') == true ou isChecked ?
-        unexpected : $('#unexpected').val(),
-        indemnity : $('#indemnity').val(),
-        taking : $('#taking').val(),
-        saturday : $('#saturday').val()
+        unexpected : $('#imprevu').val(),
+        indemnity : $('#indemnisation').val(),
+        taking : $('#ramassage').val(),
+        saturday : $('#samedi').val()
     },
         error = 0,
         checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,

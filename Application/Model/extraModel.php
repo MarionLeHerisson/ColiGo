@@ -12,6 +12,21 @@ class ExtraModel extends DefaultModel {
 
     protected $_name = 'Extra';
 
+    public function getAllBillExtras($parcelId) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT Extra.id, Extra.label, Extra.price, ParcelExtra.parcel_id, ParcelExtra.extra_id
+                                FROM " . $this->_name . "
+                                LEFT JOIN ParcelExtra
+                                ON ParcelExtra.extra_id = Extra.id
+                                WHERE ParcelExtra.parcel_id = " . $parcelId . ";");
+        $query->execute();
+
+        $result = $query->fetchAll();
+
+        return $result;
+    }
     /**
      * Get price of an extra from its id
      *
