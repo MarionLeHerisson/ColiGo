@@ -22,14 +22,22 @@ class accueil_extranetController {
                 case 'parcelPosting' :
                     $this->postParcel($param);
                     break;
+				case 'updateUserRole' :
+					$this->updateUserRole($param);
+					break;
             }
         }
 
         // manager
-        include_once('../Model/extraModel.php');
+        require_once('../Model/extraModel.php');
         $extraManager = new ExtraModel();
 
+		require_once('../Model/userTypeModel.php');
+		$userTypeManager = new UserTypeModel();
+
         // view
+		$types = $userTypeManager->getAllTypes();
+
         $blockedFirstname = '';
         $blockedLastname = '';
         $blockedMail = '';
@@ -153,6 +161,23 @@ class accueil_extranetController {
 		}
 
 
+	}
+
+	/**
+	 * @param array $param
+	 */
+	public function updateUserRole($param) {
+		// parameters
+		$userMail = $param['userMail'];
+		$newRole = $param['role'];
+
+		// manager
+		require_once('../Model/userModel.php');
+		$userManager = new UserModel();
+
+		$user = $userManager->getUserByMail($userMail);
+
+		$userManager->updateRights($user['id'], $newRole);
 	}
 
 	/**

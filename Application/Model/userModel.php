@@ -13,9 +13,21 @@ class UserModel extends defaultModel {
 
     protected $_name = 'User';
 
-    // insert a new user
+    /**
+     * insert a new user
+     *
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $pwd
+     * @param int $type
+     * @param int $address_id
+     * @return string
+     *
+     * @author Marion
+     */
     public function insertUser($firstname, $lastname, $email, $pwd, $type, $address_id) {
-
+        // TODO : n'a pas sa place dans le model
         if(is_null($address_id)) {
             $address_id = 'NULL';
         }
@@ -33,7 +45,14 @@ class UserModel extends defaultModel {
         return $res;
     }
 
-    // get user from mail
+    /**
+     * get user from mail
+     *
+     * @param string $userMail
+     * @return array
+     *
+     * @author Marion
+     */
     public function getUserByMail($userMail) {
 
         $bdd = $this->connectBdd();
