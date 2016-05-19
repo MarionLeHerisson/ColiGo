@@ -28,11 +28,11 @@
             </div>
 <!-- TODO : ajouter dans clearEverything() -->
 
-            <div id="ColisPrisEnCharge" class="none alert alert-dismissible fade in col-md-12" role="alert">
+            <div id="newRole" class="none alert alert-dismissible fade in col-md-12" role="alert">
                 <button type="button" class="close" onclick="closePopin()">
                     <span>×</span>
                 </button>
-                <p id="ColisPrisEnChargeMsg"></p>
+                <p id="newRoleMsg"></p>
             </div>
         </div>
     </div>

@@ -154,7 +154,27 @@ class UserModel extends defaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($type) . " WHERE id = " . intval($userId) . ";");
+        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($type) . " WHERE id = " . intval($userId) . " AND is_deleted = 0;");
         $query->execute();
+    }
+
+    /**
+     * Update user rights from mail
+     *
+     * @param string $userMail
+     * @param int $newRole
+     * @return int
+     *
+     * @author Marion
+     */
+    public function updateRightsFromMail($userMail, $newRole) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($newRole) . " WHERE mail LIKE '" . $userMail . "' AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
     }
 }

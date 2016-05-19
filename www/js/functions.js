@@ -21,35 +21,37 @@ $('.collapsed').on('click', clearEverything);
 
 function updateNewRole() {
 
-	
+	var mail = $('#newRoleMail').val(),
+        role = $('#selectNewRole option:selected').val(),
+        label = 'newRole';
 
 	// TODO : créer une fonction myAjax();
 	$.ajax({
 		type: "POST",
 		url: 'accueil_extranet',
 		data: {
-			action: 'updateParcelStatus',
-			param: [parcelId,idType]
+			action: 'updateUserRole',
+			param: [mail,role]
 		},
 		success: function(data) {
 			var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 			if(dataObject.stat === 'ko') {
-				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				$('#' + label + 'Msg').html(dataObject.msg);
+				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
 			}
 			else if(dataObject.stat === 'ok') {
-				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-				$('#' + parcelLabel).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+				$('#' + label + 'Msg').html(dataObject.msg);
+				$('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
 			}
 			else {
-				$('#' + parcelLabel + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				$('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
+				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
 			}
 		},
 		error: function() {
-			$('#' + parcelLabel + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			$('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
+			$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
 		}
 	});
 }

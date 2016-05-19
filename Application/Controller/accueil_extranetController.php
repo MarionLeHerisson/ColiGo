@@ -168,16 +168,49 @@ class accueil_extranetController {
 	 */
 	public function updateUserRole($param) {
 		// parameters
-		$userMail = $param['userMail'];
-		$newRole = $param['role'];
+		$userMail = $param[0];
+		$newRole = $param[1];
 
-		// manager
-		require_once('../Model/userModel.php');
-		$userManager = new UserModel();
+        // manager
+        require_once('../Model/userModel.php');
+        $userManager = new UserModel();
 
-		$user = $userManager->getUserByMail($userMail);
 
-		$userManager->updateRights($user['id'], $newRole);
+        if(empty($userMail)) {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Un email est obligatoire.'
+            ]));
+        } else if (empty($newRole) || $newRole < 1 || $newRole > 4) {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Veuillez entrer un rôle valide en utilisant le menu déroulant.'
+            ]));
+        }
+        else {
+
+            $user = $userManager->getUserByMail($userMail);
+
+            if(empty($user)) {
+                die(json_encode([
+                    'stat'	=> 'ko',
+                    'msg'	=> 'Aucun utilisateur associé à cette adresse mail.'
+                ]));
+            }
+
+            $res = $userManager->updateRightsFromMail($userMail, $newRole);
+
+            if($res == 0) {
+                die(json_encode([
+                    'stat'	=> 'ok',
+                    'msg'	=> 'Le nouveau statut a bien été affecté.'
+                ]));
+            }
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Erreur'
+            ]));
+        }
 	}
 
 	/**
