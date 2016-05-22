@@ -237,12 +237,14 @@ class accueil_extranetController {
 		$address = ColiGo::sanitizeString($param[1]);
 		$city = ColiGo::sanitizeString($param[3]);
 		$zipCode = intval($param[2]);
+		$lat = floatval($param[4]);
+		$lng = floatval($param[5]);
 
 		// If address exists, use existing id for this address
 		$addressId = $addressManager->existAddress($address, $zipCode, $city);
 
 		if($addressId == null) {
-			$addressId = $addressManager->insertAddress($address, $zipCode, $city);
+			$addressId = $addressManager->insertAddress($address, $zipCode, $city, $lat, $lng);
 		}
 
 

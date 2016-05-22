@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-4" for="type">Adresse du point relais :</label>
                         <div class="col-md-8">
-                            <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+                            <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" onBlur="getLatLng()">
                         </div>
                         <div class="<?php if(DEBUG == 0){echo 'none';}?>">
                             <table id="address">
@@ -25,6 +25,9 @@
                                 <input name="city4" id="locality4">
                                 <input name="zipcode4" id="postal_code4">
                                 <input name="country4" id="country4">
+
+                                <input name="lat" id="lat">
+                                <input name="lng" id="lng">
                             </table>
                         </div>
                     </div>

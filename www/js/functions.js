@@ -110,9 +110,11 @@ function updateParcelStatus(idType) {
 function addNewRelayPoint() {
 	var rpMail = $('#rpmail').val(),
 		rpAddress = $('#street_number4').val() + ', ' + $('#route4').val(),
-		rpZipCode = $('#zipcode4').val(),
-		rpCity = $('#city4').val(),
+		rpZipCode = $('#postal_code4').val(),
+		rpCity = $('#locality4').val(),
 		rpCountry = $('#country4').val(),
+		lat = $('#lat').val(),
+		lng = $('#lng').val(),
 		label = 'newRelayPoint',
 		error = 0;
 
@@ -122,13 +124,29 @@ function addNewRelayPoint() {
 		error = 1;
 	}
 
+	// If fields are empty
+	if(rpAddress == '' || rpZipCode == '' || rpCity == '') {
+		$('#' + label + 'Msg').html('Veuillez entrer une adresse complète.');
+		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+	}
+	// If fields are number / If zip code is string
+	else if(rpAddress == parseInt(rpAddress) || rpZipCode != parseInt(rpZipCode) || rpCity == parseInt(rpCity)) {
+		$('#' + label + 'Msg').html('Veuillez entrer une adresse valide.');
+		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+	}
+	// If mail field is empty
+	else if(rpMail == '') {
+		$('#' + label + 'Msg').html('Veuillez entrer une adresse mail.');
+		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+	}
+
 	if(error === 0) {
 		$.ajax({
 			type: "POST",
 			url: 'accueil_extranet',
 			data: {
 				action: 'addRelayPoint',
-				param: [rpMail,rpAddress,rpZipCode,rpCity]
+				param: [rpMail,rpAddress,rpZipCode,rpCity, lat, lng]
 			},
 			success: function(data) {
 				var dataObject = JSON.parse(data);	// transforms json return from php to js object
@@ -328,4 +346,27 @@ function scrollToBottom() {
         },
         'slow'
     );
+}
+
+function getLatLng() {
+
+	var address = $('#autocomplete4').val(),
+		latitude = "NULL",
+		longitude = "NULL";
+
+	var res = address.replace(/ /g, "+");
+	console.log(res);
+
+	$.ajax({
+		url:"http://maps.googleapis.com/maps/api/geocode/json?address="+res+"&sensor=false",
+		type: "POST",
+		success:function(res){
+			console.log(res);
+			latitude = res.results[0].geometry.location.lat;
+			longitude = res.results[0].geometry.location.lng;
+
+			$('#lat').val(latitude);
+			$('#lng').val(longitude);
+		}
+	});
 }

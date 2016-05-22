@@ -14,12 +14,12 @@ class AddressModel extends DefaultModel {
     protected $_name = 'Address';
 
     // insert an user's address
-    public function insertAddress($address, $zipcode, $city) {
+    public function insertAddress($address, $zipcode, $city, $lat = 'NULL', $lng = 'NULL') {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, zip_code, city)
-                                VALUES ('" . $address . "'," . intval($zipcode) . " ,'" . $city . "');");
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, zip_code, city, lat, lng)
+                                VALUES ('" . $address . "'," . intval($zipcode) . " ,'" . $city . "', " . $lat . ", " . $lng . ");");
         $query->execute();
 
         $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
