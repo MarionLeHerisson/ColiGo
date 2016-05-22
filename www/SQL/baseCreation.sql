@@ -61,6 +61,7 @@ CREATE TABLE RelayPoint(
 	id INT NOT NULL AUTO_INCREMENT,
 	address INT NOT NULL,
 	owner_id INT NOT NULL,
+	label VARCHAR(255) NOT NULL,
 	is_deleted INT DEFAULT 0,
 
 	PRIMARY KEY (id),

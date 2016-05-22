@@ -239,6 +239,7 @@ class accueil_extranetController {
 		$zipCode = intval($param[2]);
 		$lat = floatval($param[4]);
 		$lng = floatval($param[5]);
+		$label = ColiGo::sanitizeString($param[6]);
 
 		// If address exists, use existing id for this address
 		$addressId = $addressManager->existAddress($address, $zipCode, $city);
@@ -271,7 +272,7 @@ class accueil_extranetController {
 			$userManager->updateRights($userId, 2);
 		}
 
-		$rpId = $relayPointManager->insertRelayPoint($addressId, $userId);
+		$rpId = $relayPointManager->insertRelayPoint($addressId, $userId, $label);
 
 		if(is_null($rpId)) {
 			die(json_encode([

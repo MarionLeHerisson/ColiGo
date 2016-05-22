@@ -8,15 +8,10 @@
 
 <div class="container">
 
-    <div id="map" style="height: 600px; width: 600px;"></div>
+    <div id="map"></div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPuG1oh7adZDZ1E_N5_owPxzz5bhtV4FI&callback=initMap&signed_in=true&libraries=places,visualization" async defer></script>
-    <!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPuG1oh7adZDZ1E_N5_owPxzz5bhtV4FI&signed_in=true&libraries=places&callback=initMap"
-            async defer></script>
-            -->
-
-
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAPuG1oh7adZDZ1E_N5_owPxzz5bhtV4FI" async defer></script>
+    <script src="www/js/map.js"></script>
 
 
     <?php // key = AIzaSyAPuG1oh7adZDZ1E_N5_owPxzz5bhtV4FI ?>

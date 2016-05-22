@@ -32,12 +32,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group" data-example-id="static-tooltips">
+                    <div class="form-group">
                         <label class="control-label col-md-4">Email du propriétaire du point relais :</label>
                         <div class="col-md-8">
                             <input id="rpmail" type="email" class="form-control" placeholder="exemple@domaine.com">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Nom de l'enseigne :</label>
+                        <div class="col-md-8">
+                            <input id="rpLabel" type="text" class="form-control" placeholder="Chez Dédé">
+                        </div>
+                    </div>
+
                 </form>
             </div>
 

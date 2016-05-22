@@ -13,12 +13,12 @@ class RelayPointModel extends DefaultModel {
     protected $_name = 'RelayPoint';
 
 
-    public function insertRelayPoint($address, $ownerId) {
+    public function insertRelayPoint($address, $ownerId, $label) {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address_id, owner_id, is_deleted)
-                                VALUES (" . $address . ", " . $ownerId . ", 0)");
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, owner_id, label, is_deleted)
+                                VALUES (" . $address . ", " . $ownerId . ", '" . $label . "', 0)");
         $query->execute();
 
         $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
@@ -44,6 +44,26 @@ class RelayPointModel extends DefaultModel {
         $query->execute();
 
         $res = $query->fetchColumn();
+
+        return $res;
+    }
+
+    /**
+     * Return all relay points
+     * TODO : en fonction d'un code postal (jointure avec address)
+     * @return array
+     */
+    public function getAllRelayPoints() {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress, a.lat, a.lng
+                                FROM " . $this->_name . " AS rp
+                                LEFT JOIN Address AS a ON a.id = rp.address
+                                WHERE rp.is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchAll();
 
         return $res;
     }

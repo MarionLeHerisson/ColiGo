@@ -5,6 +5,11 @@ font-family: 'Roboto', sans-serif;
 */
 
 /* G E N E R A L */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 body {
 	text-align: center;
 }
@@ -172,6 +177,16 @@ h1, p {
 .scroll:hover{
     border-radius: 2em;
     color: white;
+}
+
+/* GOOGLE API */
+#map {
+	height: 600px;
+	width: 600px;
+}
+#map img {
+	max-width: none;
+	vertical-align: inherit;
 }
 
 

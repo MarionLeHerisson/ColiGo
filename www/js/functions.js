@@ -113,6 +113,7 @@ function addNewRelayPoint() {
 		rpZipCode = $('#postal_code4').val(),
 		rpCity = $('#locality4').val(),
 		rpCountry = $('#country4').val(),
+		rpLabel = $('#rpLabel').val(),
 		lat = $('#lat').val(),
 		lng = $('#lng').val(),
 		label = 'newRelayPoint',
@@ -139,6 +140,11 @@ function addNewRelayPoint() {
 		$('#' + label + 'Msg').html('Veuillez entrer une adresse mail.');
 		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
 	}
+	// If label is empty
+	else if(rpLabel == '') {
+		$('#' + label + 'Msg').html('Veuillez entrer le nom de l\'enseigne.');
+		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+	}
 
 	if(error === 0) {
 		$.ajax({
@@ -146,7 +152,7 @@ function addNewRelayPoint() {
 			url: 'accueil_extranet',
 			data: {
 				action: 'addRelayPoint',
-				param: [rpMail,rpAddress,rpZipCode,rpCity, lat, lng]
+				param: [rpMail,rpAddress,rpZipCode,rpCity, lat, lng, rpLabel]
 			},
 			success: function(data) {
 				var dataObject = JSON.parse(data);	// transforms json return from php to js object

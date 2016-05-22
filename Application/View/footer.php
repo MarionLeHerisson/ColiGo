@@ -20,4 +20,5 @@
 <script>$('.dropdown-toggle').dropdown()</script>
 
 <!--TODO : verif doublons d'include header / footer -->
+<!--TODO : mettre maps autocomplete uniquement sur les pages concernées -->
 </body>
