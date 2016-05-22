@@ -1,7 +1,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
 	<meta name="description" content="Premier service de livraison en France">
 	<meta name="author" content="Hurteau-Ouriet">
@@ -26,6 +26,74 @@
 	<script src="www/js/functions.js"></script>
 	<script src="www/js/googleMapsAutocomplete.js"></script>
 	<script src="www/js/json2.js"></script>
+
+	<!-- Google maps api : Place searches -->
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#map {
+			height: 100%;
+		}
+		#map img {
+			max-width: none;
+			vertical-align: inherit;
+		}
+	</style>
+
+	<script>
+		var map;
+		var infowindow;
+
+		function initMap() {
+			var paris = {lat: 48.85341, lng: 2.3488};
+
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: paris,
+				zoom: 10
+			});
+
+			infowindow = new google.maps.InfoWindow();
+
+			var service = new google.maps.places.PlacesService(map);
+			service.nearbySearch({
+				location: paris,
+				radius: 5000
+			}, callback);
+		}
+		function callback(results, status) {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				for (var i = 0; i < results.length; i++) {
+					createMarker(results[i]);
+				}
+			}
+		}
+
+		function createMarker(place) {
+			var placeLoc = place.geometry.location;
+			var marker = new google.maps.Marker({
+				map: map,
+				position: place.geometry.location
+			}),
+				marker2 = new google.maps.Marker({
+					position: {lat: -25.363, lng: 131.044},
+					map: map,
+					title: 'Hello World!'
+				});
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(place.name);
+				infowindow.open(map, this);
+			});
+			google.maps.event.addListener(marker2, 'click', function() {
+				infowindow.setContent(place.name);
+				infowindow.open(map, this);
+			});
+		}
+
+	</script>
 </head>
 
 <body>

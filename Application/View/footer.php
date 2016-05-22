@@ -19,5 +19,5 @@
 <script src="www/js/functions.js"></script>
 <script>$('.dropdown-toggle').dropdown()</script>
 
-
+<!--TODO : verif doublons d'include header / footer -->
 </body>
