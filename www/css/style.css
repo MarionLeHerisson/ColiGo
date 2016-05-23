@@ -196,5 +196,24 @@ h1, p {
 	}
 }
 
+@media (max-width: 450px) {
+    #map {
+        height: 300px;
+        width: 300px;
+    }
+}
+@media (min-width: 450px) and (max-width: 580px) {
+    #map {
+        height: 400px;
+        width: 400px;
+    }
+}
+@media (min-width: 580px) and (max-width: 720px) {
+    #map {
+        height: 500px;
+        width: 500px;
+    }
+}
+
 /* TODO : remplacer les liens bleus par rouge ColiGo
 */

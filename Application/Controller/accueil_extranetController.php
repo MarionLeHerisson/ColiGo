@@ -257,9 +257,10 @@ class accueil_extranetController {
 		}
 
 		$user = $userManager->getUserByMail($mail);
-		$userId = $user[0]['id'];
 
-		if(is_null($userId)) {
+        if(isset($user[0])) {
+            $userId = $user[0]['id'];
+        } else {
 			die(json_encode([
 				'stat'	=> 'ko',
 				'msg'	=> 'Cet utilisateur n\'existe pas. Veuillez d\'abord procéder à son inscription.'

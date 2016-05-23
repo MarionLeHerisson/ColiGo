@@ -13,7 +13,7 @@
 
             <div class="col-md-10">
                 <form id="addRelayPoint-form">
-                    <div class="form-group">
+                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="type">Adresse du point relais :</label>
                         <div class="col-md-8">
                             <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" onBlur="getLatLng()">
@@ -32,17 +32,17 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4">Email du propriétaire du point relais :</label>
                         <div class="col-md-8">
                             <input id="rpmail" type="email" class="form-control" placeholder="exemple@domaine.com">
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4">Nom de l'enseigne :</label>
                         <div class="col-md-8">
-                            <input id="rpLabel" type="text" class="form-control" placeholder="Chez Dédé">
+                            <input id="rpLabel" type="text" class="form-control" placeholder="Tati">
                         </div>
                     </div>
 

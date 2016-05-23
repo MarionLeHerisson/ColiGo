@@ -129,21 +129,25 @@ function addNewRelayPoint() {
 	if(rpAddress == '' || rpZipCode == '' || rpCity == '') {
 		$('#' + label + 'Msg').html('Veuillez entrer une adresse complète.');
 		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        return;
 	}
 	// If fields are number / If zip code is string
 	else if(rpAddress == parseInt(rpAddress) || rpZipCode != parseInt(rpZipCode) || rpCity == parseInt(rpCity)) {
 		$('#' + label + 'Msg').html('Veuillez entrer une adresse valide.');
 		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        return;
 	}
 	// If mail field is empty
 	else if(rpMail == '') {
 		$('#' + label + 'Msg').html('Veuillez entrer une adresse mail.');
 		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        return;
 	}
 	// If label is empty
 	else if(rpLabel == '') {
 		$('#' + label + 'Msg').html('Veuillez entrer le nom de l\'enseigne.');
 		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        return;
 	}
 
 	if(error === 0) {

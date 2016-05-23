@@ -89,6 +89,7 @@ function geolocate() {
             autocomplete1.setBounds(circle.getBounds());
             autocomplete2.setBounds(circle.getBounds());
             autocomplete3.setBounds(circle.getBounds());
+            autocomplete4.setBounds(circle.getBounds());
         });
     }
 }
