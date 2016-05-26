@@ -50,7 +50,6 @@ class RelayPointModel extends DefaultModel {
 
     /**
      * Return all relay points
-     * TODO : en fonction d'un code postal (jointure avec address)
      * @return array
      */
     public function getAllRelayPoints() {

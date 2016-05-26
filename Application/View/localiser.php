@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" onBlur="getLatLng()">
             </div>
-            <div class="<?php if(DEBUG == 0){echo 'none';}?>">
+            <div class="none <?php if(DEBUG == 0){echo 'none';}?>">
                 <table id="address">
                     <input name="streetnumber4" id="street_number4">
                     <input name="route4" id="route4">
@@ -32,6 +32,9 @@
                     <input name="lng" id="lng">
                 </table>
             </div>
+
+            <br><br><br><br>
+            <button type="button" class="btn btn-primary btn-lg" onclick="searchRP()">Trouver</button>
 
         </div>
 

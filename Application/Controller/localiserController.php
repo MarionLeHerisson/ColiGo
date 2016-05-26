@@ -33,7 +33,9 @@ class localiserController {
         require_once('../Model/relayPointModel.php');
         $relayPointManager = new RelayPointModel();
 
-        $rps = $relayPointManager->getAllRelayPoints();
+        if(empty($param)) {
+            $rps = $relayPointManager->getAllRelayPoints();
+        }
 
         die(json_encode([
             'stat'	=> 'ok',
