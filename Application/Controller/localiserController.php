@@ -8,7 +8,12 @@ class localiserController {
         if(isset($_POST['action']) && !empty($_POST['action'])) {
 
             $action = $_POST['action'];
-            $param = $_POST['param'];
+            $param = null;
+
+            if(isset($_POST['param'])) {
+                $param = $_POST['param'];
+            }
+
 
             switch($action) {
                 case 'searchRP' :
@@ -35,7 +40,11 @@ class localiserController {
 
         if(empty($param)) {
             $rps = $relayPointManager->getAllRelayPoints();
+        } else {
+            $rps = $relayPointManager->getClosestRelayPoints($param[0], $param[1], $param[2], $param[3]);
         }
+
+        //if(empty ..)
 
         die(json_encode([
             'stat'	=> 'ok',

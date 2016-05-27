@@ -76,20 +76,14 @@ function showAllRP() {
 function searchRP() {
 
     var label = 'relayPointSearch',
-        lat = $('#lat').val(),
-        lng = $('#lng').val(),
-        minLat = lat - 0.06,    // 0.06 ~ 10km
-        maxLat = lat + 0.06,
-        minLng = lng - 0.06,
-        maxLng = lng + 0.06;
-
-    // TODO : choix de la distance en km (max = hauteur France = 1000km -> 500km max ?)
-
-    // calcule minLat, maxLat, minLng, maxLng
-    // SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress, a.lat, a.lng
-    // FROM this->name
-    // LEFT JOIN Address AS a ON a.id = rp.address
-    // WHERE a.lat BETWEEN minLat AND maxLat AND a.lng BETWEEN minLng ANDmaxLng
+        lat = parseFloat($('#lat').val()),
+        lng = parseFloat($('#lng').val()),
+        unit = 0.006,
+        km = parseInt($('#kmValue').text()),
+        minLat = lat - (km * unit),
+        maxLat = lat + (km * unit),
+        minLng = lng - (km * unit),
+        maxLng = lng + (km * unit);
 
     $.ajax({
         type: "POST",
@@ -112,7 +106,10 @@ function searchRP() {
                 deleteMarkers();
                 rpts.forEach(function(rp) {
                     createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
-                })
+                });
+
+                // TODO : liste des points relais
+                // TODO : zoom
             }
             else {
                 $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
@@ -132,3 +129,7 @@ function deleteMarkers() {
     }
     markers = [];
 }
+
+$('#RPDistRange').on("change mousemove", function() {
+    $('#kmValue').text($('#RPDistRange').val());
+});

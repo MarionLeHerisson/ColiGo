@@ -11,6 +11,7 @@
 
     foreach($trackingStates as $tracking) {
 
+        $class = '';
         if($tracking['label'] == 'distribution') {
             $class = ' class="success"';
         }

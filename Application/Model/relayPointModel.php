@@ -66,4 +66,27 @@ class RelayPointModel extends DefaultModel {
 
         return $res;
     }
+
+    /**
+     * Returns the closest relay points from address, zip code, city, ...
+     * @param float $minLat
+     * @param float $maxLat
+     * @param float $minLng
+     * @param float $maxLng
+     * @return array
+     */
+    public function getClosestRelayPoints($minLat, $maxLat, $minLng, $maxLng) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress, a.lat, a.lng
+                                FROM " . $this->_name . " AS rp
+                                LEFT JOIN Address AS a ON a.id = rp.address
+                                WHERE a.lat BETWEEN " . $minLat . " AND " . $maxLat . " AND a.lng BETWEEN " . $minLng . " AND " . $maxLng . ";");
+        $query->execute();
+
+        $res = $query->fetchAll();
+
+        return $res;
+    }
 }

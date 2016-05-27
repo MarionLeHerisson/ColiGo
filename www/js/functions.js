@@ -334,7 +334,6 @@ function showMessage(label, message, isError) {
  * Show tooltips on page 'deposer'
  */
 function showTooltip(label) {
-	console.log('label' + label);
 	$('#' + label).tooltip('show');
 }
 
@@ -365,13 +364,11 @@ function getLatLng() {
 		longitude = "NULL";
 
 	var res = address.replace(/ /g, "+");
-	console.log(res);
 
 	$.ajax({
 		url:"http://maps.googleapis.com/maps/api/geocode/json?address="+res+"&sensor=false",
 		type: "POST",
 		success:function(res){
-			console.log(res);
 			latitude = res.results[0].geometry.location.lat;
 			longitude = res.results[0].geometry.location.lng;
 
