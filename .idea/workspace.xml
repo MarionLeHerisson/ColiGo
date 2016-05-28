@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b6ebe93-6acb-439e-b77e-c544e9538541" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/footer.php" afterPath="$PROJECT_DIR$/Application/View/footer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/functions.js" afterPath="$PROJECT_DIR$/www/js/functions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/header.php" afterPath="$PROJECT_DIR$/Application/View/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/localiser.php" afterPath="$PROJECT_DIR$/Application/View/localiser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Controller/localiserController.php" afterPath="$PROJECT_DIR$/Application/Controller/localiserController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/map.js" afterPath="$PROJECT_DIR$/www/js/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Model/relayPointModel.php" afterPath="$PROJECT_DIR$/Application/Model/relayPointModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/View/tableSuivi.php" afterPath="$PROJECT_DIR$/Application/View/tableSuivi.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjAnnuel2016.iws" />
@@ -32,52 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="localiserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Controller/localiserController.php">
+      <file leaf-file-name="functions.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/functions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.0">
-              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.17191978">
+              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relayPointModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Model/relayPointModel.php">
+      <file leaf-file-name="depot.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/depot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.583334">
-              <caret line="87" column="8" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
-              <folding>
-                <marker date="1464359798000" expanded="true" signature="344:511" placeholder="INSERT INTO ..." />
-                <marker date="1464359798000" expanded="true" signature="919:971" placeholder="SELECT addre..." />
-                <marker date="1464359798000" expanded="true" signature="1264:1578" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2358" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2359" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2378" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2379" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2412" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2432" placeholder="SELECT rp.id..." />
-                <marker date="1464359798000" expanded="true" signature="2048:2433" placeholder="SELECT rp.id..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="localiser.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/View/localiser.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.458333">
-              <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/js/map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4413793">
-              <caret line="110" column="49" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="186" column="51" selection-start-line="186" selection-start-column="51" selection-end-line="186" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -142,13 +105,13 @@
         <option value="$PROJECT_DIR$/Application/View/localiser.php" />
         <option value="$PROJECT_DIR$/Application/View/tableSuivi.php" />
         <option value="$PROJECT_DIR$/Application/Controller/accueil_extranetController.php" />
-        <option value="$PROJECT_DIR$/www/js/functions.js" />
         <option value="$PROJECT_DIR$/Application/Model/extraModel.php" />
         <option value="$PROJECT_DIR$/Application/View/header.php" />
         <option value="$PROJECT_DIR$/Application/View/footer.php" />
         <option value="$PROJECT_DIR$/Application/Controller/localiserController.php" />
         <option value="$PROJECT_DIR$/Application/Model/relayPointModel.php" />
         <option value="$PROJECT_DIR$/www/js/map.js" />
+        <option value="$PROJECT_DIR$/www/js/functions.js" />
       </list>
     </option>
   </component>
@@ -247,6 +210,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -280,6 +244,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SQL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjAnnuel2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjAnnuel2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -371,7 +353,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,7 +419,6 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28552458" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -449,6 +429,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28552458" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -475,16 +456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.042796005">
           <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/SQL/references.sql">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46825397">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -722,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/SQL/baseCreation.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48757172">
-          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Controller/contactController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -757,27 +721,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/functions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5882353">
-          <caret line="370" column="30" selection-start-line="370" selection-start-column="30" selection-end-line="370" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/depot.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23529412">
-          <caret line="177" column="23" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Controller/accueil_extranetController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37037036">
           <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -785,12 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.0">
           <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
-          <folding>
-            <marker date="1462821599000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1462821599000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1462821599000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1462821599000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -798,11 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.61728394">
           <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding>
-            <marker date="1463584733000" expanded="true" signature="-1:-1" placeholder="SELECT Extra..." />
-            <marker date="1463584733000" expanded="true" signature="-1:-1" placeholder="SELECT price..." />
-            <marker date="1463584733000" expanded="true" signature="-1:-1" placeholder="SELECT id, l..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,15 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.828816">
           <caret line="82" column="50" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
-          <folding>
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464358947000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -826,21 +753,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51355207">
           <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Controller/localiserController.php">
+    <entry file="file://$PROJECT_DIR$/www/SQL/baseCreation.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.0">
-          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/SQL/references.sql">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6188341">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.6">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/View/localiser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.458333">
+        <state vertical-scroll-proportion="0.6847361">
           <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding />
         </state>
@@ -848,27 +791,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Model/relayPointModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.583334">
+        <state vertical-scroll-proportion="0.78602">
           <caret line="87" column="8" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
           <folding>
-            <marker date="1464359798000" expanded="true" signature="344:511" placeholder="INSERT INTO ..." />
-            <marker date="1464359798000" expanded="true" signature="919:971" placeholder="SELECT addre..." />
-            <marker date="1464359798000" expanded="true" signature="1264:1578" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2358" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2359" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2378" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2379" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2412" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2432" placeholder="SELECT rp.id..." />
-            <marker date="1464359798000" expanded="true" signature="2048:2433" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT addre..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
+            <marker date="1464359944000" expanded="true" signature="-1:-1" placeholder="SELECT rp.id..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/map.js">
+    <entry file="file://$PROJECT_DIR$/Application/Controller/localiserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4413793">
-          <caret line="110" column="49" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.764622">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/depot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="186" column="51" selection-start-line="186" selection-start-column="51" selection-end-line="186" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17191978">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
           <folding />
         </state>
       </provider>

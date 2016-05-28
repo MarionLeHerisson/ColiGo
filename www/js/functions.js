@@ -4,6 +4,35 @@ function closePopin() {
 	});
 }
 
+/**
+ * Ajax function to be used in this code
+ * TODO : à tester
+ *
+ * @param String label		// Where error message will appear
+ * @param String url		// The Controller to be called
+ * @param String action		// The method to be called
+ * @param Array param		// Parameters
+ * @param Callable callback	// Called if success
+ *
+ * @author Marion
+ */
+function myAjax(label, url, action, param, callback) {
+
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: {
+			action: action,
+			param: param
+		},
+		success: callback(),
+		error: function() {
+			showMessage(label,'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	});
+}
+
 function clearEverything() {
 	closePopin();
 
@@ -37,21 +66,18 @@ function updateNewRole() {
 			var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 			if(dataObject.stat === 'ko') {
-				$('#' + label + 'Msg').html(dataObject.msg);
-				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(label,dataObject.msg, true);
 			}
 			else if(dataObject.stat === 'ok') {
-				$('#' + label + 'Msg').html(dataObject.msg);
-				$('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+				showMessage(label,dataObject.msg, false);
 			}
 			else {
-				$('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 			}
 		},
 		error: function() {
-			$('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-			$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			showMessage(label,'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
 		}
 	});
 }
@@ -88,21 +114,18 @@ function updateParcelStatus(idType) {
 			var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 			if(dataObject.stat === 'ko') {
-				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(parcelLabel, dataObject.msg, true);
 			}
 			else if(dataObject.stat === 'ok') {
-				$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-				$('#' + parcelLabel).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+				showMessage(parcelLabel, dataObject.msg, false);
 			}
 			else {
-				$('#' + parcelLabel + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-				$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(parcelLabel, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 			}
 		},
 		error: function() {
-			$('#' + parcelLabel + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+			showMessage(parcelLabel,'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
 		}
 	});
 }
@@ -120,33 +143,32 @@ function addNewRelayPoint() {
 		error = 0;
 
 	if(rpCountry !== 'France') {
-		$('#' + label + 'Msg').html('Erreur : Le point relais doit se situer en France.');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		showMessage(label,'Le point relais doit se situer en France.', true);
 		error = 1;
 	}
 
 	// If fields are empty
 	if(rpAddress == '' || rpZipCode == '' || rpCity == '') {
-		$('#' + label + 'Msg').html('Veuillez entrer une adresse complète.');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		showMessage(label,'Veuillez entrer une adresse complète.', true);
         return;
 	}
 	// If fields are number / If zip code is string
 	else if(rpAddress == parseInt(rpAddress) || rpZipCode != parseInt(rpZipCode) || rpCity == parseInt(rpCity)) {
-		$('#' + label + 'Msg').html('Veuillez entrer une adresse valide.');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		showMessage(label,'Veuillez entrer une adresse valide.', true);
         return;
 	}
 	// If mail field is empty
 	else if(rpMail == '') {
-		$('#' + label + 'Msg').html('Veuillez entrer une adresse mail.');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		showMessage(label,'Veuillez entrer une adresse mail.', true);
         return;
+	}
+	else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(rpMail)) {
+		showMessage(label,'Veuillez entrer une adresse mail valide.', true);
+		return;
 	}
 	// If label is empty
 	else if(rpLabel == '') {
-		$('#' + label + 'Msg').html('Veuillez entrer le nom de l\'enseigne.');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		showMessage(label,'Veuillez entrer le nom de l\'enseigne.', true);
         return;
 	}
 
@@ -162,21 +184,18 @@ function addNewRelayPoint() {
 				var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 				if(dataObject.stat === 'ko') {
-					$('#' + label + 'Msg').html(dataObject.msg);
-					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+					showMessage(label, dataObject.msg, true);
 				}
 				else if(dataObject.stat === 'ok') {
-					$('#' + label + 'Msg').html(dataObject.msg);
-					$('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+					showMessage(label, dataObject.msg, false);
 				}
 				else {
-					$('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+					showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 				}
 			},
 			error: function() {
-				$('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
+				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
 			}
 		});
 	}
@@ -208,10 +227,11 @@ function sendMessage() {
 		error = 0;
 
 	if(message == '') {
-		$('#' + label + 'Msg').html('Votre message est vide !');
-		$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
-
+		showMessage(label, 'Votre message est vide !', true);
 		error = 1;
+	}
+	else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(email)) {
+		showMessage(label, 'Merci de renseigner une adresse mail valide.', true)
 	}
 
 	if(error === 0) {
@@ -226,25 +246,22 @@ function sendMessage() {
 				var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 				if(dataObject.stat === 'ko') {
-					$('#' + label + 'Msg').html(dataObject.msg);
-					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+					showMessage(label, dataObject.msg, true);
 				}
 				else if(dataObject.stat === 'ok') {
-					$('#' + label + 'Msg').html(dataObject.msg);
-					$('#' + label).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+					showMessage(label, dataObject.msg, false);
 
 					setTimeout(function(){
 						window.location.assign('accueil');
 					}, 3000);
 				}
 				else {
-					$('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-					$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+					showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 				}
 			},
 			error: function() {
-				$('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
-				$('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+				showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. ' +
+					'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
 			}
 		});
 	}
@@ -377,3 +394,5 @@ function getLatLng() {
 		}
 	});
 }
+
+// TODO : Fichier unique pour l'extranet

@@ -35,6 +35,9 @@ function initMap() {
 
 }
 
+/**
+ * Shows all relay points
+ */
 function showAllRP() {
 
     var label = 'relayPointSearch';
@@ -73,6 +76,9 @@ function showAllRP() {
     });
 }
 
+/**
+ * Search relay points in an area
+ */
 function searchRP() {
 
     var label = 'relayPointSearch',
@@ -106,10 +112,11 @@ function searchRP() {
                 deleteMarkers();
                 rpts.forEach(function(rp) {
                     createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
+                    listRelayPoint(rp.lat, rp.lng, rp.label, rp.completeAddress);
                 });
 
-                // TODO : liste des points relais
-                // TODO : zoom
+                map.setCenter({lat: lat, lng: lng});
+                map.setZoom(12);    // TODO : Zoom en fonction du rayon choisi
             }
             else {
                 $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
@@ -123,6 +130,9 @@ function searchRP() {
     });
 }
 
+/**
+ * Revoves all markers (when showing results of a search)
+ */
 function deleteMarkers() {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -130,6 +140,16 @@ function deleteMarkers() {
     markers = [];
 }
 
+/**
+ * Listener for the chosen range of km
+ */
 $('#RPDistRange').on("change mousemove", function() {
     $('#kmValue').text($('#RPDistRange').val());
 });
+
+/**
+ * TODO : Shows the list of relay points
+ */
+function listRelayPoint() {
+
+}
