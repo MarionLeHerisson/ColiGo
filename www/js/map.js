@@ -42,35 +42,23 @@ function showAllRP() {
 
     var label = 'relayPointSearch';
 
-    $.ajax({
-        type: "POST",
-        url: 'localiser',
-        data: {
-            action: 'searchRP',
-            param: []
-        },
-        success: function(data) {
-            var dataObject = JSON.parse(data);	// transforms json return from php to js object
+    myAjax(label, 'localiser', 'searchRP', [], function(data) {
+        var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-            if(dataObject.stat === 'ko') {
-                $('#' + label + 'Msg').html(dataObject.msg);
-                $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
-            }
-            else if(dataObject.stat === 'ok') {
+        if(dataObject.stat === 'ko') {
+            $('#' + label + 'Msg').html(dataObject.msg);
+            $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        }
+        else if(dataObject.stat === 'ok') {
 
-                var rpts = dataObject.relayPoints;
+            var rpts = dataObject.relayPoints;
 
-                rpts.forEach(function(rp) {
-                    createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
-                })
-            }
-            else {
-                $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-                $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
-            }
-        },
-        error: function() {
-            $('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
+            rpts.forEach(function(rp) {
+                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
+            })
+        }
+        else {
+            $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
             $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
         }
     });
@@ -91,40 +79,30 @@ function searchRP() {
         minLng = lng - (km * unit),
         maxLng = lng + (km * unit);
 
-    $.ajax({
-        type: "POST",
-        url: 'localiser',
-        data: {
-            action: 'searchRP',
-            param: [minLat, maxLat, minLng, maxLng]
-        },
-        success: function(data) {
-            var dataObject = JSON.parse(data);	// transforms json return from php to js object
+    // TODO : Vérifier que le point relais est bien en France métropolitaine
 
-            if(dataObject.stat === 'ko') {
-                $('#' + label + 'Msg').html(dataObject.msg);
-                $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
-            }
-            else if(dataObject.stat === 'ok') {
+    myAjax(label, 'localiser', 'searchRP', [minLat, maxLat, minLng, maxLng], function(data) {
+        var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-                var rpts = dataObject.relayPoints;
+        if(dataObject.stat === 'ko') {
+            $('#' + label + 'Msg').html(dataObject.msg);
+            $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+        }
+        else if(dataObject.stat === 'ok') {
 
-                deleteMarkers();
-                rpts.forEach(function(rp) {
-                    createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
-                    listRelayPoint(rp.lat, rp.lng, rp.label, rp.completeAddress);
-                });
+            var rpts = dataObject.relayPoints;
 
-                map.setCenter({lat: lat, lng: lng});
-                map.setZoom(12);    // TODO : Zoom en fonction du rayon choisi
-            }
-            else {
-                $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-                $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
-            }
-        },
-        error: function() {
-            $('#' + label + 'Msg').html('Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer. Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.');
+            deleteMarkers();
+            rpts.forEach(function(rp) {
+                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
+                listRelayPoint(rp.lat, rp.lng, rp.label, rp.completeAddress);
+            });
+
+            map.setCenter({lat: lat, lng: lng});
+            map.setZoom(12);    // TODO : Zoom en fonction du rayon choisi
+        }
+        else {
+            $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
             $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
         }
     });

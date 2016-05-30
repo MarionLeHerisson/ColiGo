@@ -8,7 +8,11 @@ class suiviController {
         include_once('../Model/trackingModel.php');
         $trackingManager = new TrackingModel();
 
-        $trackingNumber = intval($_SERVER['REDIRECT_QUERY_STRING']);
+        $trackingNumber = 0;
+
+        if(isset($_SERVER['REDIRECT_QUERY_STRING'])) {
+            $trackingNumber = intval($_SERVER['REDIRECT_QUERY_STRING']);
+        }
         $trackingStates = $trackingManager->getParcelTracking($trackingNumber);
 
         require_once('../View/header.php');

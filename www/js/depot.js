@@ -85,31 +85,19 @@ function submitDepotForm() {
     // If no error : submit form
     if(error === 0) {
 
-        $.ajax({
-            type: "POST",
-            url: 'accueil_extranet',
-            data: {
-                action: 'parcelPosting',
-                param: data
-            },
-            success: function(ret) {
-                var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+        myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
+            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
 
-                if(dataObject.stat === 'ko') {
-                    showMessage(label, dataObject.msg, 1);
-                }
-                else if(dataObject.stat === 'ok') {
-                    showMessage(label, dataObject.msg, 0);
-                    window.open("facture?tracking_number=" + dataObject.num);
-                    $('#depot-form')[0].reset();
-                }
-                else {
-                    showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
-                }
-            },
-            error: function() {
-                showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
-                    'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', 1);
+            if(dataObject.stat === 'ko') {
+                showMessage(label, dataObject.msg, 1);
+            }
+            else if(dataObject.stat === 'ok') {
+                showMessage(label, dataObject.msg, 0);
+                window.open("facture?tracking_number=" + dataObject.num);
+                $('#depot-form')[0].reset();
+            }
+            else {
+                showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
             }
         });
     }
@@ -130,22 +118,9 @@ function claculateQuotation(event) {
 
     if(input.attr('name') == 'type') {
         // calculate weight price
-        $.ajax({
-            type: "POST",
-            url: 'accueil_extranet',
-            data: {
-                action: 'getWeightPrice',
-                param: weight
-            },
-            success: function(ret) {
-                var dataObject = JSON.parse(ret);	// transforms json return from php to js object
-
-            },
-            error: function() {
-                showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
-                    'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', 1);
-            }
-        });
+        myAjax(label, 'accueil_extranet', 'getWeightPrice', weight, function(ret) {
+            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+        })
     }
     else if (input.attr('name') == 'emballage') {
 
