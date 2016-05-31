@@ -117,66 +117,19 @@ function claculateQuotation(event) {
         '</tr>';
 
     if(input.attr('name') == 'type' || input.attr('name') == 'weight') {
-
-        var type = $('[name="type"]:checked').val();
-
-        $('#trType').text($('[name="type"]:checked').attr('id'));    // changes the type name in the quotation
-        $('#trWeight').text(weight + ' kg');        // changes the weight in the quotation
-
-        // calculate weight price
-        myAjax(label, 'accueil_extranet', 'getWeightPrice', [weight, type], function(ret) {
-            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
-            $('#trPrice').text(dataObject.price);
-        });
+        showPriceType(label, weight);
     }
     else if (input.attr('name') == 'emballage') {
-
-        if (price === parseFloat(price)) {
-
-            if ($('[data-label="emballage"]')) {
-                $('[data-label="emballage"]').parent().addClass('none');
-            }
-
-            newExtra = '<tr>' +
-                '<td class="billLabel text-left" data-label="'+ label + '">' + input.attr('id') + '</td>' +
-                '<td></td>' +
-                '<td class="billPrice text-right">' + price.toPrecision(2) + '</td>' +
-                '</tr>';
-
-            tbody.append(newExtra);
-        }
-        else {
-            $('[data-label="emballage"]').parent().addClass('none');
-        }
+        showPriceEmballage(label, price, input, tbody);
     }
     else if((input).is(':checked')) {
-
-        if($('[data-label="' + label + '"]')) {
-            $('[data-label="' + label + '"]').parent().addClass('none');
-        }
-
-        tbody.append(newExtra);
-
+        showPriceCheckbox(label, tbody, newExtra);
     }
     else {
         $('[data-label="' + label + '"]').parent().addClass('none');
     }
 
-    var totalPrice = 0;
-
-    $('.billPrice').each(function() {
-        if(!$(this).parent().hasClass('none')) {
-            totalPrice = parseFloat($(this).text()) + parseFloat(totalPrice);
-        }
-    });
-
-    if(totalPrice < 100) {
-        $('#billTotalPrice').text(totalPrice.toPrecision(4));
-    }
-    else{
-        $('#billTotalPrice').text(totalPrice.toPrecision(5));
-    }
-
+    showWithRightPrecision(calculateTotalPrice());
 }
 
 function blockRamAddress() {
@@ -194,4 +147,74 @@ function blockRamAddress() {
         $('#postal_code3').val('');
         $('#country3').val('');
     }
+}
+
+function calculateTotalPrice() {
+
+    var totalPrice = 0;
+
+    $('.billPrice').each(function() {
+        if(!$(this).parent().hasClass('none')) {
+            totalPrice = parseFloat($(this).text()) + parseFloat(totalPrice);
+        }
+    });
+
+    return totalPrice;
+}
+
+function showWithRightPrecision(totalPrice) {
+
+    if(totalPrice < 10) {
+        $('#billTotalPrice').text(totalPrice.toPrecision(3));
+    }
+    else if(totalPrice < 100) {
+        $('#billTotalPrice').text(totalPrice.toPrecision(4));
+    }
+    else{
+        $('#billTotalPrice').text(totalPrice.toPrecision(5));
+    }
+}
+
+function showPriceEmballage(label, price, input, tbody) {
+    if (price === parseFloat(price)) {
+
+        var emballage = $('[data-label="emballage"]'),
+            newExtra = '<tr>' +
+                '<td class="billLabel text-left" data-label="'+ label + '">' + input.attr('id') + '</td>' +
+                '<td></td>' +
+                '<td class="billPrice text-right">' + price.toPrecision(2) + '</td>' +
+                '</tr>';
+
+        if (emballage) {
+            emballage.parent().addClass('none');
+        }
+
+        tbody.append(newExtra);
+    }
+    else {
+        $('[data-label="emballage"]').parent().addClass('none');
+    }
+}
+
+function showPriceCheckbox(label, tbody, newExtra) {
+
+    if($('[data-label="' + label + '"]')) {
+        $('[data-label="' + label + '"]').parent().addClass('none');
+    }
+
+    tbody.append(newExtra);
+}
+
+function showPriceType(label, weight) {
+    var checkedType = $('[name="type"]:checked'),
+        type = checkedType.val();
+
+    $('#trType').text(checkedType.attr('id'));    // changes the type name in the quotation
+    $('#trWeight').text(weight + ' kg');        // changes the weight in the quotation
+
+    // calculate weight price
+    myAjax(label, 'accueil_extranet', 'getWeightPrice', [weight, type], function(ret) {
+        var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+        $('#trPrice').text(dataObject.price);
+    });
 }
