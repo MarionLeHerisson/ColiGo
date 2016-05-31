@@ -6,20 +6,28 @@
         <table id="billPanelTable">
             <tbody id="tbody">
                 <tr>
-                    <td>Poids</td>
-                    <td id="trWeight">0</td>
+                    <td class="text-left">Poids</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td id="trWeight" class="text-right">0</td>
                 </tr>
                 <tr>
-                    <td>Type</td>
-                    <td id="trType">express</td>
+                    <td class="text-left">Type</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td id="trType" class="text-right">express</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Prix seul</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td id="trPrice" class="billPrice text-right"></td>
                 </tr>
             </tbody>
-            <tr>
-                <th>Prix total :</th>
-                <th id="billTotalPrice">0</th>
+            <tr id="tprice">
+                <th class="text-left">Prix total :</th>
+                <td>&nbsp;&nbsp;</td>
+                <th id="billTotalPrice" class="text-right">0</th>
             </tr>
         </table>
     </div>
 </div>
 
-<!-- TODO : Div cachée contenant le prix au poid du produit -->
+<!-- TODO : Cacher #billPanel pour tablettes & téléphones -->

@@ -105,30 +105,43 @@ function submitDepotForm() {
 
 function claculateQuotation(event) {
     var weight = $('#weight').val(),
-        divNewPrice = $('#billTotalPrice'),
-        actualPrice = parseInt(divNewPrice.text()),
         input = $(event.target),
-        price = parseInt(input.attr('data-price')),
         label = input.attr('name'),
+
+        price = parseFloat(input.attr('data-price')),
         tbody = $('#tbody'),
         newExtra = '<tr>' +
-            '<td class="billLabel" data-label="'+ label + '">' + label + '</td>' +
-            '<td class="billPrice">' + price + '</td>' +
+            '<td class="billLabel text-left" data-label="'+ label + '">' + label + '</td>' +
+            '<td></td>'+
+            '<td class="billPrice text-right">' + price + '</td>' +
         '</tr>';
 
-    if(input.attr('name') == 'type') {
+    if(input.attr('name') == 'type' || input.attr('name') == 'weight') {
+
+        var type = $('[name="type"]:checked').val();
+
+        $('#trType').text($('[name="type"]:checked').attr('id'));    // changes the type name in the quotation
+        $('#trWeight').text(weight + ' kg');        // changes the weight in the quotation
+
         // calculate weight price
-        myAjax(label, 'accueil_extranet', 'getWeightPrice', weight, function(ret) {
+        myAjax(label, 'accueil_extranet', 'getWeightPrice', [weight, type], function(ret) {
             var dataObject = JSON.parse(ret);	// transforms json return from php to js object
-        })
+            $('#trPrice').text(dataObject.price);
+        });
     }
     else if (input.attr('name') == 'emballage') {
 
-        if (price === parseInt(price, 10)) {
+        if (price === parseFloat(price)) {
 
             if ($('[data-label="emballage"]')) {
                 $('[data-label="emballage"]').parent().addClass('none');
             }
+
+            newExtra = '<tr>' +
+                '<td class="billLabel text-left" data-label="'+ label + '">' + input.attr('id') + '</td>' +
+                '<td></td>' +
+                '<td class="billPrice text-right">' + price.toPrecision(2) + '</td>' +
+                '</tr>';
 
             tbody.append(newExtra);
         }
@@ -148,11 +161,22 @@ function claculateQuotation(event) {
     else {
         $('[data-label="' + label + '"]').parent().addClass('none');
     }
-    console.log('actual price : ' + actualPrice);
-    console.log('price : ' + price);
-    console.log(input);
-    // TODO : calculer prix total à partir du contenu des divs apparentes + prix au poid
-    // TODO : réussir à récupérer le prix des radio buttons
+
+    var totalPrice = 0;
+
+    $('.billPrice').each(function() {
+        if(!$(this).parent().hasClass('none')) {
+            totalPrice = parseFloat($(this).text()) + parseFloat(totalPrice);
+        }
+    });
+
+    if(totalPrice < 100) {
+        $('#billTotalPrice').text(totalPrice.toPrecision(4));
+    }
+    else{
+        $('#billTotalPrice').text(totalPrice.toPrecision(5));
+    }
+
 }
 
 function blockRamAddress() {

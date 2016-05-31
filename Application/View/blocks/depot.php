@@ -51,7 +51,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="claculateQuotation(event)"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire

@@ -25,6 +25,9 @@ class accueil_extranetController {
 				case 'updateUserRole' :
 					$this->updateUserRole($param);
 					break;
+				case 'getWeightPrice' :
+					$this->getWeightPrice($param);
+					break;
             }
         }
 
@@ -458,5 +461,34 @@ class accueil_extranetController {
 		} while($parcelManager->getIdFromTrackingNumber($uniqueId) != 0);
 
 		return $uniqueId;
+	}
+
+	/**
+	 * returns the price for a weight and a delivery type
+	 * @param array $param
+	 */
+	protected function getWeightPrice($param) {
+
+		include_once('../Model/weightPriceModel.php');
+		$weightPriceManager = new WeightPriceModel();
+
+		$weight = floatval($param[0]);
+		$type = intval($param[1]);
+
+		if(empty($weight)) {
+			$weight = 0;
+		}
+
+		$price = $weightPriceManager->getPrice($weight, $type);
+
+		if(empty($price)) {
+			$price = 'indisponible';
+		} else if ($type == '3') {
+			$price += 30;
+		}
+
+		die(json_encode([
+			'price'	=> $price,
+		]));
 	}
 }
