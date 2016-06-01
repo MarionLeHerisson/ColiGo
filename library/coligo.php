@@ -24,14 +24,7 @@ class ColiGo {
         return $string;
     }
 
-    public static function objectToArray ($object) {
-
-        $myArray = [];
-
-        while($donnees=$object->fetch()){
-            $myArray[] = $donnees;
-        }
-
-        return $myArray;
+    public static function getDate() {
+        
     }
 }

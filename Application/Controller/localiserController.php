@@ -14,10 +14,13 @@ class localiserController {
                 $param = $_POST['param'];
             }
 
+            require_once('../Model/Ajax/AjaxLocaliser.php');
+            $ajaxApi = new AjaxLocaliser();
+
 
             switch($action) {
                 case 'searchRP' :
-                    $this->searchRelayPoint($param);
+                    $ajaxApi->searchRelayPoint($param);
                     break;
             }
         }
@@ -27,28 +30,4 @@ class localiserController {
         require_once('../View/footer.php');
     }
 
-    /**
-     * @param array $param
-     */
-    protected function searchRelayPoint($param) {
-
-        $zipCode = $param[0];
-
-        // managers
-        require_once('../Model/relayPointModel.php');
-        $relayPointManager = new RelayPointModel();
-
-        if(empty($param)) {
-            $rps = $relayPointManager->getAllRelayPoints();
-        } else {
-            $rps = $relayPointManager->getClosestRelayPoints($param[0], $param[1], $param[2], $param[3]);
-        }
-
-        //if(empty ..)
-
-        die(json_encode([
-            'stat'	=> 'ok',
-            'relayPoints' => $rps
-        ]));
-    }
 }

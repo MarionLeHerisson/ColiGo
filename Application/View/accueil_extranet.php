@@ -20,7 +20,8 @@
 				include_once('menu_extranet/livraison.php');
 				include_once('menu_extranet/distribution.php');
 			}
-			include_once('menu_extranet/perdu.php');	// Everybody
+			include_once('menu_extranet/perdu.php');	// Admin, Relay Point or Postman
+			include_once('menu_extranet/remuneration.php');
 
             include_once('blocks/scrollButton.php');
 
