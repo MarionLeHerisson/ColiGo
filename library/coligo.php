@@ -25,6 +25,6 @@ class ColiGo {
     }
 
     public static function getDate() {
-        
+        return date('j-n-Y');
     }
 }

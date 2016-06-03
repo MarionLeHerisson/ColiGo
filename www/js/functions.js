@@ -217,3 +217,17 @@ function getLatLng() {
 		}
 	});
 }
+
+function getRemuneration(mail) {
+	if(mail == null) {
+		mail = $('#idMailEmployeRem').val();
+	}
+
+	// TODO : regexp (dans tous les cas)
+
+	var label = 'MailEmployeRem';
+
+	myAjax(label, 'accueil_extranet', 'getRemuneration', [mail], function() {
+
+	})
+}

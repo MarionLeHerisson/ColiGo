@@ -14,7 +14,7 @@
                 <label for="idMailEmployeRem">Entrez le mail d'un employé :</label>
                 <input type="text" name="idMailEmployeRem" id="idMailEmployeRem" class="form-control input-lg">
                 <br>
-                <button type="button" class="btn btn-primary btn-lg" onclick="getRemunerationFromMail()">Valider</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="getRemuneration()">Valider</button>
             </div>
 
             <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-12" role="alert">

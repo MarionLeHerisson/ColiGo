@@ -439,6 +439,23 @@ class AjaxAccueilExtranet {
 
         return $uniqueId;
     }
+
+    /**
+     * Get remuneration from an email
+     * @param array $param
+     */
+    public function getRemuneration($param) {
+
+        $mail = $param[0];
+
+        // mail -> role : pt relais ou livreur ? Autre -> erreur
+        // si livreur : repas du moi + essence du mois + payages du moi + prix au kilo des colis du mois * 20%
+        // si pt relais : prix au kilo des colis du mois * 20%
+        // colis du mois = colis passés en statut 'livré' ce mois-ci
+
+        // mail JOIN address.id
+        // orders.departure_address = address.id AND orders.arrival_address = address.id AND orders.delivery_date IN $actualMonth
+    }
 }
 
 

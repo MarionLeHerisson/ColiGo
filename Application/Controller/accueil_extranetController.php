@@ -31,6 +31,9 @@ class accueil_extranetController {
 				case 'getWeightPrice' :
 					$ajaxApi->getWeightPrice($param);
 					break;
+				case 'getRemuneration' :
+					$ajaxApi->getRemuneration($param);
+					break;
             }
         }
 

@@ -9,13 +9,14 @@
     <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
         <div class="panel-body">
 
+            getRemuneration(<?php echo $_SESSION['mail']; ?>);
 
 
-            <div id="ColisPerdu" class="none alert alert-dismissible fade in col-md-12" role="alert">
+            <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-12" role="alert">
                 <button type="button" class="close" onclick="closePopin()">
                     <span>×</span>
                 </button>
-                <p id="ColisPerduMsg"></p>
+                <p id="MailEmployeRemMsg"></p>
             </div>
         </div>
     </div>
