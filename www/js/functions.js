@@ -6,7 +6,6 @@ function closePopin() {
 
 /**
  * Ajax function to be used in this code
- * TODO : à tester
  *
  * @param String label		// Where error message will appear
  * @param String url		// The Controller to be called
@@ -53,7 +52,6 @@ function sendMessage() {
 	}
 
 	if(error === 0) {
-        // TODO : tester
         myAjax(label, 'contact', 'sendMessage', [name, mail, message, subject], function(data) {
             var dataObject = JSON.parse(data);	// transforms json return from php to js object
 

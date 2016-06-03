@@ -9,13 +9,7 @@
     <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
         <div class="panel-body">
 
-            <div class="col-md-3"></div>
-            <div class="form-group col-md-6">
-                <label for="idColisPerdu">Scannez le code-barre du colis perdu :</label>
-                <input type="text" name="idColisPerdu" id="idColisPerdu" class="form-control input-lg">
-                <br>
-                <button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(5)">Valider</button>
-            </div>
+
 
             <div id="ColisPerdu" class="none alert alert-dismissible fade in col-md-12" role="alert">
                 <button type="button" class="close" onclick="closePopin()">

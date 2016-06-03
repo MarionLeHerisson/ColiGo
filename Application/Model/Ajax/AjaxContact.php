@@ -19,14 +19,14 @@ class AjaxContact {
     public function sendMessage($param) {
         $name = ColiGo::sanitizeString($param[0]);
         $mail = ColiGo::sanitizeString($param[1]);
-        $message = ColiGo::sanitizeString($param[2]) . '<br><br>Ce mail a été envoyé par : ' . $name . ' - ' . $mail;
+        $message = ColiGo::sanitizeString($param[2]);
         $subject = ColiGo::sanitizeString($param[3]);
 
         // TODO : $to = 'marion.hurteau1@gmail.com, ouriet.romain@gmail.com';
         $to = 'marion.hurteau1@gmail.com';
         $headers = 'Content-type: text/html; charset=UTF-8' . "\r\n";
 
-        $return = mail($to, $subject, $message, $headers);
+        $return = mail($to, $subject, $message . '<br><br>Ce mail a été envoyé par : ' . $name . ' - ' . $mail, $headers);
 
 //        ini_set("SMTP","localhost" );
 //        ini_set('sendmail_from', 'me@localhost.com');
