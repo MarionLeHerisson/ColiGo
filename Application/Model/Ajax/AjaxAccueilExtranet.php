@@ -16,11 +16,14 @@ class AjaxAccueilExtranet {
     public function updateStatus($param) {
 
         // manager
-        include_once('../Model/parcelModel.php');
+        require_once('../Model/parcelModel.php');
         $parcelManager = new ParcelModel();
 
-        include_once('../Model/trackingModel.php');
+        require_once('../Model/trackingModel.php');
         $trackingManager = new TrackingModel();
+
+        require_once('../Model/ordersModel');
+        $ordersManager = new OrdersModel();
 
 
         $trackingNumber = $param[0];
@@ -40,6 +43,11 @@ class AjaxAccueilExtranet {
             }
             else {
                 $trackingManager->updateParcelTracking($parcelId, $newStatus);
+
+                if($newStatus == 4) {
+                    $ordersManager->setArrivalDate($parcelId);
+                }
+
                 die(json_encode([
                     'stat'	=> 'ok',
                     'msg'	=> 'Le status du colis a bien été mis à jour'
@@ -446,15 +454,70 @@ class AjaxAccueilExtranet {
      */
     public function getRemuneration($param) {
 
-        $mail = $param[0];
+        include_once('../../library/coligo.php');
+        $mail = ColiGo::sanitizeString($param[0]);
 
-        // mail -> role : pt relais ou livreur ? Autre -> erreur
-        // si livreur : repas du moi + essence du mois + payages du moi + prix au kilo des colis du mois * 20%
-        // si pt relais : prix au kilo des colis du mois * 20%
-        // colis du mois = colis passés en statut 'livré' ce mois-ci
+        require_once('../Model/userModel.php');
+        $userManager = new UserModel();
 
-        // mail JOIN address.id
-        // orders.departure_address = address.id AND orders.arrival_address = address.id AND orders.delivery_date IN $actualMonth
+        $user = $userManager->getUserByMail($mail);
+
+        if(empty($user)) {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Aucun utilisateur correspondant à cette addresse mail.'
+            ]));
+        }
+
+        $type = $user['type_id'];
+
+        if($type == 3) {    // postman
+            // TODO urgent : remuneration livreur
+            // si livreur : repas du moi + essence du mois + payages du moi + prix au kilo des colis du mois * 20%
+        } else if($type == 2) {     // relay point
+/*
+SELECT
+rp.id, rp.owner_id, rp.address
+,odep.id, odep.departure_address, odep.order_date
+,oarr.id, oarr.arrival_address, oarr.delivery_date
+,op.parcel_id, op.order_id
+,p.id, p.weight, p.delivery_type
+,SUM(wp.price), wp.delivery_type
+FROM RelayPoint AS rp
+WHERE rp.owner_id = 15
+
+LEFT JOIN Orders AS odep
+ON odep.departure_address = rp.address
+AND MONTH(odep.order_date) = 6
+
+LEFT JOIN Oreders AS oarr
+ON oarr.arrival_address = rp.address
+AND MONTH(oarr.delivery_date) = 6
+
+LEFT JOIN OrderParcel AS op
+ON op.order_id = odep.id
+AND op.oder_id = oarr.id
+
+LEFT JOIN Parcel AS p
+ON p.id = op.parcel_id
+
+LEFT JOIN WeightPrice AS wp
+ON p.weight BETWEEN wp.min_weight AND wp.max_weight
+AND p.delivery_type = wp.delivery_type;
+
+
+-- owner id 15 = Milka
+-- address id 57 : 30, Allée Maurice Sarraut, 31300, Toulouse
+*/
+
+            // prix au kilo des colis du mois * 20%
+
+        } else {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Cet utilisateur n\'est ni un Point Relais ni un livreur, sa rémunération ne peut être calculée.'
+            ]));
+        }
     }
 }
 

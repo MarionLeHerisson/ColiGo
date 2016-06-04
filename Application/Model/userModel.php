@@ -21,16 +21,11 @@ class UserModel extends defaultModel {
      * @param string $email
      * @param string $pwd
      * @param int $type
-     * @param int $address_id
+     * @param int|string $address_id
      * @return string
-     *
      * @author Marion
      */
-    public function insertUser($firstname, $lastname, $email, $pwd, $type, $address_id) {
-        // TODO : n'a pas sa place dans le model
-        if(is_null($address_id)) {
-            $address_id = 'NULL';
-        }
+    public function insertUser($firstname, $lastname, $email, $pwd, $type, $address_id = 'NULL') {
 
         $bdd = $this->connectBdd();
 

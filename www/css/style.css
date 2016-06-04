@@ -214,6 +214,10 @@ h1, p {
         width: 500px;
     }
 }
-
+@media not screen {
+	#billPanel {
+		display: none;
+	}
+}
 /* TODO : remplacer les liens bleus par rouge ColiGo
 */

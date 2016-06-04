@@ -27,7 +27,3 @@
     </div>
 
     <div class="col-md-1"></div>
-
-
-<?php
-// TODO : add class success when the parcel is delivered ?>

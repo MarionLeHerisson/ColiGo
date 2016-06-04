@@ -29,5 +29,3 @@
         </table>
     </div>
 </div>
-
-<!-- TODO : Cacher #billPanel pour tablettes & téléphones -->

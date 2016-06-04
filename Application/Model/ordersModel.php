@@ -38,4 +38,22 @@ class OrdersModel extends DefaultModel {
 
         return $res;
     }
+
+    public function setArrivalDate($parcelId) {
+
+        $bdd = $this->connectBdd();
+// TODO : à tester
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET delivery_date = NOW()
+                                WHERE id =
+                                (SELECT o.id FROM Orders AS o
+                                LEFT JOIN OrderParcel AS op
+                                ON op.order_id = o.id
+                                WHERE op.parcel_id = " . $parcelId . ");");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+
+        return $res;
+    }
 }
