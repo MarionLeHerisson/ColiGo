@@ -231,3 +231,43 @@ function getRemuneration(mail) {
 
 	})
 }
+
+
+function updateParcelStatus(idType) {
+
+	var parcelInputId,
+		parcelLabel = '',
+		parcelId;
+
+	switch (idType) {
+		case 2 : parcelLabel = 'ColisPrisEnCharge';
+			break;
+		case 3 : parcelLabel = 'ColisLivre';
+			break;
+		case 4 : parcelLabel = 'ColisDistribue';
+			break;
+		case 5 : parcelLabel = 'ColisPerdu';
+			break;
+	}
+
+	parcelInputId = 'id' + parcelLabel;
+
+	parcelId = $('#' + parcelInputId).val();
+
+	myAjax(parcelLabel, 'accueil_extranet', 'updateParcelStatus', [parcelId,idType], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+		if(dataObject.stat === 'ko') {
+			$('#' + parcelLabel + 'Msg').html(dataObject.msg);
+			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		}
+		else if(dataObject.stat === 'ok') {
+			$('#' + parcelLabel + 'Msg').html(dataObject.msg);
+			$('#' + parcelLabel).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+		}
+		else {
+			$('#' + parcelLabel + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
+			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+		}
+	});
+}

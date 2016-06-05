@@ -42,7 +42,7 @@ class OrdersModel extends DefaultModel {
     public function setArrivalDate($parcelId) {
 
         $bdd = $this->connectBdd();
-// TODO : à tester
+// TODO : ne marche pas (séparer en deux requêtes & exécuter d'abord la subquery?)
         $query = $bdd->prepare("UPDATE " . $this->_name . "
                                 SET delivery_date = NOW()
                                 WHERE id =

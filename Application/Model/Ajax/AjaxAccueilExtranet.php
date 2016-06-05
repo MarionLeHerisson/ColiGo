@@ -22,7 +22,7 @@ class AjaxAccueilExtranet {
         require_once('../Model/trackingModel.php');
         $trackingManager = new TrackingModel();
 
-        require_once('../Model/ordersModel');
+        require_once('../Model/ordersModel.php');
         $ordersManager = new OrdersModel();
 
 

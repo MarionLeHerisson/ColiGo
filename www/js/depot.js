@@ -81,6 +81,9 @@ function submitDepotForm() {
         error ++;
     }
 
+    if(data.weight == '') {
+        showMessage(label, 'Le poids du colis est obligatoire.', 1);
+    }
 
     // If no error : submit form
     if(error === 0) {

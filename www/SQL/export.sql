@@ -2,8 +2,8 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 03, 2016 at 05:06 PM
+-- Host: localhost:8889
+-- Generation Time: Jun 05, 2016 at 11:21 PM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -31,7 +31,7 @@ CREATE TABLE `Orders` (
   `deliver_to` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0',
   `delivery_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Orders`
@@ -61,7 +61,11 @@ INSERT INTO `Orders` (`id`, `departure_address`, `arrival_address`, `total_price
 (31, 1, 49, 38.5, '2016-05-18 12:43:24', 1, 20, 1, 0, '0000-00-00 00:00:00'),
 (32, 1, 49, 38.5, '2016-05-18 12:48:48', 1, 20, 1, 0, '0000-00-00 00:00:00'),
 (33, 1, 50, 10.2, '2016-05-18 14:32:24', 1, 1, 3, 0, '0000-00-00 00:00:00'),
-(34, 1, 51, 29.4, '2016-05-18 14:48:31', 1, 1, 3, 0, '0000-00-00 00:00:00');
+(34, 1, 51, 29.4, '2016-05-18 14:48:31', 1, 1, 3, 0, '0000-00-00 00:00:00'),
+(35, 1, 50, 93.5, '2016-06-05 17:29:49', 1, 1, 3, 0, '0000-00-00 00:00:00'),
+(36, 1, 57, 90.15, '2016-06-05 20:26:32', 1, 1, 19, 0, '0000-00-00 00:00:00'),
+(37, 1, 57, 93.8, '2016-06-05 20:53:34', 1, 1, 3, 0, '0000-00-00 00:00:00'),
+(38, 1, 57, 93.2, '2016-06-05 21:20:15', 1, 1, 3, 0, '2016-06-05 21:20:15');
 
 --
 -- Indexes for dumped tables
@@ -86,7 +90,7 @@ ALTER TABLE `Orders`
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 --
 -- Constraints for dumped tables
 --

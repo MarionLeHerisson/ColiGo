@@ -19,6 +19,9 @@ h2, h3 {
 h1, p {
 	font-family: roboto, sans-serif;
 }
+a {
+	color: #ff0055;
+}
 
 .none {
 	display: none;
@@ -219,5 +222,3 @@ h1, p {
 		display: none;
 	}
 }
-/* TODO : remplacer les liens bleus par rouge ColiGo
-*/
