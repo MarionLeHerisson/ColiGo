@@ -42,14 +42,13 @@ class OrdersModel extends DefaultModel {
     public function setArrivalDate($parcelId) {
 
         $bdd = $this->connectBdd();
-// TODO : ne marche pas (séparer en deux requêtes & exécuter d'abord la subquery?)
+
         $query = $bdd->prepare("UPDATE " . $this->_name . "
                                 SET delivery_date = NOW()
                                 WHERE id =
-                                (SELECT o.id FROM Orders AS o
-                                LEFT JOIN OrderParcel AS op
-                                ON op.order_id = o.id
-                                WHERE op.parcel_id = " . $parcelId . ");");
+                                (SELECT OrderParcel.order_id
+                                FROM OrderParcel
+                                WHERE OrderParcel.parcel_id = " . $parcelId . ");");
         $query->execute();
 
         $res = $query->fetchColumn();

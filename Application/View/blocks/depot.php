@@ -34,15 +34,15 @@
         <label class="control-label col-md-3" for="type">Type de livraison :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="radio" name="type" id="express" value="2" checked onclick="claculateQuotation(event)">
+                <input type="radio" name="type" id="express" value="2" checked onclick="calculateQuotation(event)">
                 Livraison à horaires garantis
             </div>
             <div class="pull-left">
-                <input type="radio" name="type" id="8h" value="1" onclick="claculateQuotation(event)">
+                <input type="radio" name="type" id="8h" value="1" onclick="calculateQuotation(event)">
                 Livraison le lendemain à 8h si la commande est passée avant 15h
             </div>
             <div class="pull-left">
-                <input type="radio" name="type" id="urgence" value="3" onclick="claculateQuotation(event)">
+                <input type="radio" name="type" id="urgence" value="3" onclick="calculateQuotation(event)">
                 Livraison d'urgence
             </div>
         </div>
@@ -51,7 +51,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="claculateQuotation(event)"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="calculateQuotation(event)"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire
@@ -64,23 +64,23 @@
         <label class="control-label col-md-3" for="emballage">Type d'emballage :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="radio" name="emballage" id="craft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="claculateQuotation(event)">
-                Papier craft (0,20€)
+                <input type="radio" name="emballage" id="kraft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="calculateQuotation(event)">
+                Papier kraft (0,20€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="calculateQuotation(event)">
                 Papier de soie (0,40€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="bulles" value="1"  data-price="<?php echo $extraPrices[0]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="radio" name="emballage" id="bulles" value="1"  data-price="<?php echo $extraPrices[0]['price'];?>" onclick="calculateQuotation(event)">
                 Papier bulles (0,60€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="poly" value="4" data-price="<?php echo $extraPrices[3]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="radio" name="emballage" id="polystyrene" value="4" data-price="<?php echo $extraPrices[3]['price'];?>" onclick="calculateQuotation(event)">
                 Particules de calage en polystirène (0,30€)
             </div><br>
             <div class="pull-left">
-                <input type="radio" name="emballage" id="none" value="none" checked data-price="noPack" onclick="claculateQuotation(event)">
+                <input type="radio" name="emballage" id="none" value="none" checked data-price="noPack" onclick="calculateQuotation(event)">
                 Aucun
             </div>
         </div>
@@ -90,16 +90,16 @@
         <label class="control-label col-md-3" for="type">Assurances :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
                 Colis prioritaire (10,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
                 Colis livré par tous les moyens en cas d'imprévu (37,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="claculateQuotation(event)">
-                Indemnisation en cas de perte ou d'avarie (19,00€/kg)
+                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
+                Indemnisation en cas de perte ou d'avarie (19,00€)
             </div>
         </div>
     </div>
@@ -108,11 +108,11 @@
         <label class="control-label col-md-3" for="type">Autres services :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();claculateQuotation(event)">
+                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();calculateQuotation(event)">
                 Ramassage au domicile ou sur un lieu de travail (8,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="claculateQuotation(event)">
+                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div>
         </div>

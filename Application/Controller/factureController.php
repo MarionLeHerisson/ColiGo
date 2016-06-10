@@ -56,6 +56,7 @@ class factureController {
      */
     public function createImgText($text, $size) {
 
+        $text = ColiGo::unaccent($text);
         $width = 300;
 
         if($size == 2) {

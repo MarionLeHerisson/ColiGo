@@ -44,7 +44,8 @@
         <div class="col-md-7">
             <h2 class="featurette-heading">Nous vous apportons des solutions <span class="text-muted">adaptées à vos besoins</span></h2>
             <p class="lead">Un colis volumineux ? Un colis fragile ? Un colis qui se mange, ou même un colis vivant ?
-                <a href="contact">Contactez</a> dès à présents nos conseillers, et nous trouverons ensemble la solution la plus adaptée à vos besoins.</p>
+                <a href="contact">Contactez</a> dès à présents nos conseillers, et nous trouverons ensemble la solution la plus adaptée à vos besoins. N'oubliez pas de
+                laisser vos coordonnées afin que nos conseillers puissent vous contacter.</p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="500x500" src="Medias/solutions.jpeg" data-holder-rendered="true">

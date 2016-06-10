@@ -28,6 +28,11 @@
                 données définitivement, merci de <a href="contact">contacter</a> l'équipe technique de ColiGo.
             </p>
 
+            <h3>Récupération d'un colis</h3>
+            <p>Une personne peut récupérer un colis destiné à quelqu’un d’autre uniquement si le destinataire lui en donne une preuve écrite
+                dans laquelle il décline l’identité de la personne désignée à venir chercher son colis, ainsi qu’une photocopie de sa pièce
+                d’identité.</p>
+
             <h3>Colivoiturage</h3>
             <p>
                 Le colivoiturage, ou covoiturage pour colis, est un concept appartenant à la société ColiGo. Toute personne se proposant

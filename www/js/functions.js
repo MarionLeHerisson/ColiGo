@@ -4,6 +4,23 @@ function closePopin() {
 	});
 }
 
+function clearEverything() {
+	closePopin();
+
+	$('#depot-form')[0].reset();
+	$('#addRelayPoint-form')[0].reset();
+	$('#inscription-form')[0].reset();
+
+	$('#newRoleMail').val('');
+	$('#idColisDistribue').val('');
+	$('#idColisLivre').val('');
+	$('#idColisPerdu').val('');
+	$('#idColisPrisEnCharge').val('');
+}
+
+$('.collapsed').on('click', clearEverything);
+
+
 /**
  * Ajax function to be used in this code
  *

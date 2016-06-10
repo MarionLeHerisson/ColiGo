@@ -25,7 +25,7 @@ function submitDepotForm() {
         packaging : $('input:radio[name=emballage]:checked').val(),
         type : $('input:radio[name=type]:checked').val(),
 
-        priority : $('#prioritaire').val(),// .attr('checked') == true ou isChecked ?
+        priority : $('#prioritaire').val().attr('checked') ? $('#prioritaire').val() : '',// .attr('checked') == true ou isChecked ?
         unexpected : $('#imprevu').val(),
         indemnity : $('#indemnisation').val(),
         taking : $('#ramassage').val(),
@@ -106,7 +106,7 @@ function submitDepotForm() {
     }
 }
 
-function claculateQuotation(event) {
+function calculateQuotation(event) {
     var weight = $('#weight').val(),
         input = $(event.target),
         label = input.attr('name'),
@@ -130,9 +130,8 @@ function claculateQuotation(event) {
     }
     else {
         $('[data-label="' + label + '"]').parent().addClass('none');
+        showWithRightPrecision(calculateTotalPrice());
     }
-
-    showWithRightPrecision(calculateTotalPrice());
 }
 
 function blockRamAddress() {
@@ -197,6 +196,7 @@ function showPriceEmballage(label, price, input, tbody) {
     else {
         $('[data-label="emballage"]').parent().addClass('none');
     }
+    showWithRightPrecision(calculateTotalPrice());
 }
 
 function showPriceCheckbox(label, tbody, newExtra) {
@@ -206,6 +206,7 @@ function showPriceCheckbox(label, tbody, newExtra) {
     }
 
     tbody.append(newExtra);
+    showWithRightPrecision(calculateTotalPrice());
 }
 
 function showPriceType(label, weight) {
@@ -219,5 +220,6 @@ function showPriceType(label, weight) {
     myAjax(label, 'accueil_extranet', 'getWeightPrice', [weight, type], function(ret) {
         var dataObject = JSON.parse(ret);	// transforms json return from php to js object
         $('#trPrice').text(dataObject.price);
+        showWithRightPrecision(calculateTotalPrice());
     });
 }

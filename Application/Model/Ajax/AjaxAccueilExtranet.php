@@ -144,7 +144,8 @@ class AjaxAccueilExtranet {
      * @param array $param
      */
     public function postParcel($param) {
-
+        echo '<pre>';
+die(print_r($param));
         $userFirstname = ColiGo::sanitizeString($param['firstname']);
         $userLastname = ColiGo::sanitizeString($param['lastname']);
         $userMail = ColiGo::sanitizeString($param['mail']);
@@ -210,22 +211,22 @@ class AjaxAccueilExtranet {
         if(isset($param['packaging']) && $param['packaging'] != 'none' && intval($param['packaging'] != 0)) {
             $extras[] = intval($param['packaging']);
         }
-        if(isset($param['priority'])) {
+        if(isset($param['priority']) && $param['priority'] != '') {
             $extras[] = 7;
         }
-        if(isset($param['unexpected'])) {
+        if(isset($param['unexpected']) && $param['unexpected'] != '') {
             $extras[] = 8;
         }
-        if(isset($param['indemnity'])) {
+        if(isset($param['indemnity']) && $param['indemnity'] != '') {
             $extras[] = 9;
         }
-        if(isset($param['taking'])) {
+        if(isset($param['taking']) && $param['taking'] != '') {
             $extras[] = 5;
             $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
             $senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
             $senderCity = ColiGo::sanitizeString($param['ramcity']);
         }
-        if(isset($_POST['saturday'])) {
+        if(isset($param['saturday']) && $param['saturday'] != '') {
             $extras[] = 6;
         }
 
@@ -363,8 +364,6 @@ class AjaxAccueilExtranet {
 
         if(empty($price)) {
             $price = 'indisponible';
-        } else if ($type == '3') {
-            $price += 30;
         }
 
         die(json_encode([

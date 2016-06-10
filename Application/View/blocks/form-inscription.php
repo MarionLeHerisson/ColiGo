@@ -100,7 +100,7 @@
 
     <?php
 
-    if($_SESSION['type'] == 1) {
+    if(isset($_SESSION['type']) && $_SESSION['type'] == 1) {
         echo '
     <div class="form-group">
 					<label class="control-label col-md-3" for="type">Type d\'utilisateur :</label>

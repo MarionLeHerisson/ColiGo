@@ -26,7 +26,6 @@
                 <br><br>
                 <button type="button" class="btn btn-primary btn-lg" onclick="updateNewRole()">Valider</button>
             </div>
-<!-- TODO : ajouter dans clearEverything() -->
 
             <div id="newRole" class="none alert alert-dismissible fade in col-md-12" role="alert">
                 <button type="button" class="close" onclick="closePopin()">

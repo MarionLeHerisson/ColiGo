@@ -23,19 +23,19 @@ VALUES
 	(10.1, 	20,  	19.20,	2), 
 	(20.1, 	30,  	22.70,	2),
 -- urgence --	
-	(0, 		0.5,	5,			3),
-	(0.6, 	1,  	6.35,		3),
-	(1.1, 	2,  	7.20,		3),
-	(2.1, 	5,  	10.20,	3), 
-	(5.1, 	10,  	15.55,	3), 
-	(10.1, 	20,  	19.20,	3), 
-	(20.1, 	30,  	22.70,	3);
+	(0, 		0.5,	35,			3),
+	(0.6, 	1,  	36.20,	3),
+	(1.1, 	2,  	37.00,	3),
+	(2.1, 	5,  	39.70,	3),
+	(5.1, 	10,  	44.30,	3),
+	(10.1, 	20,  	47.10,	3),
+	(20.1, 	30,  	50.20,	3);
 -- TODO : fret --
 
 INSERT INTO Extra(label, price, explaination)
 VALUES ('papier bulles', 0.40, 'Le colis sera emballé de papier bulles. Protège les objets fragiles des gros impacts.'),
 	('papier de soie', 0.60, 'Le colis sera emballé dans du papier de soie. Protège les objets très fragiles des faibles impacts.'),
-	('papier craft', 0.20, 'Le colis sera emballé de papier craft. Protège les objets peu fragiles des faibles impacts.'),
+	('papier kraft', 0.20, 'Le colis sera emballé de papier kraft. Protège les objets peu fragiles des faibles impacts.'),
 	('polystyrene', 0.30, 'Le colis sera entouré de billes de polystyrène. Protège les objets de grande taille des impacts.'),
 	('ramassage domicile', 8.0, 'Ce service vous propose de ramasser votre colis chez vous et vous permet de ne pas le déposer en point relais.'),
 	('livraison samedi', 5.0, 'Ce service permet de livrer votre colis le samedi.'),
