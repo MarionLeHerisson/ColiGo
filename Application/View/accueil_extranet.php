@@ -14,6 +14,7 @@
 				include_once('menu_extranet/ajout_utilisateur.php');
 				include_once('menu_extranet/ajout_point_relais.php');
 				include_once('menu_extranet/employeeRemuneration.php');
+				include_once('menu_extranet/generer_remunerations.php');
 			}
 			if ($_SESSION['type'] != 3) {	// Admin or relay point
 				include_once('menu_extranet/depot_extranet.php');
