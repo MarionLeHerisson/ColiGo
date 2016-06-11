@@ -28,6 +28,10 @@ class ColiGo {
         return date('j-n-Y');
     }
 
+    public static function getMonth() {
+        return date('n');
+    }
+
     /**
      * @param $str
      * @param string $charset

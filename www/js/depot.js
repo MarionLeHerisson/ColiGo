@@ -25,11 +25,11 @@ function submitDepotForm() {
         packaging : $('input:radio[name=emballage]:checked').val(),
         type : $('input:radio[name=type]:checked').val(),
 
-        priority : $('#prioritaire').val().attr('checked') ? $('#prioritaire').val() : '',// .attr('checked') == true ou isChecked ?
-        unexpected : $('#imprevu').val(),
-        indemnity : $('#indemnisation').val(),
-        taking : $('#ramassage').val(),
-        saturday : $('#samedi').val()
+        priority : $('#prioritaire:checked').val(),
+        unexpected : $('#imprevu:checked').val(),
+        indemnity : $('#indemnisation:checked').val(),
+        taking : $('#ramassage:checked').val(),
+        saturday : $('#samedi:checked').val()
     },
         error = 0,
         checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,

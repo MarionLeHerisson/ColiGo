@@ -90,15 +90,15 @@
         <label class="control-label col-md-3" for="type">Assurances :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
+                <input type="checkbox" class="checkboxes" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
                 Colis prioritaire (10,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
+                <input type="checkbox" class="checkboxes" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
                 Colis livré par tous les moyens en cas d'imprévu (37,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
+                <input type="checkbox" class="checkboxes" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
                 Indemnisation en cas de perte ou d'avarie (19,00€)
             </div>
         </div>
@@ -108,18 +108,18 @@
         <label class="control-label col-md-3" for="type">Autres services :</label>
         <div class="col-md-9">
             <div class="pull-left">
-                <input type="checkbox" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();calculateQuotation(event)">
+                <input type="checkbox" class="checkboxes" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();calculateQuotation(event)">
                 Ramassage au domicile ou sur un lieu de travail (8,00€)
             </div><br>
             <div class="pull-left">
-                <input type="checkbox" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
+                <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <!-- TODO : GoogleMaps api pour points relais -->
+        <!-- TODO : GoogleMaps api pour points relais (popin ?) -->
         <label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
         <div class="col-md-6">
             <input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" disabled>

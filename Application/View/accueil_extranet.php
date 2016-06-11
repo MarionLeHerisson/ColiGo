@@ -35,5 +35,4 @@
 	</div>
 
 	<div class="col-md-1"></div>
-    <script type="text/javascript" src="www/js/extranet.js"></script>
 </div>

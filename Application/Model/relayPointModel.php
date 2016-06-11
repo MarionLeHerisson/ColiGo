@@ -89,4 +89,49 @@ class RelayPointModel extends DefaultModel {
 
         return $res;
     }
+
+    /**
+     * @param int $ownerId
+     * @param int $month (january = 1, not 01)
+     * @return array
+     */
+    public function getMonthParcels($ownerId, $month) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT rp.id, rp.owner_id, rp.address
+                                 , odep.departure_address, odep.id, odep.order_date
+                                 , oarr.arrival_address, oarr.id, oarr.delivery_date
+                                 , op.order_id, op.parcel_id
+                                 , p.weight, p.id, p.delivery_type
+                                 , wp.min_weight, wp.max_weight, wp.price, wp.id, wp.delivery_type
+
+                                FROM " . $this->_name . " AS rp
+
+                                 LEFT JOIN Orders AS odep
+                                 ON odep.departure_address = rp.address
+
+                                 LEFT JOIN Orders AS oarr
+                                 ON oarr.arrival_address = rp.address
+
+                                 LEFT JOIN OrderParcel AS op
+                                 ON op.order_id = odep.id OR op.order_id = oarr.id
+
+                                 LEFT JOIN Parcel AS p
+                                 ON p.id = op.parcel_id
+
+                                 LEFT JOIN WeightPrice AS wp
+                                 ON  wp.delivery_type =p.delivery_type
+                                 AND p.weight BETWEEN wp.min_weight AND wp.max_weight
+
+                                WHERE rp.owner_id = " . $ownerId . "
+                                 AND MONTH(odep.order_date) = " . $month . "
+                                 OR MONTH(oarr.delivery_date) = " . $month . ";");
+        $query->execute();
+
+        $res = $query->fetchAll();
+
+        return $res;
+
+    }
 }

@@ -144,8 +144,7 @@ class AjaxAccueilExtranet {
      * @param array $param
      */
     public function postParcel($param) {
-        echo '<pre>';
-die(print_r($param));
+
         $userFirstname = ColiGo::sanitizeString($param['firstname']);
         $userLastname = ColiGo::sanitizeString($param['lastname']);
         $userMail = ColiGo::sanitizeString($param['mail']);
@@ -211,22 +210,22 @@ die(print_r($param));
         if(isset($param['packaging']) && $param['packaging'] != 'none' && intval($param['packaging'] != 0)) {
             $extras[] = intval($param['packaging']);
         }
-        if(isset($param['priority']) && $param['priority'] != '') {
+        if(isset($param['priority']) && $param['priority'] != '' && $param['priority'] != 'undefined') {
             $extras[] = 7;
         }
-        if(isset($param['unexpected']) && $param['unexpected'] != '') {
+        if(isset($param['unexpected']) && $param['unexpected'] != '' && $param['unexpected'] != 'undefined') {
             $extras[] = 8;
         }
-        if(isset($param['indemnity']) && $param['indemnity'] != '') {
+        if(isset($param['indemnity']) && $param['indemnity'] != '' && $param['indemnity'] != 'undefined') {
             $extras[] = 9;
         }
-        if(isset($param['taking']) && $param['taking'] != '') {
+        if(isset($param['taking']) && $param['taking'] != '' && $param['taking'] != 'undefined') {
             $extras[] = 5;
             $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
             $senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
             $senderCity = ColiGo::sanitizeString($param['ramcity']);
         }
-        if(isset($param['saturday']) && $param['saturday'] != '') {
+        if(isset($param['saturday']) && $param['saturday'] != '' && $param['saturday'] != 'undefined') {
             $extras[] = 6;
         }
 
@@ -453,8 +452,14 @@ die(print_r($param));
      */
     public function getRemuneration($param) {
 
-        include_once('../../library/coligo.php');
-        $mail = ColiGo::sanitizeString($param[0]);
+        if(empty($param)) {
+            $mail = $_SESSION['mail'];
+        } else {
+            $mail = ColiGo::sanitizeString($param[0]);
+        }
+
+        $month = ColiGo::getMonth();
+        $date = ColiGo::getDate();
 
         require_once('../Model/userModel.php');
         $userManager = new UserModel();
@@ -468,48 +473,27 @@ die(print_r($param));
             ]));
         }
 
-        $type = $user['type_id'];
+        $type = $user[0]['type_id'];
 
         if($type == 3) {    // postman
             // TODO urgent : remuneration livreur
             // si livreur : repas du moi + essence du mois + payages du moi + prix au kilo des colis du mois * 20%
         } else if($type == 2) {     // relay point
-/*
-SELECT
-rp.id, rp.owner_id, rp.address
-,odep.id, odep.departure_address, odep.order_date
-,oarr.id, oarr.arrival_address, oarr.delivery_date
-,op.parcel_id, op.order_id
-,p.id, p.weight, p.delivery_type
-,SUM(wp.price), wp.delivery_type
-FROM RelayPoint AS rp
-WHERE rp.owner_id = 15
 
-LEFT JOIN Orders AS odep
-ON odep.departure_address = rp.address
-AND MONTH(odep.order_date) = 6
+            require_once('../Model/relayPointModel.php');
+            $relayPointManager = new RelayPointModel();
 
-LEFT JOIN Oreders AS oarr
-ON oarr.arrival_address = rp.address
-AND MONTH(oarr.delivery_date) = 6
+            $monthParcels = $relayPointManager->getMonthParcels($user[0]['id'], $month);
+            $rem = 0;
 
-LEFT JOIN OrderParcel AS op
-ON op.order_id = odep.id
-AND op.oder_id = oarr.id
+            foreach($monthParcels as $parcel) {     // month parcels * 20%
+                $rem += round(20 / 100 * $parcel['price'], 2);
+            }
 
-LEFT JOIN Parcel AS p
-ON p.id = op.parcel_id
-
-LEFT JOIN WeightPrice AS wp
-ON p.weight BETWEEN wp.min_weight AND wp.max_weight
-AND p.delivery_type = wp.delivery_type;
-
-
--- owner id 15 = Milka
--- address id 57 : 30, Allée Maurice Sarraut, 31300, Toulouse
-*/
-
-            // prix au kilo des colis du mois * 20%
+            die(json_encode([
+                'stat'	=> 'ok',
+                'msg'	=> 'Rémuniération pour le mois en cours : ' . $rem . ' €.'
+            ]));
 
         } else {
             die(json_encode([

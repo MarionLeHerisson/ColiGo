@@ -2,7 +2,7 @@
     <div class="panel-heading" role="tab" id="headingEleven">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                <i class="material-icons">person_add</i> Ajout d'un point relais
+                <i class="material-icons">store</i> Ajout d'un point relais
             </a>
         </h4>
     </div>

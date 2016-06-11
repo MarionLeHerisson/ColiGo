@@ -236,16 +236,21 @@ function getLatLng() {
 }
 
 function getRemuneration(mail) {
-	if(mail == null) {
-		mail = $('#idMailEmployeRem').val();
-	}
+	mail = $('#idMailEmployeRem').val();
 
 	// TODO : regexp (dans tous les cas)
 
 	var label = 'MailEmployeRem';
 
-	myAjax(label, 'accueil_extranet', 'getRemuneration', [mail], function() {
+	myAjax(label, 'accueil_extranet', 'getRemuneration', [mail], function(data) {
+		var dataObject = JSON.parse(data);		// transforms json return from php to js object
 
+		if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
+		}
+		else {
+			showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
 	})
 }
 

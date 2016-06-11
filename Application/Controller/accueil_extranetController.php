@@ -10,7 +10,11 @@ class accueil_extranetController {
         if(isset($_POST['action']) && !empty($_POST['action'])) {
 
             $action = $_POST['action'];
-            $param = $_POST['param'];
+			$param = [];
+
+			if(isset($_POST['param'])) {
+				$param = $_POST['param'];
+			}
 
 			require_once('../Model/Ajax/AjaxAccueilExtranet.php');
 			$ajaxApi = new AjaxAccueilExtranet();
