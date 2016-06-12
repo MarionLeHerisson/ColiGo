@@ -1,5 +1,6 @@
 <?php
 //print_r($_SERVER);die;
+// pwd bitbucket : noynivlry134
 
 /* C O N F   L O C A L   W I N D O W S   M A R I O N */
 if($_SERVER['HTTP_HOST'] == 'www.coligo.local.lan') {
@@ -26,7 +27,7 @@ else if($_SERVER['HTTP_HOST'] == 'localhost') {
     define('BASE_PATH', 'F:/wamp/www/coligo/');
 
     define('HOSTNAME', 'localhost');
-    define('DBNAME', 'coligo');
+    define('DBNAME', 'ColiGo');
     define('DBLOGIN', 'root');
     define('DBPWD', 'root');
 

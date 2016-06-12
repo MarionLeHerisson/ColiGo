@@ -1,7 +1,5 @@
 <?php
 
-include_once ('../../library/coligo.php');
-
 class accueil_extranetController {
 	
 	public function indexAction() {
@@ -18,6 +16,9 @@ class accueil_extranetController {
 
 			require_once('../Model/Ajax/AjaxAccueilExtranet.php');
 			$ajaxApi = new AjaxAccueilExtranet();
+            
+            require_once('../Model/Ajax/AjaxRemuneration.php');
+			$ajaxApiRem = new AjaxRemuneration();
 
             switch($action) {
                 case 'updateParcelStatus' :
@@ -36,7 +37,16 @@ class accueil_extranetController {
 					$ajaxApi->getWeightPrice($param);
 					break;
 				case 'getRemuneration' :
-					$ajaxApi->getRemuneration($param);
+					$ajaxApiRem->getRemuneration($param);
+					break;
+                case 'xmlRelayPoint' :
+					$ajaxApiRem->getXmlRelayPoint($param);
+					break;
+                case 'xmlDay' :
+					$ajaxApiRem->getXmlDay($param);
+					break;
+                case 'xmlMonth' :
+					$ajaxApiRem->getXmlMonth($param);
 					break;
             }
         }

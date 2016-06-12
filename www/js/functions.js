@@ -280,16 +280,13 @@ function updateParcelStatus(idType) {
 		var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
 		if(dataObject.stat === 'ko') {
-			$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+            showMessage(parcelLabel, dataObject.msg, true);
 		}
 		else if(dataObject.stat === 'ok') {
-			$('#' + parcelLabel + 'Msg').html(dataObject.msg);
-			$('#' + parcelLabel).removeClass('alert-danger').addClass('alert-success').removeClass('none');
+            showMessage(parcelLabel, dataObject.msg, false);
 		}
 		else {
-			$('#' + parcelLabel + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-			$('#' + parcelLabel).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+            showMessage(parcelLabel, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 		}
 	});
 }

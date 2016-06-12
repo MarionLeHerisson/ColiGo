@@ -445,63 +445,6 @@ class AjaxAccueilExtranet {
 
         return $uniqueId;
     }
-
-    /**
-     * Get remuneration from an email
-     * @param array $param
-     */
-    public function getRemuneration($param) {
-
-        if(empty($param)) {
-            $mail = $_SESSION['mail'];
-        } else {
-            $mail = ColiGo::sanitizeString($param[0]);
-        }
-
-        $month = ColiGo::getMonth();
-        $date = ColiGo::getDate();
-
-        require_once('../Model/userModel.php');
-        $userManager = new UserModel();
-
-        $user = $userManager->getUserByMail($mail);
-
-        if(empty($user)) {
-            die(json_encode([
-                'stat'	=> 'ko',
-                'msg'	=> 'Aucun utilisateur correspondant à cette addresse mail.'
-            ]));
-        }
-
-        $type = $user[0]['type_id'];
-
-        if($type == 3) {    // postman
-            // TODO urgent : remuneration livreur
-            // si livreur : repas du moi + essence du mois + payages du moi + prix au kilo des colis du mois * 20%
-        } else if($type == 2) {     // relay point
-
-            require_once('../Model/relayPointModel.php');
-            $relayPointManager = new RelayPointModel();
-
-            $monthParcels = $relayPointManager->getMonthParcels($user[0]['id'], $month);
-            $rem = 0;
-
-            foreach($monthParcels as $parcel) {     // month parcels * 20%
-                $rem += round(20 / 100 * $parcel['price'], 2);
-            }
-
-            die(json_encode([
-                'stat'	=> 'ok',
-                'msg'	=> 'Rémuniération pour le mois en cours : ' . $rem . ' €.'
-            ]));
-
-        } else {
-            die(json_encode([
-                'stat'	=> 'ko',
-                'msg'	=> 'Cet utilisateur n\'est ni un Point Relais ni un livreur, sa rémunération ne peut être calculée.'
-            ]));
-        }
-    }
 }
 
 

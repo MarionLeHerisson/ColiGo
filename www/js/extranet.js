@@ -21,12 +21,15 @@ function xmlRelayPoint() {
     var rpMail = $('#idRpMail').val(),
         label = 'manualXml';
     
+    // if errors have alrady been shown, hide them
+	$('.alert').each(function(){$(this).addClass('none');});
+    
     if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(rpMail)) {
 		showMessage(label,'Veuillez entrer une adresse mail valide.', true);
 		return;
     }
     
-    myAjax(label, 'accueil_extranet', 'xmlRelayPoint', [rpmail], function(data) {
+    myAjax(label, 'accueil_extranet', 'xmlRelayPoint', [rpMail], function(data) {
         var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
         if(dataObject.stat === 'ko') {
