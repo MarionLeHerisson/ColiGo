@@ -32,6 +32,10 @@ class ColiGo {
         return date('n');
     }
 
+    public static function getYear() {
+        return date('Y');
+    }
+
     /**
      * @param $str
      * @param string $charset

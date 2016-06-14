@@ -27,6 +27,13 @@ a {
 	display: none;
 }
 
+#modalBackground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: RGBa(0,0,0,0.5);
+}
+
 /* NAV */
 .navbar-default {
 	background-color: #fff;

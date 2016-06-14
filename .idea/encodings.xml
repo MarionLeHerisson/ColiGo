@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Application/Controller/localiserController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/blocks/billPanel.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Application/View/blocks/simu_payment.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/localiser.php" charset="UTF-8" />
   </component>
 </project>

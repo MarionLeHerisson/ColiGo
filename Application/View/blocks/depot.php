@@ -177,6 +177,27 @@
 
     <button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
 
+    <button type="button" class="btn btn-primary" id="myInput" onclick="verifPayment()">Test</button>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal">
+        <div id="modalBackground"></div>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Paiement sécurisé</h4>
+                </div>
+                <div class="modal-body">
+                    <?php require_once('simu_payment.php'); ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="cb_valid">Valider</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </form>
 
 <?php include_once('blocks/billPanel.php'); ?>

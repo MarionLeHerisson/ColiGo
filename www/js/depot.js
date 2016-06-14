@@ -86,7 +86,9 @@ function submitDepotForm() {
     }
 
     // If no error : submit form
-    if(error === 0) {
+    if(error === 0 && verifPayment() === true) {
+
+        console.log('true');return;
 
         myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
             var dataObject = JSON.parse(ret);	// transforms json return from php to js object
@@ -104,6 +106,14 @@ function submitDepotForm() {
             }
         });
     }
+}
+
+function verifPayment() {
+    $('#myModal').modal('show');
+    var a;
+
+    // Click sur annuler : return false
+return true;
 }
 
 function calculateQuotation(event) {
