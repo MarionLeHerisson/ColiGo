@@ -85,35 +85,41 @@ function submitDepotForm() {
         showMessage(label, 'Le poids du colis est obligatoire.', 1);
     }
 
-    // If no error : submit form
-    if(error === 0 && verifPayment() === true) {
-
-        console.log('true');return;
-
-        myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
-            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
-
-            if(dataObject.stat === 'ko') {
-                showMessage(label, dataObject.msg, 1);
-            }
-            else if(dataObject.stat === 'ok') {
-                showMessage(label, dataObject.msg, 0);
-                window.open("facture?tracking_number=" + dataObject.num);
-                $('#depot-form')[0].reset();
-            }
-            else {
-                showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
-            }
-        });
+    // If no error : show the modal simulating payment interface
+    if(error === 0) {
+        showPaymentModal()
     }
 }
 
-function verifPayment() {
+function showPaymentModal() {
     $('#myModal').modal('show');
-    var a;
+}
 
-    // Click sur annuler : return false
-return true;
+function verifPayment() {
+
+    var regName = /^[a-zA-Z\-]+[ ]{1}[a-zA-Z\-]+$/,
+        label = 'formPayment',
+        name = $('#cb_owner').val(),
+        number = $('#cb_number').val(),
+        month = $('#cb_select_month:selected').val(),
+        year = $('#cb_select_year:selected').val(),
+        crypto = $('#crypto').val();
+
+    myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
+        var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+
+        if(dataObject.stat === 'ko') {
+            showMessage(label, dataObject.msg, 1);
+        }
+        else if(dataObject.stat === 'ok') {
+            showMessage(label, dataObject.msg, 0);
+            window.open("facture?tracking_number=" + dataObject.num);
+            $('#depot-form')[0].reset();
+        }
+        else {
+            showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
+        }
+    });
 }
 
 function calculateQuotation(event) {
