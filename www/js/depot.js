@@ -1,6 +1,8 @@
+var data = {};
+
 function submitDepotForm() {
     // get fields to check
-    var data = {
+    data = {
         firstname : $('#firstname').val(),
         lastname : $('#name').val(),
         mail : $('#mail').val(),
@@ -30,12 +32,10 @@ function submitDepotForm() {
         indemnity : $('#indemnisation:checked').val(),
         taking : $('#ramassage:checked').val(),
         saturday : $('#samedi:checked').val()
-    },
-        error = 0,
-        checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,
-//        checkZipCode = /^[0-9]{5}$/,
-        label = 'formDepot';
+    };
 
+    var checkMail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i,
+        label = 'formDepot';
 
 
     // if errors are shown, hide them
@@ -46,49 +46,48 @@ function submitDepotForm() {
     // verif inputs
     if(data.firstname === '') {
         showMessage(label, 'Le prénom de l\'envoyeur est obligatoire.', 1);
-        error ++;
+        return;
     } else if (data.firstname.length < 2) {
         showMessage(label, 'Le prénom de l\'envoyeur doit contenir au moins deux caractères.', 1);
-        error ++;
+        return;
     }
 
     if(data.lastname === '') {
         showMessage(label, 'Le nom de l\'envoyeur est obligatoire.', 1);
-        error ++;
+        return;
     } else if (data.lastname.length < 2) {
         showMessage(label, 'Le nom de l\'envoyeur doit contenir au moins deux caractères.', 1);
-        error ++;
+        return;
     }
 
     if(data.mail === '' || !checkMail.test(data.mail)) {
         showMessage(label, 'Le mail de l\'envoyeur est obligatoire.', 1);
-        error ++;
+        return;
     }
 
     if(data.receiverFirstname === '') {
         showMessage(label, 'Le prénom du destinataire est obligatoire.', 1);
-        error ++;
+        return;
     } else if (data.receiverFirstname.length < 2) {
         showMessage(label, 'Le prénom du destinataire doit contenir au moins deux caractères.', 1);
-        error ++;
+        return;
     }
 
     if(data.receiverLastname === '') {
         showMessage(label, 'Le nom du destinataire est obligatoire.', 1);
-        error ++;
+        return;
     } else if (data.receiverLastname.length < 2) {
         showMessage(label, 'Le nom du destinataire doit contenir au moins deux caractères.', 1);
-        error ++;
+        return;
     }
 
     if(data.weight == '') {
         showMessage(label, 'Le poids du colis est obligatoire.', 1);
+        return;
     }
 
     // If no error : show the modal simulating payment interface
-    if(error === 0) {
-        showPaymentModal()
-    }
+    showPaymentModal()
 }
 
 function showPaymentModal() {
@@ -97,29 +96,68 @@ function showPaymentModal() {
 
 function verifPayment() {
 
-    var regName = /^[a-zA-Z\-]+[ ]{1}[a-zA-Z\-]+$/,
+    var checkName = /^[a-zA-Z\-]+[ ]{1}[a-zA-Z\-]+$/,
         label = 'formPayment',
+        label2 = 'formDepot',
         name = $('#cb_owner').val(),
         number = $('#cb_number').val(),
-        month = $('#cb_select_month:selected').val(),
-        year = $('#cb_select_year:selected').val(),
+        month = $('#cb_select_month option:selected').val(),
+        year = $('#cb_select_year option:selected').val(),
         crypto = $('#crypto').val();
 
-    myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
-        var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+    if(name === '' || !checkName.test(name)) {
+        showMessage(label, 'Le nom du propriétaire de la carte est obligatoire.', 1);
+        return;
+    }
 
-        if(dataObject.stat === 'ko') {
-            showMessage(label, dataObject.msg, 1);
-        }
-        else if(dataObject.stat === 'ok') {
-            showMessage(label, dataObject.msg, 0);
-            window.open("facture?tracking_number=" + dataObject.num);
-            $('#depot-form')[0].reset();
-        }
-        else {
-            showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
-        }
-    });
+    if(number === '') {
+        showMessage(label, 'Le numéro de carte bleue est obligatoire.', 1);
+        return;
+    } else if(number.replace(/ /g, '').length != 16 || parseInt(number) != number) {
+        showMessage(label, 'Veuillez enter un numéro de carte bleue valide.', 1);
+        return;
+    }
+
+    if(month === '' || month < 1 || month > 12 || parseInt(month) != month) {
+        showMessage(label, 'Veuillez sélectionner un mois depuis le menu déroulant.', 1);
+        return;
+    }
+
+    if(year === '' || year < 2016 || parseInt(year) != year) {
+        showMessage(label, 'Veuillez sélectionner une année depuis le menu déroulant.', 1);
+        return;
+    }
+
+    if(crypto === '') {
+        showMessage(label, 'Le cryptogramme visuel est obligatoire.', 1);
+        return;
+    } else if(crypto.replace(/ /g, '').length != 3 || parseInt(crypto) != crypto) {
+        showMessage(label, 'Veuillez enter un cryptogramme visuel valide.', 1);
+        return;
+    }
+
+    showMessage(label, 'Votre paiement a bien été enregistré.');
+
+    setTimeout(function(){
+        $('#myModal').modal('hide');
+
+        myAjax(label2, 'accueil_extranet', 'parcelPosting', data, function(ret) {
+            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+
+            if(dataObject.stat === 'ko') {
+                showMessage(label2, dataObject.msg, 1);
+            }
+            else if(dataObject.stat === 'ok') {
+                showMessage(label2, dataObject.msg, 0);
+                window.open("facture?tracking_number=" + dataObject.num, "", "width=1000,height=800");
+                $('#depot-form')[0].reset();
+            }
+            else {
+                showMessage(label2, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
+            }
+        });
+
+    }, 2000);
 }
 
 function calculateQuotation(event) {

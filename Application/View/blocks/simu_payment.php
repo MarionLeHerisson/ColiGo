@@ -12,7 +12,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
                     <div class="form-group">
-                        <label class="control-label col-md-3" for="cb_owner">Nom du propriétaire de la carte :</label>
+                        <label class="control-label col-md-3" for="cb_owner">Nom tel qu'il est écrit sur la carte :</label>
                         <div class="col-md-6">
                             <input name="cb_owner" id="cb_owner" type="text" class="form-control" placeholder="Marie Martin">
                         </div>
