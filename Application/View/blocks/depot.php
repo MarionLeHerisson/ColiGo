@@ -119,7 +119,6 @@
     </div>
 
     <div class="form-group">
-        <!-- TODO : GoogleMaps api pour points relais (popin ?) -->
         <label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
         <div class="col-md-6">
             <input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" disabled>
@@ -150,11 +149,11 @@
         </div>
     </div>
 
-    <!-- TODO : choix point relais / adresse particulier (ajax pour remplir le table) -->
     <div class="form-group">
         <label class="control-label col-md-3" for="email">Adresse de livraison :</label>
         <div class="col-md-6">
-            <input name="address" id="autocomplete2" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+            <button type="button" class="btn btn-default" onclick="showChoixRP()" id="choixRP">Point relais</button>
+            <button type="button" class="btn btn-default" onclick="showChoixAd()" id="choixAd">Autre adresse</button>
         </div>
     </div>
 
@@ -176,10 +175,11 @@
     </div>
 
     <button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
+    <?php if(DEBUG != 0){echo '<button type="button" class="btn btn-primary none" id="myInput" onclick="showPaymentModal()">Test</button>';}?>
 
-    <button type="button" class="btn btn-primary" id="myInput" onclick="showPaymentModal()">Test</button>
-
-    <?php require_once('simu_payment.php'); ?>
+    <?php require_once('popin/simu_payment.php'); ?>
+    <?php require_once('popin/choixAd.php'); ?>
+    <?php require_once('popin/choixRP.php'); ?>
 
 </form>
 

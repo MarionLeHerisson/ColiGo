@@ -277,3 +277,23 @@ function showPriceType(label, weight) {
         showWithRightPrecision(calculateTotalPrice());
     });
 }
+
+function showChoixAd() {
+    $('#modalDeliveryAddress').modal('show');
+    $('#choixAd').addClass('active');
+    $('#choixRP').removeClass('active');
+}
+
+function showChoixRP() {
+    $('#modalDeliveryRP').modal('show');
+    $('#choixRP').addClass('active');
+    $('#choixAd').removeClass('active');
+}
+
+function selectRP() {
+console.log('select rp');
+}
+
+function selectOtherAd() {
+    console.log('select other ad');
+}
