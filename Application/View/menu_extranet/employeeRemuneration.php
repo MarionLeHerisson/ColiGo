@@ -2,7 +2,7 @@
     <div class="panel-heading" role="tab" id="headingTwelve">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                <i class="material-icons">attach_money</i> Accéder à la rémunération d'un employé
+                <i class="material-icons">attach_money</i> Accès à la rémunération d'un employé
             </a>
         </h4>
     </div>

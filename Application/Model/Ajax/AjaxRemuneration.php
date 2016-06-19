@@ -3,25 +3,24 @@
 class AjaxRemuneration {
     
     /**
-    *Generate an xml file containing all parcels recieved/sent from one relay point this day
+     * Generate an xml file containing all parcels recieved/sent from one relay point this day
+     * @param array $param
+     * @author Marion
     */
     public function getXmlRelayPoint($param) {
         
         $user = $this->getUserFromParam($param);
-        $month = ColiGo::getMonth();
         $date = ColiGo::getDate();
         
         require_once('../Model/relayPointModel.php');
         $rpManager = new RelayPointModel();
 
-        $parcels = $rpManager->getDayParcels($user[0]['id'], $month);
-        
-        $rpId = empty($parcels[0]['departure_address']) ? $parcels[0]['arrival_address'] : $parcels[0]['departure_address'];
-        
-        // TODO : dans un dossier temp ? -> voir avec création des autres xml
-        // TODO : catcher l'erreur en cas de failure
+        $parcels = $rpManager->getDayParcels($user[0]['id'], date('Y-m-d'));
+
+        $rpId = $rpManager->getRpIdFromMail($param[0]);
+
         // Si le dossier n'existe pas, le créer + chmod
-        $pathName = '../../Medias/xml/' . $date;
+        $pathName = '../../Medias/Remunerations/day_details/' . $date;
         if(!file_exists($pathName)) {
             mkdir($pathName, 777);
         }
@@ -38,11 +37,13 @@ class AjaxRemuneration {
         $content = '<?xml version = "1.0" encoding="UTF-8"?>';
         $content .= '<relay_point id="' . $rpId . '">';
         $content .= '<parcels>';
-        
-        foreach($parcels as $parcel) {
-            $content .= '<parcel id="' . $parcel['id'] . '" total_price="' . $parcel['price'] . '">';
-            $content .= round(20 / 100 * $parcel['price'], 2);
-            $content .= '</parcel>';
+
+        if(!empty($parcels)) {
+            foreach($parcels as $parcel) {
+                $content .= '<parcel id="' . $parcel['id'] . '" total_price="' . $parcel['price'] . '">';
+                $content .= round(20 / 100 * $parcel['price'], 2);
+                $content .= '</parcel>';
+            }
         }
         
         $content .= '</parcels>';
@@ -50,6 +51,12 @@ class AjaxRemuneration {
         
         fwrite($file, $content);
         fclose($file);
+
+        die(json_encode([
+            'stat'	=> 'ok',
+            'msg'	=> 'Fichier xml correctement créé.'
+        ]));
+        // TODO : ouvrir XML dans une modal ?
 /*
 <?xml version = "1.0" encoding="UTF-8"?>
 <relay_point id="19">       // $parcels[0]['departure_address'] || ['arrival_address]
@@ -72,18 +79,32 @@ class AjaxRemuneration {
     }
     
     /**
-    *Generate an xml file containing all parcels received/sent from all relay points of a region this day
-    */
+     * Generate an xml file containing all parcels received/sent from all relay points of a region this day
+     */
     public function getXmlDay($param) {
-        
-        $date = ColiGo::getDate();
-        $pathName = '../../Medias/xml/' . $date;
-        
+
+        $cPathName = '../../Medias/Remunerations/Remuneration';
+
+        // TODO : launch C programm
+        exec($cPathName, $output, $return_var);
+        print_r(($output));
+        print_r($return_var);
+
+        // TODO : get result to show it ?
+
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<rem>
+    <remuneration relaypoint_id="1">4.00</remuneration>
+    <remuneration relaypoint_id="2">41.77</remuneration>
+</rem>
+ */
     }
-    
+
     /**
-    *Generate an xml file containing all month remuneration
-    */
+     * Generate an xml file containing all month remuneration
+     * @param $param
+     */
     public function getXmlMonth($param) {
         
     }
@@ -129,7 +150,7 @@ class AjaxRemuneration {
     }
     
     // TODO : move in service
-    public function getUserFromParam() {
+    public function getUserFromParam($param) {
         
         if(empty($param)) {
             $mail = $_SESSION['mail'];

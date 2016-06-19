@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<relay_point id="2">
+    <parcels>
+        <parcel id="14756" total_price="35.07">
+            <extras>
+                <extra id="1" label="carton" price="1.05"/>
+                <extra id="3" label="papier bulle" price="3.85"/>
+            </extras>
+        </parcel>
+                
+        <parcel id="14786" total_price="2.20">
+            <extras>
+            </extras>
+        </parcel>
+        <parcel id="14786" total_price="4.50">
+            <extras>
+            </extras>
+        </parcel>
+    </parcels>
+</relay_point>

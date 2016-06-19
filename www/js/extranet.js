@@ -45,6 +45,21 @@ function xmlRelayPoint() {
 }
 
 function xmlDay() {
+	var label = 'manualXml';
+
+	myAjax(label, 'accueil_extranet','xmlDay', [], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+		if(dataObject.stat === 'ko') {
+			showMessage(label, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
+		}
+		else {
+			showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	})
 }
 
 function xmlMonth() {
@@ -72,29 +87,17 @@ function updateNewRole() {
 		return;
     }
 
-	$.ajax({
-		type: "POST",
-		url: 'accueil_extranet',
-		data: {
-			action: 'updateUserRole',
-			param: [mail,role]
-		},
-		success: function(data) {
-			var dataObject = JSON.parse(data);	// transforms json return from php to js object
+	myAjax(label, 'accueil_extranet', 'updateUserRole', [mail,role], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-			if(dataObject.stat === 'ko') {
-				showMessage(label,dataObject.msg, true);
-			}
-			else if(dataObject.stat === 'ok') {
-				showMessage(label,dataObject.msg, false);
-			}
-			else {
-				showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
-			}
-		},
-		error: function() {
-			showMessage(label,'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
-				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
+		if(dataObject.stat === 'ko') {
+			showMessage(label,dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label,dataObject.msg, false);
+		}
+		else {
+			showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 		}
 	});
 }
@@ -129,29 +132,17 @@ function updateParcelStatus(idType) {
         return;
     }
 
-	$.ajax({
-		type: "POST",
-		url: 'accueil_extranet',
-		data: {
-			action: 'updateParcelStatus',
-			param: [parcelId,idType]
-		},
-		success: function(data) {
-			var dataObject = JSON.parse(data);	// transforms json return from php to js object
+	myAjax(parcelLabel, 'accueil_extranet', 'updateParcelStatus', [parcelId,idType], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-			if(dataObject.stat === 'ko') {
-				showMessage(parcelLabel, dataObject.msg, true);
-			}
-			else if(dataObject.stat === 'ok') {
-				showMessage(parcelLabel, dataObject.msg, false);
-			}
-			else {
-				showMessage(parcelLabel, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
-			}
-		},
-		error: function() {
-			showMessage(parcelLabel,'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
-				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
+		if(dataObject.stat === 'ko') {
+			showMessage(parcelLabel, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(parcelLabel, dataObject.msg, false);
+		}
+		else {
+			showMessage(parcelLabel, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
 		}
 	});
 }
@@ -168,12 +159,11 @@ function addNewRelayPoint() {
 		rpLabel = $('#rpLabel').val(),
 		lat = $('#lat').val(),
 		lng = $('#lng').val(),
-		label = 'newRelayPoint',
-		error = 0;
+		label = 'newRelayPoint';
 
 	if(rpCountry !== 'France') {
 		showMessage(label,'Le point relais doit se situer en France.', true);
-		error = 1;
+		return;
 	}
 
 	// If fields are empty
@@ -201,32 +191,19 @@ function addNewRelayPoint() {
         return;
 	}
 
-	if(error === 0) {
-		$.ajax({
-			type: "POST",
-			url: 'accueil_extranet',
-			data: {
-				action: 'addRelayPoint',
-				param: [rpMail,rpAddress,rpZipCode,rpCity, lat, lng, rpLabel]
-			},
-			success: function(data) {
-				var dataObject = JSON.parse(data);	// transforms json return from php to js object
+	myAjax(label, 'accueil_extranet', 'addRelayPoint', [rpMail,rpAddress,rpZipCode,rpCity, lat, lng, rpLabel], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-				if(dataObject.stat === 'ko') {
-					showMessage(label, dataObject.msg, true);
-				}
-				else if(dataObject.stat === 'ok') {
-					showMessage(label, dataObject.msg, false);
-				}
-				else {
-					showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
-				}
-			},
-			error: function() {
-				showMessage(label, 'Une erreur de connexion s\'est produite. Veuillez recharger la page et réessayer.' +
-				'Si l\'erreur persiste, veuillez contacter l\'équipe technique de ColiGo.', true);
-			}
-		});
-	}
+		if(dataObject.stat === 'ko') {
+			showMessage(label, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
+		}
+		else {
+			showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	});
+
 }
 

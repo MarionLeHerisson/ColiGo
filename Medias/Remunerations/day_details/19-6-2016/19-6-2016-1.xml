@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<relay_point id="1">
+    <parcels>
+        <parcel id="14756" total_price="2">
+        </parcel>
+        
+        <parcel id="14786" total_price="2.00">
+            <extras>
+            </extras>
+        </parcel>
+    </parcels>
+</relay_point>

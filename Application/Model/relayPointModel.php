@@ -49,6 +49,25 @@ class RelayPointModel extends DefaultModel {
     }
 
     /**
+     * @param String $mail
+     * @return int
+     */
+    public function getRpIdFromMail($mail) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT " . $this->_name . ".id FROM " . $this->_name . "
+                                LEFT JOIN user
+                                ON user.id = owner_id
+                                WHERE user.mail = '" . $mail . "';");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+
+        return $res;
+    }
+
+    /**
      * Return all relay points
      * @return array
      */
@@ -83,6 +102,49 @@ class RelayPointModel extends DefaultModel {
                                 FROM " . $this->_name . " AS rp
                                 LEFT JOIN Address AS a ON a.id = rp.address
                                 WHERE a.lat BETWEEN " . $minLat . " AND " . $maxLat . " AND a.lng BETWEEN " . $minLng . " AND " . $maxLng . ";");
+        $query->execute();
+
+        $res = $query->fetchAll();
+
+        return $res;
+    }
+
+    /**
+     * @param $ownerId
+     * @param $date
+     * @return array
+     */
+    public function getDayParcels($ownerId, $date) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT rp.id, rp.owner_id, rp.address
+                                 , odep.departure_address, odep.id, odep.order_date
+                                 , oarr.arrival_address, oarr.id, oarr.delivery_date
+                                 , op.order_id, op.parcel_id
+                                 , p.weight, p.id, p.delivery_type
+                                 , wp.min_weight, wp.max_weight, wp.price, wp.id, wp.delivery_type
+
+                                FROM " . $this->_name . " AS rp
+
+                                 LEFT JOIN Orders AS odep
+                                 ON odep.departure_address = rp.address
+
+                                 LEFT JOIN Orders AS oarr
+                                 ON oarr.arrival_address = rp.address
+
+                                 LEFT JOIN OrderParcel AS op
+                                 ON op.order_id = odep.id OR op.order_id = oarr.id
+
+                                 LEFT JOIN Parcel AS p
+                                 ON p.id = op.parcel_id
+
+                                 LEFT JOIN WeightPrice AS wp
+                                 ON  wp.delivery_type =p.delivery_type
+                                 AND p.weight BETWEEN wp.min_weight AND wp.max_weight
+
+                                WHERE rp.owner_id = " . $ownerId . "
+                                 AND odep.order_date = " . $date . "
+                                 OR oarr.delivery_date = " . $date . ";");
         $query->execute();
 
         $res = $query->fetchAll();
