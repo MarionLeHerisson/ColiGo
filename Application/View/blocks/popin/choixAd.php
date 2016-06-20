@@ -5,15 +5,19 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Paiement sécurisé</h4>
+                <h4 class="modal-title">Choix d'une adresse</h4>
             </div>
             
-            <div class="modal-body col-md-12">
+            <div class="modal-body col-md-12" id="choixAd">
                 <div class="col-md-2"></div>
 
                 <div class="col-md-8">
-                    <input id="autocomplete21" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()">
+                    <input id="autocomplete2" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" autocomplete="off">
                 </div>
+                <style type="text/css">
+                     .pac-container{
+                        z-index: 100000 !important; }
+                </style>
 
                 <div class="col-md-2"></div>
             </div>

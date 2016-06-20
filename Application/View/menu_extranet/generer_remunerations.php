@@ -15,6 +15,8 @@
                     <label for="idRpMail">Entrez l'adresse mail d'un propriétaire de point relais :</label>
                     <input type="text" name="rpMail" id="idRpMail" class="form-control input-lg">
                     <br>
+                    <!-- TODO : à une date donnée -->
+                    <!-- TODO : Choix d'un point relais via la map -->
                     <button type="button" class="btn" onclick="xmlRelayPoint()">Générer pour un point relais</button>
                 </div>
                 <div class="col-md-3"></div>
@@ -32,6 +34,7 @@
                     </select>
                     <br>
                     <button type="button" class="btn" onclick="xmlDay()">Générer pour tous les points relais de la région (jour)</button>
+                    <!-- TODO : à une date donnée -->
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -42,6 +45,7 @@
                 <div class="col-md-3"></div>
                 <div class="form-group col-md-6">
                     <button type="button" class="btn" onclick="xmlMonth()">Générer pour tous les points relais de France (mois)</button>
+                    <!-- TODO : à une date donnée -->
                 </div>
                 <div class="col-md-3"></div>
             </div>

@@ -152,8 +152,11 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="email">Adresse de livraison :</label>
         <div class="col-md-6">
+            <input id="chosenDeliveryAddress" class="form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled>
+            <br>
             <button type="button" class="btn btn-default" onclick="showChoixRP()" id="choixRP">Point relais</button>
             <button type="button" class="btn btn-default" onclick="showChoixAd()" id="choixAd">Autre adresse</button>
+            <!-- TODO : plus cher si livraison domicile -->
         </div>
     </div>
 

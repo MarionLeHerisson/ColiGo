@@ -5,7 +5,8 @@ var placeSearch,
     autocomplete1,
     autocomplete2,
     autocomplete3,
-    autocomplete4;
+    autocomplete4,
+    autocomplete5;
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical location types.
@@ -21,12 +22,16 @@ function initAutocomplete() {
     autocomplete4 = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete4')),
         {types: ['geocode']});
+    autocomplete5 = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete5')),
+        {types: ['geocode']});
 
     // When the user selects an address from the dropdown, populate the address fields in the form.
     autocomplete1.addListener('place_changed', fillInAddress);
     autocomplete2.addListener('place_changed', fillInAddress);
     autocomplete3.addListener('place_changed', fillInAddress);
     autocomplete4.addListener('place_changed', fillInAddress);
+    autocomplete5.addListener('place_changed', fillInAddress);
 }
 
 function fillInAddress() {
@@ -38,7 +43,6 @@ function fillInAddress() {
 
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
-    // TODO : O-PTI-MI-SA-TION
 
     if(place1 != undefined) {
         $('#street_number1').val(place1.address_components[0].long_name);
@@ -71,6 +75,14 @@ function fillInAddress() {
         $('#country4').val(place4.address_components[5].long_name);
         $('#postal_code4').val(place4.address_components[6].long_name);
     }
+
+    if(place5 != undefined) {
+        $('#street_number5').val(place4.address_components[0].long_name);
+        $('#route5').val(place4.address_components[1].long_name);
+        $('#locality5').val(place4.address_components[2].long_name);
+        $('#country5').val(place4.address_components[5].long_name);
+        $('#postal_code5').val(place4.address_components[6].long_name);
+    }
 }
 
 // Bias the autocomplete object to the user's geographical location,
@@ -90,6 +102,7 @@ function geolocate() {
             autocomplete2.setBounds(circle.getBounds());
             autocomplete3.setBounds(circle.getBounds());
             autocomplete4.setBounds(circle.getBounds());
+            autocomplete5.setBounds(circle.getBounds());
         });
     }
 }

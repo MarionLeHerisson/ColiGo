@@ -31,7 +31,7 @@ function initMap() {
 
         showAllRP();
 
-    }, 1000);
+    }, 2000);
 
 }
 
