@@ -25,8 +25,8 @@
                                 <input name="zipcode5" id="postal_code5">
                                 <input name="country5" id="country5">
 
-                                <input name="lat" id="lat5">
-                                <input name="lng" id="lng5">
+                                <input name="lat" id="lat">
+                                <input name="lng" id="lng">
                             </table>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" id="cb_valid" onclick="selectRP()">Valider</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Valider</button>
             </div>
 
         </div><!-- /.modal-content -->

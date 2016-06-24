@@ -291,10 +291,6 @@ function showChoixRP() {
     initMap();
 }
 
-function selectRP() {
-console.log('select rp');
-}
-
 function selectOtherAd() {
     var address = "" + $('#street_number2').val() + ", " + $('#route2').val() + ", " +$('#postal_code2').val() + $('#locality2').val();
     $('#chosenDeliveryAddress').val(address);

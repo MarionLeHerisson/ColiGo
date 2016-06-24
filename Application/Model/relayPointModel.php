@@ -75,7 +75,8 @@ class RelayPointModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress, a.lat, a.lng
+        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress,
+                                a.lat, a.lng, a.address, a.zip_code, a.city
                                 FROM " . $this->_name . " AS rp
                                 LEFT JOIN Address AS a ON a.id = rp.address
                                 WHERE rp.is_deleted = 0;");
@@ -98,10 +99,13 @@ class RelayPointModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress, a.lat, a.lng
+        $query = $bdd->prepare("SELECT rp.id, rp.address, rp.label, CONCAT(a.address, ', ', a.zip_code, ', ', a.city) AS completeAddress,
+                                a.lat, a.lng, a.address, a.zip_code, a.city
                                 FROM " . $this->_name . " AS rp
                                 LEFT JOIN Address AS a ON a.id = rp.address
-                                WHERE a.lat BETWEEN " . $minLat . " AND " . $maxLat . " AND a.lng BETWEEN " . $minLng . " AND " . $maxLng . ";");
+                                WHERE a.lat BETWEEN " . $minLat . " AND " . $maxLat . "
+                                AND a.lng BETWEEN " . $minLng . " AND " . $maxLng . "
+                                AND rp.is_deleted = 0;");
         $query->execute();
 
         $res = $query->fetchAll();

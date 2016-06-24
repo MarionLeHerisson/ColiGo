@@ -39,7 +39,8 @@ function fillInAddress() {
     var place1 = autocomplete1.getPlace(),
         place2 = autocomplete2.getPlace(),
         place3 = autocomplete3.getPlace(),
-        place4 = autocomplete4.getPlace();
+        place4 = autocomplete4.getPlace(),
+        place5 = autocomplete5.getPlace();
 
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
@@ -77,11 +78,17 @@ function fillInAddress() {
     }
 
     if(place5 != undefined) {
-        $('#street_number5').val(place4.address_components[0].long_name);
-        $('#route5').val(place4.address_components[1].long_name);
-        $('#locality5').val(place4.address_components[2].long_name);
-        $('#country5').val(place4.address_components[5].long_name);
-        $('#postal_code5').val(place4.address_components[6].long_name);
+        if(place5.address_components[0] != undefined) {
+            $('#street_number5').val(place5.address_components[0].long_name);
+        }
+        $('#route5').val(place5.address_components[1].long_name);
+        $('#locality5').val(place5.address_components[2].long_name);
+        if(place5.address_components[5] != undefined) {
+            $('#country5').val(place5.address_components[5].long_name);
+        }
+        if(place5.address_components[6] != undefined) {
+            $('#postal_code5').val(place5.address_components[6].long_name);
+        }
     }
 }
 

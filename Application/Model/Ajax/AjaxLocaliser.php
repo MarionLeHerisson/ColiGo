@@ -13,8 +13,6 @@ class AjaxLocaliser {
      */
     public function searchRelayPoint($param) {
 
-        $zipCode = $param[0];
-
         // managers
         require_once('../Model/relayPointModel.php');
         $relayPointManager = new RelayPointModel();

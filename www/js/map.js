@@ -35,6 +35,26 @@ function initMap() {
 
 }
 
+function choose(event, id) {
+    // without this block, the page reloads
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var address = $('#' + id + 'addres').val(),
+        city = $('#' + id + 'city').val(),
+        pcode = $('#' + id + 'zip_code').val();
+
+    $('#street_number2').val(address);
+    $('#locality2').val(city);
+    $('#postal_code2').val(pcode);
+    $('#country2').val('France');
+
+    $('#chosenDeliveryAddress').val(address + ', ' + pcode + ' ' + city);
+
+    $('#modalDeliveryRP').modal('hide');
+}
+
 /**
  * Shows all relay points
  */
@@ -54,7 +74,12 @@ function showAllRP() {
             var rpts = dataObject.relayPoints;
 
             rpts.forEach(function(rp) {
-                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
+                console.log(rp);
+                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress +
+                    '<br><button class="btn btn-primary btn-sm" onclick="choose(event, ' + rp.id + ')">Choisir ce point relais</button>' +
+                    '<input class="none" id="' + rp.id + 'addres" value="' + rp.address + '">' +
+                    '<input class="none" id="' + rp.id + 'zip_code" value="' + rp.zip_code + '">' +
+                    '<input class="none" id="' + rp.id + 'city" value="' + rp.city + '">');
             })
         }
         else {

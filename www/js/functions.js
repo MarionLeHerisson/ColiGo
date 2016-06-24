@@ -220,6 +220,9 @@ function getLatLng() {
 		latitude = "NULL",
 		longitude = "NULL";
 
+	if(address == undefined) {
+		address = $('#autocomplete5').val();
+	}
 	var res = address.replace(/ /g, "+");
 
 	$.ajax({
