@@ -63,3 +63,4 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<span id="conf" class="none">cho</span>

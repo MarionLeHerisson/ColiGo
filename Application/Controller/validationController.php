@@ -1,5 +1,4 @@
 <?php
-include_once('../../library/coligo.php');
 
 class validationController {
 

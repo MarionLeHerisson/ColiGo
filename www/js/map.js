@@ -35,6 +35,46 @@ function initMap() {
 
 }
 
+/**
+ * Show popin to ask for confirmation
+ * @param event
+ * @param id
+ */
+function addFav(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    $('#fav_valid').attr('onclick','saveFav(' + id + ')');
+    $('#modalAddFav').modal('show');
+}
+
+/**
+ * Add a relay point in user's favorites
+ * @param rpId
+ */
+function saveFav(rpId) {
+    var label = 'addFavorite';
+
+    myAjax(label, 'localiser', 'addFav', [rpId], function(data) {
+        var dataObject = JSON.parse(data);	// transforms json return from php to js object
+        if(dataObject.stat === 'ok') {
+            showMessage(label, dataObject.msg, false);
+        } else if(dataObject.stat === 'ko') {
+            showMessage(label, dataObject.msg, true);
+        } else {
+            showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.',true);
+        }
+    });
+
+    $('#modalAddFav').modal('hide');
+}
+
+/**
+ * Choose a relay point for a parcel to deliver
+ * @param event
+ * @param id
+ */
 function choose(event, id) {
     // without this block, the page reloads
     event.preventDefault();
@@ -60,7 +100,19 @@ function choose(event, id) {
  */
 function showAllRP() {
 
-    var label = 'relayPointSearch';
+    var label = 'relayPointSearch',
+        action = '',
+        btnClass = 'none ',
+        conf = $('#conf').text();
+
+    if(conf === 'loc') {
+        action = 'addFav';
+        btnClass = '';
+    }
+    else if(conf === 'cho') {
+        action = 'choose';
+        btnClass = '';
+    }
 
     myAjax(label, 'localiser', 'searchRP', [], function(data) {
         var dataObject = JSON.parse(data);	// transforms json return from php to js object
@@ -74,17 +126,15 @@ function showAllRP() {
             var rpts = dataObject.relayPoints;
 
             rpts.forEach(function(rp) {
-                console.log(rp);
                 createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress +
-                    '<br><button class="btn btn-primary btn-sm" onclick="choose(event, ' + rp.id + ')">Choisir ce point relais</button>' +
+                    '<br><button class="' + btnClass + 'btn btn-primary btn-sm" onclick="' + action + '(event, ' + rp.id + ')">Choisir ce point relais</button>' +
                     '<input class="none" id="' + rp.id + 'addres" value="' + rp.address + '">' +
                     '<input class="none" id="' + rp.id + 'zip_code" value="' + rp.zip_code + '">' +
                     '<input class="none" id="' + rp.id + 'city" value="' + rp.city + '">');
             })
         }
         else {
-            $('#' + label + 'Msg').html('Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.');
-            $('#' + label).removeClass('alert-success').addClass('alert-danger').removeClass('none');
+            showMessage(label,'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.',true);
         }
     });
 }

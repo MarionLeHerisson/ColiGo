@@ -31,4 +31,23 @@ class AjaxLocaliser {
         ]));
     }
 
+    /**
+     * @param array $param
+     */
+    public function addFavorite($param) {
+        // managers
+        require_once('../Model/FavoriteRelayPointModel.php');
+        $favoriteRPManager = new FavoriteRelayPointModel();
+
+        $userId = $_SESSION['id'];
+        $favoriteRPManager->deleteFavorite($userId);
+
+        $favoriteRPManager->addFavorite(intval($param[0]), $userId);
+
+        die(json_encode([
+            'stat'	=> 'ok',
+            'msg' => 'Ce point relais a bien été ajouté à vos favoris !'
+        ]));
+    }
+
 }

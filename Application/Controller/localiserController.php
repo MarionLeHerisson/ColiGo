@@ -22,6 +22,9 @@ class localiserController {
                 case 'searchRP' :
                     $ajaxApi->searchRelayPoint($param);
                     break;
+                case 'addFav' :
+                    $ajaxApi->addFavorite($param);
+                    break;
             }
         }
 

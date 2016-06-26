@@ -1,7 +1,6 @@
 <?php
 
-require_once('../../const.php');
-require_once('../../library/coligo.php');
+//require_once('../../const.php');
 
 class DefaultModel {
 	

@@ -130,7 +130,7 @@ CREATE TABLE OrderParcel(
 	FOREIGN KEY (parcel_id) REFERENCES Parcel (id)
 );
 
-CREATE TABLE FovoriteRelayPoint(
+CREATE TABLE FavoriteRelayPoint(
 	id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
 	relay_point_id INT NOT NULL,

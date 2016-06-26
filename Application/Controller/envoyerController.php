@@ -1,7 +1,5 @@
 <?php
 
-require_once('../../library/coligo.php');
-
 class envoyerController {
 
     public function indexAction() {
