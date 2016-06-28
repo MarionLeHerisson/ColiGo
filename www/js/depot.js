@@ -18,11 +18,11 @@ function submitDepotForm() {
         country : $('#country2').val(),
 
 //        ramaddress : $('#autocomplete3'),
-        ramstreetnumber : $('#street_number3').val(),
-        ramroute : $('#route3').val(),
-        ramcity : $('#locality3').val(),
-        ramzipcode : $('#postal_code3').val(),
-        ramcountry : $('#country3').val(),
+        ramstreetnumber : $('#ram_street_number').val(),
+        ramroute : $('#ram_route').val(),
+        ramcity : $('#ram_locality').val(),
+        ramzipcode : $('#ram_postal_code').val(),
+        ramcountry : $('#ram_country').val(),
 
         packaging : $('input:radio[name=emballage]:checked').val(),
         type : $('input:radio[name=type]:checked').val(),
@@ -188,22 +188,22 @@ function calculateQuotation(event) {
     }
 }
 
-function blockRamAddress() {
-
-    var autocomplete = $('#autocomplete3');
-
-    if($('input[name=ramassage]').is(':checked')) {
-        autocomplete.removeAttr('disabled');
-    } else {
-        autocomplete.attr('disabled', 'disabled');
-        autocomplete.val('');
-        $('#street_number3').val('');
-        $('#route3').val('');
-        $('#locality3').val('');
-        $('#postal_code3').val('');
-        $('#country3').val('');
-    }
-}
+//function blockRamAddress() {
+//
+//    var autocomplete = $('#autocomplete3');
+//
+//    if($('input[name=ramassage]').is(':checked')) {
+//        autocomplete.removeAttr('disabled');
+//    } else {
+//        autocomplete.attr('disabled', 'disabled');
+//        autocomplete.val('');
+//        $('#street_number3').val('');
+//        $('#route3').val('');
+//        $('#locality3').val('');
+//        $('#postal_code3').val('');
+//        $('#country3').val('');
+//    }
+//}
 
 function calculateTotalPrice() {
 
@@ -278,21 +278,67 @@ function showPriceType(label, weight) {
     });
 }
 
-function showChoixAd() {
+function showChoixAd(param) {
     $('#modalDeliveryAddress').modal('show');
-    $('#choixAd').addClass('active');
-    $('#choixRP').removeClass('active');
+
+    if(param === 'ram') {
+        $('#choixRamAd').addClass('active');
+        $('#choixRamRP').removeClass('active');
+    }
+    else if(param === 'liv') {
+        $('#choixLivAd').addClass('active');
+        $('#choixLivRP').removeClass('active');
+    }
+
+    $('#paramAdd').text(param);
 }
 
-function showChoixRP() {
+function showChoixRP(param) {
     $('#modalDeliveryRP').modal('show');
-    $('#choixRP').addClass('active');
-    $('#choixAd').removeClass('active');
     initMap();
+
+    if(param === 'ram') {
+        $('#choixRamRP').addClass('active');
+        $('#choixRamAd').removeClass('active');
+    } else if(param === 'liv') {
+        $('#choixLivRP').addClass('active');
+        $('#choixLivAd').removeClass('active');
+    }
+
+    $('#paramRP').text(param);
 }
 
 function selectOtherAd() {
-    var address = "" + $('#street_number2').val() + ", " + $('#route2').val() + ", " +$('#postal_code2').val() + $('#locality2').val();
-    $('#chosenDeliveryAddress').val(address);
+
+    var address = "" + $('#street_number3').val() + ", " + $('#route3').val() + ", " +$('#postal_code3').val() + $('#locality3').val(),
+        param = $('#paramAdd').text();
+
+    if(param === 'ram') {
+        $('#choosenTakingAddress').val(address);
+
+        $('#ram_street_number').val($('#street_number3').val());
+        $('#ram_route').val($('#route3').val());
+        $('#ram_locality').val($('#locality3').val());
+        $('#ram_postal_code').val($('#postal_code3').val());
+        $('#ram_country').val($('#country3').val());
+    }
+    else if(param === 'liv') {
+        $('#chosenDeliveryAddress').val(address);
+
+        $('#street_number2').val($('#street_number3').val());
+        $('#route2').val($('#route3').val());
+        $('#locality2').val($('#locality3').val());
+        $('#postal_code2').val($('#postal_code3').val());
+        $('#country2').val($('#country3').val());
+    }
+
+    // empty the popin
+    $('#autocomplete3').val('');
+    $('#street_number3').val('');
+    $('#route3').val('');
+    $('#locality3').val('');
+    $('#postal_code3').val('');
+    $('#country3').val('');
+
     $('#modalDeliveryAddress').modal('hide');
 }

@@ -83,14 +83,27 @@ function choose(event, id) {
 
     var address = $('#' + id + 'addres').val(),
         city = $('#' + id + 'city').val(),
-        pcode = $('#' + id + 'zip_code').val();
+        pcode = $('#' + id + 'zip_code').val(),
+        param = $('#paramRP').text(),
+        label = $('#' + id + 'label').val();
 
-    $('#street_number2').val(address);
-    $('#locality2').val(city);
-    $('#postal_code2').val(pcode);
-    $('#country2').val('France');
 
-    $('#chosenDeliveryAddress').val(address + ', ' + pcode + ' ' + city);
+    if(param === 'ram') {
+        $('#choosenTakingAddress').val(label);
+
+        $('#ram_street_number').val(address);
+        $('#ram_locality').val(city);
+        $('#ram_postal_code').val(pcode);
+        $('#ram_country').val('France');
+    }
+    else if(param === 'liv') {
+        $('#chosenDeliveryAddress').val(label);
+
+        $('#street_number2').val(address);
+        $('#locality2').val(city);
+        $('#postal_code2').val(pcode);
+        $('#country2').val('France');
+    }
 
     $('#modalDeliveryRP').modal('hide');
 }
@@ -128,6 +141,7 @@ function showAllRP() {
             rpts.forEach(function(rp) {
                 createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress +
                     '<br><button class="' + btnClass + 'btn btn-primary btn-sm" onclick="' + action + '(event, ' + rp.id + ')">Choisir ce point relais</button>' +
+                    '<input class="none" id="' + rp.id + 'label" value="' + rp.label + '">' +
                     '<input class="none" id="' + rp.id + 'addres" value="' + rp.address + '">' +
                     '<input class="none" id="' + rp.id + 'zip_code" value="' + rp.zip_code + '">' +
                     '<input class="none" id="' + rp.id + 'city" value="' + rp.city + '">');

@@ -57,10 +57,11 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Valider</button>
+<!--                <button type="button" class="btn btn-primary" data-dismiss="modal">Valider</button>-->
             </div>
 
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <span id="conf" class="none">cho</span>
+<span id="paramRP" class="none"></span>

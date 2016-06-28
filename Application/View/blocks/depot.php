@@ -111,27 +111,30 @@
                 <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div><br>
-            <div class="pull-left">
-                <input type="checkbox" class="checkboxes" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="blockRamAddress();calculateQuotation(event)">
+            <div class="pull-left none">
+                <input type="checkbox" class="checkboxes" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="calculateQuotation(event)">
                 Ramassage au domicile ou sur un lieu de travail (8,00€)
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-3" for="type">Veuillez préciser l'adresse de ramassage :</label>
+        <label class="control-label col-md-3" for="type">Adresse de ramassage :</label>
         <div class="col-md-6">
-            <input name="takingAddress" id="autocomplete3" class="autocomplete form-control" placeholder="1 bis Avenue de la République" onFocus="geolocate()" disabled>
+            <button type="button" class="btn btn-default" onclick="showChoixRP('ram')" id="choixRamRP">Point relais</button>
+            <button type="button" class="btn btn-default" onclick="showChoixAd('ram')" id="choixRamAd">Autre adresse</button>
+            <br><br>
+            <input id="choosenTakingAddress" class="autocomplete form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled>
         </div>
-        <div class="<?php if(DEBUG == 0){echo 'none';}?>">
-            <table id="address">
-                <input name="streetnumber3" id="street_number3">
-                <input name="route3" id="route3">
-                <input name="city3" id="locality3">
-                <input name="zipcode3" id="postal_code3">
-                <input name="country3" id="country3">
-            </table>
-        </div>
+    </div>
+    <div class="<?php if(DEBUG == 0){echo 'none';}?>">
+        <table id="address">
+            <input name="ram_streetnumber" id="ram_street_number">
+            <input name="ram_route" id="ram_route">
+            <input name="ram_city" id="ram_localit">
+            <input name="ram_zipcode" id="ram_postal_code">
+            <input name="ram_country" id="ram_country">
+        </table>
     </div>
 
     <br><h4>Informations destinataire :</h4>
@@ -152,10 +155,10 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="email">Adresse de livraison :</label>
         <div class="col-md-6">
+            <button type="button" class="btn btn-default" onclick="showChoixRP('liv')" id="choixLivRP">Point relais</button>
+            <button type="button" class="btn btn-default" onclick="showChoixAd('liv')" id="choixLivAd">Autre adresse</button>
+            <br><br>
             <input id="chosenDeliveryAddress" class="form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled>
-            <br>
-            <button type="button" class="btn btn-default" onclick="showChoixRP()" id="choixRP">Point relais</button>
-            <button type="button" class="btn btn-default" onclick="showChoixAd()" id="choixAd">Autre adresse</button>
             <!-- TODO : plus cher si livraison domicile -->
         </div>
     </div>
