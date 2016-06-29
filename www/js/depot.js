@@ -10,14 +10,14 @@ function submitDepotForm() {
         receiverFirstname : $('#destfirstname').val(),
         receiverLastname : $('#destname').val(),
 
-//        address : $('#autocomplete2'),
+        depAddress : $('#choosenTakingAddress').val(),
         streetnumber : $('#street_number2').val(),
         route : $('#route2').val(),
         city : $('#locality2').val(),
         zipcode : $('#postal_code2').val(),
         country : $('#country2').val(),
 
-//        ramaddress : $('#autocomplete3'),
+        arrAddress : $('#chosenDeliveryAddress').val(),
         ramstreetnumber : $('#ram_street_number').val(),
         ramroute : $('#ram_route').val(),
         ramcity : $('#ram_locality').val(),
@@ -31,6 +31,7 @@ function submitDepotForm() {
         unexpected : $('#imprevu:checked').val(),
         indemnity : $('#indemnisation:checked').val(),
         taking : $('#ramassage:checked').val(),
+        delivery : $('#livraison:checked').val(),
         saturday : $('#samedi:checked').val()
     };
 
@@ -65,6 +66,16 @@ function submitDepotForm() {
         return;
     }
 
+    if(data.weight == '') {
+        showMessage(label, 'Le poids du colis est obligatoire.', 1);
+        return;
+    }
+
+    if(data.depAddress == '') {
+        showMessage(label, 'Veuillez sélectionner une adresse de départ.', 1);
+        return;
+    }
+
     if(data.receiverFirstname === '') {
         showMessage(label, 'Le prénom du destinataire est obligatoire.', 1);
         return;
@@ -81,8 +92,8 @@ function submitDepotForm() {
         return;
     }
 
-    if(data.weight == '') {
-        showMessage(label, 'Le poids du colis est obligatoire.', 1);
+    if(data.arrAddress == '') {
+        showMessage(label, 'Veuillez sélectionner une adresse de livraison.', 1);
         return;
     }
 
@@ -314,6 +325,7 @@ function selectOtherAd() {
         param = $('#paramAdd').text();
 
     if(param === 'ram') {
+        $("#ramassage:not(:checked)").trigger( "click" );     // activate hidden input's event on click
         $('#choosenTakingAddress').val(address);
 
         $('#ram_street_number').val($('#street_number3').val());
@@ -323,6 +335,7 @@ function selectOtherAd() {
         $('#ram_country').val($('#country3').val());
     }
     else if(param === 'liv') {
+        $("#livraison:not(:checked)").trigger( "click" );     // activate hidden input's event on click
         $('#chosenDeliveryAddress').val(address);
 
         $('#street_number2').val($('#street_number3').val());

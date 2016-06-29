@@ -144,15 +144,26 @@ class AjaxAccueilExtranet {
      * @param array $param
      */
     public function postParcel($param) {
+        die(json_encode([
+            'stat'	=> 'ok',
+            'msg'	=> 'Blabla'
+        ]));
 
+        // sender informations
         $userFirstname = ColiGo::sanitizeString($param['firstname']);
         $userLastname = ColiGo::sanitizeString($param['lastname']);
         $userMail = ColiGo::sanitizeString($param['mail']);
-        $deliveryType = ColiGo::sanitizeString($param['type']);
-        $parcelWeight = ColiGo::sanitizeString($param['weight']);
-
+        // receiver informations
         $receiverLastname = ColiGo::sanitizeString($param['receiverLastname']);
         $receiverFirstname = ColiGo::sanitizeString($param['receiverFirstname']);
+        // parcel informations
+        $deliveryType = ColiGo::sanitizeString($param['type']);
+        $parcelWeight = ColiGo::sanitizeString($param['weight']);
+        // sending address
+        $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
+        $senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
+        $senderCity = ColiGo::sanitizeString($param['ramcity']);
+        // delivery address
         $receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($param['route']);
         $receiverZipCode = ColiGo::sanitizeString($param['zipcode']);
         $receiverCity = ColiGo::sanitizeString($param['city']);
@@ -221,9 +232,9 @@ class AjaxAccueilExtranet {
         }
         if(isset($param['taking']) && $param['taking'] != '' && $param['taking'] != 'undefined') {
             $extras[] = 5;
-            $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
-            $senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
-            $senderCity = ColiGo::sanitizeString($param['ramcity']);
+        }
+        if(isset($param['delivery']) && $param['delivery'] != '' && $param['delivery'] != 'undefined') {
+            $extras[] = 10;
         }
         if(isset($param['saturday']) && $param['saturday'] != '' && $param['saturday'] != 'undefined') {
             $extras[] = 6;
@@ -246,39 +257,29 @@ class AjaxAccueilExtranet {
             $reciverId = $receiver[0]['id'];
         }
 
-        // If address exists, use existing id for this address
+        // Arrival address : If address exists, use existing id for this address
         $arrivalAddress = $addressManager->existAddress($receiverAddress, $receiverZipCode, $receiverCity);
 
         if($arrivalAddress == null) {
             $arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
         }
 
-        // If a taking address is given
-        if(isset($param['taking'])) {
-            // If address exists, use existing id for this address
-            $depAddressId = $addressManager->existAddress($senderAddress, $senderZipCode, $senderCity);
+        // Deprture address : If address exists, use existing id for this address
+        $depAddressId = $addressManager->existAddress($senderAddress, $senderZipCode, $senderCity);
 
-            if($depAddressId == null) {
-                $depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
-            }
+        if($depAddressId == null) {
+            $depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
+        }
 
-            $rpId = 'NULL';
+        // If order made by Relay Point owner
+        if(isset($_SESSION['type']) && $_SESSION['type'] == 2) {
+            $ownerMail = $_SESSION['mail'];
+            // Get relay point id from owner id
+            $rpId = $relayPointManager->getRpIdFromMail($ownerMail);
         }
         else {
-            if(isset($_SESSION['address'])) {
-                // Get relay point id
-                $rpId = $_SESSION['address'];
-                $depAddressId = $relayPointManager->getRPAddress($rpId);
-            }
-
-            // TODO : selection d'un point relais
+            $rpId = 'NULL';
         }
-
-        // TODO URGENT : Si connecté en admin, definir $_SESSION['address']
-        // * * * * * * * * * * D E B U G  * * * * * * * * * * * * * * * * //
-        $depAddressId = 1;
-        $rpId = 1;
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
         // insert Order
         $orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);

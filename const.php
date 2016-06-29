@@ -15,7 +15,7 @@ if($_SERVER['HTTP_HOST'] == 'www.coligo.local.lan') {
     define('DBLOGIN', 'root');
     define('DBPWD', 'root');
 
-    define('DEBUG', 1);
+    define('DEBUG', 0);
 }
 
 /* C O N F   L O C A L   W I N D O W S   M A R I O N   2 */

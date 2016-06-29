@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-2">
             <div class="etape etape-5"></div>
-            <p>Vous pouvez maintenant déposer votre colis dans le point relais de votre choix.</p>
+            <p>Vous pouvez maintenant déposer votre colis dans le point relais choisi à l'étape 2.</p>
         </div>
         <div class="col-md-1"></div>
     </div>

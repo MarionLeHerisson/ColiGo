@@ -1,7 +1,7 @@
 <div class="col-md-1"></div>
 <form method="POST" action="accueil_extranet" enctype="multipart/form-data" class="form-horizontal col-md-10" id="depot-form">
 
-    <br><h4><?php echo $info; ?></h4>
+    <br><h4><?php echo $info;?></h4>
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Prenom :</label>
         <div class="col-md-6">
@@ -111,15 +111,19 @@
                 <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
                 Livraison le samedi (5,00€)
             </div><br>
-            <div class="pull-left none">
-                <input type="checkbox" class="checkboxes" name="ramassage" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="calculateQuotation(event)">
-                Ramassage au domicile ou sur un lieu de travail (8,00€)
+            <div class="pull-left <?php if(DEBUG == 0){echo 'none';}?>">
+                <input type="checkbox" class="checkboxes" name="ramassage à domicile" id="ramassage" value="5" data-price="<?php echo $extraPrices[4]['price'];?>" onclick="calculateQuotation(event)">
+                [DEBUG] Ramassage au domicile ou sur un lieu de travail (8,00€)
+            </div>
+            <div class="pull-left <?php if(DEBUG == 0){echo 'none';}?>">
+                <input type="checkbox" class="checkboxes" name="livraison à domicile" id="livraison" value="10" data-price="<?php echo $extraPrices[9]['price'];?>" onclick="calculateQuotation(event)">
+                [DEBUG] Livraison au domicile ou sur un lieu de travail (8,00€)
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-3" for="type">Adresse de ramassage :</label>
+        <label class="control-label col-md-3" for="type">Adresse de départ :</label>
         <div class="col-md-6">
             <button type="button" class="btn btn-default" onclick="showChoixRP('ram')" id="choixRamRP">Point relais</button>
             <button type="button" class="btn btn-default" onclick="showChoixAd('ram')" id="choixRamAd">Autre adresse</button>
@@ -159,7 +163,6 @@
             <button type="button" class="btn btn-default" onclick="showChoixAd('liv')" id="choixLivAd">Autre adresse</button>
             <br><br>
             <input id="chosenDeliveryAddress" class="form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled>
-            <!-- TODO : plus cher si livraison domicile -->
         </div>
     </div>
 

@@ -89,6 +89,7 @@ function choose(event, id) {
 
 
     if(param === 'ram') {
+        $("#ramassage:checked").trigger( "click" );     // activate hidden input's event on click
         $('#choosenTakingAddress').val(label);
 
         $('#ram_street_number').val(address);
@@ -97,6 +98,7 @@ function choose(event, id) {
         $('#ram_country').val('France');
     }
     else if(param === 'liv') {
+        $("#livraison:checked").trigger( "click" );     // activate hidden input's event on click
         $('#chosenDeliveryAddress').val(label);
 
         $('#street_number2').val(address);
@@ -179,11 +181,27 @@ function searchRP() {
         }
         else if(dataObject.stat === 'ok') {
 
-            var rpts = dataObject.relayPoints;
+            var rpts = dataObject.relayPoints,
+                btnClass = 'none ',
+                conf = $('#conf').text();
+
+            if(conf === 'loc') {
+                action = 'addFav';
+                btnClass = '';
+            }
+            else if(conf === 'cho') {
+                action = 'choose';
+                btnClass = '';
+            }
 
             deleteMarkers();
             rpts.forEach(function(rp) {
-                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress);
+                createMarker(parseFloat(rp.lat), parseFloat(rp.lng), rp.label + '<br>' + rp.completeAddress +
+                    '<br><button class="' + btnClass + 'btn btn-primary btn-sm" onclick="' + action + '(event, ' + rp.id + ')">Choisir ce point relais</button>' +
+                    '<input class="none" id="' + rp.id + 'label" value="' + rp.label + '">' +
+                    '<input class="none" id="' + rp.id + 'addres" value="' + rp.address + '">' +
+                    '<input class="none" id="' + rp.id + 'zip_code" value="' + rp.zip_code + '">' +
+                    '<input class="none" id="' + rp.id + 'city" value="' + rp.city + '">');
                 listRelayPoint(rp.lat, rp.lng, rp.label, rp.completeAddress);
             });
 
