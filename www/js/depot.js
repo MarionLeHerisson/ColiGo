@@ -40,8 +40,8 @@ function submitDepotForm() {
 
 
     // if errors are shown, hide them
-    $.each(data, function() {
-        $(this).parents('.form-group').removeClass('has-error');
+    $('.close').each(function() {
+        $(this).trigger('click');
     });
 
     // verif inputs

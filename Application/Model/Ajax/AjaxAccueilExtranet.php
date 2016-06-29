@@ -144,10 +144,6 @@ class AjaxAccueilExtranet {
      * @param array $param
      */
     public function postParcel($param) {
-        die(json_encode([
-            'stat'	=> 'ok',
-            'msg'	=> 'Blabla'
-        ]));
 
         // sender informations
         $userFirstname = ColiGo::sanitizeString($param['firstname']);

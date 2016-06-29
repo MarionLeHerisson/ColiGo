@@ -125,19 +125,19 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="type">Adresse de départ :</label>
         <div class="col-md-6">
-            <button type="button" class="btn btn-default" onclick="showChoixRP('ram')" id="choixRamRP">Point relais</button>
+            <button type="button" class="btn btn-default<?php echo $isactive;?>" onclick="showChoixRP('ram')" id="choixRamRP">Point relais</button>
             <button type="button" class="btn btn-default" onclick="showChoixAd('ram')" id="choixRamAd">Autre adresse</button>
             <br><br>
-            <input id="choosenTakingAddress" class="autocomplete form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled>
+            <input id="choosenTakingAddress" class="autocomplete form-control" placeholder='Cliquez sur "Point Relais" ou "Autre adresse"' disabled value="<?php echo $fav_label;?>">
         </div>
     </div>
     <div class="<?php if(DEBUG == 0){echo 'none';}?>">
         <table id="address">
-            <input name="ram_streetnumber" id="ram_street_number">
+            <input name="ram_streetnumber" id="ram_street_number" value="<?php echo $fav_streetnumber;?>">
             <input name="ram_route" id="ram_route">
-            <input name="ram_city" id="ram_localit">
-            <input name="ram_zipcode" id="ram_postal_code">
-            <input name="ram_country" id="ram_country">
+            <input name="ram_city" id="ram_locality" value="<?php echo $fav_city;?>">
+            <input name="ram_zipcode" id="ram_postal_code" value="<?php echo $fav_zipcode;?>">
+            <input name="ram_country" id="ram_country" value="<?php echo $fav_country;?>">
         </table>
     </div>
 

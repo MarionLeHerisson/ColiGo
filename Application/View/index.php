@@ -14,7 +14,7 @@ if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) &
 	require_once('../Model/userModel.php');
 	$userManager = new UserModel;
 
-	// connect user
+	// try to connect user
 	$type = $userManager->connexion($mail, $pwd);
 
     // if user does not exist
@@ -22,6 +22,12 @@ if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) &
         echo '<script type="text/javascript">
 						document.location.href="accueil";
 					</script>';
+    }
+
+    // get his favorite ralay point
+    $fav = $userManager->getFavoriteRP($_SESSION['id']);
+    if(is_array($fav)) {
+        $_SESSION['favRP'] = $fav;
     }
 
     // if the user works for ColiGo -> redirect him to extranet

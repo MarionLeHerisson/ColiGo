@@ -65,6 +65,11 @@ class accueil_extranetController {
         $blockedLastname = '';
         $blockedMail = '';
         $disabled = '';
+        $isactive = '';
+        $fav_streetnumber = '';
+        $fav_city = '';
+        $fav_zipcode = '';
+        $fav_country = '';
 
 		$sessionType = '';
 

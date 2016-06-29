@@ -172,4 +172,32 @@ class UserModel extends defaultModel {
         $res = $query->fetchColumn();
         return $res;
     }
+
+    /**
+     * Get RP id from user id
+     *
+     * @param int $userId
+     * @return array
+     *
+     * @author huma
+     */
+    public function getFavoriteRP($userId) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT user.id
+                                ,favoriterelaypoint.user_id,favoriterelaypoint.relay_point_id,favoriterelaypoint.is_deleted
+                                ,relaypoint.id,relaypoint.address,relaypoint.label
+                                ,address.id, address.address, address.zip_code,address.city
+                                FROM " . $this->_name ."
+                                LEFT JOIN favoriterelaypoint ON favoriterelaypoint.user_id = user.id
+                                LEFT JOIN relaypoint ON relaypoint.id = favoriterelaypoint.relay_point_id
+                                LEFT JOIN address ON address.id = relaypoint.address
+                                WHERE favoriterelaypoint.is_deleted = 0
+                                AND user.id =" . $userId . ";");
+        $query->execute();
+
+        $res = $query->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
 }

@@ -41,7 +41,7 @@ class AjaxLocaliser {
 
         $userId = $_SESSION['id'];
         $favoriteRPManager->deleteFavorite($userId);
-
+    // TODO : delete & insert only if needed
         $favoriteRPManager->addFavorite(intval($param[0]), $userId);
 
         die(json_encode([
