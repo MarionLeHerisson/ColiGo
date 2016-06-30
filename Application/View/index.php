@@ -4,6 +4,11 @@ session_start();
 require_once('../../library/coligo.php');
 require_once('../../const.php');
 
+// If Javascript is inactive
+echo '<noscript>
+    <meta http-equiv="refresh" content="1; URL=nojs.php">
+</noscript>';
+
 // connection
 if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) && $_POST['copwd'] != '') {
 
