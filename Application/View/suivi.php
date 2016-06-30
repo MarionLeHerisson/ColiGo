@@ -19,7 +19,7 @@
         ou réessayez plus tard : votre colis n\'a peut être pas encore été enregistré.';
     } else {
 
-        include('tableSuivi.php');
+        include('blocks/tableSuivi.php');
     }
 
     ?>

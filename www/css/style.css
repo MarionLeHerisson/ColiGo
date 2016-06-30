@@ -85,6 +85,11 @@ a {
 	padding-bottom: 20px;
 }
 
+/* PROFIL */
+.icon-left {
+    left: 10%;
+}
+
 /* FORM */
 .btn-primary {
 	background-image: -webkit-linear-gradient(top,#FF3273 0,#FF0055 100%);
