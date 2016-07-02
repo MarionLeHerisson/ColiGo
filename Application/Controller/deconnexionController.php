@@ -24,6 +24,8 @@ class deconnexionController {
 		session_destroy();
 		
 		// Redirection vers l'accueil
-		header('Location: accueil');
+		echo '<script type="text/javascript">
+						document.location.href="accueil";
+					</script>';
 	}
 }

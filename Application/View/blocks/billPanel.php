@@ -27,5 +27,6 @@
                 <th id="billTotalPrice" class="text-right">0</th>
             </tr>
         </table>
+        <div class="none"><a><i class="material-icons">file_download</i></a><br></div>
     </div>
 </div>
