@@ -51,4 +51,22 @@ class ColiGo {
 
         return $str;
     }
+
+    /**
+     * Create a unique tracking number
+     */
+    public static function createUniqueId() {
+
+        require_once(BASE_PATH . '/Application/Model/parcelModel.php');
+        $parcelManager = new ParcelModel();
+
+        do {
+            $uniqueId = '';
+            for($i = 0; $i < 10; $i++) {
+                $uniqueId .= rand(0,9);
+            }
+        } while($parcelManager->getIdFromTrackingNumber($uniqueId) != 0);
+
+        return $uniqueId;
+    }
 }

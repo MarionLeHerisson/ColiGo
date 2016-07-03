@@ -45,7 +45,7 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="accueil">Accueil</a></li>
-						<li><a href="cgu">À props</a></li>
+						<li><a href="cgu">À propos</a></li>
 						<li><a href="contact">Contact</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -62,7 +62,7 @@
 										<li><input id="comail" type="text" name="comail" placeholder="Adresse e-mail"></li>
 										<li><input id="copwd" type="password" name="copwd" placeholder="Mot de passe"></li>
 										<li role="separator" class="divider"></li>
-										<li><a href="#">Identifiants oubliés ?</a></li>
+										<li><a href="#" onclick="showForgotPwdPopin()">Identifiants oubliés ?</a></li>
 										<li role="separator" class="divider"></li>
 										<li><input type="submit" class="btn btn-connect" value="Connexion"></li>
 									</form>
@@ -87,3 +87,4 @@
 				</div><!--/.nav-collapse -->
 			</div>
 		</nav>
+		<?php include_once('blocks/popin/forgot_pwd.php') ?>

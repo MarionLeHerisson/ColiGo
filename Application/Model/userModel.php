@@ -23,6 +23,7 @@ class UserModel extends defaultModel {
      * @param int $type
      * @param int|string $address_id
      * @return string
+     *
      * @author Marion
      */
     public function insertUser($firstname, $lastname, $email, $pwd, $type, $address_id = 'NULL') {
@@ -179,7 +180,7 @@ class UserModel extends defaultModel {
      * @param int $userId
      * @return array
      *
-     * @author huma
+     * @author Marion
      */
     public function getFavoriteRP($userId) {
 
@@ -198,6 +199,69 @@ class UserModel extends defaultModel {
         $query->execute();
 
         $res = $query->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    /**
+     * @param int $key
+     * @return array
+     *
+     * @author Marion
+     */
+    public function getUserByKey($key) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT id, first_name, last_name, mail, password, type_id, address_id
+                                FROM " . $this->_name . "
+                                WHERE lost_pwd_key = " . $key . "
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
+
+    /**
+     * If user is deleted, reactivte account
+     *
+     * @param int $userId
+     * @return string
+     *
+     * @author Marion
+     */
+    public function reactivateAccount($userId) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET is_deleted = 0
+                                WHERE id = " . $userId . "
+                                AND is_deleted = 1;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
+
+    /**
+     * @param int $userId
+     * @param int $key
+     * @return string
+     *
+     * @author Marion
+     */
+    public function setNewKey($userId, $key) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET lost_pwd_key = " . $key . "
+                                WHERE id = " . $userId . "
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
         return $res;
     }
 }

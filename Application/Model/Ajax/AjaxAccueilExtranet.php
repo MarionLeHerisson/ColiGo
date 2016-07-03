@@ -203,7 +203,7 @@ class AjaxAccueilExtranet {
         $parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
 
         // create unique tracking number
-        $trackingNumber = $this->createUniqueId();
+        $trackingNumber = ColiGo::createUniqueId();
 
         // insert tracking number
         $parcelManager->addTrackingNuber($parcelId, $trackingNumber);
@@ -421,26 +421,6 @@ class AjaxAccueilExtranet {
         $weightPrice = $weightPriceManager->getPrice($parcelWeight, $deliveryType);
 
         return $weightPrice + $price;
-    }
-
-
-    /**
-     * Create a unique tracking number
-     * TODO : put in service
-     */
-    protected function createUniqueId() {
-        $uniqueId = null;
-
-        require_once('../Model/parcelModel.php');
-        $parcelManager = new ParcelModel();
-
-        do {
-            for($i = 0; $i < 10; $i++) {
-                $uniqueId .= rand(0,9);
-            }
-        } while($parcelManager->getIdFromTrackingNumber($uniqueId) != 0);
-
-        return $uniqueId;
     }
 }
 

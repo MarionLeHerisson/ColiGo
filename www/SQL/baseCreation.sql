@@ -52,6 +52,7 @@ CREATE TABLE User (
 	type_id INT NOT NULL,
 	address_id INT,
 	is_deleted INT DEFAULT 0,
+	lost_pwd_key INT DEFAULT NULL,
 	
 	PRIMARY KEY (id),
 	FOREIGN KEY (type_id) REFERENCES UserType (id)

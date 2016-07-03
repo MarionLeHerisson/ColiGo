@@ -4,6 +4,36 @@ function closePopin() {
 	});
 }
 
+function showForgotPwdPopin() {
+	$('#modalForgotPwd').modal('show');
+}
+
+function forgotPwd() {
+
+	var label = 'fgtPwd',
+		mail = $('#forgotPwdMail').val(),
+		checkMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-_]+.[a-zA-Z]{2,4}$/i;
+
+	if(mail === '' || !checkMail.test(mail)) {
+		showMessage(label, 'Veuillez entrer une adresse mail valide.', 1);
+		return;
+	}
+
+	myAjax(label, 'profil', 'lostPwd', [mail], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+		if(dataObject.stat === 'ko') {
+			showMessage(label, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
+		}
+		else {
+			showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	});
+}
+
 function clearEverything() {
 	closePopin();
 

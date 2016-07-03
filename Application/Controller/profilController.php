@@ -4,10 +4,27 @@ class profilController {
 
     public function indexAction() {
 
+        // If user is not connected
         if(!isset($_SESSION['first_name'])) {
             echo '<script type="text/javascript">
 						document.location.href="accueil";
 					</script>';
+        }
+
+        // ajax
+        if(isset($_POST['action']) && !empty($_POST['action'])) {
+
+            $action = $_POST['action'];
+            $param = $_POST['param'];
+
+            require_once('../Model/Ajax/AjaxProfil.php');
+            $ajaxApi = new AjaxProfil();
+
+            switch ($action) {
+                case 'lostPwd' :
+                    $ajaxApi->lostPwd($param);
+                    break;
+            }
         }
 
         // manager
@@ -25,7 +42,7 @@ class profilController {
 
 
             $tabHisto .= '<tr>
-                    <td>' . $parcel['order_date'] . '<br><a>détail</a></td>
+                    <td>' . $parcel['order_date'] . '<span class="none"><br><a>détail</a></span></td>
                     <td>' . $parcel['tracking_number'] . '</td>
                     <td>' . $parcel['status'] . $statusDate . '</td>
                     <td>' . $dep . '<br>' . $parcel['dep_zipcode'] . ', ' . $parcel['dep_city'] . '</td>
