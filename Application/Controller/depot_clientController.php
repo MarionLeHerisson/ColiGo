@@ -13,6 +13,7 @@ class depot_clientController {
         $blockedMail = '';
         $disabled = '';
         $isactive = '';
+        $fav_label = '';
         $fav_streetnumber = '';
         $fav_city = '';
         $fav_zipcode = '';
