@@ -4,7 +4,10 @@ function closePopin() {
 	});
 }
 
-function showForgotPwdPopin() {
+function showForgotPwdPopin(mail) {
+    if(mail != null && mail != '') {
+        $('#forgotPwdMail').val(mail);
+    }
 	$('#modalForgotPwd').modal('show');
 }
 
@@ -142,7 +145,8 @@ function submitInscForm() {
 		email = $('#formEmail').val(),
 		pwd = $('#formPwd').val(),
 		pwdConf = $('#formPwdConfirm').val(),
-		error = 0;
+		error = 0,
+        label = 'insc';
 
 
 	// firstname ?
@@ -168,8 +172,6 @@ function submitInscForm() {
 		error = 1;
 	}
 
-	// mail alrady exists ?
-
 	// password ?
 	if(pwd == '') {
 		$('.ttPwdObg').removeClass('none');
@@ -191,11 +193,25 @@ function submitInscForm() {
 		$('.ttPwdconfInv').removeClass('none');
 		error = 1;
 	}
-	
-	// If there is no erreor, send form
-	if(error == 0) {
-		$('#inscription-form').submit();
-	}
+
+    // mail alrady exists ?
+    myAjax(label, 'inscription', 'mailExists', [email], function(data) {
+        var dataObject = JSON.parse(data);		// transforms json return from php to js object
+
+        if(dataObject.stat === 'ok') {
+            // If there is no erreor, send form
+            if(error == 0) {
+                $('#inscription-form').submit();
+            }
+        }
+        else if (dataObject.stat === 'ko') {
+            showMessage(label, dataObject.msg, true);
+        }
+        else {
+            showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+        }
+    });
+
 }
 
 function showMessage(label, message, isError) {

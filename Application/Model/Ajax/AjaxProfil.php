@@ -51,7 +51,7 @@ class AjaxProfil {
 
         die(json_encode([
             'stat'	=> 'ko',
-            'msg'	=> 'Votre message a correctement été envoyé à l\'équipe de ColiGo.'
+            'msg'	=> 'Erreur lors de l\'envoi du mail de réinitialisation.'
         ]));
     }
 
