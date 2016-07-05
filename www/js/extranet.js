@@ -16,6 +16,9 @@ function clearEverything() {
 
 $('.collapsed').on('click', clearEverything);
 
+function enableAdditionalPrice() {
+
+}
 
 function xmlRelayPoint() {
     var rpMail = $('#idRpMail').val(),

@@ -67,6 +67,7 @@ class accueil_extranetController {
         $disabled = '';
         $isactive = '';
         $fav_streetnumber = '';
+        $fav_label = '';
         $fav_city = '';
         $fav_zipcode = '';
         $fav_country = '';
