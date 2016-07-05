@@ -48,12 +48,12 @@ class profilController {
 
 
             $tabHisto .= '<tr>
-                    <td>' . $parcel['order_date'] . '<span class="none"><br><a>détail</a></span></td>
+                    <td>' . ColiGo::frenchDate($parcel['order_date']) . '<span class="none"><br><a>détail</a></span></td>
                     <td>' . $parcel['tracking_number'] . '</td>
                     <td>' . $parcel['status'] . $statusDate . '</td>
                     <td>' . $dep . '<br>' . $parcel['dep_zipcode'] . ', ' . $parcel['dep_city'] . '</td>
                     <td>' . $arr . '<br>' . $parcel['arr_address'] . '<br>' . $parcel['arr_zipcode'] . ', ' . $parcel['arr_city'] . '</td>
-                    <td>' . $parcel['total_price'] . '</td>
+                    <td>' . $parcel['total_price'] . ' €</td>
                 </tr>';
         }
 

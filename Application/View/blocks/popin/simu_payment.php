@@ -41,7 +41,7 @@
                         <div class="col-md-2">
                             <select class="form-control" id="cb_select_year">
                                 <?php
-                                for($i = ColiGo::getYear(); $i < ColiGo::getYear() + 5; $i++) {
+                                for($i = date('Y'); $i < date('Y') + 5; $i++) {
                                     echo '<option>' . $i . '</option>';
                                 }
                                 ?>

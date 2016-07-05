@@ -93,7 +93,9 @@ class OrdersModel extends DefaultModel {
                                 LEFT JOIN user AS u ON u.id = orders.deliver_to
 
                                 WHERE ordered_by = " . $userId . "
-                                AND tracking.status_id = p.status_id;");
+                                AND tracking.status_id = p.status_id
+
+                                ORDER BY orders.order_date DESC;");
 
         $query->execute();
 

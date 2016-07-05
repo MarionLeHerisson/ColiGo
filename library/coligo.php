@@ -29,11 +29,26 @@ class ColiGo {
     }
 
     public static function getMonth() {
-        return date('n');
+        return date('n');   // 1 to 12
     }
 
-    public static function getYear() {
-        return date('Y');
+    /**
+     * Return franch date from a SQL date
+     * @param string $date
+     * @return bool|string
+     * @author Marion
+     */
+    public static function frenchDate($date) {
+        $days = ['dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam'];
+        $months = ['', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'decembre'];
+
+        $timestamp = strtotime($date);
+        $strDay = $days[date('w', $timestamp)];
+        $intDay = date('j', $timestamp);
+        $month = $months[date('n', $timestamp)];
+        $hour = date('H:i' , $timestamp);
+
+        return $strDay . ' ' . $intDay . ' ' . $month . ' ' .  date('Y', $timestamp) . '<br>à ' . $hour;
     }
 
     /**
