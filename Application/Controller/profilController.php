@@ -24,6 +24,12 @@ class profilController {
                 case 'lostPwd' :
                     $ajaxApi->lostPwd($param);
                     break;
+                case 'changeMail' :
+                    $ajaxApi->changeMail($param);
+                    break;
+                case 'changePwd' :
+                    $ajaxApi->changePwd($param);
+                    break;
             }
         }
 

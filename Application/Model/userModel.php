@@ -264,4 +264,63 @@ class UserModel extends defaultModel {
         $res = $query->fetchColumn();
         return $res;
     }
+
+    /**
+     * update a mail
+     * @param string $newMail
+     * @param int $userId
+     * @return string
+     * @author Marion
+     */
+    public function setNewMail($newMail, $userId) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET mail = '" . $newMail . "'
+                                WHERE id = " . $userId . "
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
+
+    /**
+     * update a password
+     * @param String $newPwd
+     * @param int $userId
+     * @return string
+     * @author Marion
+     */
+    public function setNewPwd($newPwd, $userId) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET password = '" . $newPwd . "'
+                                WHERE id = " . $userId . "
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
+
+    /**
+     * return the md5 password of an user
+     * @param int $userId
+     * @return string
+     * @author Marion
+     */
+    public function getPwd($userId) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT password
+                                FROM " . $this->_name . "
+                                WHERE id = " . $userId . "
+                                AND is_deleted = 0;");
+        $query->execute();
+
+        $res = $query->fetchColumn();
+        return $res;
+    }
 }

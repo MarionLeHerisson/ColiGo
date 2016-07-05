@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/Application/Controller/profilController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Model/Ajax/AjaxInscription.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/blocks/billPanel.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Application/View/blocks/popin/change_mail.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Application/View/blocks/popin/change_pwd.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/blocks/popin/choixAd.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/blocks/popin/choixRP.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/View/blocks/popin/simu_payment.php" charset="UTF-8" />
@@ -13,5 +15,6 @@
     <file url="file://$PROJECT_DIR$/Application/View/profil.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/const.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nojs.php" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

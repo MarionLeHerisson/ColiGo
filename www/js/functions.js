@@ -37,6 +37,79 @@ function forgotPwd() {
 	});
 }
 
+function showChangeMail() {
+    // empty the modal
+    $('#newMail').val('');
+    $('#changeMail').addClass('none');
+
+    $('#modalChangeMail').modal('show');
+}
+
+function changeMail() {
+    var newMail = $('#newMail').val(),
+        label = 'changeMail';
+
+    if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(newMail) || newMail === '') {
+        showMessage(label, 'Merci de renseigner une adresse mail valide.', true)
+    }
+    else {
+        myAjax(label, 'profil', 'changeMail', [newMail], function(data) {
+            var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+            if(dataObject.stat === 'ko') {
+                showMessage(label, dataObject.msg, true);
+            }
+            else if(dataObject.stat === 'ok') {
+                showMessage(label, dataObject.msg, false);
+            }
+            else {
+                showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+            }
+        });
+    }
+}
+
+function showChangePwd() {
+    // empty the modal
+    $('#oldPwd').val('');
+    $('#newPwd').val('');
+    $('#confirmNewPwd').val('');
+    $('#changePwd').addClass('none');
+
+    $('#modalChangePwd').modal('show');
+}
+
+function changePwd() {
+    var oldPwd = $('#oldPwd').val(),
+        newPwd = $('#newPwd').val(),
+        confNewPwd = $('#confirmNewPwd').val(),
+        label = 'changePwd';
+
+    if(oldPwd === '' || newPwd === '' || confNewPwd === '') {
+        showMessage(label, 'Tous les champs sont requis.', true);
+        return;
+    }
+
+    if(newPwd == confNewPwd) {
+        myAjax(label, 'profil', 'changePwd', [oldPwd, newPwd], function(data) {
+            var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+            if(dataObject.stat === 'ko') {
+                showMessage(label, dataObject.msg, true);
+            }
+            else if(dataObject.stat === 'ok') {
+                showMessage(label, dataObject.msg, false);
+            }
+            else {
+                showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+            }
+        });
+    }
+    else {
+        showMessage(label, 'Le nouveau mot de passe et sa confirmation ne sont pas identiques.', true);
+    }
+}
+
 function clearEverything() {
 	closePopin();
 
@@ -62,8 +135,6 @@ $('.collapsed').on('click', clearEverything);
  * @param String action		// The method to be called
  * @param Array param		// Parameters
  * @param Callable callback	// Called if success
- *
- * @author Marion
  */
 function myAjax(label, url, action, param, callback) {
 

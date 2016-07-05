@@ -8,6 +8,11 @@
 
 class AjaxProfil {
 
+    /**
+     * [complete this summary]
+     * @param array $param
+     * @author Marion
+     */
     public function lostPwd($param) {
         // managers
         require_once('../Model/userModel.php');
@@ -56,10 +61,66 @@ class AjaxProfil {
     }
 
     public function changePwd($param) {
+        $pwd = md5(ColiGo::sanitizeString($param[0]));
+        $newPwd = md5(ColiGo::sanitizeString($param[1]));
 
+        require_once('../Model/userModel.php');
+        $userManager = new UserModel();
+
+        $actualPwd = $userManager->getPwd($_SESSION['id']);
+
+        if($actualPwd == $pwd) {
+            $res = $userManager->setNewPwd($newPwd, $_SESSION['id']);
+
+            if($res == 0) {
+                $_SESSION['mail'] = $param[0];
+
+                die(json_encode([
+                    'stat'	=> 'ok',
+                    'msg'	=> 'Votre mot de passe a bien été mis à jour.'
+                ]));
+            }
+
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.(changePwd)'
+            ]));
+        }
+
+        die(json_encode([
+            'stat'	=> 'ko',
+            'msg'	=> 'Votre ancien mot de passe est incorrect.'
+        ]));
     }
 
     public function changeMail($param) {
 
+        require_once('../Model/userModel.php');
+        $userManager = new UserModel();
+
+        $user = $userManager->getUserByMail($param[0]);
+
+        if(isset($user[0]['id'])) {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Cette adresse mail est déjà assocée à un compte. Avez vous <a href="#" onclick="showForgotPwdPopin(\'' . $param[0] . '\')">perdu votre mot de passe</a> ?'
+            ]));
+        }
+
+        $res = $userManager->setNewMail($param[0], $_SESSION['id']);
+
+        if($res == 0) {
+            $_SESSION['mail'] = $param[0];
+
+            die(json_encode([
+                'stat'	=> 'ok',
+                'msg'	=> 'Votre adresse mail a bien été mise à jour.'
+            ]));
+        }
+
+        die(json_encode([
+            'stat'	=> 'ko',
+            'msg'	=> 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.(changeMail)'
+        ]));
     }
 }
