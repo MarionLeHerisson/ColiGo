@@ -164,6 +164,10 @@ a {
     right: 10px;
 }
 
+.normal {
+    font-weight: normal;
+}
+
 /* Scroll to top/bottom */
 .scroll {
     display: block;

@@ -60,6 +60,7 @@
             ?>
             </tbody>
         </table>
+        <small class="col-md-12">* Si colis déposé en point relais avant 15h ou ramassé le jour même.</small>
     </div>
 
     <div class="col-md-4">
@@ -84,4 +85,7 @@
         </table>
     </div>
 
-    <small class="col-md-12">* Si colis déposé en point relais avant 15h ou ramassé le jour même.</small>
+    <div class="col-md-12">
+        <h3 class="pull-left">Livraison de fret</h3>
+        <p class="col-md-12">Pour tout colis de plus de 30kg, pous pouvez vous adresser à notre <a href="contact">service clientèle</a> qui veillera à vous offrir une solution personnalisée adaptée à vos besoins.</p>
+    </div>

@@ -36,27 +36,35 @@
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="type" id="express" value="2" checked onclick="calculateQuotation(event)">
-                    Livraison à horaires garantis
+                    <label for="express" class="normal">
+                        Livraison à horaires garantis
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="type" id="8h" value="1" onclick="calculateQuotation(event)">
-                    Livraison le lendemain à 8h si la commande est passée avant 15h
+                    <label for="8h" class="normal">
+                        Livraison le lendemain à 8h si la commande est passée avant 15h
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="type" id="urgence" value="3" onclick="calculateQuotation(event)">
-                    Livraison d'urgence
+                    <label for="urgence" class="normal">
+                        Livraison d'urgence
+                    </label>
                 </div>
             </div>
             <?php
             if($_SESSION['type'] == 1 || $_SESSION['type'] == 2) {
                 echo '<div class="col-md-12">
                         <div class="pull-left">
-                            <input type="radio" name="type" id="fret" value="4" onclick="calculateQuotation(event);enableAdditionalPrice()">
-                            Livraison de fret
+                            <input type="radio" name="type" id="fret" value="4" onclick="calculateQuotation(event)">
+                            <label for="fret" class="normal">
+                                Livraison de fret
+                            </label>
                         </div>
                     </div>';
             }
@@ -67,12 +75,11 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="calculateQuotation(event)"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="calculateQuotation(event)" onfocusout="sanitizeNumbers()"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire
         </p>
-        <!-- TODO : Verif point ou virgule, puis js qui transforme virgule en point, retire -->
     </div>
 
     <br><h4>Services supplémentaires :</h4>
@@ -82,31 +89,41 @@
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="emballage" id="kraft" value="3" data-price="<?php echo $extraPrices[2]['price'];?>" onclick="calculateQuotation(event)">
-                    Papier kraft (<?php echo $extraPrices[2]['price'];?> €)
+                    <label for="kraft" class="normal">
+                        Papier kraft (<?php echo $extraPrices[2]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="emballage" id="soie" value="2" data-price="<?php echo $extraPrices[1]['price'];?>" onclick="calculateQuotation(event)">
-                    Papier de soie (<?php echo $extraPrices[1]['price'];?> €)
+                    <label for="soie" class="normal">
+                        Papier de soie (<?php echo $extraPrices[1]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="emballage" id="bulles" value="1"  data-price="<?php echo $extraPrices[0]['price'];?>" onclick="calculateQuotation(event)">
-                    Papier bulles (<?php echo $extraPrices[0]['price'];?> €)
+                    <label for="bulles" class="normal">
+                        Papier bulles (<?php echo $extraPrices[0]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="emballage" id="polystyrene" value="4" data-price="<?php echo $extraPrices[3]['price'];?>" onclick="calculateQuotation(event)">
-                    Particules de calage en polystirène (<?php echo $extraPrices[3]['price'];?> €)
+                    <label for="polystyrene" class="normal">
+                        Particules de calage en polystirène (<?php echo $extraPrices[3]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="emballage" id="none" value="none" checked data-price="noPack" onclick="calculateQuotation(event)">
-                    Aucun
+                    <label for="none" class="normal">
+                        Aucun
+                    </label>
                 </div>
             </div>
         </div>
@@ -118,19 +135,25 @@
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
-                    Colis prioritaire (<?php echo $extraPrices[6]['price'];?> €)
+                    <label for="prioritaire" class="normal">
+                        Colis prioritaire (<?php echo $extraPrices[6]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
-                    Colis livré par tous les moyens en cas d'imprévu (<?php echo $extraPrices[7]['price'];?> €)
+                    <label for="imprevu" class="normal">
+                        Colis livré par tous les moyens en cas d'imprévu (<?php echo $extraPrices[7]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
-                    Indemnisation en cas de perte ou d'avarie (<?php echo $extraPrices[8]['price'];?> €)
+                    <label for="indemnisation" class="normal">
+                        Indemnisation en cas de perte ou d'avarie (<?php echo $extraPrices[8]['price'];?> €)
+                    </label>
                 </div>
             </div>
         </div>
@@ -142,23 +165,27 @@
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
-                    Livraison le samedi (<?php echo $extraPrices[5]['price'];?> €)
+                    <label for="samedi" class="normal">
+                        Livraison le samedi (<?php echo $extraPrices[5]['price'];?> €)
+                    </label>
                 </div>
             </div>
             <?php
             if($_SESSION['type'] == 1 || $_SESSION['type'] == 2) {
             echo '<div class="col-md-12">
                 <div class="pull-left">
-                    <input type="checkbox" class="checkboxes" name="additionnel" id="additionnel" data-price="0" onclick="enableAdditionalPrice()">
-                    Charges additionnelles
+                    <input type="checkbox" class="checkboxes" name="additionnel" id="additionnel" onclick="enableAdditionalPrice();">
+                    <label for="additionnel" class="normal">
+                        Charges additionnelles
+                    </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="text" name="addedPrice" id="addedPrice" class="form-control" placeholder="00.00" disabled> €
-                     <!-- TODO : Pareil que sur le prix -->
+                    <input type="text" name="addedPrice" id="addedPrice" class="form-control" placeholder="00.00" onfocusout="sanitizeNumbers();calcAddPrice();" disabled> €
                 </div>
-            </div>';
+            </div>
+            <div class="pull-left none"><input type="checkbox" class="checkboxes" name="Charges additionnelles" id="chAdd" data-price="0" onclick="calculateQuotation(event)"></div>';
             }
             ?>
             <div class="col-md-12">

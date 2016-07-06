@@ -32,7 +32,8 @@ function submitDepotForm() {
         indemnity : $('#indemnisation:checked').val(),
         taking : $('#ramassage:checked').val(),
         delivery : $('#livraison:checked').val(),
-        saturday : $('#samedi:checked').val()
+        saturday : $('#samedi:checked').val(),
+        additionnal : $('#chAdd:checked').attr('data-price')
     };
 
     var checkMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/i,

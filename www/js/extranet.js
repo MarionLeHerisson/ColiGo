@@ -18,6 +18,25 @@ $('.collapsed').on('click', clearEverything);
 
 function enableAdditionalPrice() {
 
+    var add = $('#addedPrice');
+
+    if($('input[name=additionnel]').is(':checked')) {
+        add.removeAttr('disabled');
+    } else {
+        add.attr('disabled', 'disabled');
+        add.val('');
+        calcAddPrice();
+    }
+}
+
+function calcAddPrice() {
+    var charges = $('#chAdd');
+    charges.attr('data-price', parseFloat($('#addedPrice').val()) + "");
+    charges.trigger('click');
+}
+
+function sanitizeNumbers() {
+console.log($(this));
 }
 
 function xmlRelayPoint() {
