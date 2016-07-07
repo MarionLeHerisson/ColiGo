@@ -35,7 +35,7 @@ function calcAddPrice() {
     charges.trigger('click');
 }
 
-function sanitizeNumbers() {
+function sanitizeNumbers(event) {
 console.log($(this));
 }
 

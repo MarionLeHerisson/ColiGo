@@ -322,7 +322,7 @@ function scrollToBottom() {
 
     var body = $("html, body");
     body.animate({
-            scrollTop:1000
+            scrollTop:2000
         },
         'slow'
     );

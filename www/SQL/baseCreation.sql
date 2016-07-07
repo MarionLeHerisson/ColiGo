@@ -175,4 +175,13 @@ CREATE TABLE Tracking(
   FOREIGN KEY(status_id) REFERENCES ParcelStatus(id)
 );
 
+CREATE TABLE AdditionnalPrice(
+  id INT NOT NULL AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+
+  PRIMARY KEY (id),
+  FOREIGN KEY (order_id) REFERENCES Orders(id)
+);
+
 

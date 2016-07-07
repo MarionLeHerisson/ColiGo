@@ -236,13 +236,19 @@ class AjaxAccueilExtranet {
             $extras[] = 6;
         }
 
+        if(isset($param['additionnal']) && $param['additionnal'] != '' && $param['additionnal'] != 'undefined') {
+            $add = intval($param['additionnal']);
+        } else {
+            $add = 0;
+        }
+
         $values = $this->sortValues($extras, $parcelId);
 
         // link extras and parcel
         $parcelExtraManager->linkMultipleParcelExtra($values);
 
         // calculate price
-        $totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType);
+        $totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType, $add);
 
         // if receiver exists -> get id & address_id
         $receiver = $userManager->getUserByName($receiverFirstname, $receiverLastname);
@@ -255,14 +261,12 @@ class AjaxAccueilExtranet {
 
         // Arrival address : If address exists, use existing id for this address
         $arrivalAddress = $addressManager->existAddress($receiverAddress, $receiverZipCode, $receiverCity);
-
         if($arrivalAddress == null) {
             $arrivalAddress = $addressManager->insertAddress($receiverAddress, $receiverZipCode, $receiverCity);
         }
 
         // Deprture address : If address exists, use existing id for this address
         $depAddressId = $addressManager->existAddress($senderAddress, $senderZipCode, $senderCity);
-
         if($depAddressId == null) {
             $depAddressId = $addressManager->insertAddress($senderAddress, $senderZipCode, $senderCity);
         }
@@ -279,6 +283,13 @@ class AjaxAccueilExtranet {
 
         // insert Order
         $orderId = $ordersManager->insertOrder($depAddressId, $arrivalAddress, $totalPrice, $userId, $reciverId, $rpId);
+
+        // additionnal price
+        if($add > 0) {
+            require_once('../Model/additionnalPriceModel.php');
+            $addPriceManager = new AdditionnalPriceModel();
+            $addPriceManager->linkOrderAddPrice($orderId, $add);
+        }
 
         // link order to parcel
         $orderParcelManager->linkParcelToOrder($parcelId, $orderId);
@@ -399,12 +410,13 @@ class AjaxAccueilExtranet {
      * @param array $extras
      * @param float $parcelWeight
      * @param int $deliveryType
+     * @param float $add
      * @return float
      *
      * @author Marion
      * TODO : put in Service
      */
-    public function calculatePrice($extras, $parcelWeight, $deliveryType) {
+    public function calculatePrice($extras, $parcelWeight, $deliveryType, $add) {
 
         // Managers
         include_once('../Model/extraModel.php');
@@ -419,8 +431,9 @@ class AjaxAccueilExtranet {
         }
 
         $weightPrice = $weightPriceManager->getPrice($parcelWeight, $deliveryType);
+        $totalPrice = $weightPrice + $price + $add;
 
-        return $weightPrice + $price;
+        return $totalPrice;
     }
 }
 

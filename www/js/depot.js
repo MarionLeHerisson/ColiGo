@@ -36,6 +36,7 @@ function submitDepotForm() {
         additionnal : $('#chAdd:checked').attr('data-price')
     };
 
+    console.log(data);
     var checkMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/i,
         label = 'formDepot';
 

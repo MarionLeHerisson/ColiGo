@@ -29,8 +29,9 @@ VALUES
 	(2.1, 	5,  	39.70,	3),
 	(5.1, 	10,  	44.30,	3),
 	(10.1, 	20,  	47.10,	3),
-	(20.1, 	30,  	50.20,	3);
--- TODO : fret --
+	(20.1, 	30,  	50.20,	3),
+-- fret --
+  (0, 		10000,	  0,	4);
 
 INSERT INTO Extra(label, price, explaination)
 VALUES ('papier bulles', 0.40, 'Le colis sera emballé de papier bulles. Protège les objets fragiles des gros impacts.'),

@@ -75,7 +75,7 @@
     <div class="form-group">
         <label class="control-label col-md-3" for="firstname">Poids du colis :</label>
         <div class="col-md-4">
-            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="calculateQuotation(event)" onfocusout="sanitizeNumbers()"><p>kg</p>
+            <input name="weight" id="weight" type="text" class="form-control" placeholder="00.00" onkeyup="calculateQuotation(event)" onfocusout="sanitizeNumbers(event)"><p>kg</p>
         </div>
         <p class="col-md-4 none ttLastname bg-danger">
             Poids obligatoire
@@ -182,7 +182,7 @@
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="text" name="addedPrice" id="addedPrice" class="form-control" placeholder="00.00" onfocusout="sanitizeNumbers();calcAddPrice();" disabled> €
+                    <input type="text" name="addedPrice" id="addedPrice" class="form-control" placeholder="00.00" onfocusout="sanitizeNumbers(event);calcAddPrice();" disabled> €
                 </div>
             </div>
             <div class="pull-left none"><input type="checkbox" class="checkboxes" name="Charges additionnelles" id="chAdd" data-price="0" onclick="calculateQuotation(event)"></div>';
