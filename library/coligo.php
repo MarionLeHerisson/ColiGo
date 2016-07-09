@@ -78,7 +78,7 @@ class ColiGo {
         do {
             $uniqueId = '';
             for($i = 0; $i < 10; $i++) {
-                $uniqueId .= rand(0,9);
+                $uniqueId .= rand(1,9);
             }
         } while($parcelManager->getIdFromTrackingNumber($uniqueId) != 0);
 

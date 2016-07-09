@@ -171,7 +171,7 @@
                 </div>
             </div>
             <?php
-            if($_SESSION['type'] == 1 || $_SESSION['type'] == 2) {
+            if(($_SESSION['type'] == 1 || $_SESSION['type'] == 2) && $disabled == '') {
             echo '<div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="additionnel" id="additionnel" onclick="enableAdditionalPrice();">

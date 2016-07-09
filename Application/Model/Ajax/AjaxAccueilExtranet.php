@@ -236,16 +236,17 @@ class AjaxAccueilExtranet {
             $extras[] = 6;
         }
 
+        $values = $this->sortValues($extras, $parcelId);
+
+        // link extras and parcel
+        $parcelExtraManager->linkMultipleParcelExtra($values);
+
+        // set additionnal price
         if(isset($param['additionnal']) && $param['additionnal'] != '' && $param['additionnal'] != 'undefined') {
             $add = intval($param['additionnal']);
         } else {
             $add = 0;
         }
-
-        $values = $this->sortValues($extras, $parcelId);
-
-        // link extras and parcel
-        $parcelExtraManager->linkMultipleParcelExtra($values);
 
         // calculate price
         $totalPrice = $this->calculatePrice($extras, $parcelWeight, $deliveryType, $add);

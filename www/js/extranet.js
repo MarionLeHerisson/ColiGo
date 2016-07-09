@@ -12,6 +12,11 @@ function clearEverything() {
 	$('#idColisLivre').val('');
 	$('#idColisPerdu').val('');
 	$('#idColisPrisEnCharge').val('');
+
+	$('#choixLivRP').removeClass('active');
+	$('#choixLivAd').removeClass('active');
+	$('#choixRamRP').removeClass('active');
+	$('#choixRamAd').removeClass('active');
 }
 
 $('.collapsed').on('click', clearEverything);
