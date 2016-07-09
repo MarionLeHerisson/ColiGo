@@ -27,13 +27,13 @@ class ParcelModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(weight, status_id, delivery_type)
-                                VALUES (" . $weight . ", " . $status . ", " . $delivery . ");");
-        $query->execute();
+                                VALUES (?, ?, ?);");
+        $query->execute([$weight, $status, $delivery]);
 
-        $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
-        $query2->execute();
-
-        $res = $query2->fetchColumn();
+        //$query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
+        //$query2->execute();
+        $res = $bdd->lastInsertId();
+        //$res = $query2->fetchColumn();
 
         return $res;
     }
@@ -51,9 +51,10 @@ class ParcelModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("UPDATE " . $this->_name . " SET status_id = " . $newStatus .
-                                " WHERE id = " . $parcelId . ";");
-        $query->execute();
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET status_id = ?
+                                WHERE id = ?;");
+        $query->execute([$newStatus, $parcelId]);
 
         $result = $query->fetchColumn();
         return $result;
@@ -71,8 +72,8 @@ class ParcelModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT status_id FROM " . $this->_name . " WHERE id = " . $parcelId);
-        $query->execute();
+        $query = $bdd->prepare("SELECT status_id FROM " . $this->_name . " WHERE id = ?;");
+        $query->execute([$parcelId]);
 
         $status = $query->fetchColumn();
 
@@ -91,10 +92,11 @@ class ParcelModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("UPDATE " . $this->_name . " SET tracking_number = " . $trackingNumber . "
-                                WHERE id = " . $parcelId . ";");
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET tracking_number = ?
+                                WHERE id = ?;");
 
-        $query->execute();
+        $query->execute([$trackingNumber, $parcelId]);
     }
 
     /**
@@ -109,8 +111,8 @@ class ParcelModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT id FROM " . $this->_name . " WHERE tracking_number = " . $trackingNumber);
-        $query->execute();
+        $query = $bdd->prepare("SELECT id FROM " . $this->_name . " WHERE tracking_number = ?;");
+        $query->execute([$trackingNumber]);
 
         $res = $query->fetchColumn();
 
@@ -164,10 +166,9 @@ class ParcelModel extends DefaultModel {
                                 LEFT JOIN DeliveryType AS dt
                                     ON dt.id = Parcel.delivery_type
 
-                                WHERE Parcel.tracking_number = " . $trackingNumber . "
-                                AND Parcel.delivery_type = wp.delivery_type;
-");
-        $query->execute();
+                                WHERE Parcel.tracking_number = ?
+                                AND Parcel.delivery_type = wp.delivery_type;");
+        $query->execute([$trackingNumber]);
 
         $res = $query->fetchAll();
 

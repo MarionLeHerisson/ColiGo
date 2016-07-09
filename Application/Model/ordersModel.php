@@ -92,15 +92,14 @@ class OrdersModel extends DefaultModel {
                                 LEFT JOIN ParcelStatus AS ps ON ps.id = Tracking.status_id
                                 LEFT JOIN user AS u ON u.id = orders.deliver_to
 
-                                WHERE ordered_by = " . $userId . "
+                                WHERE ordered_by = ?
                                 AND tracking.status_id = p.status_id
 
                                 ORDER BY orders.order_date DESC;");
 
-        $query->execute();
+        $query->execute([$userId]);
 
-        //$res = $query->fetch(PDO::FETCH_ASSOC);
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }

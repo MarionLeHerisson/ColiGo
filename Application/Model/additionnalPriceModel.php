@@ -23,10 +23,10 @@ class AdditionnalPriceModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(order_id, price)
-                                VALUES (" . $orderId . ", " . $price . ");");
-        $query->execute();
-        $res = $query->fetchColumn();
+                                VALUES (?, ?);");
+        $query->execute([$orderId, $price]);
 
+        $res = $query->fetchColumn();
         return $res;
     }
 

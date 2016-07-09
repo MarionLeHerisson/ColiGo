@@ -15,8 +15,8 @@ class OrderParcelModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(order_id, parcel_id)
-                                VALUES (" . intval($orderId) . ", " . intval($parcelId) . ");");
-        $query->execute();
+                                VALUES (?, ?);");
+        $query->execute([$orderId, $parcelId]);
 
     }
 }

@@ -18,8 +18,8 @@ class TrackingModel extends DefaultModel
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(parcel_id, status_id, new_status_date)
-                                VALUES (" . $parcelId . ", " . $statusId . ", NOW());");
-        $query->execute();
+                                VALUES (?, ?, NOW());");
+        $query->execute([$parcelId, $statusId]);
     }
 
     /**
@@ -38,9 +38,9 @@ class TrackingModel extends DefaultModel
                                 FROM Parcel
                                 LEFT JOIN Tracking ON Tracking.parcel_id = Parcel.id
                                 LEFT JOIN ParcelStatus ON ParcelStatus.id = Tracking.status_id
-                                WHERE Parcel.tracking_number = " . $trackingNumber . ";");
+                                WHERE Parcel.tracking_number = ?;");
 
-        $query->execute();
+        $query->execute([$trackingNumber]);
 
         $res = $query->fetchAll();
 

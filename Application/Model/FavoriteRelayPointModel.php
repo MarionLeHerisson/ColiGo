@@ -21,8 +21,8 @@ class FavoriteRelayPointModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(user_id, relay_point_id)
-                                VALUES (" . $userId . ", " . $rpId . ");");
-        $res = $query->execute();
+                                VALUES (?, ?);");
+        $res = $query->execute([$userId, $rpId]);
 
         return $res;
     }
@@ -36,9 +36,9 @@ class FavoriteRelayPointModel extends DefaultModel {
 
         $query = $bdd->prepare("UPDATE " . $this->_name . "
                                 SET is_deleted = 1
-                                WHERE user_id = " . $userId . "
+                                WHERE user_id = ?
                                 AND is_deleted = 0;");
-        $res = $query->execute();
+        $res = $query->execute([$userId]);
 
         return $res;
     }

@@ -128,7 +128,7 @@ class RelayPointModel extends DefaultModel {
                                  , p.weight, p.id, p.delivery_type
                                  , wp.min_weight, wp.max_weight, wp.price, wp.id, wp.delivery_type
 
-                                FROM " . $this->_name . " AS rp
+                                 FROM " . $this->_name . " AS rp
 
                                  LEFT JOIN Orders AS odep
                                  ON odep.departure_address = rp.address
@@ -146,10 +146,10 @@ class RelayPointModel extends DefaultModel {
                                  ON  wp.delivery_type =p.delivery_type
                                  AND p.weight BETWEEN wp.min_weight AND wp.max_weight
 
-                                WHERE rp.owner_id = " . $ownerId . "
-                                 AND odep.order_date = " . $date . "
-                                 OR oarr.delivery_date = " . $date . ";");
-        $query->execute();
+                                 WHERE rp.owner_id = ?
+                                 AND odep.order_date = ?
+                                 OR oarr.delivery_date = ?;");
+        $query->execute([$ownerId, $date, $date]);
 
         $res = $query->fetchAll();
 
@@ -190,10 +190,10 @@ class RelayPointModel extends DefaultModel {
                                  ON  wp.delivery_type =p.delivery_type
                                  AND p.weight BETWEEN wp.min_weight AND wp.max_weight
 
-                                WHERE rp.owner_id = " . $ownerId . "
-                                 AND MONTH(odep.order_date) = " . $month . "
-                                 OR MONTH(oarr.delivery_date) = " . $month . ";");
-        $query->execute();
+                                WHERE rp.owner_id = ?
+                                 AND MONTH(odep.order_date) = ?
+                                 OR MONTH(oarr.delivery_date) = ?;");
+        $query->execute([$ownerId, $month, $month]);
 
         $res = $query->fetchAll();
 

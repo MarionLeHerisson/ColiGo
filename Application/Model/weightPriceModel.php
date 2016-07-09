@@ -26,9 +26,9 @@ class WeightPriceModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT price FROM " . $this->_name . "
-                       WHERE delivery_type = " . $type . "
-                       AND " . $weight . " BETWEEN min_weight AND max_weight;");
-        $query->execute();
+                       WHERE delivery_type = ?
+                       AND ? BETWEEN min_weight AND max_weight;");
+        $query->execute([$type, $weight]);
 
         $result = $query->fetchColumn();
 

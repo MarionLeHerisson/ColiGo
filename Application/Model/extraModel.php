@@ -20,8 +20,8 @@ class ExtraModel extends DefaultModel {
                                 FROM " . $this->_name . "
                                 LEFT JOIN ParcelExtra
                                 ON ParcelExtra.extra_id = Extra.id
-                                WHERE ParcelExtra.parcel_id = " . $parcelId . ";");
-        $query->execute();
+                                WHERE ParcelExtra.parcel_id = ?;");
+        $query->execute([$parcelId]);
 
         $result = $query->fetchAll();
 
@@ -39,8 +39,9 @@ class ExtraModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT price FROM " . $this->_name . " WHERE id = " . $extraId . ";");
-        $query->execute();
+        $query = $bdd->prepare("SELECT price FROM " . $this->_name . "
+                                WHERE id = ?;");
+        $query->execute([$extraId]);
 
         $result = $query->fetchColumn();
 

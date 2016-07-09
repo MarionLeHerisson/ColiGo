@@ -17,7 +17,7 @@ class ParcelExtraModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(parcel_id, extra_id)
-                                VALUES " . $values . ";");
-        $query->execute();
+                                VALUES ?;");
+        $query->execute([$values]);
     }
 }

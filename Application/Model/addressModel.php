@@ -19,8 +19,8 @@ class AddressModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, zip_code, city, lat, lng)
-                                VALUES ('" . $address . "'," . intval($zipcode) . " ,'" . $city . "', " . $lat . ", " . $lng . ");");
-        $query->execute();
+                                VALUES (?, ? ,? , ?, ?);");
+        $query->execute([$address, $zipcode, $city, $lat, $lng]);
 
         $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
         $query2->execute();
@@ -36,9 +36,9 @@ class AddressModel extends DefaultModel {
 
         $query = $bdd->prepare("SELECT id, address, zip_code, city FROM " . $this->_name . "
                                 INNER JOIN User ON User.address_id = Address.id
-                                WHERE User.id = " . $userId . ";");
+                                WHERE User.id = ?;");
 
-        $query->execute();
+        $query->execute([$userId]);
 
         return $query;
     }
@@ -56,10 +56,10 @@ class AddressModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id FROM " . $this->_name . "
-                                WHERE address = '" . $address . "'
-                                AND zip_code = " . intval($zipcode) . "
-                                AND city = '" . $city . "';");
-        $query->execute();
+                                WHERE address = ?
+                                AND zip_code = ?
+                                AND city = ?;");
+        $query->execute([$address, $zipcode, $city]);
         $res = $query->fetchColumn();
 
         return $res;

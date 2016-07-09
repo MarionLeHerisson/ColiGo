@@ -32,9 +32,8 @@ class UserModel extends defaultModel {
 
         // insert user
         $query = $bdd->prepare("INSERT INTO " . $this->_name . " (first_name, last_name, mail, password, type_id, address_id)
-                                VALUES ('" . $firstname . "', '" . $lastname . "', '" . $email . "', '" . $pwd ."', " . $type . ",
-                                " . $address_id ."); SELECT LAST_INSERT_ID();");
-        $query->execute();
+                                VALUES (?, ?, ?, ?, ?,?); SELECT LAST_INSERT_ID();");
+        $query->execute([$firstname, $lastname, $email, $pwd, $type, $address_id]);
 
         $res = $query->fetchColumn();
 
@@ -54,9 +53,9 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id, address_id FROM " . $this->_name . "
-                                WHERE mail = '" . $userMail . "'
+                                WHERE mail = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$userMail]);
 
         $result = $query->fetchAll();
 
@@ -76,10 +75,10 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id, address_id, first_name, last_name, type_id FROM " . $this->_name . "
-                                WHERE first_name = '" . $firstname . "'
-                                AND last_name = '" . $lastname . "'
+                                WHERE first_name = ?
+                                AND last_name = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$firstname, $lastname]);
 
         $result = $query->fetchAll();
 
@@ -102,8 +101,8 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT id, first_name, last_name, mail, type_id, address_id FROM " . $this->_name . "
-                                WHERE mail='" . $mail ."' AND password='". $pwd ."' AND is_deleted = 0;");
-        $query->execute();
+                                WHERE mail = ? AND password = ? AND is_deleted = 0;");
+        $query->execute([$mail, $pwd]);
 
         $tab = $query->fetchAll();
 
@@ -131,8 +130,8 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("SELECT type_id FROM " . $this->_name . "
-                                WHERE id=" . intval($id) .";");
-        $query->execute();
+                                WHERE id = ?;");
+        $query->execute([$id]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -150,8 +149,11 @@ class UserModel extends defaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($type) . " WHERE id = " . intval($userId) . " AND is_deleted = 0;");
-        $query->execute();
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET type_id = ?
+                                WHERE id = ?
+                                AND is_deleted = 0;");
+        $query->execute([$type, $userId]);
     }
 
     /**
@@ -167,8 +169,11 @@ class UserModel extends defaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("UPDATE " . $this->_name . " SET type_id = " . intval($newRole) . " WHERE mail LIKE '" . $userMail . "' AND is_deleted = 0;");
-        $query->execute();
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET type_id = ?
+                                WHERE mail LIKE ?
+                                AND is_deleted = 0;");
+        $query->execute([$newRole, $userMail]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -195,8 +200,8 @@ class UserModel extends defaultModel {
                                 LEFT JOIN relaypoint ON relaypoint.id = favoriterelaypoint.relay_point_id
                                 LEFT JOIN address ON address.id = relaypoint.address
                                 WHERE favoriterelaypoint.is_deleted = 0
-                                AND user.id =" . $userId . ";");
-        $query->execute();
+                                AND user.id = ?;");
+        $query->execute([$userId]);
 
         $res = $query->fetch(PDO::FETCH_ASSOC);
         return $res;
@@ -214,9 +219,9 @@ class UserModel extends defaultModel {
 
         $query = $bdd->prepare("SELECT id, first_name, last_name, mail, password, type_id, address_id
                                 FROM " . $this->_name . "
-                                WHERE lost_pwd_key = " . $key . "
+                                WHERE lost_pwd_key = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$key]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -236,9 +241,9 @@ class UserModel extends defaultModel {
 
         $query = $bdd->prepare("UPDATE " . $this->_name . "
                                 SET is_deleted = 0
-                                WHERE id = " . $userId . "
+                                WHERE id = ?
                                 AND is_deleted = 1;");
-        $query->execute();
+        $query->execute([$userId]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -256,10 +261,10 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("UPDATE " . $this->_name . "
-                                SET lost_pwd_key = " . $key . "
-                                WHERE id = " . $userId . "
+                                SET lost_pwd_key = ?
+                                WHERE id = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$key, $userId]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -276,10 +281,10 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("UPDATE " . $this->_name . "
-                                SET mail = '" . $newMail . "'
-                                WHERE id = " . $userId . "
+                                SET mail = ?
+                                WHERE id = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$newMail, $userId]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -296,10 +301,10 @@ class UserModel extends defaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("UPDATE " . $this->_name . "
-                                SET password = '" . $newPwd . "'
-                                WHERE id = " . $userId . "
+                                SET password = ?
+                                WHERE id = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$newPwd, $userId]);
 
         $res = $query->fetchColumn();
         return $res;
@@ -316,9 +321,9 @@ class UserModel extends defaultModel {
 
         $query = $bdd->prepare("SELECT password
                                 FROM " . $this->_name . "
-                                WHERE id = " . $userId . "
+                                WHERE id = ?
                                 AND is_deleted = 0;");
-        $query->execute();
+        $query->execute([$userId]);
 
         $res = $query->fetchColumn();
         return $res;
