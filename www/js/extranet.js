@@ -17,6 +17,30 @@ function clearEverything() {
 	$('#choixLivAd').removeClass('active');
 	$('#choixRamRP').removeClass('active');
 	$('#choixRamAd').removeClass('active');
+
+	$('#billPanelTable').text('<tbody id="tbody">' +
+		'<tr>' +
+		'<td class="text-left">Poids</td>' +
+		'<td>&nbsp;&nbsp;</td>' +
+		'<td id="trWeight" class="text-right">0</td>' +
+		'</tr>' +
+		'<tr>' +
+		'<td class="text-left">Type</td>' +
+		'<td>&nbsp;&nbsp;</td>' +
+		'<td id="trType" class="text-right">express</td>' +
+		'</tr>' +
+		'<tr>' +
+		'<td class="text-left">Prix seul</td>' +
+		'<td>&nbsp;&nbsp;</td>' +
+		'<td id="trPrice" class="billPrice text-right"></td>' +
+		'</tr>' +
+		'</tbody>' +
+		'<tbody><tr id="tprice">' +
+		'<th class="text-left">Prix total :</th>' +
+		'<td>&nbsp;&nbsp;</td>' +
+		'<th id="billTotalPrice" class="text-right">0</th>' +
+		'</tr>' +
+		'</tbody>');
 }
 
 $('.collapsed').on('click', clearEverything);
