@@ -23,7 +23,7 @@ class ExtraModel extends DefaultModel {
                                 WHERE ParcelExtra.parcel_id = ?;");
         $query->execute([$parcelId]);
 
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -55,7 +55,7 @@ class ExtraModel extends DefaultModel {
         $query = $bdd->prepare("SELECT id, label, price, explaination FROM " . $this->_name . ";");
         $query->execute();
 
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

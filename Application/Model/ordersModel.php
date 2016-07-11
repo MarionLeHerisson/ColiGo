@@ -26,9 +26,9 @@ class OrdersModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(departure_address, arrival_address, total_price,
-                                order_date, ordered_from, ordered_by, deliver_to)
+                                ordered_from, ordered_by, deliver_to)
                                 VALUES(" . $departureAddress . ", " . $arrivalAddress . ", " . $totalPrice . ",
-                                NOW(), " . $rpId . ", " . $userId . ", " . $reciverId . ");");
+                                " . $rpId . ", " . $userId . ", " . $reciverId . ");");
         $query->execute();
 
         $query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");

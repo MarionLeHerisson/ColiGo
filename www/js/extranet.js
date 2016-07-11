@@ -18,7 +18,7 @@ function clearEverything() {
 	$('#choixRamRP').removeClass('active');
 	$('#choixRamAd').removeClass('active');
 
-	$('#billPanelTable').text('<tbody id="tbody">' +
+	$('#billPanelTable').html('<tbody id="tbody">' +
 		'<tr>' +
 		'<td class="text-left">Poids</td>' +
 		'<td>&nbsp;&nbsp;</td>' +
@@ -64,8 +64,8 @@ function calcAddPrice() {
     charges.trigger('click');
 }
 
-function sanitizeNumbers(event) {
-console.log($(this));
+function sanitizeNumbers() {
+
 }
 
 function xmlRelayPoint() {

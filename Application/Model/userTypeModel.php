@@ -19,7 +19,7 @@ class UserTypeModel extends defaultModel {
                                 FROM " . $this->_name . ";");
         $query->execute();
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }

@@ -170,7 +170,7 @@ class ParcelModel extends DefaultModel {
                                 AND Parcel.delivery_type = wp.delivery_type;");
         $query->execute([$trackingNumber]);
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
 

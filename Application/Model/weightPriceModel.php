@@ -49,7 +49,7 @@ class WeightPriceModel extends DefaultModel {
                                 ORDER BY max_weight;");
         $query->execute();
 
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
 

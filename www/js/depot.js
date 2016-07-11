@@ -36,7 +36,6 @@ function submitDepotForm() {
         additionnal : $('#chAdd:checked').attr('data-price')
     };
 
-    console.log(data);
     var checkMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/i,
         label = 'formDepot';
 
@@ -323,37 +322,42 @@ function showChoixRP(param) {
 
 function selectOtherAd() {
 
-    var address = "" + $('#street_number3').val() + ", " + $('#route3').val() + ", " +$('#postal_code3').val() + $('#locality3').val(),
+    var streetNum = $('#street_number3'),
+        route = $('#route3'),
+        postCode = $('#postal_code3'),
+        loc = $('#locality3'),
+        country = $('#country3'),
+        address = "" + streetNum.val() + ", " + route.val() + ", " + postCode.val() + loc.val(),
         param = $('#paramAdd').text();
 
     if(param === 'ram') {
         $("#ramassage:not(:checked)").trigger( "click" );     // activate hidden input's event on click
         $('#choosenTakingAddress').val(address);
 
-        $('#ram_street_number').val($('#street_number3').val());
-        $('#ram_route').val($('#route3').val());
-        $('#ram_locality').val($('#locality3').val());
-        $('#ram_postal_code').val($('#postal_code3').val());
-        $('#ram_country').val($('#country3').val());
+        $('#ram_street_number').val(streetNum.val());
+        $('#ram_route').val(route.val());
+        $('#ram_locality').val(loc.val());
+        $('#ram_postal_code').val(postCode.val());
+        $('#ram_country').val(country.val());
     }
     else if(param === 'liv') {
         $("#livraison:not(:checked)").trigger( "click" );     // activate hidden input's event on click
         $('#chosenDeliveryAddress').val(address);
 
-        $('#street_number2').val($('#street_number3').val());
-        $('#route2').val($('#route3').val());
-        $('#locality2').val($('#locality3').val());
-        $('#postal_code2').val($('#postal_code3').val());
-        $('#country2').val($('#country3').val());
+        $('#street_number2').val(streetNum.val());
+        $('#route2').val(route.val());
+        $('#locality2').val(loc.val());
+        $('#postal_code2').val(postCode.val());
+        $('#country2').val(country.val());
     }
 
     // empty the popin
     $('#autocomplete3').val('');
-    $('#street_number3').val('');
-    $('#route3').val('');
-    $('#locality3').val('');
-    $('#postal_code3').val('');
-    $('#country3').val('');
+    streetNum.val('');
+    route.val('');
+    loc.val('');
+    postCode.val('');
+    country.val('');
 
     $('#modalDeliveryAddress').modal('hide');
 }

@@ -42,7 +42,7 @@ class TrackingModel extends DefaultModel
 
         $query->execute([$trackingNumber]);
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }

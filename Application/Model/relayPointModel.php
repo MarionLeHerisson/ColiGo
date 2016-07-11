@@ -82,7 +82,7 @@ class RelayPointModel extends DefaultModel {
                                 WHERE rp.is_deleted = 0;");
         $query->execute();
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }
@@ -108,7 +108,7 @@ class RelayPointModel extends DefaultModel {
                                 AND rp.is_deleted = 0;");
         $query->execute();
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }
@@ -151,7 +151,7 @@ class RelayPointModel extends DefaultModel {
                                  OR oarr.delivery_date = ?;");
         $query->execute([$ownerId, $date, $date]);
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }
@@ -195,7 +195,7 @@ class RelayPointModel extends DefaultModel {
                                  OR MONTH(oarr.delivery_date) = ?;");
         $query->execute([$ownerId, $month, $month]);
 
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
 

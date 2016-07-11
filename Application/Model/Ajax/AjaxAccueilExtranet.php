@@ -432,7 +432,7 @@ class AjaxAccueilExtranet {
         }
 
         $weightPrice = $weightPriceManager->getPrice($parcelWeight, $deliveryType);
-        die('weight price = ' . $weightPrice);
+
         $totalPrice = $weightPrice + $price + $add;
 
         return $totalPrice;

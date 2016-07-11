@@ -57,7 +57,7 @@ class UserModel extends defaultModel {
                                 AND is_deleted = 0;");
         $query->execute([$userMail]);
 
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
 
@@ -80,7 +80,7 @@ class UserModel extends defaultModel {
                                 AND is_deleted = 0;");
         $query->execute([$firstname, $lastname]);
 
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
 
@@ -104,7 +104,7 @@ class UserModel extends defaultModel {
                                 WHERE mail = ? AND password = ? AND is_deleted = 0;");
         $query->execute([$mail, $pwd]);
 
-        $tab = $query->fetchAll();
+        $tab = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $_SESSION['id'] = $tab[0]['id'];
         $_SESSION['first_name'] = $tab[0]['first_name'];
