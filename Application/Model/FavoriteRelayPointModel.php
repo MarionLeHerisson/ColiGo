@@ -42,4 +42,26 @@ class FavoriteRelayPointModel extends DefaultModel {
 
         return $res;
     }
+
+    /**
+     * get favorite ralay point
+     * @return bool
+     * @author Marion
+     */
+    public function getFavorite() {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT fav.user_id, fav.relay_point_id
+                                , rp.address AS add_id, rp.label
+                                , a.address, a.zip_code, a.city
+                                FROM " . $this->_name . " AS fav
+                                LEFT JOIN relaypoint AS rp ON rp.id = fav.relay_point_id
+                                LEFT JOIN address AS a ON a.id = rp.address
+                                WHERE fav.user_id = ?
+                                AND fav.is_deleted = 0;");
+        $query->execute([$_SESSION['id']]);
+
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res[0];
+    }
 }

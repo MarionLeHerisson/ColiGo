@@ -13,6 +13,14 @@ class RelayPointModel extends DefaultModel {
     protected $_name = 'RelayPoint';
 
 
+    /**
+     * add a relay point in data base
+     * @param string $address
+     * @param int $ownerId
+     * @param string $label
+     * @return bool
+     * @author Marion
+     */
     public function insertRelayPoint($address, $ownerId, $label) {
 
         $bdd = $this->connectBdd();

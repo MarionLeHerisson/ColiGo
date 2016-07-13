@@ -33,10 +33,14 @@ class profilController {
             }
         }
 
-        // manager
+        // managers
         require_once('../Model/ordersModel.php');
         $ordersManager = new OrdersModel();
 
+        require_once('../Model/FavoriteRelayPointModel.php');
+        $relayPointManager = new FavoriteRelayPointModel();
+
+        // veiw
         $history = $ordersManager->getOrdersHistory($_SESSION['id']);
         $tabHisto = '';
 
@@ -55,6 +59,19 @@ class profilController {
                     <td>' . $arr . '<br>' . $parcel['arr_address'] . '<br>' . $parcel['arr_zipcode'] . ', ' . $parcel['arr_city'] . '</td>
                     <td>' . $parcel['total_price'] . ' €</td>
                 </tr>';
+        }
+
+        $fav = $relayPointManager->getFavorite();
+        //die(print_r($fav));
+        if(isset($fav) && is_array($fav)) {
+            $favRp = "<p>" . $fav['label'] . "</p>
+                    <p>" . $fav['address'] . "</p>
+                    <p>" . $fav['zip_code'] . " " .$fav['city'] . "</p>";
+            $buttonLabel = 'Cahnger';
+        }
+        else {
+            $favRp = "<p>Vous n'avez pas encore sélectionné de point relais favori.</p>";
+            $buttonLabel = 'Choisir';
         }
 
         //echo '<pre>';die(print_r($history));

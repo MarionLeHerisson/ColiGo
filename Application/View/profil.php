@@ -29,11 +29,9 @@ require_once("header.php");
         </div>
 
         <div class="col-md-12">
-            <label><br><br><br><i class="material-icons icon-left">store</i>Votre point relais favoris :</label>
-            <p><?php echo $_SESSION['favRP']['label']; ?></p>
-            <p><?php echo $_SESSION['favRP']['address']; ?></p>
-            <p><?php echo $_SESSION['favRP']['zip_code'] . ' ' . $_SESSION['favRP']['city']; ?></p>
-            <a href="localiser"><input type="button" value="Changer" class="btn btn-primary"></a>
+            <label><br><br><br><i class="material-icons icon-left">store</i>Votre point relais favori :</label>
+            <?php echo $favRp; ?>
+            <a href="localiser"><input type="button" value="<?php echo $buttonLabel; ?>" class="btn btn-primary"></a>
         </div>
 
         <div class="col-md-12">

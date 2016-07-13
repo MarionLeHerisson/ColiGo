@@ -5,7 +5,7 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Votre point relais favoris</h4>
+                <h4 class="modal-title">Votre point relais favori</h4>
             </div>
 
             <div class="modal-body col-md-12" id="choixAd">

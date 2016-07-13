@@ -16,7 +16,7 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">Nos délais de livraison garantis <span class="text-muted">partout en France</span></h2>
-            <p class="lead">Votre colis sera reçu dans les trois jours, au plus trad.
+            <p class="lead">Votre colis sera reçu dans les trois jours, au plus tard.
                 Mais vous pouvez choisir de le voir arriver demain à 8h.
                 Ou encore avant grâce à notre service d'urgence.</p>
         </div>
@@ -31,7 +31,7 @@
         <div class="col-md-7 col-md-push-5">
             <h2 class="featurette-heading">Des emballages <span class="text-muted">éco-responsables</span></h2>
             <p class="lead">Les chips de calage en polystyrène sont remplacées par des bouchons en carton recyclé, moins chers, respectueux de l'environnement et aussi efficaces.
-                Notre programme de <a href="colivoiturage">Colivoiturage</a> représente également une économie de transport et donc moins de co2 !</p>
+                Notre programme de <a href="colivoiturage">Colivoiturage</a> représente également une économie de transport et donc moins de Co2 !</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
             <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="500x500" src="Medias/paris.jpeg" data-holder-rendered="true">

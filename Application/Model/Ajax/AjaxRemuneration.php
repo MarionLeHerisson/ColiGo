@@ -138,7 +138,7 @@ class AjaxRemuneration {
 
             die(json_encode([
                 'stat'	=> 'ok',
-                'msg'	=> 'Rémuniération pour le mois en cours : ' . $rem . ' €.'
+                'msg'	=> 'Rémunération pour le mois en cours : ' . $rem . ' €.'
             ]));
 
         } else {

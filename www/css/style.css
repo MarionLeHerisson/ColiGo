@@ -201,6 +201,7 @@ a {
 
 /* GOOGLE API */
 #map {
+    background: #cccccc center no-repeat url("/Medias/chargement.gif");
 	height: 600px;
 	width: 600px;
 }
