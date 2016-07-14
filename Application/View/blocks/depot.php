@@ -44,8 +44,8 @@
             <div class="col-md-12">
                 <div class="pull-left">
                     <input type="radio" name="type" id="8h" value="1" onclick="calculateQuotation(event)">
-                    <label for="8h" class="normal">
-                        Livraison le lendemain à 8h si la commande est passée avant 15h
+                    <label for="8h" class="normal text-left">
+                        Livraison le lendemain à 8h *
                     </label>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <?php
-            if($_SESSION['type'] == 1 || $_SESSION['type'] == 2) {
+            if(isset($_SESSION['type']) && ($_SESSION['type'] == 1 || $_SESSION['type'] == 2)) {
                 echo '<div class="col-md-12">
                         <div class="pull-left">
                             <input type="radio" name="type" id="fret" value="4" onclick="calculateQuotation(event)">
@@ -84,7 +84,7 @@
 
     <br><h4>Services supplémentaires :</h4>
     <div class="form-group">
-        <label class="control-label col-md-3" for="emballage">Type d'emballage :</label>
+        <label class="control-label col-md-3" for="emballage">Emballage :</label>
         <div class="col-md-9">
             <div class="col-md-12">
                 <div class="pull-left">
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <?php
-            if(($_SESSION['type'] == 1 || $_SESSION['type'] == 2) && $disabled == '') {
+            if(isset($_SESSION['type']) && ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) && $disabled == '') {
             echo '<div class="col-md-12">
                 <div class="pull-left">
                     <input type="checkbox" class="checkboxes" name="additionnel" id="additionnel" onclick="enableAdditionalPrice();">
@@ -264,13 +264,19 @@
         <p id="formDepotMsg"></p>
     </div>
 
-    <button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-lg" onclick="submitDepotForm()">Valider</button>
+    </div>
     <?php if(DEBUG != 0){echo '<button type="button" class="btn btn-primary none" id="myInput" onclick="showPaymentModal()">Test</button>';}?>
 
     <?php require_once('popin/simu_payment.php'); ?>
     <?php require_once('popin/choixAd.php'); ?>
     <?php require_once('popin/choixRP.php'); ?>
 
+    <div class="col-md-12">
+        <br>
+        <small>* si la commande est passée avant 15h</small>
+    </div>
 </form>
 
 <?php include_once('billPanel.php'); ?>

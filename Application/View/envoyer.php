@@ -47,14 +47,16 @@
 
             foreach($prices as $key => $price) {
 
-                if(!isset($price[2])) {$price[2] = '';}
-                if(!isset($price[1])) {$price[1] = '';}
+                if(intval($key) <= 30) {
+                    if(!isset($price[2])) {$price[2] = '';}
+                    if(!isset($price[1])) {$price[1] = '';}
 
-                echo '<tr>
+                    echo '<tr>
                     <td>' . $key . '</td>
                     <td>' . $price[2] . '</td>
                     <td>' . $price[1] . '</td>
                 </tr>';
+                }
             }
 
             ?>
@@ -74,7 +76,7 @@
                         <td>
                             <span class="badge cursor-hover" data-placement="left" rel="txtTooltip"
                             data-original-title="' . $extra['explaination'] . '" id="extra' . $extra['id'] . '"
-                            onclick="showTooltip(\'extra' . $extra['id'] . '\')">?</span>' . $extra['label'] . '
+                            onmouseover="showTooltip(\'extra' . $extra['id'] . '\')">?</span>' . $extra['label'] . '
                         </td>
                         <td class="tr-extra-prices"> ' . $extra['price'] . ' €</td>
                     </tr>';

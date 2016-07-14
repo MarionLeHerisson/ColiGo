@@ -11,6 +11,7 @@ CREATE TABLE Extra(
 	label VARCHAR(50) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
 	explaination TINYTEXT,
+	is_stockable INT NOT NULL DEFAULT 0,
 	
 	PRIMARY KEY (id)
 );
