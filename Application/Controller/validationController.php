@@ -60,11 +60,16 @@ class validationController {
 				$_SESSION['mail'] = $user['mail'];
 				$_SESSION['type'] = $user['type_id'];
 				$_SESSION['address'] = $user['address_id'];
-			}
 
-			require_once("../View/header.php");
-			require_once('../View/validInscription.php');
-			require_once('../View/footer.php');
+				require_once("../View/header.php");
+				require_once('../View/validInscription.php');
+				require_once('../View/footer.php');
+			}
+			else {
+				echo '<script type="text/javascript">
+						document.location.href="accueil_extranet";
+					</script>';
+			}
 		}
 		else {
 			echo '<script type="text/javascript">

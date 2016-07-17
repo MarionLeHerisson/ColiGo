@@ -63,10 +63,10 @@ class profilController {
 
         $fav = $relayPointManager->getFavorite();
         //die(print_r($fav));
-        if(isset($fav) && is_array($fav)) {
-            $favRp = "<p>" . $fav['label'] . "</p>
-                    <p>" . $fav['address'] . "</p>
-                    <p>" . $fav['zip_code'] . " " .$fav['city'] . "</p>";
+        if(isset($fav[0]) && is_array($fav[0])) {
+            $favRp = "<p>" . $fav[0]['label'] . "</p>
+                    <p>" . $fav[0]['address'] . "</p>
+                    <p>" . $fav[0]['zip_code'] . " " .$fav[0]['city'] . "</p>";
             $buttonLabel = 'Cahnger';
         }
         else {

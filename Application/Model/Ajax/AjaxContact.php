@@ -28,8 +28,9 @@ class AjaxContact {
 
         $return = mail($to, $subject, $message . '<br><br>Ce mail a été envoyé par : ' . $name . ' - ' . $mail, $headers);
 
-//        ini_set("SMTP","localhost" );
-//        ini_set('sendmail_from', 'me@localhost.com');
+        //ini_set("SMTP","smtp.gmail.com");
+        //ini_set("smtp_port","25");
+        //ini_set('sendmail_from', 'you@example.com');
 
         mail($mail,
             'Confirmation de l\'envoi de votre message : ' . $subject,

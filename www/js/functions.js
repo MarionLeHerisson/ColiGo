@@ -161,36 +161,34 @@ function sendMessage() {
 		mail = $('#contactMail').val(),
 		subject = $('#contactSubject').val(),
 		message = $('#contactMessage').val(),
-		label = 'sendMessage',
-		error = 0;
+		label = 'sendMessage';
 
 	if(message == '') {
 		showMessage(label, 'Votre message est vide !', true);
-		error = 1;
+		return;
 	}
 	else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(mail)) {
-		showMessage(label, 'Merci de renseigner une adresse mail valide.', true)
+		showMessage(label, 'Merci de renseigner une adresse mail valide.', true);
+		return;
 	}
 
-	if(error === 0) {
-        myAjax(label, 'contact', 'sendMessage', [name, mail, message, subject], function(data) {
-            var dataObject = JSON.parse(data);	// transforms json return from php to js object
+	myAjax(label, 'contact', 'sendMessage', [name, mail, message, subject], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
 
-            if(dataObject.stat === 'ko') {
-                showMessage(label, dataObject.msg, true);
-            }
-            else if(dataObject.stat === 'ok') {
-                showMessage(label, dataObject.msg, false);
+		if(dataObject.stat === 'ko') {
+			showMessage(label, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
 
-                setTimeout(function(){
-                    window.location.assign('accueil');
-                }, 3000);
-            }
-            else {
-                showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
-            }
-        });
-	}
+			setTimeout(function(){
+				window.location.assign('accueil');
+			}, 3000);
+		}
+		else {
+			showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	});
 }
 
 function submitSuiviForm() {

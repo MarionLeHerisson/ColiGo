@@ -64,4 +64,21 @@ class AddressModel extends DefaultModel {
 
         return $res;
     }
+
+    /**
+     * Updates latitude and longitude
+     * @param int $addressId
+     * @param float $lat
+     * @param float $lng
+     * @author Marion
+     */
+    public function updateLatLng($addressId, $lat, $lng) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("UPDATE " . $this->_name . "
+                                SET lat = ?,
+                                lng = ?
+                                WHERE id = ?;");
+        $query->execute([$lat, $lng, $addressId]);
+    }
 }

@@ -17,11 +17,14 @@
                 <button type="button" class="btn btn-primary btn-lg" onclick="getRemuneration()">Valider</button>
             </div>
 
-            <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-6" role="alert">
-                <button type="button" class="close" onclick="closePopin()">
-                    <span>×</span>
-                </button>
-                <p id="MailEmployeRemMsg"></p>
+            <div class="col-md-12">
+                <div class="col-md-3"></div>
+                <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-6" role="alert">
+                    <button type="button" class="close" onclick="closePopin()">
+                        <span>×</span>
+                    </button>
+                    <p id="MailEmployeRemMsg"></p>
+                </div>
             </div>
         </div>
     </div>

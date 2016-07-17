@@ -62,6 +62,6 @@ class FavoriteRelayPointModel extends DefaultModel {
         $query->execute([$_SESSION['id']]);
 
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $res[0];
+        return $res;
     }
 }

@@ -18,17 +18,17 @@ class ParcelModel extends DefaultModel {
      * @param float $weight
      * @param int $status
      * @param int $delivery
+     * @param int $trackingNumber
      * @return int
-     *
      * @author Marion
      */
-    public function insertParcel($weight, $status, $delivery) {
+    public function insertParcel($weight, $status, $delivery, $trackingNumber) {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(weight, status_id, delivery_type)
-                                VALUES (?, ?, ?);");
-        $query->execute([$weight, $status, $delivery]);
+        $query = $bdd->prepare("INSERT INTO " . $this->_name . "(weight, status_id, delivery_type, tracking_number)
+                                VALUES (?, ?, ?, ?);");
+        $query->execute([$weight, $status, $delivery, $trackingNumber]);
 
         //$query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
         //$query2->execute();

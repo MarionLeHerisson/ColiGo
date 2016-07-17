@@ -72,7 +72,6 @@ class AjaxAccueilExtranet {
      * @return array
      *
      * @author Marion
-     * TODO : Verif si user a déjà un mot de passe
      */
     public function addRelayPoint($param) {
         // Managers
@@ -99,7 +98,9 @@ class AjaxAccueilExtranet {
         if($addressId == null) {
             $addressId = $addressManager->insertAddress($address, $zipCode, $city, $lat, $lng);
         }
-
+        else {
+            $addressManager->updateLatLng($addressId, $lat, $lng);
+        }
 
         if(is_null($addressId)) {
             die(json_encode([
@@ -119,9 +120,7 @@ class AjaxAccueilExtranet {
             ]));
         }
 
-        $userType = $userManager->getUserType($userId);
-
-        if($userType != 2) {
+        if($user[0]['type_id'] != 2) {
             $userManager->updateRights($userId, 2);
         }
 
@@ -156,11 +155,17 @@ class AjaxAccueilExtranet {
         $deliveryType = ColiGo::sanitizeString($param['type']);
         $parcelWeight = ColiGo::sanitizeString($param['weight']);
         // sending address
-        $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']) . ', ' . ColiGo::sanitizeString($param['ramroute']);
+        $senderAddress = ColiGo::sanitizeString($param['ramstreetnumber']);
+        if($param['ramroute'] != '') {
+            $senderAddress .= ', ' . ColiGo::sanitizeString($param['ramroute']);
+        }
         $senderZipCode = ColiGo::sanitizeString($param['ramzipcode']);
         $senderCity = ColiGo::sanitizeString($param['ramcity']);
         // delivery address
-        $receiverAddress = ColiGo::sanitizeString($param['streetnumber']) . ', ' . ColiGo::sanitizeString($param['route']);
+        $receiverAddress = ColiGo::sanitizeString($param['streetnumber']);
+        if($param['streetnumber'] != '') {
+            $receiverAddress .= ', ' . ColiGo::sanitizeString($param['route']);
+        }
         $receiverZipCode = ColiGo::sanitizeString($param['zipcode']);
         $receiverCity = ColiGo::sanitizeString($param['city']);
 
@@ -199,14 +204,11 @@ class AjaxAccueilExtranet {
             $userId = $user[0]['id'];
         }
 
-        // insert Parcel (weight, status = déposé, delivery_type) -> get id
-        $parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType);
-
         // create unique tracking number
         $trackingNumber = ColiGo::createUniqueId();
 
-        // insert tracking number
-        $parcelManager->addTrackingNuber($parcelId, $trackingNumber);
+        // insert Parcel (weight, status = déposé, delivery_type) -> get id
+        $parcelId = $parcelManager->insertParcel($parcelWeight, 1, $deliveryType, $trackingNumber);
 
         // Track the parcel with its status and date, keeps an history
         $trackingManager->updateParcelTracking($parcelId, 1);
