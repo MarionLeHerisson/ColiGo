@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-primary btn-lg" onclick="getRemuneration()">Valider</button>
             </div>
 
-            <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-12" role="alert">
+            <div id="MailEmployeRem" class="none alert alert-dismissible fade in col-md-6" role="alert">
                 <button type="button" class="close" onclick="closePopin()">
                     <span>×</span>
                 </button>

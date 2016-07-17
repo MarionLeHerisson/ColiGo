@@ -129,7 +129,7 @@ function updateNewRole() {
         showMessage(label, 'Veuillez entrer une adresse mail.', true);
         return;
     }
-    else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(rpMail)) {
+    else if(!/[\d\w.\-_]+@[\d\w.\-_]+\.[\w]{2,3}/.test(mail)) {
 		showMessage(label,'Veuillez entrer une adresse mail valide.', true);
 		return;
     }
@@ -218,7 +218,7 @@ function addNewRelayPoint() {
 	}
 
 	// If fields are empty
-	if(rpAddress == '' || rpZipCode == '' || rpCity == '') {
+	if(rpAddress == ', ' || rpZipCode == '' || rpCity == '') {
 		showMessage(label,'Veuillez entrer une adresse complète.', true);
         return;
 	}

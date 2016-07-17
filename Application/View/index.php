@@ -15,14 +15,23 @@ if(isset($_POST['comail']) && $_POST['comail'] != '' && isset($_POST['copwd']) &
 	$userManager = new UserModel;
 
 	// try to connect user
-	$type = $userManager->connexion($mail, $pwd);
+	$user = $userManager->connexion($mail, $pwd);
+	$type = $user['type_id'];
 
     // if user does not exist
-    if(is_null($type)) {
+    if(!is_array($user)) {
         echo '<script type="text/javascript">
 						document.location.href="accueil";
 					</script>';
-    }
+    }	// else, connect user
+	else {
+		$_SESSION['id'] = $user['id'];
+		$_SESSION['first_name'] = $user['first_name'];
+		$_SESSION['last_name'] = $user['last_name'];
+		$_SESSION['mail'] = $user['mail'];
+		$_SESSION['type'] = $user['type_id'];
+		$_SESSION['address'] = $user['address_id'];
+	}
 
     // get his favorite ralay point
     $fav = $userManager->getFavoriteRP($_SESSION['id']);

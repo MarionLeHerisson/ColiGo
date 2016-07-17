@@ -49,16 +49,18 @@ class validationController {
 			// envoi de mail
 			mail($mail, "Votre inscription chez ColiGo", "Félicitation, vous êtes bien inscrit chez Coligo !");
 
-			// if a relay point is created
-			if($userType == 2) {
 
-				require_once('../Model/relayPointModel.php');
-				$relayPointManager = new RelayPointModel();
+			// if inscription not from extranet
+			if(!isset($_SESSION['type'])) {
+				$user = $userManager->connexion($mail, $pwd);
 
-				$relayPointManager->insertRelayPoint($address_id, $userId);
+				$_SESSION['id'] = $user['id'];
+				$_SESSION['first_name'] = $user['first_name'];
+				$_SESSION['last_name'] = $user['last_name'];
+				$_SESSION['mail'] = $user['mail'];
+				$_SESSION['type'] = $user['type_id'];
+				$_SESSION['address'] = $user['address_id'];
 			}
-
-			$userManager->connexion($mail, $pwd);
 
 			require_once("../View/header.php");
 			require_once('../View/validInscription.php');

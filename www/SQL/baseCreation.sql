@@ -81,6 +81,7 @@ CREATE TABLE Orders (
 	ordered_from INT,
 	ordered_by INT NOT NULL,
 	deliver_to INT NOT NULL,
+	delivered_by INT DEFAULT NULL,
 	is_deleted INT DEFAULT 0,
 	
 	PRIMARY KEY (id),
@@ -88,7 +89,8 @@ CREATE TABLE Orders (
 	FOREIGN KEY (arrival_address) REFERENCES Address (id),
 	FOREIGN KEY (ordered_from) REFERENCES RelayPoint (id),
 	FOREIGN KEY (ordered_by) REFERENCES User (id),
-	FOREIGN KEY (deliver_to) REFERENCES User (id)
+	FOREIGN KEY (deliver_to) REFERENCES User (id),
+	FOREIGN KEY (delivered_by) REFERENCES User (id)
 );
 
 CREATE TABLE DeliveryType(

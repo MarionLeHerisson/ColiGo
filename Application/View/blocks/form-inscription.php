@@ -111,7 +111,7 @@
 						</div><br>
 						<div class="pull-left">
 							<input type="radio" name="usertype" id="pointRelais" value="2">
-							Point Relais **
+							Propriétaire de Point Relais **
 						</div><br>
 						<div class="pull-left">
 							<input type="radio" name="usertype" id="livreur" value="3">

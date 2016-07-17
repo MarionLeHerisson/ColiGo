@@ -51,7 +51,7 @@
 
             <div class="col-md-1"></div>
 
-            <div id="newRelayPoint" class="none alert alert-dismissible fade in col-md-12" role="alert">
+            <div id="newRelayPoint" class="none alert alert-dismissible fade in col-md-6" role="alert">
                 <button type="button" class="close" onclick="closePopin()">
                     <span>×</span>
                 </button>

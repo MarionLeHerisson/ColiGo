@@ -106,14 +106,7 @@ class UserModel extends defaultModel {
 
         $tab = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $_SESSION['id'] = $tab[0]['id'];
-        $_SESSION['first_name'] = $tab[0]['first_name'];
-        $_SESSION['last_name'] = $tab[0]['last_name'];
-        $_SESSION['mail'] = $tab[0]['mail'];
-        $_SESSION['type'] = $tab[0]['type_id'];
-        $_SESSION['address'] = $tab[0]['address_id'];
-
-        return $tab[0]['type_id'];
+        return $tab[0];
     }
 
 

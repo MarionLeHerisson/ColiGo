@@ -209,6 +209,7 @@ function submitSuiviForm() {
 function submitInscForm() {
 	// if errors have alrady been shown, hide them
 	$('.bg-danger').each(function(){$(this).addClass('none');});
+	$('.alert-danger').each(function(){$(this).addClass('none');});
 
 	// get inputs values
 	var firstname = $('#formFirstname').val(),
@@ -217,7 +218,12 @@ function submitInscForm() {
 		pwd = $('#formPwd').val(),
 		pwdConf = $('#formPwdConfirm').val(),
 		error = 0,
-        label = 'insc';
+        label = 'insc',
+		number = $('#street_number1').val(),
+		route = $('#route1').val(),
+		zip_code = $('#postal_code1').val(),
+		city = $('#locality1').val(),
+		country = $('#country1').val();
 
 
 	// firstname ?
@@ -263,6 +269,19 @@ function submitInscForm() {
 	else if(pwd != pwdConf) {
 		$('.ttPwdconfInv').removeClass('none');
 		error = 1;
+	}
+
+	// adress ?
+	if(number != '' || route != '' || zip_code != '' || city != '') {
+		if(number == '' || route == '' || zip_code == '' || city == '') {
+			showMessage(label, 'Si vous entrez une adresse, celle-ci doit être complète. Merci de la sélectionner via la ' +
+				'liste déroulante', true);
+			return;
+		}
+		else if(country != 'France') {
+			showMessage(label, 'Si vous entrer une adresse, celle-ci doit se trouver en France.', true);
+			return;
+		}
 	}
 
     // mail alrady exists ?

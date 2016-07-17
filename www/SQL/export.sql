@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Jun 10, 2016 at 12:46 PM
+-- Generation Time: Jul 17, 2016 at 02:47 PM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `ColiGo`
+-- Database: `ColiGoBackup`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ CREATE TABLE `Address` (
   `city` varchar(255) NOT NULL,
   `lat` float DEFAULT NULL,
   `lng` float DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Address`
@@ -89,7 +89,12 @@ INSERT INTO `Address` (`id`, `address`, `zip_code`, `city`, `lat`, `lng`) VALUES
 (54, '393, Rue de Vaugirard', 75015, 'Paris', 48.834, 2.29191),
 (55, '65, Boulevard Voltaire', 75011, 'Paris', 48.8618, 2.37404),
 (56, '45, Avenue John Fitzgerald Kennedy', 71100, 'Chalon-sur-Saône', 46.8018, 4.86108),
-(57, '30, Allée Maurice Sarraut', 31300, 'Toulouse', 43.5954, 1.4218);
+(57, '30, Allée Maurice Sarraut', 31300, 'Toulouse', 43.5954, 1.4218),
+(58, '34Rue Daniel Ouvrard, ', 86170, 'Vienne', NULL, NULL),
+(59, '45, Avenue John Fitzgerald Kennedy, ', 71100, 'Chalon-sur-Saône', 0, 0),
+(60, '30, Allée Maurice Sarraut, ', 31300, 'Toulouse', 0, 0),
+(61, '4442, Rue des Petits Carreaux', 75002, 'Paris', 0, 0),
+(62, '12, Boulevard Voltaire', 75011, 'Paris', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +128,7 @@ CREATE TABLE `Extra` (
   `label` varchar(50) NOT NULL,
   `price` float NOT NULL,
   `explaination` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Extra`
@@ -138,20 +143,30 @@ INSERT INTO `Extra` (`id`, `label`, `price`, `explaination`) VALUES
 (6, 'livraison samedi', 5, 'Ce service permet de livrer votre colis le samedi.'),
 (7, 'prioritaire', 10, 'Ce service rend votre colis prioritaire.'),
 (8, 'par tous les moyens', 37, 'En cas de problèmes sur le transport de votre colis, ce service permet la mise en place de tous les moyens possibles pour permettre la livraison de votre colis.'),
-(9, 'indemnisation', 19, 'Ce service vous rembourse en cas de perte ou d avarie du colis.');
+(9, 'indemnisation', 19, 'Ce service vous rembourse en cas de perte ou d avarie du colis.'),
+(10, 'livraison domicile', 8, 'Ce service vous propose de livrer votre colis chez vous au lieu de le livrer en Point Relais.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `FovoriteRelayPoint`
+-- Table structure for table `FavoriteRelayPoint`
 --
 
-CREATE TABLE `FovoriteRelayPoint` (
+CREATE TABLE `FavoriteRelayPoint` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `relay_point_id` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `FavoriteRelayPoint`
+--
+
+INSERT INTO `FavoriteRelayPoint` (`id`, `user_id`, `relay_point_id`, `is_deleted`) VALUES
+(1, 1, 4, 1),
+(2, 1, 4, 1),
+(3, 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -164,7 +179,7 @@ CREATE TABLE `OrderParcel` (
   `order_id` int(11) NOT NULL,
   `parcel_id` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `OrderParcel`
@@ -199,7 +214,12 @@ INSERT INTO `OrderParcel` (`id`, `order_id`, `parcel_id`, `is_deleted`) VALUES
 (36, 38, 136, 0),
 (38, 39, 138, 0),
 (39, 40, 139, 0),
-(40, 41, 140, 0);
+(40, 41, 140, 0),
+(41, 44, 141, 0),
+(42, 45, 142, 0),
+(43, 46, 143, 0),
+(45, 47, 145, 0),
+(46, 48, 146, 0);
 
 -- --------------------------------------------------------
 
@@ -218,7 +238,7 @@ CREATE TABLE `Orders` (
   `deliver_to` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0',
   `delivery_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Orders`
@@ -255,7 +275,14 @@ INSERT INTO `Orders` (`id`, `departure_address`, `arrival_address`, `total_price
 (38, 1, 57, 93.2, '2016-06-10 07:56:43', 1, 1, 3, 0, '2016-06-10 07:56:43'),
 (39, 1, 57, 89.95, '2016-06-10 08:13:55', 1, 24, 1, 0, '0000-00-00 00:00:00'),
 (40, 1, 57, 118.7, '2016-06-10 10:23:44', 1, 1, 3, 0, '0000-00-00 00:00:00'),
-(41, 1, 57, 118.7, '2016-06-10 10:26:45', 1, 1, 3, 0, '0000-00-00 00:00:00');
+(41, 1, 57, 118.7, '2016-06-10 10:26:45', 1, 1, 3, 0, '0000-00-00 00:00:00'),
+(42, 1, 57, 69, '2016-06-10 10:53:29', 1, 25, 1, 0, '0000-00-00 00:00:00'),
+(43, 1, 57, 79, '2016-06-10 10:57:25', 1, 25, 1, 0, '0000-00-00 00:00:00'),
+(44, 1, 58, 10.2, '2016-06-24 20:25:37', 1, 1, 3, 0, '0000-00-00 00:00:00'),
+(45, 60, 59, 47.6, '2016-07-09 13:15:24', NULL, 1, 3, 0, '0000-00-00 00:00:00'),
+(46, 60, 59, 49.9, '2016-07-09 13:23:43', NULL, 1, 3, 0, '0000-00-00 00:00:00'),
+(47, 62, 61, 87.2, '2016-07-10 13:29:15', NULL, 1, 19, 0, '0000-00-00 00:00:00'),
+(48, 60, 58, 47.6, '2016-07-14 16:51:21', NULL, 1, 3, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -270,7 +297,7 @@ CREATE TABLE `Parcel` (
   `is_deleted` int(11) DEFAULT '0',
   `delivery_type` int(11) NOT NULL,
   `tracking_number` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Parcel`
@@ -416,7 +443,13 @@ INSERT INTO `Parcel` (`id`, `weight`, `status_id`, `is_deleted`, `delivery_type`
 (137, 5, 4, 0, 2, 3374370727),
 (138, 9, 1, 0, 2, 2509146242),
 (139, 3, 1, 0, 3, 3860041321),
-(140, 3, 1, 0, 3, 5678420581);
+(140, 3, 1, 0, 3, 5678420581),
+(141, 3, 1, 0, 2, 6799667589),
+(142, 3, 1, 0, 2, 2062732626),
+(143, 5, 1, 0, 3, 5854747701),
+(144, 15, 1, 0, 2, 784227853),
+(145, 3, 1, 0, 4, 1333279438),
+(146, 4.5, 1, 0, 2, 8758238342);
 
 -- --------------------------------------------------------
 
@@ -574,7 +607,7 @@ CREATE TABLE `Tracking` (
   `parcel_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
   `new_status_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Tracking`
@@ -743,7 +776,13 @@ INSERT INTO `Tracking` (`id`, `parcel_id`, `status_id`, `new_status_date`) VALUE
 (160, 137, 4, '2016-06-10 08:00:00'),
 (161, 138, 1, '2016-06-10 08:13:55'),
 (162, 139, 1, '2016-06-10 10:23:44'),
-(163, 140, 1, '2016-06-10 10:26:45');
+(163, 140, 1, '2016-06-10 10:26:45'),
+(164, 141, 1, '2016-06-24 20:25:37'),
+(165, 142, 1, '2016-07-09 13:15:24'),
+(166, 143, 1, '2016-07-09 13:23:43'),
+(167, 144, 1, '2016-07-09 13:28:10'),
+(168, 145, 1, '2016-07-10 13:29:15'),
+(169, 146, 1, '2016-07-14 16:51:20');
 
 -- --------------------------------------------------------
 
@@ -759,39 +798,41 @@ CREATE TABLE `User` (
   `password` varchar(32) DEFAULT NULL,
   `type_id` int(11) NOT NULL,
   `address_id` int(11) DEFAULT NULL,
-  `is_deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+  `is_deleted` int(11) DEFAULT '0',
+  `lost_pwd_key` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `User`
 --
 
-INSERT INTO `User` (`id`, `first_name`, `last_name`, `mail`, `password`, `type_id`, `address_id`, `is_deleted`) VALUES
-(1, 'Marion', 'Hurteau', 'marion.hurteau1@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 1, 1, 0),
-(2, 'Ulysse', 'Debernardy', 'ulyssedg@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, 0, 0),
-(3, 'Oriane', 'Payen', 'oriane.payen@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 1, 0),
-(4, 'Moi', 'Boudin', 'moiboudin@yomail.fr', '', 4, 0, 0),
-(5, 'Romain', 'Ouriet', 'ouriet.romain@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 4, 1, 0),
-(6, 'Livreur', 'Goligo', 'livreur@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 1, 0),
-(7, 'PrenomClient', 'NomClient', 'mail@client.fr', '', 2, 0, 0),
-(8, 'Robert', 'Dansac', 'bob-gujan@yopmail.fr', '', 4, 0, 0),
-(9, 'Françoise', 'Dansac', 'fan-gujan@yopmail.fr', '', 4, 0, 0),
-(10, 'Moïse', 'Guyonneau', '', '', 2, NULL, 0),
-(11, 'Ghislaine', 'Dansac', 'ghislaine@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 35, 0),
-(12, 'Ghislaine', 'Dansac', 'ghislaine@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 36, 0),
-(13, 'Patrick', 'Seastar', 'patrick_the_sea_star@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 0, 0),
-(14, '', '', '', '', 4, NULL, 0),
-(15, 'Milka', '', 'milkalavache@yopmail.fr', '', 2, 0, 0),
-(16, 'Zelda', '', 'zeldouche@yopmail.fr', '', 2, 0, 0),
-(17, 'efzef', 'zefze', 'zefzef@zvz.fr', '', 2, 0, 0),
-(18, 'Marion2', 'Hurteau2', '', '', 4, 0, 0),
-(19, 'Milka', 'Lavache', '', '', 4, 0, 0),
-(20, 'Laura', 'Geiger', 'laura.geiger@yopmail.fr', '', 4, 0, 0),
-(21, 'Catherine', 'Dupuy', '', '', 4, 0, 0),
-(22, 'Christophe', 'Garcia', '', '', 4, 0, 0),
-(23, 'Fabien', 'Maertens', '', '', 4, 0, 0),
-(24, 'Oriane', 'Payen', 'oriane.payen@wanadoo.fr', '', 4, 0, 0),
-(25, 'Sabine', 'Rentin', 'sabinette@yopmail.com', 'e10adc3949ba59abbe56e057f20f883e', 4, 36, 0);
+INSERT INTO `User` (`id`, `first_name`, `last_name`, `mail`, `password`, `type_id`, `address_id`, `is_deleted`, `lost_pwd_key`) VALUES
+(1, 'Marion', 'Hurteau', 'marion.hurteau1@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 1, 1, 0, 2147483647),
+(2, 'Ulysse', 'Debernardy', 'ulyssedg@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, 0, 0, NULL),
+(3, 'Oriane', 'Payen', 'oriane.payen@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 1, 0, NULL),
+(4, 'Moi', 'Boudin', 'moiboudin@yomail.fr', '', 4, 0, 0, NULL),
+(5, 'Romain', 'Ouriet', 'ouriet.romain@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 4, 1, 0, NULL),
+(6, 'Livreur', 'Goligo', 'livreur@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 1, 0, NULL),
+(7, 'PrenomClient', 'NomClient', 'mail@client.fr', '', 2, 0, 0, NULL),
+(8, 'Robert', 'Dansac', 'bob-gujan@yopmail.fr', '', 4, 0, 0, NULL),
+(9, 'Françoise', 'Dansac', 'fan-gujan@yopmail.fr', '', 4, 0, 0, NULL),
+(10, 'Moïse', 'Guyonneau', '', '', 2, NULL, 0, NULL),
+(11, 'Ghislaine', 'Dansac', 'ghislaine@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 35, 0, NULL),
+(12, 'Ghislaine', 'Dansac', 'ghislaine@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 4, 36, 0, NULL),
+(13, 'Patrick', 'Seastar', 'patrick_the_sea_star@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 0, 0, NULL),
+(14, '', '', '', '', 4, NULL, 0, NULL),
+(15, 'Milka', '', 'milkalavache@yopmail.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 0, 0, NULL),
+(16, 'Zelda', '', 'zeldouche@yopmail.fr', '', 2, 0, 0, NULL),
+(17, 'efzef', 'zefze', 'zefzef@zvz.fr', '', 2, 0, 0, NULL),
+(18, 'Marion2', 'Hurteau2', '', '', 4, 0, 0, NULL),
+(19, 'Milka', 'Lavache', '', '', 4, 0, 0, NULL),
+(20, 'Laura', 'Geiger', 'laura.geiger@yopmail.fr', '', 4, 0, 0, NULL),
+(21, 'Catherine', 'Dupuy', '', '', 4, 0, 0, NULL),
+(22, 'Christophe', 'Garcia', '', '', 4, 0, 0, NULL),
+(23, 'Fabien', 'Maertens', '', '', 4, 0, 0, NULL),
+(24, 'Oriane', 'Payen', 'oriane.payen@wanadoo.fr', '', 4, 0, 0, NULL),
+(25, 'Sabine', 'Rentin', 'sabinette@yopmail.com', 'e10adc3949ba59abbe56e057f20f883e', 4, 36, 0, NULL),
+(26, 'Marion', 'Herisson', 'marion.herisson@yopmail.com', NULL, 4, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -826,7 +867,7 @@ CREATE TABLE `WeightPrice` (
   `min_weight` float NOT NULL,
   `max_weight` float NOT NULL,
   `price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `WeightPrice`
@@ -853,7 +894,8 @@ INSERT INTO `WeightPrice` (`id`, `delivery_type`, `min_weight`, `max_weight`, `p
 (18, 3, 2.1, 5, '39.70'),
 (19, 3, 5.1, 10, '44.30'),
 (20, 3, 10.1, 20, '47.10'),
-(21, 3, 20.1, 30, '50.20');
+(21, 3, 20.1, 30, '50.20'),
+(22, 4, 0, 10000, '0.00');
 
 --
 -- Indexes for dumped tables
@@ -878,9 +920,9 @@ ALTER TABLE `Extra`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `FovoriteRelayPoint`
+-- Indexes for table `FavoriteRelayPoint`
 --
-ALTER TABLE `FovoriteRelayPoint`
+ALTER TABLE `FavoriteRelayPoint`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `relay_point_id` (`relay_point_id`);
@@ -984,7 +1026,7 @@ ALTER TABLE `WeightPrice`
 -- AUTO_INCREMENT for table `Address`
 --
 ALTER TABLE `Address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `DeliveryType`
 --
@@ -994,27 +1036,27 @@ ALTER TABLE `DeliveryType`
 -- AUTO_INCREMENT for table `Extra`
 --
 ALTER TABLE `Extra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT for table `FovoriteRelayPoint`
+-- AUTO_INCREMENT for table `FavoriteRelayPoint`
 --
-ALTER TABLE `FovoriteRelayPoint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `FavoriteRelayPoint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `OrderParcel`
 --
 ALTER TABLE `OrderParcel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `Parcel`
 --
 ALTER TABLE `Parcel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=141;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=147;
 --
 -- AUTO_INCREMENT for table `ParcelExtra`
 --
@@ -1044,12 +1086,12 @@ ALTER TABLE `Stock`
 -- AUTO_INCREMENT for table `Tracking`
 --
 ALTER TABLE `Tracking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=164;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=170;
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `UserType`
 --
@@ -1059,78 +1101,78 @@ ALTER TABLE `UserType`
 -- AUTO_INCREMENT for table `WeightPrice`
 --
 ALTER TABLE `WeightPrice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `FovoriteRelayPoint`
+-- Constraints for table `FavoriteRelayPoint`
 --
-ALTER TABLE `FovoriteRelayPoint`
-  ADD CONSTRAINT `fovoriterelaypoint_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  ADD CONSTRAINT `fovoriterelaypoint_ibfk_2` FOREIGN KEY (`relay_point_id`) REFERENCES `RelayPoint` (`id`);
+ALTER TABLE `FavoriteRelayPoint`
+  ADD CONSTRAINT `favoriterelaypoint_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `favoriterelaypoint_ibfk_2` FOREIGN KEY (`relay_point_id`) REFERENCES `relaypoint` (`id`);
 
 --
 -- Constraints for table `OrderParcel`
 --
 ALTER TABLE `OrderParcel`
-  ADD CONSTRAINT `orderparcel_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`),
-  ADD CONSTRAINT `orderparcel_ibfk_2` FOREIGN KEY (`parcel_id`) REFERENCES `Parcel` (`id`);
+  ADD CONSTRAINT `orderparcel_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `orderparcel_ibfk_2` FOREIGN KEY (`parcel_id`) REFERENCES `parcel` (`id`);
 
 --
 -- Constraints for table `Orders`
 --
 ALTER TABLE `Orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`departure_address`) REFERENCES `Address` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`arrival_address`) REFERENCES `Address` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`ordered_from`) REFERENCES `RelayPoint` (`id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`ordered_by`) REFERENCES `User` (`id`),
-  ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`deliver_to`) REFERENCES `User` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`departure_address`) REFERENCES `address` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`arrival_address`) REFERENCES `address` (`id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`ordered_from`) REFERENCES `relaypoint` (`id`),
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`ordered_by`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`deliver_to`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `Parcel`
 --
 ALTER TABLE `Parcel`
-  ADD CONSTRAINT `parcel_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `ParcelStatus` (`id`),
-  ADD CONSTRAINT `parcel_ibfk_2` FOREIGN KEY (`delivery_type`) REFERENCES `DeliveryType` (`id`);
+  ADD CONSTRAINT `parcel_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `parcelstatus` (`id`),
+  ADD CONSTRAINT `parcel_ibfk_2` FOREIGN KEY (`delivery_type`) REFERENCES `deliverytype` (`id`);
 
 --
 -- Constraints for table `ParcelExtra`
 --
 ALTER TABLE `ParcelExtra`
-  ADD CONSTRAINT `parcelextra_ibfk_1` FOREIGN KEY (`parcel_id`) REFERENCES `Parcel` (`id`),
-  ADD CONSTRAINT `parcelextra_ibfk_2` FOREIGN KEY (`extra_id`) REFERENCES `Extra` (`id`);
+  ADD CONSTRAINT `parcelextra_ibfk_1` FOREIGN KEY (`parcel_id`) REFERENCES `parcel` (`id`),
+  ADD CONSTRAINT `parcelextra_ibfk_2` FOREIGN KEY (`extra_id`) REFERENCES `extra` (`id`);
 
 --
 -- Constraints for table `RelayPoint`
 --
 ALTER TABLE `RelayPoint`
-  ADD CONSTRAINT `relaypoint_ibfk_1` FOREIGN KEY (`address`) REFERENCES `Address` (`id`),
-  ADD CONSTRAINT `relaypoint_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `User` (`id`);
+  ADD CONSTRAINT `relaypoint_ibfk_1` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
+  ADD CONSTRAINT `relaypoint_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `Remuneration`
 --
 ALTER TABLE `Remuneration`
-  ADD CONSTRAINT `remuneration_ibfk_1` FOREIGN KEY (`relay_point_id`) REFERENCES `RelayPoint` (`id`);
+  ADD CONSTRAINT `remuneration_ibfk_1` FOREIGN KEY (`relay_point_id`) REFERENCES `relaypoint` (`id`);
 
 --
 -- Constraints for table `Stock`
 --
 ALTER TABLE `Stock`
-  ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`relay_point_id`) REFERENCES `RelayPoint` (`id`),
-  ADD CONSTRAINT `stock_ibfk_2` FOREIGN KEY (`extra_id`) REFERENCES `Extra` (`id`);
+  ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`relay_point_id`) REFERENCES `relaypoint` (`id`),
+  ADD CONSTRAINT `stock_ibfk_2` FOREIGN KEY (`extra_id`) REFERENCES `extra` (`id`);
 
 --
 -- Constraints for table `Tracking`
 --
 ALTER TABLE `Tracking`
-  ADD CONSTRAINT `tracking_ibfk_1` FOREIGN KEY (`parcel_id`) REFERENCES `Parcel` (`id`),
-  ADD CONSTRAINT `tracking_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `ParcelStatus` (`id`);
+  ADD CONSTRAINT `tracking_ibfk_1` FOREIGN KEY (`parcel_id`) REFERENCES `parcel` (`id`),
+  ADD CONSTRAINT `tracking_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `parcelstatus` (`id`);
 
 --
 -- Constraints for table `User`
 --
 ALTER TABLE `User`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `UserType` (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `usertype` (`id`);

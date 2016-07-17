@@ -25,13 +25,13 @@
                 </select>
                 <br><br>
                 <button type="button" class="btn btn-primary btn-lg" onclick="updateNewRole()">Valider</button>
-            </div>
-
-            <div id="newRole" class="none alert alert-dismissible fade in col-md-12" role="alert">
-                <button type="button" class="close" onclick="closePopin()">
-                    <span>×</span>
-                </button>
-                <p id="newRoleMsg"></p>
+                <br><br>
+                <div id="newRole" class="none alert alert-dismissible fade in col-md-12" role="alert">
+                    <button type="button" class="close" onclick="closePopin()">
+                        <span>×</span>
+                    </button>
+                    <p id="newRoleMsg"></p>
+                </div>
             </div>
         </div>
     </div>
