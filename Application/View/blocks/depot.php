@@ -58,7 +58,7 @@
                 </div>
             </div>
             <?php
-            if(isset($_SESSION['type']) && ($_SESSION['type'] == 1 || $_SESSION['type'] == 2)) {
+            if($disabled != 'disabled' && isset($_SESSION['type']) && ($_SESSION['type'] == 1 || $_SESSION['type'] == 2)) {
                 echo '<div class="col-md-12">
                         <div class="pull-left">
                             <input type="radio" name="type" id="fret" value="4" onclick="calculateQuotation(event)">

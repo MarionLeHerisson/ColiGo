@@ -64,10 +64,6 @@ function calcAddPrice() {
     charges.trigger('click');
 }
 
-function sanitizeNumbers() {
-
-}
-
 function xmlRelayPoint() {
     var rpMail = $('#idRpMail').val(),
         label = 'manualXml';

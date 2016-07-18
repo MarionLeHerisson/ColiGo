@@ -211,6 +211,7 @@ a {
 }
 
 
+/* RESPONSIVE */
 @media (min-width: 768px) {
 	.featurette-heading {
 		font-size: 50px;
@@ -236,6 +237,12 @@ a {
     }
 }
 @media not screen {
+	#billPanel {
+		display: none;
+	}
+}
+
+@media (max-width: 990px) {
 	#billPanel {
 		display: none;
 	}

@@ -61,3 +61,20 @@ VALUES ('8h'),
 	('express'),
 	('urgence'),
 	('fret');
+
+
+	------------------ QUELQUES UTILISATEURS (avec différents rôles) ET POINTS RELAIS --------------------
+INSERT INTO Address (id, address, zip_code, city, lat, lng) VALUES
+(1, '14, Rue Monte-Cristo', 75020, 'Paris', 0, 0),
+(2, ', ', 0, '', 0, 0),
+(3, '10, Rue Lisfranc', 75020, 'Paris', 48.8618, 2.40236),
+(4, '12, Rue de la Mer', 62600, 'Berck', 50.4069, 1.56102),
+(5, '3, Rue de Cugnaux', 31300, 'Toulouse', 43.5917, 1.4196);
+
+INSERT INTO User (id, first_name, last_name, mail, password, type_id, address_id, is_deleted, lost_pwd_key) VALUES
+(1, 'Marion', 'Hurteau', 'marion.hurteau1@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 1, 1, 0, NULL),
+(2, 'Romain', 'Ouriet', 'romain.ouriet@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 1, 2, 0, NULL),
+(3, 'Catherine', 'Dupuy', 'cathy.dupuy-dansac@live.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 1, 0, NULL),
+(4, 'Oriane', 'Payen', 'oriane.payen@wanadoo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 3, 0, NULL),
+(5, 'Maxime', 'Cohet', 'maxime.cohet@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 2, 0, NULL),
+(6, 'Michel', 'Maubert', 'michel.maubert@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 2, 0, NULL);

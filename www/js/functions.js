@@ -118,6 +118,8 @@ function clearEverything() {
 	$('#inscription-form')[0].reset();
 
 	$('#newRoleMail').val('');
+	$('#idMailEmployeRem').val('');
+	$('#idRpMail').val('');
 	$('#idColisDistribue').val('');
 	$('#idColisLivre').val('');
 	$('#idColisPerdu').val('');

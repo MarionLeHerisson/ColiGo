@@ -1,5 +1,25 @@
 var data = {};
 
+function sanitizeNumbers(event) {
+    var input = $(event.target),
+        value = input.val();
+
+    value = value.replace(/ /g, "");
+    value = value.replace(/,/g, ".");
+
+    var splited = value.split(".");
+
+    if(splited.length == 2 && splited[1].length == 2) {
+        input.val(value);
+    }
+    else if(splited.length == 1) {
+        input.val(value + ".00");
+    }
+    else {
+        input.val("");
+    }
+}
+
 function submitDepotForm() {
     // get fields to check
     data = {
@@ -98,8 +118,13 @@ function submitDepotForm() {
         return;
     }
 
-    // If no error : show the modal simulating payment interface
-    showPaymentModal()
+    // If normal user : show the modal simulating payment interface
+    if($('#fret').val() == undefined) {
+        showPaymentModal();
+    }
+    else {  // if admin, skip payment (we assume relay points have card machines, or they take cash)
+        postParcel();
+    }
 }
 
 function showPaymentModal() {
@@ -110,7 +135,6 @@ function verifPayment() {
 
     var checkName = /^[a-zA-Z\-]+[ ]{1}[a-zA-Z\-]+$/,
         label = 'formPayment',
-        label2 = 'formDepot',
         name = $('#cb_owner').val(),
         number = $('#cb_number').val(),
         month = $('#cb_select_month option:selected').val(),
@@ -153,23 +177,30 @@ function verifPayment() {
     setTimeout(function(){
         $('#myModal').modal('hide');
 
-        myAjax(label2, 'accueil_extranet', 'parcelPosting', data, function(ret) {
-            var dataObject = JSON.parse(ret);	// transforms json return from php to js object
-
-            if(dataObject.stat === 'ko') {
-                showMessage(label2, dataObject.msg, 1);
-            }
-            else if(dataObject.stat === 'ok') {
-                showMessage(label2, dataObject.msg, 0);
-                window.open("facture?tracking_number=" + dataObject.num, "", "width=1000,height=800");
-                $('#depot-form')[0].reset();
-            }
-            else {
-                showMessage(label2, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
-            }
-        });
+        postParcel();
 
     }, 2000);
+}
+
+function postParcel() {
+
+    var label = 'formDepot';
+
+    myAjax(label, 'accueil_extranet', 'parcelPosting', data, function(ret) {
+        var dataObject = JSON.parse(ret);	// transforms json return from php to js object
+
+        if(dataObject.stat === 'ko') {
+            showMessage(label, dataObject.msg, 1);
+        }
+        else if(dataObject.stat === 'ok') {
+            showMessage(label, dataObject.msg, 0);
+            window.open("facture?tracking_number=" + dataObject.num, "", "width=1000,height=800");
+            $('#depot-form')[0].reset();
+        }
+        else {
+            showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', 1);
+        }
+    });
 }
 
 function calculateQuotation(event) {
