@@ -26,8 +26,8 @@ class RelayPointModel extends DefaultModel {
         $bdd = $this->connectBdd();
 
         $query = $bdd->prepare("INSERT INTO " . $this->_name . "(address, owner_id, label, is_deleted)
-                                VALUES (" . $address . ", " . $ownerId . ", '" . $label . "', 0)");
-        $query->execute();
+                                VALUES (?, ?, ?, 0)");
+        $query->execute([$address, $ownerId, $label]);
 
         $query = $bdd->prepare("SELECT LAST_INSERT_ID();");
         $res = $query->execute();
@@ -48,8 +48,8 @@ class RelayPointModel extends DefaultModel {
 
         $bdd = $this->connectBdd();
 
-        $query = $bdd->prepare("SELECT address FROM " . $this->_name . " WHERE id = " . $rpId . ";");
-        $query->execute();
+        $query = $bdd->prepare("SELECT address FROM " . $this->_name . " WHERE id = ?;");
+        $query->execute([$rpId]);
 
         $res = $query->fetchColumn();
 
@@ -67,8 +67,8 @@ class RelayPointModel extends DefaultModel {
         $query = $bdd->prepare("SELECT " . $this->_name . ".id FROM " . $this->_name . "
                                 LEFT JOIN user
                                 ON user.id = owner_id
-                                WHERE user.mail = '" . $mail . "';");
-        $query->execute();
+                                WHERE user.mail = ?;");
+        $query->execute([$mail]);
 
         $res = $query->fetchColumn();
 
@@ -111,10 +111,10 @@ class RelayPointModel extends DefaultModel {
                                 a.lat, a.lng, a.address, a.zip_code, a.city
                                 FROM " . $this->_name . " AS rp
                                 LEFT JOIN Address AS a ON a.id = rp.address
-                                WHERE a.lat BETWEEN " . $minLat . " AND " . $maxLat . "
-                                AND a.lng BETWEEN " . $minLng . " AND " . $maxLng . "
+                                WHERE a.lat BETWEEN ? AND ?
+                                AND a.lng BETWEEN ? AND ?
                                 AND rp.is_deleted = 0;");
-        $query->execute();
+        $query->execute([$minLat, $maxLat, $minLng, $maxLng]);
 
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -207,5 +207,21 @@ class RelayPointModel extends DefaultModel {
 
         return $res;
 
+    }
+
+    public function getRP($rpId) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT rp.id AS id, rp.address AS addId, rp.label,
+                                a.lat, a.lng, a.address, a.zip_code, a.city
+                                FROM " . $this->_name . " AS rp
+                                LEFT JOIN Address AS a ON a.id = rp.address
+                                WHERE rp.id = ?
+                                AND rp.is_deleted = 0;");
+        $query->execute([$rpId]);
+
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $res;
     }
 }

@@ -35,14 +35,26 @@ class AjaxLocaliser {
      * @param array $param
      */
     public function addFavorite($param) {
+        $rpId = intval($param[0]);
+
         // managers
         require_once('../Model/FavoriteRelayPointModel.php');
         $favoriteRPManager = new FavoriteRelayPointModel();
 
+        require_once('../Model/relayPointModel.php');
+        $rpManager = new RelayPointModel();
+
         $userId = $_SESSION['id'];
         $favoriteRPManager->deleteFavorite($userId);
     // TODO : delete & insert only if needed
-        $favoriteRPManager->addFavorite(intval($param[0]), $userId);
+        $favoriteRPManager->addFavorite($rpId, $userId);
+
+        $address = $rpManager->getRP($rpId);
+        $_SESSION['favRP']['relay_point_id'] = $address[0]['id'];
+        $_SESSION['favRP']['address'] = $address[0]['address'];
+        $_SESSION['favRP']['label'] = $address[0]['label'];
+        $_SESSION['favRP']['zip_code'] = $address[0]['zip_code'];
+        $_SESSION['favRP']['city'] = $address[0]['city'];
 
         die(json_encode([
             'stat'	=> 'ok',

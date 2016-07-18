@@ -139,7 +139,10 @@ function verifPayment() {
         number = $('#cb_number').val(),
         month = $('#cb_select_month option:selected').val(),
         year = $('#cb_select_year option:selected').val(),
-        crypto = $('#crypto').val();
+        crypto = $('#crypto').val(),
+        date = new Date(),
+        actualMonth = date.getMonth() + 1,
+        actualYear = date.getFullYear();
 
     if(name === '' || !checkName.test(name)) {
         showMessage(label, 'Le nom du propriétaire de la carte est obligatoire.', 1);
@@ -157,10 +160,11 @@ function verifPayment() {
     if(month === '' || month < 1 || month > 12 || parseInt(month) != month) {
         showMessage(label, 'Veuillez sélectionner un mois depuis le menu déroulant.', 1);
         return;
-    }
-
-    if(year === '' || year < 2016 || parseInt(year) != year) {
+    } else if(year === '' || year < 2016 || parseInt(year) != year) {
         showMessage(label, 'Veuillez sélectionner une année depuis le menu déroulant.', 1);
+        return;
+    } else if (year == actualYear && month < actualMonth) {
+        showMessage(label, 'Vous ne pouvez pas payer avec une carte périmée.', 1);
         return;
     }
 
