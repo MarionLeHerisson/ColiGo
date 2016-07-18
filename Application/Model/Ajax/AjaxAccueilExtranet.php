@@ -391,7 +391,6 @@ class AjaxAccueilExtranet {
      * @return string
      *
      * @author Marion
-     * TODO : put in Service
      */
     public function sortValues($values, $parcelId) {
 
@@ -417,7 +416,6 @@ class AjaxAccueilExtranet {
      * @return float
      *
      * @author Marion
-     * TODO : put in Service
      */
     public function calculatePrice($extras, $parcelWeight, $deliveryType, $add) {
 

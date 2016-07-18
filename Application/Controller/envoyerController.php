@@ -15,8 +15,7 @@ class envoyerController {
 
         $prices = $this->sortPrices($prices);
         $extras = $extraManager->getAllExtras();
-//        echo '<pre>';
-//        die(print_r($extras));
+
         require_once('../View/header.php');
         require_once('../View/envoyer.php');
         require_once('../View/footer.php');

@@ -1,5 +1,4 @@
 <?php
-//print_r($_SERVER);die;
 // pwd bitbucket : noynivlry134
 
 /* C O N F   L O C A L   W I N D O W S   M A R I O N */

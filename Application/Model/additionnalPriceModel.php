@@ -30,4 +30,21 @@ class AdditionnalPriceModel extends DefaultModel {
         return $res;
     }
 
+    /**
+     * @param int $orderId
+     * @return string
+     * @author Marion
+     */
+    public function getAdditionnalPrice($orderId) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT price FROM " . $this->_name . "
+                                WHERE order_id = ?;");
+        $query->execute([$orderId]);
+
+        $res = $query->fetchColumn();
+
+        return $res;
+    }
+
 }

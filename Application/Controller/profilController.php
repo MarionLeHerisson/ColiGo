@@ -52,17 +52,17 @@ class profilController {
 
 
             $tabHisto .= '<tr>
-                    <td>' . ColiGo::frenchDate($parcel['order_date']) . '<span class="none"><br><a>détail</a></span></td>
+                    <td>' . ColiGo::frenchDate($parcel['order_date']) . '</td>
                     <td>' . $parcel['tracking_number'] . '</td>
                     <td>' . $parcel['status'] . $statusDate . '</td>
                     <td>' . $dep . '<br>' . $parcel['dep_zipcode'] . ', ' . $parcel['dep_city'] . '</td>
                     <td>' . $arr . '<br>' . $parcel['arr_address'] . '<br>' . $parcel['arr_zipcode'] . ', ' . $parcel['arr_city'] . '</td>
-                    <td>' . $parcel['total_price'] . ' €</td>
+                    <td>' . $parcel['total_price'] . ' €<br><a target="_blank" href="facture?tracking_number=' . $parcel['tracking_number'] . '">détail</a></td>
                 </tr>';
         }
 
         $fav = $relayPointManager->getFavorite();
-        //die(print_r($fav));
+
         if(isset($fav[0]) && is_array($fav[0])) {
             $favRp = "<p>" . $fav[0]['label'] . "</p>
                     <p>" . $fav[0]['address'] . "</p>
@@ -73,8 +73,7 @@ class profilController {
             $favRp = "<p>Vous n'avez pas encore sélectionné de point relais favori.</p>";
             $buttonLabel = 'Choisir';
         }
-
-        //echo '<pre>';die(print_r($history));
+        
 
         include_once('../View/header.php');
         include_once('../View/profil.php');

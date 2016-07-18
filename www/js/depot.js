@@ -12,6 +12,12 @@ function sanitizeNumbers(event) {
     if(splited.length == 2 && splited[1].length == 2) {
         input.val(value);
     }
+    else if(splited.length == 2 && splited[1].length == 1) {
+        input.val(value + "0");
+    }
+    else if(splited.length == 2 && splited[1].length == 0) {
+        input.val(value + "00");
+    }
     else if(splited.length == 1) {
         input.val(value + ".00");
     }

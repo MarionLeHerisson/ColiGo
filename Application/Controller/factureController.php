@@ -5,8 +5,7 @@ class factureController {
     public function indexAction() {
 
         if(!isset($_GET['tracking_number']) || $_GET['tracking_number'] == '') {
-            die('error');
-            //$trackingNumber = 689472894;
+            echo '<script>document.location.href="accueil"</script>';
         } else {
             $trackingNumber = $_GET['tracking_number'];
         }
@@ -85,12 +84,25 @@ class factureController {
         require_once('../Model/extraModel.php');
         $extraManager = new ExtraModel();
 
+        require_once('../Model/additionnalPriceModel.php');
+        $addPriceManager = new AdditionnalPriceModel();
+
 
         $data = $parcelManager->getAllBillDatas($trackingNumber);
+
+        if(empty($data)) {
+            echo '<script>document.location.href="accueil"</script>';
+        }
+
+        $add = $addPriceManager->getAdditionnalPrice($data[0]['order_id']);
+
+        if(!empty($add)) {
+            $data[0]['add'] = $add;
+        }
+
         $extras = $extraManager->getAllBillExtras($data[0]['parcel_id']);
 
         $data[0]['extra'] = $extras;
-        //echo '<pre>';die(print_r($data));
 
         return $data[0];
     }
@@ -119,6 +131,12 @@ class factureController {
                     'price' => $this->createImgText($extra['price'] . ' EUR', 2)
                 ];
             }
+        }
+        if(isset($data['add']) && !empty($data['add'])) {
+            $imgExtra[] = [
+                'label' => $this->createImgText('prix additionnel', 2),
+                'price' => $this->createImgText($data['add'] . ' EUR', 2)
+            ];
         }
 
         $imgTotal['label'] = $this->createImgText('TOTAL TTC : ', 3);

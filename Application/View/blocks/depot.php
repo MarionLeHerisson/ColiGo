@@ -134,25 +134,25 @@
         <div class="col-md-9">
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="checkbox" class="checkboxes" name="prioritaire" id="prioritaire" value="7" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
+                    <input type="checkbox" class="checkboxes" name="prioritaire" id="prioritaire" value="8" data-price="<?php echo $extraPrices[6]['price'];?>" onclick="calculateQuotation(event)">
                     <label for="prioritaire" class="normal">
-                        Colis prioritaire (<?php echo $extraPrices[6]['price'];?> €)
+                        Colis prioritaire (<?php echo $extraPrices[7]['price'];?> €)
                     </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="checkbox" class="checkboxes" name="imprevu" id="imprevu" value="8" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
+                    <input type="checkbox" class="checkboxes" name="imprevu" id="imprevu" value="9" data-price="<?php echo $extraPrices[7]['price'];?>" onclick="calculateQuotation(event)">
                     <label for="imprevu" class="normal">
-                        Colis livré par tous les moyens en cas d'imprévu (<?php echo $extraPrices[7]['price'];?> €)
+                        Colis livré par tous les moyens en cas d'imprévu (<?php echo $extraPrices[8]['price'];?> €)
                     </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="checkbox" class="checkboxes" name="indemnisation" id="indemnisation" value="9" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
+                    <input type="checkbox" class="checkboxes" name="indemnisation" id="indemnisation" value="10" data-price="<?php echo $extraPrices[8]['price'];?>" onclick="calculateQuotation(event)">
                     <label for="indemnisation" class="normal">
-                        Indemnisation en cas de perte ou d'avarie (<?php echo $extraPrices[8]['price'];?> €)
+                        Indemnisation en cas de perte ou d'avarie (<?php echo $extraPrices[9]['price'];?> €)
                     </label>
                 </div>
             </div>
@@ -164,9 +164,9 @@
         <div class="col-md-9">
             <div class="col-md-12">
                 <div class="pull-left">
-                    <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="6" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
+                    <input type="checkbox" class="checkboxes" name="samedi" id="samedi" value="7" data-price="<?php echo $extraPrices[5]['price'];?>" onclick="calculateQuotation(event)">
                     <label for="samedi" class="normal">
-                        Livraison le samedi (<?php echo $extraPrices[5]['price'];?> €)
+                        Livraison le samedi (<?php echo $extraPrices[6]['price'];?> €)
                     </label>
                 </div>
             </div>
@@ -196,8 +196,8 @@
             </div>
             <div class="col-md-12">
                 <div class="pull-left none">
-                    <input type="checkbox" class="checkboxes" name="livraison à domicile" id="livraison" value="10" data-price="<?php echo $extraPrices[9]['price'];?>" onclick="calculateQuotation(event)">
-                    Livraison au domicile ou sur un lieu de travail (<?php echo $extraPrices[9]['price'];?> €)
+                    <input type="checkbox" class="checkboxes" name="livraison à domicile" id="livraison" value="6" data-price="<?php echo $extraPrices[9]['price'];?>" onclick="calculateQuotation(event)">
+                    Livraison au domicile ou sur un lieu de travail (<?php echo $extraPrices[5]['price'];?> €)
                 </div>
             </div>
         </div>
