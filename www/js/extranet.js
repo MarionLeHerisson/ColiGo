@@ -254,3 +254,41 @@ function addNewRelayPoint() {
 
 }
 
+
+function addCosts() {
+	var label = 'driverCosts',
+		costLabel = $('#costLabel').val(),
+		price = $('#costPrice').val();
+
+	if(costLabel.replace(" ", "") == '') {
+		showMessage(label, 'Veuillez renseigner le libellé de cette dépense.', true);
+		return;
+	}
+	else if(costLabel.length > 255) {
+		showMessage(label, 'Le libellé de cette dépense est trop long.', true);
+		return;
+	}
+
+	if(price.replace(" ", "") == '') {
+		showMessage(label, 'Veuillez renseigner le montant de cette dépense.', true);
+		return;
+	}
+	else if(parseFloat(price) != price) {
+		showMessage(label, 'Le montant de cette dépense ne doit pas contenir de lettres.', true);
+		return;
+	}
+
+	myAjax(label, 'accueil_extranet', 'addCosts', [costLabel, price], function(data) {
+		var dataObject = JSON.parse(data);	// transforms json return from php to js object
+
+		if(dataObject.stat === 'ko') {
+			showMessage(label, dataObject.msg, true);
+		}
+		else if(dataObject.stat === 'ok') {
+			showMessage(label, dataObject.msg, false);
+		}
+		else {
+			showMessage(label, 'Une erreur s\'est produite. Veuillez contacter l\'équipe technique de ColiGo.', true);
+		}
+	});
+}

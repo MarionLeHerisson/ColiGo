@@ -437,6 +437,33 @@ class AjaxAccueilExtranet {
 
         return $totalPrice;
     }
+
+    /**
+     * Add a cost for drivers
+     * @param array $param
+     */
+    public function addCosts($param) {
+        $label = $param[0];
+        $price = $param[1];
+
+        require_once('../Model/DriversBillModel.php');
+        $billManager = new DriversBill();
+
+        $res = $billManager->addCosts($_SESSION['id'], $label, $price);
+
+        if(!empty($res)) {
+            die(json_encode([
+                'stat'	=> 'ok',
+                'msg'	=> 'Cette dépense a bien été enregistrée.'
+            ]));
+        }
+        else {
+            die(json_encode([
+                'stat'	=> 'ko',
+                'msg'	=> 'Une erreur s\'est produite.'
+            ]));
+        }
+    }
 }
 
 

@@ -24,6 +24,10 @@
 			}
 			include_once('menu_extranet/perdu.php');	// Admin, Relay Point or Postman
 
+			if($_SESSION['type'] == 3) {
+				include_once('menu_extranet/frais_livreur.php');
+			}
+
 			if($_SESSION['type'] != 1) {	// Relay point or Postman
 				include_once('menu_extranet/remuneration.php');
 			}

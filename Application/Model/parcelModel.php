@@ -30,10 +30,7 @@ class ParcelModel extends DefaultModel {
                                 VALUES (?, ?, ?, ?);");
         $query->execute([$weight, $status, $delivery, $trackingNumber]);
 
-        //$query2 = $bdd->prepare("SELECT LAST_INSERT_ID();");
-        //$query2->execute();
         $res = $bdd->lastInsertId();
-        //$res = $query2->fetchColumn();
 
         return $res;
     }

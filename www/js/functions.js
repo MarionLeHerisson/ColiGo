@@ -110,6 +110,32 @@ function changePwd() {
     }
 }
 
+function sanitizeNumbers(event) {
+	var input = $(event.target),
+		value = input.val();
+
+	value = value.replace(/ /g, "");
+	value = value.replace(/,/g, ".");
+
+	var splited = value.split(".");
+
+	if(splited.length == 2 && splited[1].length == 2) {
+		input.val(value);
+	}
+	else if(splited.length == 2 && splited[1].length == 1) {
+		input.val(value + "0");
+	}
+	else if(splited.length == 2 && splited[1].length == 0) {
+		input.val(value + "00");
+	}
+	else if(splited.length == 1) {
+		input.val(value + ".00");
+	}
+	else {
+		input.val("");
+	}
+}
+
 function clearEverything() {
 	closePopin();
 

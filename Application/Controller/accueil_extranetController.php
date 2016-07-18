@@ -48,6 +48,9 @@ class accueil_extranetController {
                 case 'xmlMonth' :
 					$ajaxApiRem->getXmlMonth($param);
 					break;
+				case 'addCosts' :
+					$ajaxApi->addCosts($param);
+					break;
             }
         }
 

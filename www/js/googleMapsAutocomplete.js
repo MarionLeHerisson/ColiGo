@@ -10,28 +10,36 @@ var placeSearch,
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical location types.
-    autocomplete1 = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete1')),
-        {types: ['geocode']});
-    autocomplete2 = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
-        {types: ['geocode']});
-    autocomplete3 = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete3')),
-        {types: ['geocode']});
-    autocomplete4 = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete4')),
-        {types: ['geocode']});
-    autocomplete5 = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete5')),
-        {types: ['geocode']});
-
-    // When the user selects an address from the dropdown, populate the address fields in the form.
-    autocomplete1.addListener('place_changed', fillInAddress);
-    autocomplete2.addListener('place_changed', fillInAddress);
-    autocomplete3.addListener('place_changed', fillInAddress);
-    autocomplete4.addListener('place_changed', fillInAddress);
-    autocomplete5.addListener('place_changed', fillInAddress);
+    if($('#autocomplete1').val() != undefined) {
+        autocomplete1 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete1')),
+            {types: ['geocode']});
+        autocomplete1.addListener('place_changed', fillInAddress);
+    }
+    if($('#autocomplete2').val() != undefined) {
+        autocomplete2 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
+            {types: ['geocode']});
+        autocomplete2.addListener('place_changed', fillInAddress);
+    }
+    if($('#autocomplete3').val() != undefined) {
+        autocomplete3 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete3')),
+            {types: ['geocode']});
+        autocomplete3.addListener('place_changed', fillInAddress);
+    }
+    if($('#autocomplete4').val() != undefined) {
+        autocomplete4 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete4')),
+            {types: ['geocode']});
+        autocomplete4.addListener('place_changed', fillInAddress);
+    }
+    if($('#autocomplete5').val() != undefined) {
+        autocomplete5 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete5')),
+            {types: ['geocode']});
+        autocomplete5.addListener('place_changed', fillInAddress);
+    }
 }
 
 function fillInAddress() {

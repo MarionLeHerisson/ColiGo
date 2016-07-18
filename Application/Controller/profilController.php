@@ -67,7 +67,7 @@ class profilController {
             $favRp = "<p>" . $fav[0]['label'] . "</p>
                     <p>" . $fav[0]['address'] . "</p>
                     <p>" . $fav[0]['zip_code'] . " " .$fav[0]['city'] . "</p>";
-            $buttonLabel = 'Cahnger';
+            $buttonLabel = 'Changer';
         }
         else {
             $favRp = "<p>Vous n'avez pas encore sélectionné de point relais favori.</p>";

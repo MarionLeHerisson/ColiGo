@@ -187,4 +187,15 @@ CREATE TABLE AdditionnalPrice(
   FOREIGN KEY (order_id) REFERENCES Orders(id)
 );
 
+CREATE TABLE DriversBill(
+	id INT NOT NULL AUTO_INCREMENT,
+	driver_id INT NOT NULL,
+	price DECIMAL(10,2),
+	label VARCHAR(255),
+	bill_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+	PRIMARY KEY (id),
+	FOREIGN KEY (driver_id) REFERENCES User(id)
+);
+
 
