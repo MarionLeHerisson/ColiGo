@@ -63,13 +63,14 @@ VALUES ('8h'),
 	('fret');
 
 
-	------------------ QUELQUES UTILISATEURS (avec différents rôles) ET POINTS RELAIS --------------------
+-- QUELQUES UTILISATEURS (avec différents rôles) ET POINTS RELAIS --------------------
 INSERT INTO Address (id, address, zip_code, city, lat, lng) VALUES
 (1, '14, Rue Monte-Cristo', 75020, 'Paris', 0, 0),
 (2, ', ', 0, '', 0, 0),
 (3, '10, Rue Lisfranc', 75020, 'Paris', 48.8618, 2.40236),
 (4, '12, Rue de la Mer', 62600, 'Berck', 50.4069, 1.56102),
 (5, '3, Rue de Cugnaux', 31300, 'Toulouse', 43.5917, 1.4196);
+(7, '16, Boulevard Voltaire', 75011, 'Paris', 0, 0);
 
 INSERT INTO User (id, first_name, last_name, mail, password, type_id, address_id, is_deleted, lost_pwd_key) VALUES
 (1, 'Marion', 'Hurteau', 'marion.hurteau1@gmail.com', 'ab4f63f9ac65152575886860dde480a1', 1, 1, 0, NULL),
@@ -77,7 +78,7 @@ INSERT INTO User (id, first_name, last_name, mail, password, type_id, address_id
 (3, 'Catherine', 'Dupuy', 'cathy.dupuy-dansac@live.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 1, 0, NULL),
 (4, 'Oriane', 'Payen', 'oriane.payen@wanadoo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 3, 0, NULL),
 (5, 'Maxime', 'Cohet', 'maxime.cohet@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 2, 0, NULL),
-(6, 'Michel', 'Maubert', 'michel.maubert@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 2, 0, NULL);
+(6, 'Michel', 'Maubert', 'michel.maubert@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 7, 0, NULL);
 
 INSERT INTO RelayPoint (id, address, owner_id, label, is_deleted) VALUES
 (1, 4, 3, 'Mon Beau Bateau', 0),

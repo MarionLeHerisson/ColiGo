@@ -42,7 +42,7 @@ class factureController {
         $white  = ImageColorAllocate($im,0xff,0xff,0xff);
         imagefilledrectangle($im, 0, 0, 300, 200, $white);
         // ressource, color, left, top, rotation, type, data, width, height
-        $data = Barcode::gd($im, $black, 100, 100, 0, "code128", $trackingNumber, 3, 100);
+        $data = Barcode::gd($im, $black, 150, 100, 0, "code128", $trackingNumber, 3, 100);
 
         return $im;
     }

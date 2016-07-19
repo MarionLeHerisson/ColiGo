@@ -385,6 +385,10 @@ function getLatLng() {
 	if(address == undefined) {
 		address = $('#autocomplete5').val();
 	}
+	if(address == undefined) {
+		address = $('#zip_code').val();
+	}
+
 	var res = address.replace(/ /g, "+");
 
 	$.ajax({

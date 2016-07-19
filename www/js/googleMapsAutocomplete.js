@@ -44,11 +44,11 @@ function initAutocomplete() {
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
-    var place1 = autocomplete1.getPlace(),
-        place2 = autocomplete2.getPlace(),
-        place3 = autocomplete3.getPlace(),
-        place4 = autocomplete4.getPlace(),
-        place5 = autocomplete5.getPlace();
+    if(autocomplete1 != undefined) var place1 = autocomplete1.getPlace();
+    if(autocomplete2 != undefined) var place2 = autocomplete2.getPlace();
+    if(autocomplete3 != undefined) var place3 = autocomplete3.getPlace();
+    if(autocomplete4 != undefined) var place4 = autocomplete4.getPlace();
+    if(autocomplete5 != undefined) var place5 = autocomplete5.getPlace();
 
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.

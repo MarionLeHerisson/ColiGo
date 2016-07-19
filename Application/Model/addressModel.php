@@ -81,4 +81,27 @@ class AddressModel extends DefaultModel {
                                 WHERE id = ?;");
         $query->execute([$lat, $lng, $addressId]);
     }
+
+    /**
+     * Get closest relay point from latitude and longitude
+     * @param float $lat
+     * @param float $lng
+     * @return mixed
+     */
+    public function getClosestRP($lat, $lng) {
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT a.id, a.lat, a.lng, a.address, a.zip_code, a.city
+                                ,rp.id, rp.label
+                                FROM " . $this->_name . " AS a
+                                LEFT JOIN RelayPoint AS rp ON rp.address = a.id
+                                WHERE rp.is_deleted = 0
+                                ORDER BY ABS(a.lat - ?) ASC,
+                                ABS(a.lng - ?) ASC
+                                LIMIT 1;");
+        $query->execute([$lat, $lng]);
+        $res = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $res;
+    }
 }

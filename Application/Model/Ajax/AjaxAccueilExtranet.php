@@ -163,7 +163,7 @@ class AjaxAccueilExtranet {
         $senderCity = ColiGo::sanitizeString($param['ramcity']);
         // delivery address
         $receiverAddress = ColiGo::sanitizeString($param['streetnumber']);
-        if($param['streetnumber'] != '') {
+        if($param['route'] != '') {
             $receiverAddress .= ', ' . ColiGo::sanitizeString($param['route']);
         }
         $receiverZipCode = ColiGo::sanitizeString($param['zipcode']);

@@ -342,4 +342,26 @@ class UserModel extends defaultModel {
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
+
+    /**
+     * Get complete address of an user
+     * @param int $userId
+     * @return mixed
+     * @author Marion
+     */
+    public function getUserAddress($userId) {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT u.id, u.address_id, u.is_deleted
+                                ,a.id, a.address, a.zip_code, a.city, a.lat, a.lng
+                                FROM " . $this->_name ." AS u
+                                LEFT JOIN Address AS a ON a.id = u.address_id
+                                WHERE u.is_deleted = 0
+                                AND u.id = ?;");
+        $query->execute([$userId]);
+
+        $res = $query->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
 }
