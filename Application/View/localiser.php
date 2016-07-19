@@ -19,7 +19,7 @@
             <div class="form-group"><label class="control-label col-md-12" for="type">Entrez une adresse, une ville, un code postal, ...</label>
                 <div class="col-md-12">
                     <input id="autocomplete4" class="autocomplete form-control" placeholder="1 bis Avenue de la République"
-                           onFocus="geolocate()" onBlur="getLatLng()">
+                           onFocus="geolocate()" onkeyup="getLatLng()">
                 </div>
                 <div class="<?php if(DEBUG == 0){echo 'none';}?>">
                     <table id="address">

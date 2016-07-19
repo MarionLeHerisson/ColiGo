@@ -78,3 +78,8 @@ INSERT INTO User (id, first_name, last_name, mail, password, type_id, address_id
 (4, 'Oriane', 'Payen', 'oriane.payen@wanadoo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 3, 0, NULL),
 (5, 'Maxime', 'Cohet', 'maxime.cohet@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 2, 2, 0, NULL),
 (6, 'Michel', 'Maubert', 'michel.maubert@coligo.fr', 'ab4f63f9ac65152575886860dde480a1', 3, 2, 0, NULL);
+
+INSERT INTO RelayPoint (id, address, owner_id, label, is_deleted) VALUES
+(1, 4, 3, 'Mon Beau Bateau', 0),
+(2, 3, 4, 'Usine à Nuages', 0),
+(3, 5, 5, 'La Bonne Pinte', 0);

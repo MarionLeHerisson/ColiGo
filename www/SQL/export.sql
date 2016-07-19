@@ -1176,3 +1176,4 @@ ALTER TABLE `Tracking`
 --
 ALTER TABLE `User`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `usertype` (`id`);
+

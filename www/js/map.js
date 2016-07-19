@@ -163,7 +163,7 @@ function searchRP() {
     var label = 'relayPointSearch',
         lat = parseFloat($('#lat').val()),
         lng = parseFloat($('#lng').val()),
-        unit = 0.006,
+        unit = 0.01,
         km = parseInt($('#kmValue').text()),
         minLat = lat - (km * unit),
         maxLat = lat + (km * unit),
