@@ -12,6 +12,7 @@
 			if ($_SESSION['type'] == 1) {	// Admin
 				include_once('menu_extranet/role_utilisateur.php');
 				include_once('menu_extranet/ajout_utilisateur.php');
+				include_once('menu_extranet/liste_users.php');
 				include_once('menu_extranet/ajout_point_relais.php');
 				include_once('menu_extranet/employeeRemuneration.php');
 				include_once('menu_extranet/generer_remunerations.php');

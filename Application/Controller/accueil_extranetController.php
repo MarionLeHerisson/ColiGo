@@ -31,6 +31,7 @@ class accueil_extranetController {
         $fav_country = '';
 
 		$tabLost = $this->getLostParcels();			// lost parcels array
+		$tabUsers = $this->getUsers();				// users array
 
 		switch($_SESSION['type']) {
 			case 1: $sessionType = 'Administrateur';
@@ -81,6 +82,35 @@ class accueil_extranetController {
 		}
 
 		return $tabLost;
+	}
+
+	private function getUsers() {
+
+		require_once('../Model/userModel.php');
+		$userManager = new UserModel();
+
+		$users = $userManager->getAllUsers();
+
+		$tabUsers = '';
+
+		foreach($users as $user) {
+
+			if($user['city'] == '') {
+				$address = 'Non renseignée';
+			} else {
+				$address = $user['address'] . '<br>' . $user['zip_code'] . ', ' . $user['city'];
+			}
+
+			$tabUsers .= '<tr>
+                    <td>' . $user['last_name'] . '</td>
+                    <td>' . $user['first_name'] . '</td>
+                    <td>' . $user['mail'] . '</td>
+                    <td>' . $address . '</td>
+                    <td>' . $user['label'] . '</td>
+                </tr>';
+		}
+
+		return $tabUsers;
 	}
 
 	/**

@@ -321,4 +321,25 @@ class UserModel extends defaultModel {
         $res = $query->fetchColumn();
         return $res;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAllUsers() {
+
+        $bdd = $this->connectBdd();
+
+        $query = $bdd->prepare("SELECT u.id, u.first_name, u.last_name, u.mail, u.type_id, u.address_id, u.is_deleted
+                                ,a.id, a.address, a.zip_code, a.city
+                                ,ut.id, ut.label
+                                FROM " . $this->_name ." AS u
+                                LEFT JOIN Address AS a ON a.id = u.address_id
+                                LEFT JOiN UserType AS ut ON ut.id = u.type_id
+                                WHERE u.is_deleted = 0
+                                AND u.mail IS NOT NULL;");
+        $query->execute();
+
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
 }
