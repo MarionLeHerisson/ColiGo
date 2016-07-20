@@ -28,7 +28,7 @@
 				include_once('menu_extranet/liste_perdus.php');
 			}
 
-			if($_SESSION['type'] == 3) {
+			if($_SESSION['type'] == 3) {		// Postman
 				include_once('menu_extranet/frais_livreur.php');
 			}
 

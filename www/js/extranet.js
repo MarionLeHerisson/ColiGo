@@ -169,7 +169,7 @@ function updateParcelStatus(idType) {
 	}
 
 	parcelId = $('#id' + parcelLabel).val();
-    
+
     if(parcelId == '') {
         showMessage(parcelLabel, 'Veuillez entrer l\'id du colis.', true);
         return;
