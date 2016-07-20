@@ -22,7 +22,9 @@ class AjaxRemuneration {
         // Si le dossier n'existe pas, le créer + chmod
         $pathName = '../../Medias/Remunerations/day_details/' . $date;
         if(!file_exists($pathName)) {
-            mkdir($pathName, 777);
+            mkdir($pathName, 777, true);
+        } else {
+            chmod($pathName, 777);
         }
         
         $file = fopen($pathName . '/' . $date . '-' . $rpId . '.xml', 'w');
@@ -87,8 +89,8 @@ class AjaxRemuneration {
 
         // TODO : launch C programm
         exec($cPathName, $output, $return_var);
-        print_r(($output));
-        print_r($return_var);
+        //print_r(($output));
+        //print_r($return_var);
 
         // TODO : get result to show it ?
 

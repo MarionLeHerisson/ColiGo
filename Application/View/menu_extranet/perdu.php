@@ -12,7 +12,8 @@
             <div class="col-md-3"></div>
             <div class="form-group col-md-6">
                 <label for="idColisPerdu">Scannez le code-barre du colis perdu :</label>
-                <input type="text" name="idColisPerdu" id="idColisPerdu" class="form-control input-lg">
+                <input type="text" name="idColisPerdu" id="idColisPerdu" class="form-control input-lg"
+                       oninput="updateParcelStatus(5)">
                 <br>
                 <button type="button" class="btn btn-primary btn-lg" onclick="updateParcelStatus(5)">Valider</button>
             </div>
