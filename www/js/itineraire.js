@@ -50,8 +50,7 @@ setTimeout(function() {
         "&key=AIzaSyDLhSbz-WEcWDN8L4yL2-LNwIXLAREHyYE",
         type: "POST",
         success:function(res){
-            console.log('caca');
-            console.log(res);
+            // TODO
         }
     });
 }, 3000);

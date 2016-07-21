@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Jul 19, 2016 at 03:23 PM
+-- Generation Time: Jul 20, 2016 at 09:51 PM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -120,17 +120,7 @@ INSERT INTO `Extra` (`id`, `label`, `price`, `explaination`, `is_stockable`) VAL
 (7, 'livraison samedi', '5.00', 'Ce service permet de livrer votre colis le samedi.', 0),
 (8, 'prioritaire', '10.00', 'Ce service rend votre colis prioritaire.', 0),
 (9, 'par tous les moyens', '37.00', 'En cas de problèmes sur le transport de votre colis, ce service permet la mise en place de tous les moyens possibles pour permettre la livraison de votre colis.', 0),
-(10, 'indemnisation', '19.00', 'Ce service vous rembourse en cas de perte ou d avarie du colis.', 0),
-(11, 'papier bulles', '0.40', 'Le colis sera emballé de papier bulles. Protège les objets fragiles des gros impacts.', 1),
-(12, 'papier de soie', '0.60', 'Le colis sera emballé dans du papier de soie. Protège les objets très fragiles des faibles impacts.', 1),
-(13, 'papier kraft', '0.20', 'Le colis sera emballé de papier kraft. Protège les objets peu fragiles des faibles impacts.', 1),
-(14, 'polystyrene', '0.30', 'Le colis sera entouré de billes de polystyrène. Protège les objets de grande taille des impacts.', 1),
-(15, 'ramassage domicile', '8.00', 'Ce service vous propose de ramasser votre colis chez vous et vous permet de ne pas le déposer en point relais.', 0),
-(16, 'livraison domicile', '8.00', 'Ce service vous propose de livrer votre colis chez vous au lieu de le livrer en Point Relais.', 0),
-(17, 'livraison samedi', '5.00', 'Ce service permet de livrer votre colis le samedi.', 0),
-(18, 'prioritaire', '10.00', 'Ce service rend votre colis prioritaire.', 0),
-(19, 'par tous les moyens', '37.00', 'En cas de problèmes sur le transport de votre colis, ce service permet la mise en place de tous les moyens possibles pour permettre la livraison de votre colis.', 0),
-(20, 'indemnisation', '19.00', 'Ce service vous rembourse en cas de perte ou d avarie du colis.', 0);
+(10, 'indemnisation', '19.00', 'Ce service vous rembourse en cas de perte ou d avarie du colis.', 0);
 
 -- --------------------------------------------------------
 
@@ -156,7 +146,7 @@ CREATE TABLE `OrderParcel` (
   `order_id` int(11) NOT NULL,
   `parcel_id` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `OrderParcel`
@@ -165,7 +155,8 @@ CREATE TABLE `OrderParcel` (
 INSERT INTO `OrderParcel` (`id`, `order_id`, `parcel_id`, `is_deleted`) VALUES
 (1, 1, 1, 0),
 (2, 2, 2, 0),
-(3, 3, 3, 0);
+(3, 3, 3, 0),
+(4, 4, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -185,7 +176,7 @@ CREATE TABLE `Orders` (
   `deliver_to` int(11) NOT NULL,
   `delivered_by` int(11) DEFAULT NULL,
   `is_deleted` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Orders`
@@ -194,7 +185,8 @@ CREATE TABLE `Orders` (
 INSERT INTO `Orders` (`id`, `departure_address`, `arrival_address`, `total_price`, `order_date`, `delivery_date`, `ordered_from`, `ordered_by`, `deliver_to`, `delivered_by`, `is_deleted`) VALUES
 (1, 3, 5, '25.40', '2016-07-19 10:18:50', '0000-00-00 00:00:00', NULL, 1, 5, NULL, 0),
 (2, 4, 7, '74.80', '2016-07-19 10:06:51', '0000-00-00 00:00:00', NULL, 1, 6, NULL, 0),
-(3, 3, 5, '49.10', '2016-07-19 10:16:53', '0000-00-00 00:00:00', NULL, 1, 4, NULL, 0);
+(3, 3, 5, '49.10', '2016-07-20 09:33:30', '2016-07-20 09:33:30', NULL, 1, 4, NULL, 0),
+(4, 3, 4, '10.20', '2016-07-19 15:59:54', '0000-00-00 00:00:00', NULL, 1, 6, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -209,7 +201,7 @@ CREATE TABLE `Parcel` (
   `status_id` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT '0',
   `delivery_type` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Parcel`
@@ -218,7 +210,8 @@ CREATE TABLE `Parcel` (
 INSERT INTO `Parcel` (`id`, `tracking_number`, `weight`, `status_id`, `is_deleted`, `delivery_type`) VALUES
 (1, 7458583614, 4, 1, 0, 2),
 (2, 6989944237, 27, 1, 0, 3),
-(3, 5296921979, 5, 1, 0, 1);
+(3, 5296921979, 5, 4, 0, 1),
+(4, 3318768296, 5, 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -335,7 +328,7 @@ CREATE TABLE `Tracking` (
   `parcel_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
   `new_status_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Tracking`
@@ -344,7 +337,11 @@ CREATE TABLE `Tracking` (
 INSERT INTO `Tracking` (`id`, `parcel_id`, `status_id`, `new_status_date`) VALUES
 (1, 1, 1, '2016-07-19 09:54:25'),
 (2, 2, 1, '2016-07-19 10:06:51'),
-(3, 3, 1, '2016-07-19 10:16:53');
+(3, 3, 1, '2016-07-19 10:16:53'),
+(4, 4, 1, '2016-07-19 15:59:54'),
+(5, 3, 2, '2016-07-19 21:39:09'),
+(6, 3, 3, '2016-07-20 09:26:15'),
+(7, 3, 4, '2016-07-20 09:33:30');
 
 -- --------------------------------------------------------
 
@@ -647,17 +644,17 @@ ALTER TABLE `FavoriteRelayPoint`
 -- AUTO_INCREMENT for table `OrderParcel`
 --
 ALTER TABLE `OrderParcel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Parcel`
 --
 ALTER TABLE `Parcel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ParcelExtra`
 --
@@ -687,7 +684,7 @@ ALTER TABLE `Stock`
 -- AUTO_INCREMENT for table `Tracking`
 --
 ALTER TABLE `Tracking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `User`
 --
